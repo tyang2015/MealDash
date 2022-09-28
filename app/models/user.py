@@ -17,8 +17,8 @@ class User(db.Model, UserMixin):
     # relationships
     restaurants = db.relationship("Restaurant", back_populates="user", cascade="all,delete")
     reviews = db.relationship("Review", back_populates="user", cascade="all,delete")
-    food_item_reviews = db.relationship("FoodItem", back_populates="user", cascade="all, delete")
-    orders = db.relationship("Order", back_populates= "user")
+    food_item_reviews = db.relationship("FoodItemReview", back_populates="user", cascade="all, delete")
+    orders = db.relationship("Order", back_populates= "user", cascade="all, delete")
 
     @property
     def password(self):
@@ -34,6 +34,11 @@ class User(db.Model, UserMixin):
     def to_dict(self):
         return {
             'id': self.id,
-            'username': self.username,
-            'email': self.email
+            'email': self.email,
+            "firstName": self.first_name,
+            "lastName": self.last_name,
+            "reviews": [review.to_dict() for review in self.reviews],
+            "foodItemReviews": [item_review.to_dict() for item_review in self.food_item_reviews],
+            "restaurantsOwned": [restaurant.to_dict() for restaurant in self.restaurants],
+            "orders": [order.to_dict() for order in self.orders]
         }
