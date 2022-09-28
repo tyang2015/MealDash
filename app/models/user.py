@@ -7,9 +7,18 @@ class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(40), nullable=False, unique=True)
+    first_name = db.Column(db.String, nullable=False)
+    last_name = db.Column(db.String, nullable=False)
+    # username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
+    phone_number = db.Column(db.Integer, nullable=False)
     hashed_password = db.Column(db.String(255), nullable=False)
+
+    # relationships
+    restaurants = db.relationship("Restaurant", back_populates="user", cascade="all,delete")
+    reviews = db.relationship("Review", back_populates="user", cascade="all,delete")
+    food_item_reviews = db.relationship("FoodItem", back_populates="user", cascade="all, delete")
+    orders = db.relationship("Order", back_populates= "user")
 
     @property
     def password(self):
