@@ -1,7 +1,27 @@
-.restaurant-main-container{
+.restaurant-main-grid-container{
     margin-top: 50px;
     background-color: lightgreen;
-    width: 100%;
+    width:70%;
     height: 100%;
     display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(auto-fill);
+    grid-column-gap: 10px;
+    margin: auto;
+
+}
+.get-restaurants-pic-container{
+  height: 160px;
+  min-height:  160px;
+  max-height: 300px;
+}
+
+.restaurant-card-container{
+
+}
+
+
+.get-restaurants-pic{
+  height: 100%;
+  width: 100%
 }

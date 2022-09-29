@@ -39,6 +39,12 @@ def valid_routing_number(form, field):
     if len(str(routingNumber)) != 9:
         raise ValidationError("Invalid Routing Number")
 
+def logo_exists(form, field):
+  logo = field.data
+  existingLogo = Restaurant.query.filter(Restaurant.logo == logo).first()
+  if existingLogo:
+    raise ValidationError("Logo already registered by another user")
+
 # # 00:00:00 => 8 digits
 # def valid_open_time(form, field):
 #     openTime = field.data
@@ -49,6 +55,7 @@ class RestaurantForm(FlaskForm):
     name = StringField("Post Url", validators=[DataRequired()])
     priceRange = IntegerField("Price Range", validators=[DataRequired(), valid_price_range])
     restaurantPicUrl  = StringField("Restaurant Pic Url", validators=[DataRequired()])
+    logo = StringField("Logo", validators=[logo_exists])
     longitude = DecimalField("Longitude", validators=[DataRequired(), valid_longitude] )
     latitude = DecimalField("Latitude", validators=[DataRequired(), valid_latitude])
     email = StringField("Email", validators=[DataRequired(), valid_email])

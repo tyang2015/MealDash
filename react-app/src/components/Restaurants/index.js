@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllRestaurants } from '../../store/restaurant';
+import { NavLink } from 'react-router-dom';
 import "./restaurants.css"
 
 const Restaurants = () => {
@@ -12,13 +13,25 @@ const Restaurants = () => {
     }, [dispatch])
     return (
         <>
-            <div className="restaurant-main-container">
+          <div>
+            <div className="restaurant-main-grid-container">
                 {restaurants.length>0 && restaurants.map(restaurant => (
-                    <div key={restaurant.id}>
-                        {restaurant.name}
+                  <NavLink to = {`restaurants/${restaurant.id}`}>
+                    <div key={restaurant.id} className="restaurant-card-container">
+                      <div className= 'get-restaurants-pic-container'>
+                        <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}/>
+                      </div>
+                      <div className="get-restaurants-bottom-text-container">
+                        <div className='get-restaurants-left-inner-text-container'>
+                          <h3>{restaurant.name}</h3>
+                          <p> {restaurant.avgRating} rating</p>
+                        </div>
+                      </div>
                     </div>
+                  </NavLink>
                 ))}
             </div>
+          </div>
         </>
     )
 }

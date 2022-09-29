@@ -13,6 +13,7 @@ import SplashPage from './components/SplashPage';
 import CreateRestaurant from './components/RestaurantForm';
 import CreateRestaurantForm from './components/CreateRestaurantForm';
 import UpdateRestaurantForm from './components/UpdateRestaurantForm';
+import GetRestaurant from './components/GetRestaurant';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -49,7 +50,7 @@ function App() {
         <ProtectedRoute path='/restaurants/new' exact={true} >
          <CreateRestaurantForm/>
         </ProtectedRoute>
-        <ProtectedRoute path='/restaurants/:id' exact={true} >
+        <ProtectedRoute path='/restaurants/:id/edit' exact={true} >
           <UpdateRestaurantForm/>
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
@@ -57,6 +58,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           <Restaurants/>
+        </ProtectedRoute>
+        <ProtectedRoute path='/restaurants/:id' exact={true} >
+          <GetRestaurant/>
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

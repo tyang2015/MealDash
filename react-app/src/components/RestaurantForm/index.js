@@ -11,25 +11,47 @@ import FormStep3 from './FormStep3';
 // 3rd step: bankAccount, routingNumber
 const RestaurantForm = ({restaurant, formType}) => {
     // console.log('inside create restaurant form')
+    console.log('restaurant in restaurant form:', restaurant)
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user)
     const [formStep, setFormStep]= useState(0)
     const [errors, setErrors] = useState([])
     const [hasSubmitted, setHasSubmitted] =useState(false)
-    const [formData, setFormData] = useState({
-        name: "",
-        priceRange: "",
-        restaurantPicUrl: "",
-        longitude: "",
-        latitude: "",
-        email: "",
-        phoneNumber: "",
-        bankAccount: "",
-        routingNumber: "",
-        category: "",
-        openTime: "",
-        closeTime: ""
+    // const [testName, setTestName] = useState(restaurant.name)
+    // console.log('test name from rest.:', testName)
+    const [formData, setFormData] = useState(
+    // {
+    //   name: restaurant.name,
+    //   priceRange: restaurant.priceRange,
+    //   restaurantPicUrl: restaurant.restaurantPicUrl,
+    //   longitude: restaurant.longitude,
+    //   latitude: restaurant.latitude,
+    //   email: restaurant.email,
+    //   phoneNumber: restaurant.phoneNumber,
+    //   bankAccount:  restaurant.bankAccount,
+    //   routingNumber:  restaurant.routingNumber,
+    //   category: restaurant.category,
+    //   openTime:  restaurant.openTime,
+    //   closeTime:  restaurant.closeTime
+    // } ||
+    {
+      name: "",
+      priceRange: "",
+      restaurantPicUrl: "",
+      longitude: "",
+      latitude: "",
+      email: "",
+      phoneNumber: "",
+      bankAccount:  "",
+      routingNumber:  "",
+      category: "",
+      openTime:  "",
+      closeTime:  ""
     })
+      // const [formData, setFormData] = useState({
+
+      // })
+    console.log('form data use state object:', formData)
     // console.log('form step:', formStep)
     useEffect(()=>{
       let errors= []

@@ -1,8 +1,8 @@
 """create all tables
 
-Revision ID: 3a50bcd2cd69
+Revision ID: b4644a5e0540
 Revises: 
-Create Date: 2022-09-28 09:00:46.382643
+Create Date: 2022-09-28 22:58:39.039412
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '3a50bcd2cd69'
+revision = 'b4644a5e0540'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -34,6 +34,7 @@ def upgrade():
     sa.Column('owner_id', sa.Integer(), nullable=True),
     sa.Column('price_range', sa.Integer(), nullable=False),
     sa.Column('restaurant_pic_url', sa.String(), nullable=False),
+    sa.Column('logo', sa.String(), nullable=True),
     sa.Column('longitude', sa.Numeric(scale=2), nullable=False),
     sa.Column('latitude', sa.Numeric(scale=2), nullable=False),
     sa.Column('email', sa.String(), nullable=False),
@@ -46,7 +47,8 @@ def upgrade():
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('logo')
     )
     op.create_table('food_items',
     sa.Column('id', sa.Integer(), nullable=False),

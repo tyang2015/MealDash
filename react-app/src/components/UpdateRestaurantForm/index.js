@@ -10,7 +10,7 @@ const UpdateRestaurantForm = () => {
   const restaurants = useSelector(state=> state.restaurants)
   // console.log('restaurants in update:', restaurants)
   const restaurant = restaurants[id]
-  console.log('restaurant in update form:', restaurant)
+  // console.log('restaurant in update form:', restaurant)
   useEffect(()=>{
     dispatch(getAllRestaurants())
   }, [dispatch])

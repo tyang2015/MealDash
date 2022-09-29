@@ -21,6 +21,8 @@ class Restaurant(db.Model):
     owner_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     price_range = db.Column(db.Integer, nullable=False)
     restaurant_pic_url = db.Column(db.String, nullable=False)
+    # added here
+    logo = db.Column(db.String, unique=True)
     longitude = db.Column(db.Numeric(scale=2), nullable = False)
     latitude= db.Column(db.Numeric(scale=2), nullable = False)
     email = db.Column(db.String, nullable = False)
@@ -56,6 +58,7 @@ class Restaurant(db.Model):
             "ownerId" : self.owner_id,
             "priceRange" : self.price_range,
             "restaurantPicUrl" : self.restaurant_pic_url,
+            "logo": self.logo,
             "longitude" : str(self.longitude),
             "latitude" : str(self.latitude),
             "email" : self.email,

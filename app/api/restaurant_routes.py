@@ -36,6 +36,7 @@ def create_restaurant():
             name = form.data["name"],
             price_range = form.data["priceRange"],
             restaurant_pic_url = form.data["restaurantPicUrl"],
+            logo = form.data["logo"],
             longitude = form.data["longitude"],
             latitude = form.data["latitude"],
             email = form.data["email"],
