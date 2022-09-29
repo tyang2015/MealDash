@@ -19,7 +19,7 @@ const RestaurantForm = ({restaurant, formType}) => {
     const [errors, setErrors] = useState([])
     const [hasSubmitted, setHasSubmitted] =useState(false)
     // const [testName, setTestName] = useState(restaurant.name)
-    // console.log('test name from rest.:', testName)
+    // console.log('test name from rest.:', testName)fdf
     const [formData, setFormData] = useState(
     {
       name: restaurant? restaurant.name: "",
