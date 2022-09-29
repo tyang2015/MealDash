@@ -1,0 +1,21 @@
+.get-restaurant-main-container{
+  height: 100%;
+  width: 100%;
+}
+
+.restaurant-page-pic{
+  width: 58%;
+  height: 250px;
+  object-fit: cover;
+  background-color: green;
+}
+
+.restaurant-page-logo-pic{
+  width: 190px;
+  height: 190px;
+  background-color: green;
+}
+
+.restaurant-page-logo-pic-container{
+  /* width: sdfsdf*/
+}
