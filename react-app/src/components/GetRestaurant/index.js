@@ -13,7 +13,7 @@ const GetRestaurant = () => {
   useEffect(()=> {
     dispatch(getAllRestaurants())
   }, [dispatch])
-// sdf
+// sdfdsfs
   return (
     <div className="get-restaurant-main-container">
       {/* <h3> restaurant page</h3> */}
@@ -28,7 +28,8 @@ const GetRestaurant = () => {
           </div>
           <div className="restaurant-page-description-container">
             <div className="restaurant-page-left-description-text-box">
-              <div> {restaurant.category} {restaurant.avgRating}</div>
+              <div> {restaurant.category} {restaurant.avgRating}
+              {restaurant.numReviews} ratings {restaurant.priceRange = "1"? "$": "2"? "$$": "$$$"}</div>
             </div>
           </div>
         </>
