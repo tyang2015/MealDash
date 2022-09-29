@@ -26,17 +26,17 @@ def valid_price_range(form, field):
 
 def valid_phone_number(form, field):
     phoneNumber = field.data
-    if len(str(phoneNumber))!= 10:
+    if len(phoneNumber)!= 10:
         raise ValidationError("Invalid phone number")
 
 def valid_bank_account(form, field):
     bankAccount = field.data
-    if len(str(bankAccount)) < 8 or len(str(bankAccount))> 17:
+    if len(bankAccount) < 8 or len(str(bankAccount))> 17:
         raise ValidationError("Invalid Bank account Number")
 
 def valid_routing_number(form, field):
     routingNumber = field.data
-    if len(str(routingNumber)) != 9:
+    if len(routingNumber) != 9:
         raise ValidationError("Invalid Routing Number")
 
 def logo_exists(form, field):
