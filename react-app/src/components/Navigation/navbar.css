@@ -1,0 +1,16 @@
+.navbar{
+    width: 100vw;
+    height: 50px;
+    background-color: lightcoral;
+    display:flex;
+    justify-content: space-between
+}
+
+.dropdown-container{
+    background-color: lightcyan;
+    display: flex;
+    flex-direction: column;
+    width: 180px;
+    
+
+}

@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
-import NavBar from './components/NavBar';
+import NavBar from './components/Navigation/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 import Restaurants from './components/Restaurants';
 import SplashPage from './components/SplashPage';
+import CreateRestaurant from './components/RestaurantForm';
+import CreateRestaurantForm from './components/CreateRestaurantForm';
+import UpdateRestaurantForm from './components/UpdateRestaurantForm';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
+  const loggedInUser = useSelector(state=> state.session.user)
   const dispatch = useDispatch();
-
+  console.log('logged in user in app:', loggedInUser)
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());
@@ -28,7 +32,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
+      {loggedInUser && <NavBar />}
       <Switch>
         <Route path='/login' exact={true}>
           <SplashPage/>
@@ -42,6 +46,12 @@ function App() {
         {/* <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
         </ProtectedRoute> */}
+        <ProtectedRoute path='/restaurants/new' exact={true} >
+         <CreateRestaurantForm/>
+        </ProtectedRoute>
+        <ProtectedRoute path='/restaurants/:id' exact={true} >
+          <UpdateRestaurantForm/>
+        </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>

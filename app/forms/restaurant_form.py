@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, DecimalField, DateTimeField
+from wtforms import StringField, SelectField, IntegerField, DecimalField, DateTimeField
 from wtforms.fields.html5 import TimeField
 from wtforms.validators import DataRequired, ValidationError
 from app.models import Restaurant
@@ -43,6 +43,8 @@ def valid_routing_number(form, field):
 # def valid_open_time(form, field):
 #     openTime = field.data
 
+CATEGORY_CHOICES = ["Asian", "American","Breakfast", "Vegan", "Mexican", "Japanese", "Italian", "French","Dessert", "FastFood"]
+
 class RestaurantForm(FlaskForm):
     name = StringField("Post Url", validators=[DataRequired()])
     priceRange = IntegerField("Price Range", validators=[DataRequired(), valid_price_range])
@@ -53,6 +55,6 @@ class RestaurantForm(FlaskForm):
     phoneNumber = IntegerField("Phone number", validators=[DataRequired(), valid_phone_number])
     bankAccount = IntegerField("Bank Account", validators=[DataRequired(), valid_bank_account])
     routingNumber = IntegerField("Routing Number", validators = [DataRequired(), valid_routing_number])
-    category = StringField("Category", validators = [DataRequired()])
+    category = SelectField("Category", choices=CATEGORY_CHOICES, validators = [DataRequired()])
     openTime = TimeField("Opening Time", validators = [DataRequired()])
     closeTime = TimeField("Closing Time", validators = [DataRequired()])
