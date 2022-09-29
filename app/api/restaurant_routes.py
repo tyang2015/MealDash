@@ -84,3 +84,7 @@ def delete_restaurant(id):
     db.session.delete(restaurant)
     db.session.commit()
     return {"message": "Successfully deleted!"}
+
+
+# -------------------------------------------------------
+# FEATURE 2: FOOD ITEM

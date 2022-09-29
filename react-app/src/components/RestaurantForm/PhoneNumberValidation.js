@@ -20,7 +20,9 @@ export const maskPhoneNumber = (phoneNumber) => {
     //return the digit at the current index and increment the index
     return digits[i++]
   })
-
-  //return the formatted phone number
+  // added here
+  if (formatted.substring(0, lastReplacementIndex + 1) =="("){
+    return ""
+  }
   return formatted.substring(0, lastReplacementIndex + 1)
 }

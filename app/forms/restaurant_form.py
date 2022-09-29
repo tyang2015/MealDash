@@ -26,12 +26,12 @@ def valid_price_range(form, field):
 
 def valid_phone_number(form, field):
     phoneNumber = field.data
-    if len(phoneNumber)!= 10:
+    if len(phoneNumber)!= 14:
         raise ValidationError("Invalid phone number")
 
 def valid_bank_account(form, field):
     bankAccount = field.data
-    if len(bankAccount) < 8 or len(str(bankAccount))> 17:
+    if len(bankAccount) < 8 or len(bankAccount)> 17:
         raise ValidationError("Invalid Bank account Number")
 
 def valid_routing_number(form, field):
@@ -59,9 +59,9 @@ class RestaurantForm(FlaskForm):
     longitude = DecimalField("Longitude", validators=[DataRequired(), valid_longitude] )
     latitude = DecimalField("Latitude", validators=[DataRequired(), valid_latitude])
     email = StringField("Email", validators=[DataRequired(), valid_email])
-    phoneNumber = IntegerField("Phone number", validators=[DataRequired(), valid_phone_number])
-    bankAccount = IntegerField("Bank Account", validators=[DataRequired(), valid_bank_account])
-    routingNumber = IntegerField("Routing Number", validators = [DataRequired(), valid_routing_number])
+    phoneNumber = StringField("Phone number", validators=[DataRequired(), valid_phone_number])
+    bankAccount = StringField("Bank Account", validators=[DataRequired(), valid_bank_account])
+    routingNumber = StringField("Routing Number", validators = [DataRequired(), valid_routing_number])
     category = SelectField("Category", choices=CATEGORY_CHOICES, validators = [DataRequired()])
     openTime = TimeField("Opening Time", validators = [DataRequired()])
     closeTime = TimeField("Closing Time", validators = [DataRequired()])

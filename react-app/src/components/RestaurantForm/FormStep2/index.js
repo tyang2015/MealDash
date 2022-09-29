@@ -7,6 +7,7 @@ import "./FormStep2.css"
 const CATEGORY_CHOICES = ["Asian", "American","Breakfast", "Vegan", "Mexican", "Japanese", "Italian", "French","Dessert", "FastFood"]
 
 const FormStep2 = ({formData, setFormData}) => {
+  console.log('form data in form step 2:', formData)
   return (
     <div className='create-restaurant-form-step-2-container'>
       <label htmlFor="open-time">Open Hours</label>
@@ -45,6 +46,7 @@ const FormStep2 = ({formData, setFormData}) => {
       />
       <label htmlFor="restaurant-category">Category</label>
       <select
+        id="restaurant-category"
         value={formData.category}
         onChange={e=> setFormData({...formData, category: e.target.value})}
         required

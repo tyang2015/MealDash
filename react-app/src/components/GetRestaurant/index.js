@@ -2,12 +2,14 @@ import { useParams, useHistory, NavLink } from "react-router-dom"
 import React,{useState, useEffect} from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { getAllRestaurants } from "../../store/restaurant";
+import { deleteRestaurant } from "../../store/restaurant";
 
 import "./GetRestaurant.css"
 
 const GetRestaurant = () => {
   let { id } = useParams();
   const dispatch = useDispatch();
+  const history = useHistory();
   const sessionUser = useSelector(state=> state.session.user)
   console.log('id is:', id)
   const restaurant = useSelector(state=> state.restaurants[id])
@@ -25,6 +27,12 @@ const GetRestaurant = () => {
     dispatch(getAllRestaurants())
   }, [dispatch])
 // sdfdsfs
+  const handleDelete = e => {
+    dispatch(deleteRestaurant(id))
+    alert('successfully deleted!')
+    return history.push('/')
+  }
+  
   return (
     <div className="restaurant-page-main-container">
       <div className="restaurant-page-main-content-container">
@@ -58,7 +66,7 @@ const GetRestaurant = () => {
                         Update Restaurant
                       </div>
                     </NavLink>
-                      <button className="restaurant-page-delete-button">
+                      <button onClick={handleDelete} className="restaurant-page-delete-button">
                         Delete
                       </button>
                   </>

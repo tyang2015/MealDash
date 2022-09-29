@@ -65,14 +65,14 @@ export const updateRestaurant = (payload) => async dispatch => {
     }
 }
 
-export const deleteRestaurant = (payload) => async dispatch => {
-    const response = await fetch(`/api/restaurants/${payload.id}`, {
+export const deleteRestaurant = (id) => async dispatch => {
+    const response = await fetch(`/api/restaurants/${id}`, {
         method: "DELETE",
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(payload.id)
+        body: JSON.stringify(id)
     })
     if (response.ok){
-        dispatch(remove(payload.id))
+        dispatch(remove(id))
     }
 }
 const initialState = {}

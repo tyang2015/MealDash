@@ -12,19 +12,19 @@ import { returnDigitsOnly, maskPhoneNumber } from './PhoneNumberValidation';
 // 3rd step: bankAccount, routingNumber
 const RestaurantForm = ({restaurant, formType}) => {
     // console.log('inside create restaurant form')
-    console.log('restaurant in restaurant form:', restaurant)
+    // console.log('restaurant in restaurant form:', restaurant)
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user)
     const [formStep, setFormStep]= useState(0)
     const [errors, setErrors] = useState([])
     const [hasSubmitted, setHasSubmitted] =useState(false)
     // const [testName, setTestName] = useState(restaurant.name)
-    // console.log('test name from rest.:', testName)fdf
     const [formData, setFormData] = useState(
     {
       name: restaurant? restaurant.name: "",
       priceRange: restaurant? restaurant.priceRange: "",
       restaurantPicUrl: restaurant? restaurant.restaurantPicUrl: "",
+      logo: restaurant? restaurant.logo: "",
       longitude: restaurant? restaurant.longitude: "",
       latitude: restaurant? restaurant.latitude: "",
       email: restaurant? restaurant.email: "",
@@ -50,17 +50,20 @@ const RestaurantForm = ({restaurant, formType}) => {
       closeTime:  ""
     })
 
-    console.log('form data use state object:', formData)
+    // console.log('form data use state object:', formData)
     // console.log('form step:', formStep)
     useEffect(()=>{
       let errors= []
       // change to string w/o dashes
-      let newPhoneNumber = formData.phoneNumber.split("-").join("")
+      console.log('phone number:', formData.phoneNumber)
+      // let newPhoneNumber = formData.phoneNumber.split("-").join("")
       if (!formData.email.includes("@")) errors.push("Email is invalid")
       if (formData.priceRange < 1 || formData.priceRange >3) errors.push("Price range is invalid")
+      if (!isImage(formData.restaurantPicUrl)) errors.push("Restaurant pic url is invalid")
+      if (!isImage(formData.logo)) errors.push("Logo url is invalid")
       if (formData.longitude < -180 || formData.longitude > 180) errors.push("Longitude is invalid")
       if (formData.latitude < -90 || formData.latitude> 90) errors.push("Latitude is invalid")
-      if (newPhoneNumber.length!= 10) errors.push("Phone Number is invalid")
+      if (formData.phoneNumber.length!= 14) errors.push("Phone Number is invalid")
       if (formData.bankAccount.length < 8 || formData.bankAccount.length > 17) {
         errors.push("Bank Account is invalid")
       }
@@ -71,6 +74,9 @@ const RestaurantForm = ({restaurant, formType}) => {
       formData.latitude, formData.email, formData.phoneNumber, formData.bankAccount,
       formData.routingNumber, formData.category, formData.openTime, formData.closeTime])
 
+    function isImage(url) {
+      return /\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
+    }
 
     const FormDisplay = () => {
         if (formStep === 0 ) {
@@ -87,12 +93,15 @@ const RestaurantForm = ({restaurant, formType}) => {
     const handleSubmit= (e) => {
       e.preventDefault();
       setHasSubmitted(true)
+      console.log('phone number (with masked function):', maskPhoneNumber(formData.phoneNumber))
+      console.log('')
       if (errors.length>0){
         alert('Cannot submit post')
         return
       }
-      let newNumber = returnDigitsOnly(formData.phoneNumber)
-      console.log(newNumber)
+      // let newNumber = returnDigitsOnly(formData.phoneNumber)
+      // console.log(newNumber)
+      // console.log('phone number:', formData.phoneNumber)
 
       // let newPhoneNumber = formData.phoneNumber.split("-").join("")
       // formData.phoneNumber = newPhoneNumber
@@ -147,12 +156,7 @@ const RestaurantForm = ({restaurant, formType}) => {
             {formStep<2 && (
               <button
                 onClick={() => {
-                  if (formStep === 2) {
-                    // return handleSubmit()
-                    console.log('last step')
-                  } else {
-                    setFormStep((currPage) => currPage + 1);
-                  }
+                  setFormStep((currPage) => currPage + 1);
                 }}
               >
                 Next

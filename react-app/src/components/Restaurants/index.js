@@ -16,7 +16,7 @@ const Restaurants = () => {
           <div>
             <div className="restaurant-main-grid-container">
                 {restaurants.length>0 && restaurants.map(restaurant => (
-                  <NavLink to = {`restaurants/${restaurant.id}`}>
+                  <NavLink key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
                     <div key={restaurant.id} className="restaurant-card-container">
                       <div className= 'get-restaurants-pic-container'>
                         <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}/>

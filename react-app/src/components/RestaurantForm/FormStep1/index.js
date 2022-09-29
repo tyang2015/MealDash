@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
+import { maskPhoneNumber } from '../PhoneNumberValidation';
 import "./FormStep1.css"
 
 // first step: name, address (longitude & latitude), email, phone number, restaurant_pic_url
@@ -28,6 +29,13 @@ const FormStep1 = ({formData, setFormData}) => {
         required
       />
       <input
+        type = 'text'
+        value = {formData.logo}
+        onChange={e=> setFormData({...formData, logo: e.target.value})}
+        placeholder = "Logo"
+        required
+      />
+      <input
         type = 'number'
         value = {formData.longitude}
         onChange = {e=> setFormData({...formData, longitude: e.target.value})}
@@ -50,17 +58,23 @@ const FormStep1 = ({formData, setFormData}) => {
       />
       <input
         type = 'tel'
-        value = {formData.phoneNumber}
+        value = {maskPhoneNumber(formData.phoneNumber)}
         onChange = {e=> setFormData({...formData, phoneNumber: e.target.value})}
         placeholder = "xxx-xxx-xxxx"
-        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+        // pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
         required
       />
-      {/* <img
+
+      <img
         src={formData.restaurantPicUrl}
-        alt="image description for screen readers"
-        onError={e => { e.currentTarget.src = "your_image_not_found_defalt_picture_here"; }}
-      /> */}
+        alt="restaurant pic url"
+        onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}
+      />
+      <img
+        src={formData.logo}
+        alt="logo url"
+        onError={e => { e.currentTarget.src = "https://cdn5.vectorstock.com/i/1000x1000/65/29/vintage-badge-retro-blank-labels-logo-vector-23946529.jpg"; }}
+      />
     </div>
 
   )
