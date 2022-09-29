@@ -124,7 +124,7 @@ class Order(db.Model):
     longitude = db.Column(db.Numeric(scale=2), nullable = False)
     latitude= db.Column(db.Numeric(scale=2), nullable = False)
     phone_number = db.Column(db.Integer, nullable = False)
-    credit_card = db.Column(db.Integer, nullable = False)
+    credit_card = db.Column(db.String, nullable = False)
     total_price = db.Column(db.Numeric(scale = 2), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)

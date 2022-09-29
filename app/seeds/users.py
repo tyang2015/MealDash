@@ -9,77 +9,77 @@ def seed_users():
            "last_name": "Demo",
            "email": "user1@gmail.com",
             "password": "password",
-            "phone_number" : 6162920990
+            "phone_number" : "(616) 292-0990"
         },
         {
             "first_name": "Demo",
             "last_name": "Demo",
             "email": "user2@gmail.com",
             "password": "password",
-            "phone_number" : 6269008765
+            "phone_number" : "(626) 900-8765"
         },
         {
             "first_name": "Demo",
             "last_name": "Demo",
             "email": "user3@gmail.com",
             "password": "password",
-            "phone_number" : 6269998765
+            "phone_number" : "(626) 999-8765"
         },
         {
             "first_name": "Tiffany",
             "last_name": "Yang",
             "email": "tiffany@gmail.com",
             "password": "password",
-            "phone_number" : 6261112222
+            "phone_number" : "(626) 111-2222"
         },
         {
             "first_name": "Randy",
             "last_name": "Chang",
             "email": "randy@gmail.com",
             "password": "password",
-            "phone_number" : 6261112092
+            "phone_number" : "(626) 111-2092"
         },
         {
             "first_name": "Ananya",
             "last_name": "Bharghava",
             "email": "ananya@gmail.com",
             "password": "password",
-            "phone_number" : 2349087563
+            "phone_number" : "(234) 908-7563"
         },
         {
             "first_name": "Chen",
             "last_name": "Chen",
             "email": "chen@gmail.com",
             "password": "password",
-            "phone_number" : 1119008765
+            "phone_number" : "(111) 900-8765"
         },
         {
             "first_name": "Ashley",
             "last_name": "Yeh",
             "email": "ashley@gmail.com",
             "password": "password",
-            "phone_number" : 6264009027
+            "phone_number" : "(626) 400-9027"
         },
         {
             "first_name": "Sabrina",
             "last_name": "Lee",
             "email": "sabrina@gmail.com",
             "password": "password",
-            "phone_number" : 6268773211
+            "phone_number" : "(626) 877-3211"
         },
         {
             "first_name": "Lilith",
             "last_name": "Lee",
             "email": "lilith@gmail.com",
             "password": "password",
-            "phone_number" : 6269093122
+            "phone_number" : "(626) 909-3122"
         },
         {
             "first_name": "Ben",
             "last_name": "Waldee",
             "email": "ben@gmail.com",
             "password": "password",
-            "phone_number" : 2138893122
+            "phone_number" : "(213) 889-3122"
         },
 
     ]

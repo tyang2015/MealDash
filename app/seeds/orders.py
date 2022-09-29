@@ -8,8 +8,8 @@ def seed_orders():
             "restaurant_id": 4,
             "longitude": 10,
             "latitude": 10,
-            "phone_number": 6261112222,
-            "credit_card": 1111222231110987,
+            "phone_number": "(626) 111-2222",
+            "credit_card": "1111222231110987",
             "total_price": 20.80
         },
         {
@@ -17,8 +17,8 @@ def seed_orders():
             "restaurant_id": 5,
             "longitude": 5,
             "latitude": 10,
-            "phone_number": 6261112222,
-            "credit_card": 1111222231110987,
+            "phone_number": "(626) 111-2222",
+            "credit_card": "1111222231110987",
             "total_price": 15.50
         },
         {
@@ -26,8 +26,8 @@ def seed_orders():
             "restaurant_id": 1,
             "longitude": 5,
             "latitude": 12,
-            "phone_number": 6261112092,
-            "credit_card": 9088222231110987,
+            "phone_number": "(626) 111-2092",
+            "credit_card": "9088222231110987",
             "total_price": 40.99
         },
         {
@@ -35,8 +35,8 @@ def seed_orders():
             "restaurant_id": 2,
             "longitude": 7,
             "latitude": 20,
-            "phone_number": 2349087563,
-            "credit_card": 6666222231110987,
+            "phone_number": "(234) 908-7563",
+            "credit_card": "6666222231110987",
             "total_price": 20.80
         },
         {
@@ -44,8 +44,8 @@ def seed_orders():
             "restaurant_id": 3,
             "longitude": 12,
             "latitude": 10,
-            "phone_number": 1119008765,
-            "credit_card": 5555222231110987,
+            "phone_number": "(111) 900-8765",
+            "credit_card": "5555222231110987",
             "total_price": 30.80
         },
         {
@@ -53,8 +53,8 @@ def seed_orders():
             "restaurant_id": 5,
             "longitude": 10,
             "latitude": 10,
-            "phone_number": 6264009027,
-            "credit_card": 9000222231110987,
+            "phone_number": "(626) 400-9027",
+            "credit_card": "9000222231110987",
             "total_price": 20.80
         },
     ]
