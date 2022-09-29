@@ -16,10 +16,10 @@ seed_commands = AppGroup('seed')
 @seed_commands.command('all')
 def seed():
     seed_users()
-    seed_food_item_reviews()
     seed_food_items()
-    seed_orders()
     seed_restaurants()
+    seed_orders()
+    seed_food_item_reviews()
     seed_reviews()
     print('successfully seeded!')
     # Add other seed functions here
@@ -29,10 +29,10 @@ def seed():
 @seed_commands.command('undo')
 def undo():
     undo_users()
-    undo_food_item_reviews()
     undo_food_items()
-    undo_orders()
     undo_restaurants()
+    undo_orders()
+    undo_food_item_reviews()
     undo_reviews()
 
     # Add other undo functions here

@@ -15,17 +15,25 @@ const GetRestaurant = () => {
   }, [dispatch])
 // sdf
   return (
-    <>
-      <h3> restaurant page</h3>
+    <div className="get-restaurant-main-container">
+      {/* <h3> restaurant page</h3> */}
       {restaurant && (
         <>
-          <div>
-            <img src={restaurant.restaurantPicUrl}/>
+          <div className="restaurant-page-pic-container">
+            <img className="restaurant-page-pic" src={restaurant.restaurantPicUrl}/>
           </div>
-          <img src={restaurant.logo}/>
+          <img className="restaurant-page-logo-pic" src={restaurant.logo}/>
+          <div className="restaurant-page-name">
+            {restaurant.name}
+          </div>
+          <div className="restaurant-page-description-container">
+            <div className="restaurant-page-left-description-text-box">
+              <div> {restaurant.category} {restaurant.avgRating}</div>
+            </div>
+          </div>
         </>
       )}
-    </>
+    </div>
 
 
   )
