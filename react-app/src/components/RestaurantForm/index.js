@@ -5,6 +5,7 @@ import { createRestaurant, updateRestaurant } from '../../store/restaurant';
 import FormStep1 from './FormStep1';
 import FormStep2 from './FormStep2';
 import FormStep3 from './FormStep3';
+import { returnDigitsOnly, maskPhoneNumber } from './PhoneNumberValidation';
 
 // first step: name, address (longitude & latitude), email, phone number, restaurant_pic_url
 // 2nd step: openTime, closeTime, priceRange, category
@@ -20,20 +21,20 @@ const RestaurantForm = ({restaurant, formType}) => {
     // const [testName, setTestName] = useState(restaurant.name)
     // console.log('test name from rest.:', testName)
     const [formData, setFormData] = useState(
-    // {
-    //   name: restaurant.name,
-    //   priceRange: restaurant.priceRange,
-    //   restaurantPicUrl: restaurant.restaurantPicUrl,
-    //   longitude: restaurant.longitude,
-    //   latitude: restaurant.latitude,
-    //   email: restaurant.email,
-    //   phoneNumber: restaurant.phoneNumber,
-    //   bankAccount:  restaurant.bankAccount,
-    //   routingNumber:  restaurant.routingNumber,
-    //   category: restaurant.category,
-    //   openTime:  restaurant.openTime,
-    //   closeTime:  restaurant.closeTime
-    // } ||
+    {
+      name: restaurant? restaurant.name: "",
+      priceRange: restaurant? restaurant.priceRange: "",
+      restaurantPicUrl: restaurant? restaurant.restaurantPicUrl: "",
+      longitude: restaurant? restaurant.longitude: "",
+      latitude: restaurant? restaurant.latitude: "",
+      email: restaurant? restaurant.email: "",
+      phoneNumber: restaurant? restaurant.phoneNumber: "",
+      bankAccount:  restaurant? restaurant.bankAccount: "",
+      routingNumber:  restaurant? restaurant.routingNumber: "",
+      category: restaurant? restaurant.category: "",
+      openTime:  restaurant? restaurant.openTime: "",
+      closeTime:  restaurant? restaurant.closeTime: ""
+    } ||
     {
       name: "",
       priceRange: "",
@@ -48,9 +49,7 @@ const RestaurantForm = ({restaurant, formType}) => {
       openTime:  "",
       closeTime:  ""
     })
-      // const [formData, setFormData] = useState({
 
-      // })
     console.log('form data use state object:', formData)
     // console.log('form step:', formStep)
     useEffect(()=>{
@@ -62,7 +61,7 @@ const RestaurantForm = ({restaurant, formType}) => {
       if (formData.longitude < -180 || formData.longitude > 180) errors.push("Longitude is invalid")
       if (formData.latitude < -90 || formData.latitude> 90) errors.push("Latitude is invalid")
       if (newPhoneNumber.length!= 10) errors.push("Phone Number is invalid")
-      if (String(formData.bankAccount).length < 8 || String(formData.bankAccount).length > 17) {
+      if (formData.bankAccount.length < 8 || formData.bankAccount.length > 17) {
         errors.push("Bank Account is invalid")
       }
       if (String(formData.routingNumber).length != 9) errors.push("Routing number is invalid")
@@ -90,12 +89,13 @@ const RestaurantForm = ({restaurant, formType}) => {
       setHasSubmitted(true)
       if (errors.length>0){
         alert('Cannot submit post')
-        // console.log()
         return
       }
+      let newNumber = returnDigitsOnly(formData.phoneNumber)
+      console.log(newNumber)
 
-      let newPhoneNumber = formData.phoneNumber.split("-").join("")
-      formData.phoneNumber = newPhoneNumber
+      // let newPhoneNumber = formData.phoneNumber.split("-").join("")
+      // formData.phoneNumber = newPhoneNumber
       restaurant = {
         ...restaurant,
         ...formData

@@ -1,10 +1,18 @@
-.get-restaurant-main-container{
-  height: 100%;
-  width: 100%;
+.restaurant-page-main-container{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.restaurant-page-main-content-container{
+  height: 100vh;
+  width: 58%;
+  /* margin-top:50px; */
+  margin: auto
 }
 
 .restaurant-page-pic{
-  width: 58%;
+  width: 100%;
   height: 250px;
   object-fit: cover;
   background-color: green;
