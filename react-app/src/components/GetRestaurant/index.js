@@ -20,16 +20,16 @@ const GetRestaurant = () => {
       {restaurant && (
         <>
           <div className="restaurant-page-pic-container">
-            <img className="restaurant-page-pic" src={restaurant.restaurantPicUrl}/>
+            <img className="restaurant-page-pic" src={restaurant.restaurantPicUrl} onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
           </div>
-          <img className="restaurant-page-logo-pic" src={restaurant.logo}/>
+          <img className="restaurant-page-logo-pic" src={restaurant.logo} onError={e => { e.currentTarget.src = "https://cdn5.vectorstock.com/i/1000x1000/65/29/vintage-badge-retro-blank-labels-logo-vector-23946529.jpg"; }} />
           <div className="restaurant-page-name">
             {restaurant.name}
           </div>
           <div className="restaurant-page-description-container">
             <div className="restaurant-page-left-description-text-box">
               <div> {restaurant.category} {restaurant.avgRating}
-              {restaurant.numReviews} ratings {restaurant.priceRange = "1"? "$": "2"? "$$": "$$$"}</div>
+              {restaurant.numReviews} ratings {restaurant.priceRange == "1"? "$": "2"? "$$": "$$$"}</div>
             </div>
           </div>
         </>
