@@ -9,11 +9,11 @@ const GetRestaurant = () => {
   console.log('id is:', id)
   const restaurant = useSelector(state=> state.restaurants[id])
   console.log('restaurant:', restaurant)
-  
+
   useEffect(()=> {
     dispatch(getAllRestaurants())
   }, [dispatch])
-
+// sdf
   return (
     <>
       <h3> restaurant page</h3>
