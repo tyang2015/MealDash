@@ -33,10 +33,10 @@ const NavBar = () => {
 
         return (
             <>
-            <button className="nav-bar-profile-button" onClick={()=> setOpen(!open)}>
-                Profile
-            </button>
-            {open && dropDownMenu}
+              <button className="nav-bar-profile-button" onClick={()=> setOpen(!open)}>
+                  Profile
+              </button>
+              {open && dropDownMenu}
             </>
         )
     }
@@ -48,14 +48,15 @@ const NavBar = () => {
                     <div>
                         {profileMenu()}
                     </div>
-                    <div>
-                        DOORDASH
-                    </div>
+                    <NavLink to="/">
+                      <div>
+                          DOORDASH
+                      </div>
+                    </NavLink>
                     <div>
                         CART ICON
                     </div>
                 </div>
-
             </nav>
         </>
     )

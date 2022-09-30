@@ -34,28 +34,35 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
       category: restaurant? restaurant.category: "American",
       openTime:  restaurant? restaurant.openTime: "",
       closeTime:  restaurant? restaurant.closeTime: ""
-    } ||
-    {
-      name: "",
-      priceRange: "",
-      restaurantPicUrl: "",
-      longitude: "",
-      latitude: "",
-      email: "",
-      phoneNumber: "",
-      bankAccount:  "",
-      routingNumber:  "",
-      category: "",
-      openTime:  "",
-      closeTime:  ""
     })
 
-    // console.log('form data use state object:', formData)
-    // console.log('form step:', formStep)
+    // useEffect(()=> {
+    //   console.log('form data in use effect:', formData)
+    //   setFormData({...formData,
+    //   name: restaurant? restaurant.name: formData? formData.name : "",
+    //   priceRange: restaurant? restaurant.priceRange: formData? formData.priceRange: "",
+    //   restaurantPicUrl: restaurant? restaurant.restaurantPicUrl: formData? formData.restaurantPicUrl: "",
+    //   logo: restaurant? restaurant.logo: formData? formData.logo: "",
+    //   longitude: restaurant? restaurant.longitude: formData? formData.longitude: "",
+    //   latitude: restaurant? restaurant.latitude: formData? formData.latitude: "",
+    //   email: restaurant? restaurant.email: formData? formData.email: "",
+    //   phoneNumber: restaurant? restaurant.phoneNumber: formData? formData.phoneNumber: "",
+    //   bankAccount:  restaurant? restaurant.bankAccount: formData? formData.bankAccount: "",
+    //   routingNumber:  restaurant? restaurant.routingNumber: formData? formData.routingNumber: "",
+    //   category: restaurant? restaurant.category: formData? formData.category: "American",
+    //   openTime:  restaurant? restaurant.openTime: formData? formData.openTime: "",
+    //   closeTime:  restaurant? restaurant.closeTime: formData? formData.closeTime: ""
+    //   })
+    // }, [formStep])
+    useEffect(()=> {
+      setFormStep(formStep)
+    }, [formStep])
+
+    console.log('form step:', formStep)
     useEffect(()=>{
       let errors= []
-      // change to string w/o dashes
-      console.log('phone number:', formData.phoneNumber)
+      if (formData === "") return null
+      // console.log('phone number:', formData.phoneNumber)
       // let newPhoneNumber = formData.phoneNumber.split("-").join("")
       if (!formData.email.includes("@")) errors.push("Email is invalid")
       if (formData.priceRange < 1 || formData.priceRange >3) errors.push("Price range is invalid")
@@ -75,17 +82,22 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
       formData.latitude, formData.email, formData.phoneNumber, formData.bankAccount,
       formData.routingNumber, formData.category, formData.openTime, formData.closeTime])
 
+
     function logoExists(logoUrl) {
       let logos= []
       if (restaurants.length>0){
         for (let i = 0; i< restaurants.length; i++) {
           let restaurantObj = restaurants[i]
+          // console.log('restaurant obj in fucntion:', restaurantObj)
           logos.push(restaurantObj.logo)
         }
       }
+      // console.log('logos from db:', logos)
       let foundLogo = logos.find(item => item === logoUrl)
+
       if (foundLogo) return true
       else {
+        // console.log('logo is..:', foundLogo)
         return false
       }
     }
@@ -109,24 +121,18 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
     const handleSubmit= (e) => {
       e.preventDefault();
       setHasSubmitted(true)
-      console.log('phone number (with masked function):', maskPhoneNumber(formData.phoneNumber))
-      console.log('')
+      // console.log('logo url before submission:', formData.logo)
+      // console.log('phone number (with masked function):', maskPhoneNumber(formData.phoneNumber))
       if (errors.length>0){
         alert('Cannot submit restsaurant info')
         return
       }
-      // let newNumber = returnDigitsOnly(formData.phoneNumber)
-      // console.log(newNumber)
-      // console.log('phone number:', formData.phoneNumber)
-
       // let newPhoneNumber = formData.phoneNumber.split("-").join("")
-      // formData.phoneNumber = newPhoneNumber
       restaurant = {
         ...restaurant,
         ...formData
       }
 
-      // console.log('restaurant data submitted:', restaurant)
       if (formType === "Create Form"){
         dispatch(createRestaurant(restaurant))
         alert("Restaurant successfully created!")
@@ -139,17 +145,26 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
 
     }
 
-
+    if (formData === '') return null
     return (
 			<>
 				<div className='create-restaurant-form-title'>
-          Step {formStep + 1} of 3
+          {/* Step {formStep + 1} of 3
           <div style={{ width: formStep === 0 ? "33.3%" : formStep == 1 ? "66.6%" : "100%" }}>
-          </div>
+          </div> */}
 				</div>
 				<form className= 'create-restaurant-form-container'>
           <div className = "create-restaurant-form-body">
             {FormDisplay()}
+            {/* {formStep === 0 && (
+              <FormStep1 formData={formData} setFormData={setFormData}/>
+            )}
+            {formStep === 1 && (
+              <FormStep2 formData={formData} setFormData={setFormData}/>
+            )}
+            {formStep === 2 && (
+              <FormStep3 formData={formData} setFormData={setFormData}/>
+            )} */}
             {errors.length>0 && hasSubmitted && (
               <div className="validation-errors-container">
                   <ul className='validation-errors'>

@@ -15,6 +15,7 @@ import CreateRestaurantForm from './components/CreateRestaurantForm';
 import UpdateRestaurantForm from './components/UpdateRestaurantForm';
 import GetRestaurant from './components/GetRestaurant';
 import CreateFoodItem from './components/CreateFoodItem';
+import UpdateFoodItem from './components/UpdateFoodItem';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -65,6 +66,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/restaurants/:id/new' exact={true} >
           <CreateFoodItem/>
+        </ProtectedRoute>
+        <ProtectedRoute path='/restaurants/:id/fooditems/:foodItemId' exact={true} >
+          <UpdateFoodItem/>
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

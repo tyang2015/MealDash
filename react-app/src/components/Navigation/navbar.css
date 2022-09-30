@@ -7,10 +7,26 @@
 }
 
 .dropdown-container{
-    background-color: lightcyan;
+    /* background-color: lightcyan;
     display: flex;
     flex-direction: column;
     width: 180px;
-    
+     */
+     border: 1px solid rgba(55, 43, 43, 0.3);
+     position: absolute;
+     left: .5em;
+     top: 2.5em;
+     /* margin-top: 1.4em;
+     margin-left: 3000em; */
+     width: 12em;
+     right: 4em;
+     z-index: 1;
+     background-color: white;
+     height: 5em;
+     display: flex;
+     flex-direction: column;
+     justify-content: space-around;
+     border-radius: 3px;
+     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
 
 }

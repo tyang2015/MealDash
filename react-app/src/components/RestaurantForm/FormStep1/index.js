@@ -10,7 +10,7 @@ import "./FormStep1.css"
 // for now just use number fields for long and lat
 // text, use autocomplete* , text, number?, text
 const FormStep1 = ({formData, setFormData}) => {
-
+  console.log('formData in form step 1: ', formData)
   return (
     <div className='create-restaurant-form-step-1-container'>
       <input
@@ -64,15 +64,16 @@ const FormStep1 = ({formData, setFormData}) => {
         // pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
         required
       />
-
       <img
         src={formData.restaurantPicUrl}
         alt="restaurant pic url"
+        className='restaurant-form-restaurant-pic'
         onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}
       />
       <img
         src={formData.logo}
         alt="logo url"
+        className='restaurant-form-restaurant-logo'
         onError={e => { e.currentTarget.src = "https://cdn5.vectorstock.com/i/1000x1000/65/29/vintage-badge-retro-blank-labels-logo-vector-23946529.jpg"; }}
       />
     </div>

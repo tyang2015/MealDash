@@ -3,6 +3,7 @@ import React,{useState, useEffect} from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { getAllRestaurants } from "../../store/restaurant";
 import { deleteRestaurant } from "../../store/restaurant";
+import { deleteFoodItem } from "../../store/foodItem";
 import { getFoodItems } from "../../store/foodItem";
 import "./GetRestaurant.css"
 
@@ -70,10 +71,18 @@ const GetRestaurant = () => {
     dispatch(getFoodItems(id))
   }, [dispatch])
 
+  // FOR RESTAURANT
   const handleDelete = e => {
     dispatch(deleteRestaurant(id))
     alert('successfully deleted!')
     return history.push('/')
+  }
+
+  const handleDeleteFoodItem = (foodItemId)=> {
+    console.log('food item id in handle delete function:', foodItemId)
+    dispatch(deleteFoodItem(id, foodItemId))
+    alert('food item deleted!')
+    return
   }
 
   const handleFilter = e => {
@@ -151,8 +160,10 @@ const GetRestaurant = () => {
                       <div className="food-item-right-container">
                         {sessionUser.id == restaurant.ownerId && (
                           <>
-                            <button className="button">edit item</button>
-                            <button className="button">delete item</button>
+                            <NavLink to={`/restaurants/${id}/fooditems/${item.id}`}>
+                              <button className="button">edit item</button>
+                            </NavLink>
+                            <button onClick={(e)=> handleDeleteFoodItem(item.id)} className="button">delete item</button>
                           </>
                         )}
                       </div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from 'react-router-dom';
-import { createFoodItem } from '../../store/foodItem';
+import { createFoodItem, updateFoodItem } from '../../store/foodItem';
 import "./FoodItemForm.css"
 
 const FOOD_ITEM_CATEGORIES = ["Main", "Side", "Drink", "Dessert"]
@@ -9,16 +9,16 @@ const FOOD_ITEM_CATEGORIES = ["Main", "Side", "Drink", "Dessert"]
 
 const FoodItemForm = ({foodItem, formType}) => {
   const dispatch = useDispatch();
-  const history = useHistory;
+  const history = useHistory();
   // this is RESTAURANT id to be put inside object on submit
   const { id } = useParams();
   const sessionUser = useSelector(state => state.session.user)
 
-  const [name, setName] = useState('')
-  const [foodPicUrl, setFoodPicUrl] = useState('')
-  const [description, setDescription] = useState('')
-  const [price, setPrice] = useState('')
-  const [category, setCategory] = useState('Main')
+  const [name, setName] = useState(foodItem? foodItem.name : '')
+  const [foodPicUrl, setFoodPicUrl] = useState(foodItem? foodItem.foodPicUrl : '')
+  const [description, setDescription] = useState(foodItem? foodItem.description:'')
+  const [price, setPrice] = useState(foodItem? foodItem.price : '')
+  const [category, setCategory] = useState(foodItem? foodItem.category: 'Main')
   const [errors, setErrors] = useState([])
   const [hasSubmitted, setHasSubmitted] = useState(false)
 
@@ -50,12 +50,15 @@ const FoodItemForm = ({foodItem, formType}) => {
       category,
       restaurantId: id
     }
-    console.log('food item before sending to db:', foodItem)
+    // console.log('food item before sending to db:', foodItem)
     if (formType === "Create Form") {
       dispatch(createFoodItem(id, foodItem))
       alert("Food item successfully created!")
     } else {
-      console.log("todo: update")
+      dispatch(updateFoodItem(id, foodItem))
+      alert("Food item has been updated")
+      return history.push(`/restaurants/${id}`)
+      // console.log("todo: update")
     }
     setHasSubmitted(false)
     return

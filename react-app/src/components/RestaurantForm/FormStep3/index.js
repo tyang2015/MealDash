@@ -9,14 +9,14 @@ const FormStep3 = ({formData, setFormData}) => {
       <label htmlFor="restaurant-bank-account">Account Number</label>
       <input
         id="restaurant-bank-account"
-        type="number"
+        type="text"
         value = {formData.bankAccount}
         onChange={e=> setFormData({...formData, bankAccount: e.target.value})}
       />
       <label htmlFor="restaurant-routing-number">Routing Number</label>
       <input
         id="restaurant-routing-number"
-        type="number"
+        type="text"
         value = {formData.routingNumber}
         onChange={e=> setFormData({...formData, routingNumber: e.target.value})}
       />
