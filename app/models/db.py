@@ -9,8 +9,8 @@ db = SQLAlchemy()
 order_items = db.Table(
     'order_items',
     db.Model.metadata,
-    db.Column('orders', db.Integer, db.ForeignKey("orders.id"), primary_key= True),
-    db.Column('food_items', db.Integer, db.ForeignKey("food_items.id"), primary_key=True)
+    db.Column('orders', db.Integer, db.ForeignKey("orders.id")),
+    db.Column('food_items', db.Integer, db.ForeignKey("food_items.id"))
 )
 
 
@@ -98,7 +98,7 @@ class FoodItem(db.Model):
     # relationships
     reviews = db.relationship("FoodItemReview", back_populates="food_item", cascade="all,delete")
     restaurant = db.relationship("Restaurant", back_populates= "food_items")
-    item_orders = db.relationship("Order", back_populates= "order_food_items", secondary="order_items" )
+    item_orders = db.relationship("Order", back_populates= "order_food_items", secondary=order_items )
 
     def to_dict(self):
         return {
@@ -106,14 +106,14 @@ class FoodItem(db.Model):
             "name": self.name,
             "foodPicUrl": self.food_pic_url,
             "description": self.description,
-            "quantity": self.quantity,
-            "price": self.price,
-            "orderId": self.orderId,
+            "price": str(self.price),
+            # "orderId": self.orderId,
             "restaurantId": self.restaurant_id,
             "category": self.category,
-            "price": self.price,
-            "orderQuantity": len(item_orders),
-            "category": self.category
+            "orderQuantity": len(self.item_orders),
+            "category": self.category,
+            "Orders": [order.id for order in self.item_orders],
+            "Reviews": [review.id for review in self.reviews]
         }
 
 class Order(db.Model):
@@ -130,7 +130,7 @@ class Order(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     # relationships
-    order_food_items = db.relationship("FoodItem", back_populates="item_orders", secondary='order_items')
+    order_food_items = db.relationship("FoodItem", back_populates="item_orders", secondary=order_items)
     user = db.relationship("User", back_populates="orders")
     restaurant = db.relationship("Restaurant", back_populates = "orders")
 
@@ -142,7 +142,7 @@ class Order(db.Model):
         # quantities => dictionary: {food_item_id: count}
         for item in self.order_food_items:
             prices[item.id] = item.price
-            quantities[item.id] = item.get(item.id, 0) + 1
+            quantities[item.id] = quantities.get(item.id, 0) + 1
         for item_id,price in list(prices.items()):
             total_price+= prices[item_id] * quantities[item_id]
         return str(round(total_price, 2))

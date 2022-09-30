@@ -15,9 +15,10 @@ def valid_price(form, field):
 
 FOOD_ITEM_CATEGORIES = ["Main", "Side", "Drink", "Dessert"]
 
-class FoodItem(FlaskForm):
+class FoodItemForm(FlaskForm):
   name = StringField("Food Name", validators=[DataRequired()])
-  food_pic_url = StringField("Food Pic Url",  validators=[DataRequired()])
+  foodPicUrl = StringField("Food Pic Url",  validators=[DataRequired()])
+  restaurantId = IntegerField("restaurant id", validators=[DataRequired()])
   description = StringField("Description", validators=[valid_description])
-  price = DecimalField("Price", validators=[DataRequired])
+  price = DecimalField("Price", validators=[DataRequired()])
   category = SelectField("Food Category", choices = FOOD_ITEM_CATEGORIES )

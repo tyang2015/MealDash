@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, session, request, redirect
 from flask_login import login_required, current_user
-from app.models import User, db, Restaurant
-from app.forms import LoginForm, SignUpForm, RestaurantForm
+from app.models import User, db, Restaurant, FoodItem
+from app.forms import LoginForm, SignUpForm, RestaurantForm, FoodItemForm
 from .auth_routes import validation_errors_to_error_messages
 import json
 
@@ -56,6 +56,10 @@ def create_restaurant():
 @restaurant_routes.route("<int:id>", methods=['PUT'])
 @login_required
 def update_restaurant(id):
+    restaurant = Restaurant.query.get(id)
+    if restaurant == None:
+        return {"message": "Restaurant couldn't be found"}, 404
+
     form = RestaurantForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
@@ -87,4 +91,75 @@ def delete_restaurant(id):
 
 
 # -------------------------------------------------------
-# FEATURE 2: FOOD ITEM
+# FEATURE 2: FOOD ITEM (per restaurant)
+@restaurant_routes.route("/<int:rest_id>/fooditems", methods=['GET'])
+@login_required
+def get_food_items(rest_id):
+  restaurant = Restaurant.query.get(rest_id)
+  if restaurant == None:
+      return {"message": "Restaurant couldn't be found"}, 404
+  food_items = FoodItem.query.filter(FoodItem.restaurant_id == rest_id).all()
+  return {"food_items": [item.to_dict() for item in food_items]}
+
+
+# CREATE food item
+@restaurant_routes.route("/<int:rest_id>", methods=["POST"])
+@login_required
+def create_food_item(rest_id):
+  restaurant = Restaurant.query.get(rest_id)
+  if restaurant == None:
+    return {"message": "Restaurant couldn't be found"}, 404
+  if restaurant.owner_id != current_user.id:
+    return {"errors": "Forbidden"}, 403
+  form = FoodItemForm()
+  form['csrf_token'].data = request.cookies['csrf_token']
+  if form.validate_on_submit():
+    food_item = FoodItem(
+      name = form.data["name"],
+      food_pic_url = form.data["foodPicUrl"],
+      description = form.data["description"],
+      price = form.data["price"],
+      category = form.data["category"],
+      restaurant_id = form.data["restaurantId"]
+    )
+    db.session.add(food_item)
+    db.session.commit()
+    return food_item.to_dict(), 201
+
+@restaurant_routes.route("/<int:rest_id>/fooditems/<int:food_item_id>", methods=["PUT"])
+@login_required
+def update_food_item(rest_id, food_item_id):
+  restaurant = Restaurant.query.get(rest_id)
+  food_item = FoodItem.query.get(food_item_id)
+  if restaurant == None:
+    return {"message": "Restaurant couldn't be found"}, 404
+  if food_item == None:
+    return {"message": "Food item couldnt be found"}, 404
+  if restaurant.owner_id != current_user.id:
+    return {"errors":"Forbidden"}, 403
+  form = FoodItemForm()
+  form['csrf_token'].data = request.cookies['csrf_token']
+  if form.validate_on_submit():
+    food_item_data = json.loads(request.data.decode('utf-8'))
+    # food_item_data["restaurantId"] = rest_id
+    # print("food item data: ", food_item_data)
+    for k,v in food_item_data.items():
+      setattr(food_item, k,v)
+    db.session.commit()
+    updated_food_item = FoodItem.query.get(food_item_id)
+    return updated_food_item.to_dict()
+
+@restaurant_routes.route("/<int:rest_id>/fooditems/<int:food_item_id>", methods=["Delete"])
+@login_required
+def delete_food_item(rest_id, food_item_id):
+  restaurant = Restaurant.query.get(rest_id)
+  food_item = FoodItem.query.get(food_item_id)
+  if restaurant == None:
+    return {"message": "Restaurant couldn't be found"}, 404
+  if food_item == None:
+    return {"message": "Food item couldnt be found"}, 404
+  if restaurant.owner_id != current_user.id:
+    return {"errors":"Forbidden"}, 403
+  db.session.delete(food_item)
+  db.session.commit()
+  return {"message": "Successfully deleted!"}

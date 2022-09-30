@@ -1,7 +1,23 @@
 from app.models import db, User, FoodItem
 from datetime import time
+# from .orders import orders_list
+import random
+
+food_items_list = []
+
+# def random_orders_list():
+#   # how many orders (num is random) it will have
+#   max_range = random.randint(0,5)
+#   # orders = set()
+#   final_orders = []
+#   # same food item can appear in multiple orders
+#   for i in range(max_range):
+#     order = random.choice(orders_list)
+#     final_orders.append(order)
+#   return final_orders
 
 def seed_food_items():
+    global food_items_list
     food_items = [
         {
             "name": "Beef Noodle Soup",
@@ -93,8 +109,11 @@ def seed_food_items():
             description = item["description"],
             price = item["price"],
             restaurant_id = item["restaurant_id"],
-            category = item["category"]
+            category = item["category"],
+            # added here
+            # orders = random_orders_list()
         )
+        food_items_list.append(food)
         db.session.add(food)
     db.session.commit()
     print('food items seeded!')

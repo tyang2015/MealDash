@@ -4,9 +4,10 @@
   align-items: center;
 }
 
+/* this controls the width of all content (will change after you put orders pane in */
 .restaurant-page-main-content-container{
   height: 100vh;
-  width: 58%;
+  width: 65em;
   /* margin-top:50px;dd */
   margin: auto
 }
@@ -24,6 +25,134 @@
   background-color: green;
 }
 
+.restaurant-page-description-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100px;
+  border-bottom: 1.5px #E7E7E7 solid;
+  /* background-color: lightcyan; */
+}
+
 .restaurant-page-logo-pic-container{
   /* width: ssdfsdf*/
+}
+
+.restaurant-page-bottom-container{
+  /* background-color: lightsalmon; */
+}
+
+.food-item-pic{
+  width: 170px;
+  height: 100%;
+  object-fit: cover;
+}
+
+.food-items-grid-container{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(auto-fill);
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+
+}
+
+.food-item-card-container{
+  border: 1px #E7E7E7 solid;
+  background-color: white;
+  height: 142px;
+  display: flex;
+  flex-direction: row;
+  border-radius: 6px;
+}
+
+.food-item-left-container{
+  width: 100%;
+}
+
+.food-item-right-container{
+  /* background-color: lightcoral; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.restaurant-page-name{
+  font-size: 20px;
+  font-weight: 700;
+
+}
+
+.restaurant-page-update-delete-buttons-container{
+  display: flex;
+  flex-direction: row;
+  /* margin-left:40em; */
+  background-color: lightcoral;
+  /* width: 45em; */
+  height: 100%;
+  justify-content: space-between;
+
+}
+
+.restaurant-page-update-button.button{
+  border: none;
+  background-color: #D91400;
+  color: white;
+  border-radius: 1000px;
+  width: 100px;
+  height: 35px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 14px;
+  text-align: center;
+}
+
+.restaurant-page-create-food-item-container.button{
+  border: none;
+  background-color: #D91400;
+  color: white;
+  width: 100px;
+  height: 35px;
+  border-radius: 1000px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.restaurant-page-delete-button.button{
+  border: none;
+  background-color: #D91400;
+  color: white;
+  width: 100px;
+  height: 35px;
+  border-radius: 1000px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.button{
+  border: none;
+  background-color: #E7E7E7;
+  color: black;
+  border-radius: 5px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  /* border */
+}
+
+.restaurant-page-hours-container{
+  background-color: lightblue;
+  width: 200px;
+  display:flex;
+  justify-content: flex-start;
+}
+
+.navlink{
+  text-decoration: none;
 }

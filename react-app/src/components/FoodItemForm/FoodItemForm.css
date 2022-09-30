@@ -1,0 +1,57 @@
+.create-food-item-form-container{
+  /* background-color: lightblue; */
+  height: 100vh;
+  width: 55em;
+  margin: auto
+}
+
+.create-food-item-food-pic{
+  height: 380px;
+  width: 400px;
+  object-fit: cover;
+}
+
+.create-food-item-content-container{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 30em;
+  justify-content: space-between;
+
+}
+
+.create-food-item-left-container{
+  width: 35%;
+  height:100%;
+  background-color: lightsalmon;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  /* align-items: flex-start; */
+}
+
+.food-item-price-category-container{
+  background-color: lightcyan;
+  display: flex;
+  justify-content: space-between;
+}
+
+.create-food-item-right-container{
+  width: 60%;
+  height:100%;
+  background-color: lightgreen;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.create-food-item-container{
+  background-color: lightpink;
+  /* height: 380px;
+  width: 400px; */
+  height:100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

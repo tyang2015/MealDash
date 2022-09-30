@@ -1,7 +1,21 @@
 from app.models import db, Order
 from datetime import time
+from .food_items import food_items_list
+import random
+# orders_list = []
+
+def random_food_items():
+  max_range = random.randint(0,8)
+  all_food_items = []
+  # same food item can appear in multiple orders
+  for i in range(max_range):
+    food_item = random.choice(food_items_list)
+    all_food_items.append(food_item)
+  return all_food_items
+
 
 def seed_orders():
+    # global orders_list
     orders = [
         {
             "customer_id": 4,
@@ -66,8 +80,10 @@ def seed_orders():
             latitude = order["latitude"],
             phone_number = order["phone_number"],
             credit_card = order["credit_card"],
-            total_price = order["total_price"]
+            total_price = order["total_price"],
+            order_food_items = random_food_items()
         )
+        # orders_list.append(newOrder)
         db.session.add(newOrder)
     db.session.commit()
 
