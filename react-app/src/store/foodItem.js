@@ -49,6 +49,7 @@ export const createFoodItem = (restaurantId, payload) => async dispatch => {
   if (response.ok){
       const foodItem = await response.json()
       dispatch(create(foodItem))
+      return foodItem
   }
 }
 

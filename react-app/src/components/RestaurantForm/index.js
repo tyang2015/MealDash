@@ -10,7 +10,7 @@ import { returnDigitsOnly, maskPhoneNumber } from './PhoneNumberValidation';
 // first step: name, address (longitude & latitude), email, phone number, restaurant_pic_url
 // 2nd step: openTime, closeTime, priceRange, category
 // 3rd step: bankAccount, routingNumber
-const RestaurantForm = ({restaurant, formType}) => {
+const RestaurantForm = ({restaurant, formType, restaurants}) => {
     // console.log('inside create restaurant form')
     // console.log('restaurant in restaurant form:', restaurant)
     const dispatch = useDispatch();
@@ -31,7 +31,7 @@ const RestaurantForm = ({restaurant, formType}) => {
       phoneNumber: restaurant? restaurant.phoneNumber: "",
       bankAccount:  restaurant? restaurant.bankAccount: "",
       routingNumber:  restaurant? restaurant.routingNumber: "",
-      category: restaurant? restaurant.category: "",
+      category: restaurant? restaurant.category: "American",
       openTime:  restaurant? restaurant.openTime: "",
       closeTime:  restaurant? restaurant.closeTime: ""
     } ||
@@ -61,6 +61,7 @@ const RestaurantForm = ({restaurant, formType}) => {
       if (formData.priceRange < 1 || formData.priceRange >3) errors.push("Price range is invalid")
       if (!isImage(formData.restaurantPicUrl)) errors.push("Restaurant pic url is invalid")
       if (!isImage(formData.logo)) errors.push("Logo url is invalid")
+      if (logoExists(formData.logo)) errors.push("Logo must be unique")
       if (formData.longitude < -180 || formData.longitude > 180) errors.push("Longitude is invalid")
       if (formData.latitude < -90 || formData.latitude> 90) errors.push("Latitude is invalid")
       if (formData.phoneNumber.length!= 14) errors.push("Phone Number is invalid")
@@ -73,6 +74,21 @@ const RestaurantForm = ({restaurant, formType}) => {
     }, [formData.name, formData.priceRange, formData.restaurantPicUrl, formData.longitude,
       formData.latitude, formData.email, formData.phoneNumber, formData.bankAccount,
       formData.routingNumber, formData.category, formData.openTime, formData.closeTime])
+
+    function logoExists(logoUrl) {
+      let logos= []
+      if (restaurants.length>0){
+        for (let i = 0; i< restaurants.length; i++) {
+          let restaurantObj = restaurants[i]
+          logos.push(restaurantObj.logo)
+        }
+      }
+      let foundLogo = logos.find(item => item === logoUrl)
+      if (foundLogo) return true
+      else {
+        return false
+      }
+    }
 
     function isImage(url) {
       return /\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
@@ -96,7 +112,7 @@ const RestaurantForm = ({restaurant, formType}) => {
       console.log('phone number (with masked function):', maskPhoneNumber(formData.phoneNumber))
       console.log('')
       if (errors.length>0){
-        alert('Cannot submit post')
+        alert('Cannot submit restsaurant info')
         return
       }
       // let newNumber = returnDigitsOnly(formData.phoneNumber)

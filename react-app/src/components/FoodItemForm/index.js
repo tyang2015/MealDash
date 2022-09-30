@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from 'react-router-dom';
+import { createFoodItem } from '../../store/foodItem';
 import "./FoodItemForm.css"
 
 const FOOD_ITEM_CATEGORIES = ["Main", "Side", "Drink", "Dessert"]
 
 
-const FoodItemForm = () => {
+const FoodItemForm = ({foodItem, formType}) => {
   const dispatch = useDispatch();
   const history = useHistory;
   // this is RESTAURANT id to be put inside object on submit
@@ -17,7 +18,7 @@ const FoodItemForm = () => {
   const [foodPicUrl, setFoodPicUrl] = useState('')
   const [description, setDescription] = useState('')
   const [price, setPrice] = useState('')
-  const [category, setCategory] = useState('')
+  const [category, setCategory] = useState('Main')
   const [errors, setErrors] = useState([])
   const [hasSubmitted, setHasSubmitted] = useState(false)
 
@@ -33,12 +34,50 @@ const FoodItemForm = () => {
     setErrors(errors)
   }, [name, foodPicUrl, description, price, category])
 
+  const handleSubmit = e => {
+    e.preventDefault();
+    setHasSubmitted(true)
+    if (errors.length>0){
+      alert("Cannot submit food item info")
+      return
+    }
+    foodItem = {
+      ...foodItem,
+      name,
+      foodPicUrl,
+      description,
+      price,
+      category,
+      restaurantId: id
+    }
+    console.log('food item before sending to db:', foodItem)
+    if (formType === "Create Form") {
+      dispatch(createFoodItem(id, foodItem))
+      alert("Food item successfully created!")
+    } else {
+      console.log("todo: update")
+    }
+    setHasSubmitted(false)
+    return
+
+  }
 
   return (
     // <h3> food item form</h3>
     <>
       <form className='create-food-item-form-container'>
         <h3> Create Food Item </h3>
+        <div className="create-food-item-errors-container">
+          {errors.length>0 && hasSubmitted && (
+            <div className="validation-errors-container">
+                <ul className='validation-errors'>
+                    {errors.map((error, idx) => (
+                    <li key={idx}>{error}</li>
+                    ))}
+                </ul>
+            </div>
+          )}
+        </div>
         <div className='create-food-item-content-container'>
           <div className='create-food-item-left-container'>
             <input
@@ -64,7 +103,6 @@ const FoodItemForm = () => {
                 onChange={e => setPrice(e.target.value)}
                 placeholder='Price'
                 step='0.01'
-                required="required"
                 min="0.00"
                 required
               />
@@ -73,6 +111,7 @@ const FoodItemForm = () => {
                 onChange={(e)=> setCategory(e.target.value)}
                 required
                 >
+                  {/* how come my default selected value does not sho */}
                 {FOOD_ITEM_CATEGORIES.map(cat => (
                   <>
                     <option key={cat.id}>{cat}</option>
@@ -100,7 +139,7 @@ const FoodItemForm = () => {
             </div>
           </div>
         </div>
-        <button type='submit' className='button'> Submit </button>
+        <button type='submit' className='button' onClick={handleSubmit}> Submit </button>
 
       </form>
     </>
