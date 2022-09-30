@@ -19,9 +19,16 @@ def username_exists(form, field):
     if user:
         raise ValidationError('Username is already in use.')
 
+def valid_phone_number(form, field):
+    phoneNumber = field.data
+    if len(phoneNumber)!= 14:
+        raise ValidationError("Invalid phone number")
 
 class SignUpForm(FlaskForm):
-    username = StringField(
-        'username', validators=[DataRequired(), username_exists])
+    # username = StringField(
+    #     'username', validators=[DataRequired(), username_exists])
+    firstName = StringField('First Name', validators=[DataRequired()])
+    lastName = StringField('Last Name', validators=[DataRequired()] )
+    phoneNumber = StringField("Phone number", validators=[DataRequired(), valid_phone_number])
     email = StringField('email', validators=[DataRequired(), user_exists])
     password = StringField('password', validators=[DataRequired()])

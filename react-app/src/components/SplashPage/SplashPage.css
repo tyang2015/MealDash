@@ -1,0 +1,82 @@
+.splash-page-background-image-container{
+  background-image: url("https://media.istockphoto.com/photos/dining-table-with-a-variety-of-dishes-grilled-chicken-legs-fried-picture-id883662660?k=20&m=883662660&s=612x612&w=0&h=YD6xp6KEdHPK0bVEGVjqVqWqxD6u-IGiakwTxQCiRbw=");
+  height: 10em;
+  width: 100vw;
+  object-fit: cover;
+  /* background-size: cover; */
+  background-repeat: repeat-x;
+
+}
+
+.splash-page-main-grid-container{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(auto-fill);
+  grid-column-gap:  10px;
+  grid-row-gap: 10px;
+
+}
+
+.splash-page-restaurant-pic-container{
+  /* width: 16em; */
+  width: 100%;
+  height: 9em;
+}
+
+.splash-page-3-links-middle-container{
+  width: 60em;
+  height: 550px;
+  margin: auto;
+  background-color: lightpink;
+  display:flex;
+  justify-content:space-between;
+  align-items:center
+
+}
+
+.splash-middle-link-container{
+  background-color: lightgreen;
+  width: 250px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.become-a-dasher-container{
+
+}
+
+.image-link-pic{
+  width: 150px;
+  height: 150px;
+}
+
+.splash-page-restaurant-card-container{
+  background-color: lightcoral;
+  background-color: white;
+
+
+}
+
+.splash-page-restaurant-pic{
+  height: 100%;
+  width: 100%;
+  /* width: 16em; */
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.splash-page-title-text-box{
+  color: white;
+  font-weight: 700;
+  font-size: 40px;
+}
+
+.splash-page-content-container{
+  width: 60em;
+  height: fit-content;
+  margin: auto;
+  background-color: lightcyan;
+}

@@ -8,7 +8,7 @@ import json
 restaurant_routes = Blueprint('restaurants', __name__)
 
 @restaurant_routes.route("", methods = ['GET'])
-@login_required
+# @login_required
 def get_all_restaurants():
     print("hitting restaurants route!")
     restaurants = Restaurant.query.all()

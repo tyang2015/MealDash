@@ -48,7 +48,7 @@ const NavBar = () => {
                     <div>
                         {profileMenu()}
                     </div>
-                    <NavLink to="/">
+                    <NavLink to="/restaurants">
                       <i className="fa-solid fa-burger"> DoorDash </i>
                     </NavLink>
                     <div>

@@ -16,6 +16,7 @@ import UpdateRestaurantForm from './components/UpdateRestaurantForm';
 import GetRestaurant from './components/GetRestaurant';
 import CreateFoodItem from './components/CreateFoodItem';
 import UpdateFoodItem from './components/UpdateFoodItem';
+import NavBarSplash from './components/NavBarSplash';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -36,12 +37,16 @@ function App() {
   return (
     <BrowserRouter>
       {loggedInUser && <NavBar />}
+      {/* {!loggedInUser && <NavBarSplash/>} */}
       <Switch>
-        <Route path='/login' exact={true}>
+        <Route path='/' exact={true}>
           <SplashPage/>
         </Route>
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
+        </Route>
+        <Route path='/login' exact={true}>
+          <LoginForm />
         </Route>
         {/* <ProtectedRoute path='/restaurants'>
           <Restaurants/>
@@ -58,7 +63,7 @@ function App() {
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
-        <ProtectedRoute path='/' exact={true} >
+        <ProtectedRoute path='/restaurants' exact={true} >
           <Restaurants/>
         </ProtectedRoute>
         <ProtectedRoute path='/restaurants/:id' exact={true} >

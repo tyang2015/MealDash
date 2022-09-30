@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from 'react-router-dom';
 import "./Restaurant.css"
 import { createRestaurant, updateRestaurant } from '../../store/restaurant';
 import FormStep1 from './FormStep1';
@@ -14,6 +15,7 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
     // console.log('inside create restaurant form')
     // console.log('restaurant in restaurant form:', restaurant)
     const dispatch = useDispatch();
+    const history = useHistory();
     const sessionUser = useSelector(state => state.session.user)
     const [formStep, setFormStep]= useState(0)
     const [errors, setErrors] = useState([])
@@ -136,9 +138,11 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
       if (formType === "Create Form"){
         dispatch(createRestaurant(restaurant))
         alert("Restaurant successfully created!")
+        history.push('/restaurants')
       } else {
         dispatch(updateRestaurant(restaurant))
         alert("Restaurant updated successfully!")
+        history.push(`/restaurants/${restaurant.id}`)
       }
       setHasSubmitted(false)
       return
@@ -153,7 +157,7 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
           <div style={{ width: formStep === 0 ? "33.3%" : formStep == 1 ? "66.6%" : "100%" }}>
           </div> */}
 				</div>
-				<form className= 'create-restaurant-form-container'>
+				<form onSubmit={handleSubmit} className= 'create-restaurant-form-container'>
           <div className = "create-restaurant-form-body">
             {FormDisplay()}
             {/* {formStep === 0 && (
@@ -177,6 +181,7 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
           </div>
           <div className = 'create-restaurant-form-footer'>
             <button
+              type="button"
               disabled={formStep == 0}
               onClick={() => {
                 setFormStep((currPage) => currPage - 1);
@@ -186,6 +191,7 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
             </button>
             {formStep<2 && (
               <button
+                type="button"
                 onClick={() => {
                   setFormStep((currPage) => currPage + 1);
                 }}
@@ -195,7 +201,6 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
             )}
             {formStep== 2 && (
               <button type='submit'
-                onClick={handleSubmit}
               >
                 Submit
               </button>
