@@ -24,11 +24,16 @@ def valid_phone_number(form, field):
     if len(phoneNumber)!= 14:
         raise ValidationError("Invalid phone number")
 
+def valid_email(form, field):
+  email = field.data
+  if "@" not in email:
+    raise ValidationError("Invalid email")
+
 class SignUpForm(FlaskForm):
     # username = StringField(
     #     'username', validators=[DataRequired(), username_exists])
     firstName = StringField('First Name', validators=[DataRequired()])
     lastName = StringField('Last Name', validators=[DataRequired()] )
     phoneNumber = StringField("Phone number", validators=[DataRequired(), valid_phone_number])
-    email = StringField('email', validators=[DataRequired(), user_exists])
+    email = StringField('email', validators=[DataRequired(), user_exists, valid_email])
     password = StringField('password', validators=[DataRequired()])

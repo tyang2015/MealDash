@@ -152,23 +152,19 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
     if (formData === '') return null
     return (
 			<>
-				<div className='create-restaurant-form-title'>
-          {/* Step {formStep + 1} of 3
-          <div style={{ width: formStep === 0 ? "33.3%" : formStep == 1 ? "66.6%" : "100%" }}>
-          </div> */}
-				</div>
+        <div className='create-restaurant-title-container'>
+          <i className="fa-solid fa-burger sign-up-logo"style={{color:"lightcoral"}}> </i>
+          <div className='create-restaurant-form-title'>
+            Step {formStep + 1} of 3
+          </div>
+          <div className='create-restaurant-progress-bar-container'>
+            <div className="create-restaurant-progress-bar" style={{ width: formStep === 0 ? "33.3%" : formStep == 1 ? "66.6%" : "100%" }}>
+            </div>
+          </div>
+        </div>
 				<form onSubmit={handleSubmit} className= 'create-restaurant-form-container'>
           <div className = "create-restaurant-form-body">
             {FormDisplay()}
-            {/* {formStep === 0 && (
-              <FormStep1 formData={formData} setFormData={setFormData}/>
-            )}
-            {formStep === 1 && (
-              <FormStep2 formData={formData} setFormData={setFormData}/>
-            )}
-            {formStep === 2 && (
-              <FormStep3 formData={formData} setFormData={setFormData}/>
-            )} */}
             {errors.length>0 && hasSubmitted && (
               <div className="validation-errors-container">
                   <ul className='validation-errors'>

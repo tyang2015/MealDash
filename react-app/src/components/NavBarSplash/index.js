@@ -7,18 +7,23 @@ import SignUpForm from '../auth/SignUpForm';
 import "./NavBarSplash.css"
 
 const NavBarSplash = () => {
+  // const session
+  // const sessionUser
+  const sessionUser = useSelector(state=> state.session.user)
+
+  if (sessionUser) return null;
   return (
-    <nav className='navbar-splash'>
-      <i className="fa-solid fa-burger splash-page-logo"> DoorDash </i>
-      <div className='session-links-container'>
-        <NavLink to={`/login`}>
-          <div>Sign In </div>
-        </NavLink>
-        <NavLink to={`/sign-up`}>
-          <div className='sign-up-button'>Sign Up</div>
-        </NavLink>
-      </div>
-    </nav>
+      <nav className='navbar-splash'>
+        <i className="fa-solid fa-burger splash-page-logo"> MealDash </i>
+        <div className='session-links-container'>
+          <NavLink to={`/login`}>
+            <div>Sign In </div>
+          </NavLink>
+          <NavLink to={`/sign-up`}>
+            <div className='sign-up-button'>Sign Up</div>
+          </NavLink>
+        </div>
+      </nav>
   )
 }
 

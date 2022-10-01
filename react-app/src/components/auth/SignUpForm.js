@@ -1,12 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
+import { NavLink, useHistory } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
+import { maskPhoneNumber } from '../RestaurantForm/PhoneNumberValidation';
+import "./SignUpForm.css"
 
 const SignUpForm = () => {
+  const history = useHistory();
   const [errors, setErrors] = useState([]);
-  const [username, setUsername] = useState('');
+  // const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [phoneNumber, setPhoneNumber] = useState('')
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const user = useSelector(state => state.session.user);
@@ -15,20 +22,38 @@ const SignUpForm = () => {
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const data = await dispatch(signUp(username, email, password));
+      const data = await dispatch(signUp(firstName, lastName,email, phoneNumber,password));
       if (data) {
         setErrors(data)
+      } else {
+        history.push("/restaurants")
       }
+    } else {
+      setErrors(['Passwords need to match'])
     }
   };
 
-  const updateUsername = (e) => {
-    setUsername(e.target.value);
-  };
+  // useEffect(()=> {
+  //   if
+  // }, [email])
+
+
 
   const updateEmail = (e) => {
     setEmail(e.target.value);
   };
+
+  const updateFirstName = (e) => {
+    setFirstName(e.target.value)
+  }
+
+  const updateLastName = (e)=>{
+    setLastName(e.target.value)
+  }
+
+  const updatePhoneNumber = (e)=>{
+    setPhoneNumber(e.target.value)
+  }
 
   const updatePassword = (e) => {
     setPassword(e.target.value);
@@ -43,51 +68,98 @@ const SignUpForm = () => {
   }
 
   return (
-    <form onSubmit={onSignUp}>
-      <div>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
+    <>
+      <div className='signup-top-bar'>
+        <i className="fa-solid fa-burger sign-up-logo"style={{color:"lightcoral"}}> MealDash </i>
       </div>
-      <div>
-        <label>User Name</label>
-        <input
-          type='text'
-          name='username'
-          onChange={updateUsername}
-          value={username}
-        ></input>
+      <div className='signup-title-container'>
+        <h1>Sign Up</h1>
+        <div>
+          Already have an account?
+          <NavLink className="navlink" to="/login" style={{marginLeft:"5px"}}>
+           <b style={{color: "lightcoral"}}>Sign In</b>
+          </NavLink>
+        </div>
       </div>
-      <div>
-        <label>Email</label>
-        <input
-          type='text'
-          name='email'
-          onChange={updateEmail}
-          value={email}
-        ></input>
-      </div>
-      <div>
-        <label>Password</label>
-        <input
-          type='password'
-          name='password'
-          onChange={updatePassword}
-          value={password}
-        ></input>
-      </div>
-      <div>
-        <label>Repeat Password</label>
-        <input
-          type='password'
-          name='repeat_password'
-          onChange={updateRepeatPassword}
-          value={repeatPassword}
-          required={true}
-        ></input>
-      </div>
-      <button type='submit'>Sign Up</button>
-    </form>
+      <form className="signup-form-container"onSubmit={onSignUp}>
+        <div>
+          {errors.map((error, ind) => (
+            <div key={ind} className="validation-errors">{error}</div>
+          ))}
+        </div>
+        <div className='signup-page-row-inputs top-row'>
+          <div className='first-row-firstname-box'>
+            <label>First Name</label>
+            <input
+              type='text'
+              name='firstname'
+              onChange={updateFirstName}
+              value={firstName}
+              className='signup-inputs first-name-input'
+              required
+            ></input>
+          </div>
+          <div className='first-row-lastname-box'>
+            <label style={{marginLeft: '5px'}}>Last Name</label>
+            <input
+              type='text'
+              name='lastname'
+              style={{alignSelf: 'flex-end'}}
+              onChange={updateLastName}
+              className='signup-inputs last-name-input'
+              value={lastName}
+              required
+            ></input>
+          </div>
+        </div>
+        <div className='signup-page-row-inputs single'>
+          <label>Email</label>
+          <input
+            type='text'
+            name='email'
+            className='signup-inputs'
+            onChange={updateEmail}
+            value={email}
+            required
+          ></input>
+        </div>
+        <div className='signup-page-row-inputs single'>
+          <label>PhoneNumber</label>
+          <input
+            type='text'
+            name='email'
+            onChange={updatePhoneNumber}
+            value={maskPhoneNumber(phoneNumber)}
+            placeholder='(123) 456-789'
+            className='signup-inputs'
+            required
+          ></input>
+        </div>
+        <div className='signup-page-row-inputs single'>
+          <label>Password</label>
+          <input
+            type='password'
+            name='password'
+            onChange={updatePassword}
+            value={password}
+            className='signup-inputs'
+            required
+          ></input>
+        </div>
+        <div className='signup-page-row-inputs single'>
+          <label>Repeat Password</label>
+          <input
+            type='password'
+            name='repeat_password'
+            onChange={updateRepeatPassword}
+            className='signup-inputs'
+            value={repeatPassword}
+            required={true}
+          ></input>
+        </div>
+        <button className='signup-page-submit-button' style={{marginTop:"-30px"}} type='submit'>Sign Up</button>
+      </form>
+    </>
   );
 };
 

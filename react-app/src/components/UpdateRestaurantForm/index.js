@@ -7,10 +7,10 @@ import { useParams } from 'react-router-dom'
 const UpdateRestaurantForm = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const restaurants = useSelector(state=> Object.values(state.restaurants))
-  console.log('restaurants in update:', restaurants)
-  const restaurant = restaurants[id]
-  // console.log('restaurant in update form:', restaurant)
+  const allRestaurants = useSelector(state=> state.restaurants)
+  const restaurant = allRestaurants[id]
+  const restaurants = Object.values(allRestaurants)
+
   useEffect(()=>{
     dispatch(getAllRestaurants())
   }, [dispatch])

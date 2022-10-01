@@ -23,6 +23,7 @@ function App() {
   const loggedInUser = useSelector(state=> state.session.user)
   const dispatch = useDispatch();
   console.log('logged in user in app:', loggedInUser)
+  console.log('!loggedInuser', !loggedInUser)
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());

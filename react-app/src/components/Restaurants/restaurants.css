@@ -1,12 +1,12 @@
 .restaurant-main-grid-container{
     margin-top: 50px;
-    background-color: lightgreen;
-    width:70%;
+    /* background-color: lightgreen; */
+    width:57em;
     height: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(auto-fill);
-    grid-column-gap: 10px;
+    grid-column-gap: 1em;
     margin: auto;
 
 }
@@ -24,5 +24,7 @@
 
 .get-restaurants-pic{
   height: 100%;
-  width: 100%
+  width: 100%;
+  object-fit: cover;
+
 }
