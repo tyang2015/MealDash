@@ -10,7 +10,7 @@ const NavBarSplash = () => {
   // const session
   // const sessionUser
   const sessionUser = useSelector(state=> state.session.user)
-
+  console.log('session user in navbarsplash:', sessionUser)
   if (sessionUser) return null;
   return (
       <nav className='navbar-splash'>

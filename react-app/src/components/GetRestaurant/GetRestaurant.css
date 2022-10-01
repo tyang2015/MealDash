@@ -83,12 +83,12 @@
 
 }
 
-.restaurant-page-update-delete-buttons-container{
+div.restaurant-page-update-delete-buttons-container{
   display: flex;
   flex-direction: row;
   /* margin-left:40em; */
-  background-color: lightcoral;
-  /* width: 45em; */
+  /* width: 4em; */
+  /* width: 230px; */
   height: 100%;
   justify-content: space-between;
 
@@ -96,7 +96,7 @@
 
 .restaurant-page-update-button.button{
   border: none;
-  background-color: #D91400;
+  background-color: lightcoral;
   color: white;
   border-radius: 1000px;
   width: 100px;
@@ -109,9 +109,9 @@
   text-align: center;
 }
 
-.restaurant-page-create-food-item-container.button{
+.restaurant-page-create-food-item-button.button{
   border: none;
-  background-color: #D91400;
+  background-color: lightcoral;
   color: white;
   width: 100px;
   height: 35px;
@@ -124,7 +124,7 @@
 
 .restaurant-page-delete-button.button{
   border: none;
-  background-color: #D91400;
+  background-color: lightcoral;
   color: white;
   width: 100px;
   height: 35px;
@@ -156,4 +156,29 @@
 .navlink{
   text-decoration: none;
   color: black;
+}
+
+
+.restaurant-page-middle-container{
+  display: flex;
+  background-color: lightgoldenrodyellow;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.filter-food-item-category-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 100%;
+  margin-top: 20px;
+  background-color: pink;
+  height: 25px;
+  width: 100%;
+  align-items: center;
+
+}
+
+.not-first-category{
+  margin-left: 30px;
 }

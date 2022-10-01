@@ -27,7 +27,7 @@
   width: 60em;
   height: 550px;
   margin: auto;
-  background-color: lightpink;
+  /* background-color: lightpink; */
   display:flex;
   justify-content:space-between;
   align-items:center
@@ -35,7 +35,7 @@
 }
 
 .splash-middle-link-container{
-  background-color: lightgreen;
+  /* background-color: lightgreen; */
   width: 250px;
   height: 300px;
   display: flex;
@@ -78,5 +78,5 @@
   width: 60em;
   height: fit-content;
   margin: auto;
-  background-color: lightcyan;
+  /* background-color: lightcyan; */
 }

@@ -38,24 +38,6 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
       closeTime:  restaurant? restaurant.closeTime: ""
     })
 
-    // useEffect(()=> {
-    //   console.log('form data in use effect:', formData)
-    //   setFormData({...formData,
-    //   name: restaurant? restaurant.name: formData? formData.name : "",
-    //   priceRange: restaurant? restaurant.priceRange: formData? formData.priceRange: "",
-    //   restaurantPicUrl: restaurant? restaurant.restaurantPicUrl: formData? formData.restaurantPicUrl: "",
-    //   logo: restaurant? restaurant.logo: formData? formData.logo: "",
-    //   longitude: restaurant? restaurant.longitude: formData? formData.longitude: "",
-    //   latitude: restaurant? restaurant.latitude: formData? formData.latitude: "",
-    //   email: restaurant? restaurant.email: formData? formData.email: "",
-    //   phoneNumber: restaurant? restaurant.phoneNumber: formData? formData.phoneNumber: "",
-    //   bankAccount:  restaurant? restaurant.bankAccount: formData? formData.bankAccount: "",
-    //   routingNumber:  restaurant? restaurant.routingNumber: formData? formData.routingNumber: "",
-    //   category: restaurant? restaurant.category: formData? formData.category: "American",
-    //   openTime:  restaurant? restaurant.openTime: formData? formData.openTime: "",
-    //   closeTime:  restaurant? restaurant.closeTime: formData? formData.closeTime: ""
-    //   })
-    // }, [formStep])
     useEffect(()=> {
       setFormStep(formStep)
     }, [formStep])

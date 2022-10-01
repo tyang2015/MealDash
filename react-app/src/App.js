@@ -45,8 +45,11 @@ function App() {
         <ProtectedRoute path='/restaurants/:id/edit' exact={true} >
           <UpdateRestaurantForm/>
         </ProtectedRoute>
+        {/* <div>
+          {loggedInUser && <NavBarSplash/>}
+        </div> */}
         <div>
-          {loggedInUser && <NavBar />}
+          {loggedInUser && <NavBar/>}
           <Route path='/' exact={true}>
             <SplashPage/>
           </Route>
