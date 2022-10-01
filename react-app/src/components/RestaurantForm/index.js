@@ -175,19 +175,21 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
               </div>
             )}
           </div>
-          <div className = 'create-restaurant-form-footer'>
+          <div className='create-restaurant-form-footer'>
             <button
               type="button"
               disabled={formStep == 0}
               onClick={() => {
                 setFormStep((currPage) => currPage - 1);
               }}
+              className='create-restaurant-button'
             >
               Back
             </button>
             {formStep<2 && (
               <button
                 type="button"
+                className='create-restaurant-button'
                 onClick={() => {
                   setFormStep((currPage) => currPage + 1);
                 }}
@@ -197,6 +199,7 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
             )}
             {formStep== 2 && (
               <button type='submit'
+                className='create-restaurant-button'
               >
                 Submit
               </button>

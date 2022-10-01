@@ -13,9 +13,17 @@
   background-color: #dbdbdb;
 }
 
+.create-restaurant-form-footer{
+  /* background-color: lightblue; */
+  display:flex;
+  justify-content: space-between;
+  width: 40em;
+  margin: auto
+}
+
 .create-restaurant-progress-bar{
   height: 100%;
-  background-color: coral;
+  background-color: lightsalmon;
   align-self: flex-start;
   /* justify-self: flex-start; */
 }
@@ -23,7 +31,8 @@
 
 .create-restaurant-form-step-1-container{
   /* background-color: lightcyan; */
-  height: 600px;
+  /* height: 600px; */
+  height:fit-content;
   width: 40em;
   margin: 20px auto;
 }
@@ -96,4 +105,79 @@
   min-height: 300px;
   object-fit: cover;
   box-sizing: border-box;
+}
+
+
+/* -------------------------------------------------------- */
+/* form step #2 */
+.create-restaurant-form-step-2-container{
+  height: fit-content;
+  width: 40em;
+  margin: 20px auto;
+  /* background-color: lightblue; */
+
+}
+
+.form-step-2-label-input-container{
+  display:flex;
+  /* background-color: lightblue; */
+  flex-direction: column;
+  align-items: flex-start;
+
+}
+
+.form-step-2-label-input-container.left-box{
+  margin-right: 15em;
+}
+
+.form-step-2-top-bottom-row{
+  display: flex;
+  justify-content: flex-start;
+  /* background-color: lightcoral; */
+}
+
+.form-step-2-input{
+  width: 200px;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+
+.create-restaurant-button{
+  border: none;
+  background-color: lightcoral;
+  color: white;
+  border-radius: 5px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  height: 32px;
+  width: 57px;
+}
+
+button:disabled {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
+
+/* ---------------------------------------------------- */
+/* form step 3 */
+.form-step-3-label-container{
+  display:flex;
+  flex-direction: column;
+
+
+}
+
+.create-restaurant-form-step-3-container{
+  width: 40em;
+  margin: 20px auto;
+}
+
+.form-step-3-row{
+  display:flex;
+  flex-direction: row;
+  justify-content: flex-start;
 }
