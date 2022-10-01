@@ -26,7 +26,7 @@ const FormStep1 = ({formData, setFormData}) => {
             required
           />
         </div>
-        <div className='create-restaurant-label-input-container'>
+        <div className='create-restaurant-label-input-container top-row'>
           <label htmlFor="phone-number">Phone Number</label>
           <input
             id="phone-number"

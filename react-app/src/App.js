@@ -37,45 +37,41 @@ function App() {
 
   return (
     <BrowserRouter>
-      {loggedInUser && <NavBar />}
       {/* {!loggedInUser && <NavBarSplash/>} */}
       <Switch>
-        <Route path='/' exact={true}>
-          <SplashPage/>
-        </Route>
-        <Route path='/sign-up' exact={true}>
-          <SignUpForm />
-        </Route>
-        <Route path='/login' exact={true}>
-          <LoginForm />
-        </Route>
-        {/* <ProtectedRoute path='/restaurants'>
-          <Restaurants/>
-        </ProtectedRoute> */}
-        {/* <ProtectedRoute path='/users' exact={true} >
-          <UsersList/>dfs
-        </ProtectedRoute> */}
         <ProtectedRoute path='/restaurants/new' exact={true} >
          <CreateRestaurantForm/>
         </ProtectedRoute>
         <ProtectedRoute path='/restaurants/:id/edit' exact={true} >
           <UpdateRestaurantForm/>
         </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId' exact={true} >
-          <User />
-        </ProtectedRoute>
-        <ProtectedRoute path='/restaurants' exact={true} >
-          <Restaurants/>
-        </ProtectedRoute>
-        <ProtectedRoute path='/restaurants/:id' exact={true} >
-          <GetRestaurant/>
-        </ProtectedRoute>
-        <ProtectedRoute path='/restaurants/:id/new' exact={true} >
-          <CreateFoodItem/>
-        </ProtectedRoute>
-        <ProtectedRoute path='/restaurants/:id/fooditems/:foodItemId' exact={true} >
-          <UpdateFoodItem/>
-        </ProtectedRoute>
+        <div>
+          {loggedInUser && <NavBar />}
+          <Route path='/' exact={true}>
+            <SplashPage/>
+          </Route>
+          <Route path='/sign-up' exact={true}>
+            <SignUpForm />
+          </Route>
+          <Route path='/login' exact={true}>
+            <LoginForm />
+          </Route>
+          <ProtectedRoute path='/users/:userId' exact={true} >
+            <User />
+          </ProtectedRoute>
+          <ProtectedRoute path='/restaurants' exact={true} >
+            <Restaurants/>
+          </ProtectedRoute>
+          <ProtectedRoute path='/restaurants/:id' exact={true} >
+            <GetRestaurant/>
+          </ProtectedRoute>
+          <ProtectedRoute path='/restaurants/:id/new' exact={true} >
+            <CreateFoodItem/>
+          </ProtectedRoute>
+          <ProtectedRoute path='/restaurants/:id/fooditems/:foodItemId' exact={true} >
+            <UpdateFoodItem/>
+          </ProtectedRoute>
+        </div>
       </Switch>
     </BrowserRouter>
   );

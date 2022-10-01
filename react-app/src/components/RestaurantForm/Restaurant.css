@@ -20,20 +20,16 @@
   /* justify-self: flex-start; */
 }
 
-/* .create-restaurant-form-body{
-  background-color:lightcyan;
-  height: 700px;
-} */
 
 .create-restaurant-form-step-1-container{
-  background-color: lightcyan;
+  /* background-color: lightcyan; */
   height: 600px;
   width: 40em;
   margin: 20px auto;
 }
 
 .create-restaurant-form-step-1-first-row{
-  background-color: goldenrod;
+  /* background-color: goldenrod; */
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -50,12 +46,14 @@
 .create-restaurant-label-input-container.top-row{
   align-self: flex-start;
   justify-self: flex-start;
-  margin-left: -96.5px;
+  margin-left: -144.5px;
 
 }
 
+
+
 .create-restaurant-form-step-1-third-row{
-  background-color: lightcoral;
+  /* background-color: lightcoral; */
   display:flex;
   flex-direction: row;
   justify-content: space-around;
@@ -83,7 +81,11 @@
 
 .create-restaurant-form-step-1-left-container, .create-restaurant-form-step-1-right-container{
   width: 50%;
-  background-color: lightsalmon;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 25em;
+  /* background-color: lightsalmon; */
 }
 
 
