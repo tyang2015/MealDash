@@ -3,17 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { maskPhoneNumber } from '../PhoneNumberValidation';
 import "./FormStep1.css"
 import "../Restaurant.css"
+import MapContainer from '../../Maps';
+import PlacesAutocomplete from '../../UsePlacesAutoComplete';
 
 // first step: name, address (longitude & latitude), email, phone number, restaurant_pic_url
-// 2nd step: openTime, closeTime, priceRange, category
-// 3rd step: bankAccount, routingNumber
-
 // for now just use number fields for long and lat
 // text, use autocomplete* , text, number?, text
 const FormStep1 = ({formData, setFormData}) => {
   console.log('formData in form step 1: ', formData)
   return (
     <div className='create-restaurant-form-step-1-container'>
+      <MapContainer/>
       <div className='create-restaurant-form-step-1-first-row'>
         <div className='create-restaurant-label-input-container top-row'>
           <label htmlFor="restaurant-name">Restaurant Name</label>
@@ -115,7 +115,9 @@ const FormStep1 = ({formData, setFormData}) => {
             className='restaurant-form-restaurant-logo'
             onError={e => { e.currentTarget.src = "https://cdn5.vectorstock.com/i/1000x1000/65/29/vintage-badge-retro-blank-labels-logo-vector-23946529.jpg"; }}
           />
+        {/* <PlacesAutocomplete/> */}
         </div>
+
       </div>
     </div>
 

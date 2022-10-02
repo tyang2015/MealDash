@@ -10,4 +10,6 @@ map_routes = Blueprint('maps', __name__)
 
 @map_routes.route("/key", methods=["POST"])
 def get_google_api():
-  res.json({Config.googleMapsAPIKey})
+  api_key = Config.googleMapsAPIKey
+  return { "googleMapsAPIKey": api_key}
+

@@ -3,10 +3,12 @@ import thunk from 'redux-thunk';
 import session from './session'
 import restaurantReducer from './restaurant';
 import foodItemReducer from './foodItem';
+import mapsReducer from './maps';
 const rootReducer = combineReducers({
   session,
   restaurants: restaurantReducer,
-  foodItems: foodItemReducer
+  foodItems: foodItemReducer,
+  maps: mapsReducer
 });
 
 
