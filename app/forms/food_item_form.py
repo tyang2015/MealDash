@@ -13,7 +13,7 @@ def valid_price(form, field):
   if price > 25000:
     raise ValidationError("Price must be less than $25,000")
 
-FOOD_ITEM_CATEGORIES = ["Main", "Side", "Drink", "Dessert"]
+FOOD_ITEM_CATEGORIES = ["Main", "Sides", "Drinks", "Desserts"]
 
 class FoodItemForm(FlaskForm):
   name = StringField("Food Name", validators=[DataRequired()])

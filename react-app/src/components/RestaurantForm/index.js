@@ -46,6 +46,8 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
     useEffect(()=>{
       let errors= []
       if (formData === "") return null
+      console.log('open time in form:', formData.openTime)
+      console.log('close time in form:', formData.closeTime)
       // console.log('phone number:', formData.phoneNumber)
       // let newPhoneNumber = formData.phoneNumber.split("-").join("")
       if (!formData.email.includes("@")) errors.push("Email is invalid")
@@ -53,6 +55,7 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
       if (!isImage(formData.restaurantPicUrl)) errors.push("Restaurant pic url is invalid")
       if (!isImage(formData.logo)) errors.push("Logo url is invalid")
       if (logoExists(formData.logo)) errors.push("Logo must be unique")
+      if (formData.closeTime <= formData.openTime) errors.push("Closing Time must be after Opening Time")
       if (formData.longitude < -180 || formData.longitude > 180) errors.push("Longitude is invalid")
       if (formData.latitude < -90 || formData.latitude> 90) errors.push("Latitude is invalid")
       if (formData.phoneNumber.length!= 14) errors.push("Phone Number is invalid")

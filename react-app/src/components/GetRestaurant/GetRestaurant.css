@@ -7,7 +7,7 @@
 /* this controls the width of all content (will change after you put orders pane in */
 .restaurant-page-main-content-container{
   height: 100vh;
-  width: 65em;
+  width: 60em;
   /* margin-top:50px;dd */
   margin: auto
 }
@@ -16,27 +16,37 @@
   width: 100%;
   height: 250px;
   object-fit: cover;
-  background-color: green;
+  border-radius: 15px;
+}
+
+.restaurant-page-logo-pic-container{
+  height: 8em;
+  width: 8em;
 }
 
 .restaurant-page-logo-pic{
-  width: 190px;
+  /* width: 190px;
   height: 190px;
-  background-color: green;
+  background-color: green; */
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  background-position: center;
+  border: 1.5px solid #E7E7E7;
+
 }
 
 .restaurant-page-description-container{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: 100px;
+  height: 80px;
   border-bottom: 1.5px #E7E7E7 solid;
   /* background-color: lightcyan; */
 }
 
-.restaurant-page-logo-pic-container{
-  /* width: ssdfsdf*/
-}
+
 
 .restaurant-page-bottom-container{
   /* background-color: lightsalmon; */
@@ -52,8 +62,13 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(auto-fill);
-  grid-column-gap: 10px;
-  grid-row-gap: 10px;
+  overflow-y: auto;
+  /* grid-template-rows: repeat() */
+  height: 70em;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+  grid-auto-rows: 140px;
+  grid-auto-columns: auto 100px ;
 
 }
 
@@ -132,6 +147,7 @@ div.restaurant-page-update-delete-buttons-container{
   display:flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 
 }
 
@@ -147,7 +163,6 @@ div.restaurant-page-update-delete-buttons-container{
 }
 
 .restaurant-page-hours-container{
-  background-color: lightblue;
   width: 200px;
   display:flex;
   justify-content: flex-start;
@@ -161,7 +176,9 @@ div.restaurant-page-update-delete-buttons-container{
 
 .restaurant-page-middle-container{
   display: flex;
-  background-color: lightgoldenrodyellow;
+  /* background-color: lightgoldenrodyellow; */
+  position:sticky;
+  top: 0px;
   flex-direction: column;
   align-items: flex-start;
 }
@@ -171,14 +188,30 @@ div.restaurant-page-update-delete-buttons-container{
   flex-direction: row;
   justify-content: flex-start;
   width: 100%;
-  margin-top: 20px;
-  background-color: pink;
+  margin-top: 50px;
+  /* background-color: pink; */
   height: 25px;
   width: 100%;
   align-items: center;
+  border-bottom:1.5px #E7E7E7 solid ;
 
 }
 
 .not-first-category{
   margin-left: 30px;
+}
+
+.restaurant-page-category-container{
+  display:flex;
+  /* background-color: lightgreen; */
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  font-weight: 700;
+}
+
+.restaurant-page-category-selection-bar{
+  height: 20%;
+  width: 100%;
+  background-color: lightsalmon;
 }

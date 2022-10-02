@@ -15,7 +15,7 @@
 .fa-solid.fa-burger{
   width: fit-content;
   height: 20px;
-  color: red;
+  color: lightcoral;
   /* font-weight: 800; */
   /* background-color: lightpink; */
 }
@@ -29,14 +29,14 @@
      border: 1px solid rgba(55, 43, 43, 0.3);
      position: absolute;
      left: .5em;
-     top: 2.5em;
+     top: 3em;
      /* margin-top: 1.4em;
      margin-left: 3000em; */
      width: 12em;
      right: 4em;
      z-index: 1;
      background-color: white;
-     height: 5em;
+     height: 8em;
      display: flex;
      flex-direction: column;
      justify-content: space-around;

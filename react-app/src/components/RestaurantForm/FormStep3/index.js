@@ -14,6 +14,7 @@ const FormStep3 = ({formData, setFormData}) => {
             type="text"
             value = {formData.bankAccount}
             onChange={e=> setFormData({...formData, bankAccount: e.target.value})}
+            required
           />
         </div>
         <div className='form-step-3-label-input-container' >
@@ -24,6 +25,7 @@ const FormStep3 = ({formData, setFormData}) => {
 
             value = {formData.routingNumber}
             onChange={e=> setFormData({...formData, routingNumber: e.target.value})}
+            required
           />
         </div>
       </div>

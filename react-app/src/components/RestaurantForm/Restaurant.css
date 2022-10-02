@@ -181,3 +181,11 @@ button:disabled {
   flex-direction: row;
   justify-content: flex-start;
 }
+
+.validation-errors-container{
+  width: 40em;
+  margin:auto;
+  display: flex;
+  justify-content: flex-start;
+  /* back */
+}

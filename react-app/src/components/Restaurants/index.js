@@ -24,7 +24,7 @@ const Restaurants = () => {
                       <div className="get-restaurants-bottom-text-container">
                         <div className='get-restaurants-left-inner-text-container'>
                           <h3>{restaurant.name}</h3>
-                          <p> {restaurant.avgRating} rating</p>
+                          <p> {restaurant.avgRating} <i class="fa-solid fa-star" ></i> ratings</p>
                         </div>
                       </div>
                     </div>

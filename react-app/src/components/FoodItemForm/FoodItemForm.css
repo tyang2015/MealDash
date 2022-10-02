@@ -6,8 +6,8 @@
 }
 
 .create-food-item-food-pic{
-  height: 380px;
-  width: 400px;
+  height: 100%;
+  width: 100%;
   object-fit: cover;
 }
 
@@ -21,9 +21,9 @@
 }
 
 .create-food-item-left-container{
-  width: 35%;
+  width: 40%;
   height:100%;
-  background-color: lightsalmon;
+  /* background-color: lightsalmon; */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -31,7 +31,7 @@
 }
 
 .food-item-price-category-container{
-  background-color: lightcyan;
+  /* background-color: lightcyan; */
   display: flex;
   justify-content: space-between;
 }
@@ -39,14 +39,14 @@
 .create-food-item-right-container{
   width: 60%;
   height:100%;
-  background-color: lightgreen;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  margin-left: 2em;
 }
 
 .create-food-item-container{
-  background-color: lightpink;
+  /* background-color: lightpink; */
   /* height: 380px;
   width: 400px; */
   height:100%;
@@ -56,6 +56,47 @@
   justify-content: center;
 }
 
+.create-food-item-button{
+  border: none;
+  background-color: lightcoral;
+  color: white;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 32px;
+  width: 57px;
+}
+
+.create-food-item-submit-container{
+  width:100%;
+  /* background-color: lightblue; */
+  margin-top: 90px;
+}
+
+.create-food-item-label-input-container{
+  display:flex;
+  flex-direction: column;
+  /* align-items: flex-start; */
+}
+
+.not-top-food-item{
+  margin-top: 50px;
+}
+
+
+/*
+.restaurant-page-logo-pic{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  background-position:center;
+  border: 0.5px solid
+} */
+
 .validation-errors{
   color:red;
+  /* list-style:none; */
+  padding-left: 0;
 }

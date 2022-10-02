@@ -4,15 +4,17 @@ import { useParams, useHistory } from 'react-router-dom';
 import { createFoodItem, updateFoodItem } from '../../store/foodItem';
 import "./FoodItemForm.css"
 
-const FOOD_ITEM_CATEGORIES = ["Main", "Side", "Drink", "Dessert"]
+const FOOD_ITEM_CATEGORIES = ["Main", "Sides", "Drinks", "Desserts"]
 
 
 const FoodItemForm = ({foodItem, formType}) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  // this is RESTAURANT id to be put inside object on submit
-  const { id } = useParams();
+  // id is RESTAURANT id to be put inside object on submit
+  const { id, foodItemId } = useParams();
   const sessionUser = useSelector(state => state.session.user)
+  // const foodItems =  useSelector(state=> state.foodItems)
+  // let foodItem = foodItems[foodItemId]
 
   const [name, setName] = useState(foodItem? foodItem.name : '')
   const [foodPicUrl, setFoodPicUrl] = useState(foodItem? foodItem.foodPicUrl : '')
@@ -54,6 +56,7 @@ const FoodItemForm = ({foodItem, formType}) => {
     if (formType === "Create Form") {
       dispatch(createFoodItem(id, foodItem))
       alert("Food item successfully created!")
+      history.push(`/restaurants/${id}`)
     } else {
       dispatch(updateFoodItem(id, foodItem))
       alert("Food item has been updated")
@@ -69,7 +72,7 @@ const FoodItemForm = ({foodItem, formType}) => {
     // <h3> food item form</h3>
     <>
       <form className='create-food-item-form-container'>
-        <h3> Create Food Item </h3>
+        <h3> {formType==="Create Form"? "Create Menu Item": "Update Menu Item"} </h3>
         <div className="create-food-item-errors-container">
           {errors.length>0 && hasSubmitted && (
             <div className="validation-errors-container">
@@ -83,48 +86,70 @@ const FoodItemForm = ({foodItem, formType}) => {
         </div>
         <div className='create-food-item-content-container'>
           <div className='create-food-item-left-container'>
-            <input
-              type='text'
-              placeholder="name"
-              value={name}
-              onChange={(e)=> setName(e.target.value)}
-              required
-            />
-            <textarea
-              type='text'
-              placeholder="description"
-              rows='10'
-              cols = '33'
-              value={description}
-              onChange={e=> setDescription(e.target.value)}
-              style={{marginTop:"50px"}}
-            />
-            <div className='food-item-price-category-container' style={{marginTop: "50px"}}>
+            <div className='create-food-item-label-input-container'>
+              <label htmlFor='food-item-name'>Food Item Name</label>
               <input
-                type="number"
-                value={price}
-                onChange={e => setPrice(e.target.value)}
-                placeholder='Price'
-                step='0.01'
-                min="0.00"
+                id="food-item-name"
+                type='text'
+                placeholder="name"
+                value={name}
+                onChange={(e)=> setName(e.target.value)}
                 required
               />
-              <select
-                value={category}
-                onChange={(e)=> setCategory(e.target.value)}
-                required
-                >
-                  {/* how come my default selected value does not sho */}
-                {FOOD_ITEM_CATEGORIES.map(cat => (
-                  <>
-                    <option key={cat.id}>{cat}</option>
-                  </>
-                ))}
-              </select>
+            </div>
+            <div className='create-food-item-label-input-container not-top-food-item'>
+              <label htmlFor="food-item-description" style={{marginBottom:"-50px"}}>Description</label>
+              <textarea
+                type='text'
+                id= "food-item-description"
+                placeholder="description"
+                rows='10'
+                cols = '33'
+                value={description}
+                onChange={e=> setDescription(e.target.value)}
+                style={{marginTop:"50px"}}
+              />
+            </div>
+            <div className='food-item-price-category-container not-top-food-item' >
+              <div className='create-food-item-label-input-container' >
+                <label htmlFor="food-item-price">Price</label>
+                <input
+                  id='food-item-price'
+                  type="number"
+                  value={price}
+                  onChange={e => setPrice(e.target.value)}
+                  placeholder='Price'
+                  step='0.01'
+                  min="0.00"
+                  required
+                />
+              </div>
+              <div className='create-food-item-label-input-container' >
+                <label htmlFor="food-item-category">Food Category</label>
+                <select
+                  id='food-item-category'
+                  value={category}
+                  onChange={(e)=> setCategory(e.target.value)}
+                  required
+                  style={{boxSizing:"border-box", height: "100%"}}
+                  >
+                    {/* how come my default selected value does not sho */}
+                  {FOOD_ITEM_CATEGORIES.map(cat => (
+                    <>
+                      <option key={cat.id}>{cat}</option>
+                    </>
+                  ))}
+                </select>
+              </div>
+            </div>
+            <div className='create-food-item-submit-container'>
+              <button type='submit' className='create-food-item-button' onClick={handleSubmit}> Submit </button>
             </div>
           </div>
           <div className='create-food-item-right-container'>
+            <label htmlFor="food-item-pic">Food Item Picture</label>
             <input
+              id="food-item-pic"
               type='text'
               placeholder='food pic url'
               value={foodPicUrl}
@@ -142,7 +167,6 @@ const FoodItemForm = ({foodItem, formType}) => {
             </div>
           </div>
         </div>
-        <button type='submit' className='button' onClick={handleSubmit}> Submit </button>
 
       </form>
     </>

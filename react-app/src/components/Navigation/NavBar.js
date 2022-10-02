@@ -13,16 +13,19 @@ const NavBar = () => {
     const profileMenu = () => {
         const dropDownMenu = (
             <div className='dropdown-container'>
+                <NavLink className= 'navlink' to='/restaurants'>
                 <div>
                     Home
                 </div>
-                <div>
+                </NavLink>
+                {/* FEATURE #3 */}
+                {/* <div style={{cursor:'pointer'}}>
                     Orders
-                </div>
-                <NavLink to="/restaurants/new">
-                    <div>
-                        Register Restaurant
-                    </div>
+                </div> */}
+                <NavLink className= 'navlink' to="/restaurants/new">
+                  <div>
+                      Register Restaurant
+                  </div>
                 </NavLink>
 
                 <div className='navbar-logout-button'>

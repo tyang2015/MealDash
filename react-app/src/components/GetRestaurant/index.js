@@ -40,6 +40,7 @@ const GetRestaurant = () => {
   // let openTime;
   // let isOpen;
   // let filteredItems;
+  let finalAvgRating;
   let closeMinutesIndex;
   let closeMinutes;
   let openMinutesIndex;
@@ -84,8 +85,7 @@ const GetRestaurant = () => {
     }
   }, [restaurant])
 
-  // useEffect(()=> {
-  // }, [main, sides, desserts, drinks])
+
 
   useEffect(()=>{
     if (foodItems.length>0 && all=== "All"){
@@ -147,11 +147,6 @@ const GetRestaurant = () => {
     }
   }, [drinks])
 
-  // useEffect(()=>{
-  //   console.log('food items changing')
-  //   setFoodItemsChange(!foodItemsChange)
-  // }, [foodItems.length])
-
   useEffect(()=> {
     dispatch(getAllRestaurants())
   }, [dispatch])
@@ -159,6 +154,11 @@ const GetRestaurant = () => {
   useEffect(()=> {
     dispatch(getFoodItems(id))
   }, [dispatch])
+
+  if (restaurant){
+    finalAvgRating = Number(restaurant.avgRating)
+    finalAvgRating = String(finalAvgRating.toFixed(2))
+  }
 
   // FOR RESTAURANT
   const handleDelete = e => {
@@ -177,23 +177,23 @@ const GetRestaurant = () => {
   const handleFilter = categoryName => {
     if (categoryName === "All") {
       setAll(categoryName)
-      setCategoryChosen("All")
+      setCategoryChosen(categoryName)
       setMain("")
       setSides("")
       setDesserts("")
       setDrinks("")
     }
     if (categoryName === "Main") {
-      setMain("Main")
-      setCategoryChosen("Main")
+      setMain(categoryName)
+      setCategoryChosen(categoryName)
       setSides("")
       setDesserts("")
       setDrinks("")
       setAll("")
     }
     if (categoryName=== "Desserts"){
-      setDesserts("Desserts")
-      setCategoryChosen("Desserts")
+      setDesserts(categoryName)
+      setCategoryChosen(categoryName)
       setMain("")
       setSides("")
       setDrinks("")
@@ -201,8 +201,8 @@ const GetRestaurant = () => {
 
     }
     if (categoryName=== 'Sides') {
-      setSides("Sides")
-      setCategoryChosen("Sides")
+      setSides(categoryName)
+      setCategoryChosen(categoryName)
       setDrinks("")
       setMain("")
       setDesserts("")
@@ -210,8 +210,8 @@ const GetRestaurant = () => {
 
     }
     if (categoryName === "Drinks") {
-      setDrinks("Drinks")
-      setCategoryChosen("Drinks")
+      setDrinks(categoryName)
+      setCategoryChosen(categoryName)
       setMain("")
       setDesserts("")
       setSides("")
@@ -230,19 +230,24 @@ const GetRestaurant = () => {
             <div className="restaurant-page-pic-container">
               <img className="restaurant-page-pic" src={restaurant.restaurantPicUrl} onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
             </div>
-            <div className="restaurant-page-logo-pic-container">
+            <div className="restaurant-page-logo-pic-container" style={{marginTop: "27px"}}>
               <img className="restaurant-page-logo-pic" src={restaurant.logo} onError={e => { e.currentTarget.src = "https://cdn5.vectorstock.com/i/1000x1000/65/29/vintage-badge-retro-blank-labels-logo-vector-23946529.jpg"; }} />
             </div>
-            <div className="restaurant-page-name">
+            <div className="restaurant-page-name" style={{marginTop: "20px"}}>
               {restaurant.name}
             </div>
             <div className="restaurant-page-description-container">
               <div className="restaurant-page-left-description-text-box">
-                <div> {restaurant.category} {restaurant.avgRating}
-                {restaurant.numReviews} ratings {restaurant.priceRange == "1"? "$": "2"? "$$": "$$$"}
+                <div> {restaurant.category} • {restaurant.avgRating == "0"? null: finalAvgRating}&nbsp;
+                <i class="fa-solid fa-star" ></i> • {restaurant.numReviews == "0"? "No": restaurant.numReviews}&nbsp;{restaurant.numReviews=== 1? "rating": "ratings"} • {restaurant.priceRange == "1"? "$": "2"? "$$": "$$$"}
                 </div>
                 <div className="restaurant-page-hours-container">
-                  {isOpen? "Open Now": "Closed"} Closes at {restaurant? closeTime: null}
+                  <div className="restaurant-page-open-status" style={{color: isOpen? "green": "red"}}>
+                    {isOpen? "Open Now": "Closed"}&nbsp;
+                  </div>
+                  <div className="restaurant-page-close-information">
+                  •&nbsp;Closes at {restaurant? closeTime: null}
+                  </div>
                 </div>
               </div>
               <div style={{width: "330px"}} className="restaurant-page-update-delete-buttons-container">
@@ -266,14 +271,39 @@ const GetRestaurant = () => {
               </div>
             </div>
             <div className="restaurant-page-middle-container">
-                <div> Full Menu </div>
-                <div> {openTime} - {closeTime}</div>
+                <div style={{marginTop:"15px"}}><b>Full Menu</b></div>
+                <div style={{color: "#7A7876"}}> {openTime} - {closeTime}</div>
                 <div className="filter-food-item-category-container">
-                  <div onClick={ e=> handleFilter("All")} className='food-category-main-button'>All</div>
-                  <div onClick={ e=> handleFilter("Main")} className='food-category-main-button not-first-category'>Main</div>
-                  <div onClick={e=> handleFilter("Sides")} className='food-category-side-button not-first-category'>Sides</div>
-                  <div onClick={e=>  handleFilter("Drinks")} className="food-category-drink-button not-first-category">Drinks</div>
-                  <div onClick={e=>  handleFilter("Desserts")} className="food-category-dessert-button not-first-category">Desserts</div>
+                  <div onClick={ e=> handleFilter("All")} className='restaurant-page-category-container'>
+                    All
+                    {categoryChosen === "All" && (
+                      <div className="restaurant-page-category-selection-bar"></div>
+                    )}
+                  </div>
+                  <div onClick={ e=> handleFilter("Main")} className='restaurant-page-category-container not-first-category'>
+                    Main
+                    {categoryChosen === "Main" && (
+                      <div className="restaurant-page-category-selection-bar"></div>
+                    )}
+                  </div>
+                  <div onClick={e=> handleFilter("Sides")} className='restaurant-page-category-container not-first-category'>
+                    Sides
+                    {categoryChosen === "Sides" && (
+                      <div className="restaurant-page-category-selection-bar"></div>
+                    )}
+                  </div>
+                  <div onClick={e=>  handleFilter("Drinks")} className="restaurant-page-category-container not-first-category">
+                    Drinks
+                    {categoryChosen === "Drinks" && (
+                      <div className="restaurant-page-category-selection-bar"></div>
+                    )}
+                  </div>
+                  <div onClick={e=>  handleFilter("Desserts")} className="restaurant-page-category-container not-first-category">
+                    Desserts
+                    {categoryChosen === "Desserts" && (
+                      <div className="restaurant-page-category-selection-bar"></div>
+                    )}
+                  </div>
                 </div>
                 <div className="filter-food-item-category-dynamic-bar-selection" style={{}}>
                 </div>
@@ -296,7 +326,7 @@ const GetRestaurant = () => {
                       <div className="food-item-right-container">
                         {sessionUser.id == restaurant.ownerId && (
                           <>
-                            <NavLink to={`/restaurants/${id}/fooditems/${item.id}`}>
+                            <NavLink className="navlink" to={`/restaurants/${id}/fooditems/${item.id}`}>
                               <button className="button">edit item</button>
                             </NavLink>
                             <button onClick={(e)=> handleDeleteFoodItem(item.id)} className="button">delete item</button>
