@@ -5,7 +5,10 @@ import PlacesAutocomplete from '../../UsePlacesAutoComplete';
 
 const OrderConfirmationPage = () => {
   return (
-    <h3> Order confirmation page</h3>
+    <>
+      <h3> Order confirmation page</h3>
+      <MapContainer/>
+    </>
   )
 
 }
