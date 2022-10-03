@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { getAllRestaurants } from '../../store/restaurant';
 import NavBarSplash from '../NavBarSplash';
 import "./SplashPage.css"
@@ -27,8 +27,8 @@ const SplashPage = () => {
     <>
       <div className='splash-page-main-container'>
         {/* <h3> New Nav bar </h3> */}
+        <NavBarSplash/>
         <div className="splash-page-background-image-container" >
-          <NavBarSplash/>
           <div className='splash-page-title-text-box'> Restaurants and more, delivered to your door</div>
         </div>
         <div className='splash-page-content-container'>
@@ -56,7 +56,9 @@ const SplashPage = () => {
           <div className='become-a-partner-container splash-middle-link-container'>
             <img className="image-link-pic" src="https://cdn.doordash.com/media/consumer/home/landing/new/Storefront.svg"/>
             <h1> Become a Partner </h1>
-            <p style={{textAlign: "center"}}> Click here to sign up your store </p>
+            <NavLink to="/restaurants/new">
+              <p style={{textAlign: "center"}}> Click here to sign up your store </p>
+            </NavLink>
           </div>
           <div className='try-the-app splash-middle-link-container' >
             <img className="image-link-pic" src="https://cdn.doordash.com/media/consumer/home/landing/new/iphone.svg"/>

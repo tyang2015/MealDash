@@ -9,6 +9,7 @@
   justify-content: center;
   background-color: lightcoral;
   align-items: center;
+  width: 100vw;
 }
 /* s */
 .session-links-container{

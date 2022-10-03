@@ -6,7 +6,9 @@
   /* background-size: cover; */
   background-repeat: repeat-x;
   background-size: auto 100%;
-
+  display: flex;
+  justify-content: center;
+  align-items: center
 }
 
 .favorites-near-you{
