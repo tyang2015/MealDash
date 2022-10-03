@@ -34,18 +34,18 @@ def create_restaurant():
     if form.validate_on_submit():
         restaurant = Restaurant(
             name = form.data["name"],
-            price_range = form.data["priceRange"],
-            restaurant_pic_url = form.data["restaurantPicUrl"],
+            price_range = form.data["price_range"],
+            restaurant_pic_url = form.data["restaurant_pic_url"],
             logo = form.data["logo"],
             longitude = form.data["longitude"],
             latitude = form.data["latitude"],
             email = form.data["email"],
-            phone_number = form.data["phoneNumber"],
-            bank_account = form.data["bankAccount"],
-            routing_number = form.data["routingNumber"],
+            phone_number = form.data["phone_number"],
+            bank_account = form.data["bank_account"],
+            routing_number = form.data["routing_number"],
             category = form.data["category"],
-            open_time = form.data["openTime"],
-            close_time = form.data["closeTime"],
+            open_time = form.data["open_time"],
+            close_time = form.data["close_time"],
             user = current_user
         )
         db.session.add(restaurant)

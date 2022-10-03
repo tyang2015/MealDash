@@ -88,15 +88,14 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
           }
         }
       }
-      console.log('logos from db:', logos)
+      // console.log('logos from db:', logos)
       let foundLogo = logos.find(item => item === logoUrl.trim())
       if (foundLogo){
-        console.log('found logo:', foundLogo)
-
+        // console.log('found logo:', foundLogo)
         return true
       }
       else {
-        console.log('logo not found:')
+        // console.log('logo not found:')
         return false
       }
     }
@@ -120,17 +119,12 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
     const handleSubmit= async (e) => {
       e.preventDefault();
       setHasSubmitted(true)
-      // if (logoExists(formData.logo)){
-      //   setErrors([...errors, "Logo must be unique and not be used by another owner"])
-      // }
       if (errors.length>0){
-        console.log('session user id:', sessionUser.id)
-        console.log('restaurant owner id:', restaurant.ownerId)
         alert('Cannot submit restaurant info')
 
         return
       }
-      console.log('form data right before submission:', formData)
+      // console.log('form data right before submission:', formData)
       // let newFormData;
       // if(geolocationEnabled){
       // console.log('address to be sent in fetch...:', formData.address)
@@ -166,7 +160,7 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
         close_time: formData.closeTime
         // ...formData
       }
-      console.log('restaurant to be submitted:', restaurant)
+      // console.log('restaurant to be submitted:', restaurant)
 
       if (formType === "Create Form"){
         dispatch(createRestaurant(restaurant))
