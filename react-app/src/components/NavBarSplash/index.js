@@ -16,11 +16,11 @@ const NavBarSplash = () => {
       <nav className='navbar-splash'>
         <i className="fa-solid fa-burger splash-page-logo"> MealDash </i>
         <div className='session-links-container'>
-          <NavLink to={`/login`}>
-            <div>Sign In </div>
+          <NavLink className='navlink' to={`/login`}>
+            <div className='splash-page-session-button sign-in-button'>Sign In </div>
           </NavLink>
-          <NavLink to={`/sign-up`}>
-            <div className='sign-up-button'>Sign Up</div>
+          <NavLink className='navlink' to={`/sign-up`}>
+            <div className='splash-page-session-button'>Sign Up</div>
           </NavLink>
         </div>
       </nav>
