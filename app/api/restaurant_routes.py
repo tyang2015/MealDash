@@ -173,3 +173,6 @@ def delete_food_item(rest_id, food_item_id):
 def get_restaurant_orders(id):
   orders = Order.query.filter(Order.restaurant_id == id, Order.customer_id == current_user.id).all()
   return {"orders": [order.to_dict() for order in orders]}
+
+
+

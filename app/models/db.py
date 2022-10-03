@@ -140,6 +140,8 @@ class Order(db.Model):
     phone_number = db.Column(db.String, nullable = False)
     credit_card = db.Column(db.String, nullable = False)
     total_price = db.Column(db.Numeric(scale = 2), nullable=False)
+    # distance = db.Column(db.Numeric(scale=2))
+    # duration = db.Column(db.Integer)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
 
