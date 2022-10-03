@@ -53,8 +53,8 @@ export const createRestaurant = (payload) => async dispatch => {
     }
 }
 
-export const updateRestaurant = (payload) => async dispatch => {
-    const response = await fetch(`/api/restaurants/${payload.id}`,{
+export const updateRestaurant = (id, payload) => async dispatch => {
+    const response = await fetch(`/api/restaurants/${id}`,{
         method: "PUT",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(payload)

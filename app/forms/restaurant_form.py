@@ -20,30 +20,30 @@ def valid_latitude(form, field):
         raise ValidationError("Invalid latitude")
 # 1 to 3
 def valid_price_range(form, field):
-    priceRange = field.data
-    if priceRange < 1 or priceRange> 3:
+    price_range = field.data
+    if price_range < 1 or price_range> 3:
         raise ValidationError("Invalid price range")
 
 def valid_phone_number(form, field):
-    phoneNumber = field.data
-    if len(phoneNumber)!= 14:
+    phone_number = field.data
+    if len(phone_number)!= 14:
         raise ValidationError("Invalid phone number")
 
 def valid_bank_account(form, field):
-    bankAccount = field.data
-    if len(bankAccount) < 8 or len(bankAccount)> 17:
+    bank_account = field.data
+    if len(bank_account) < 8 or len(bank_account)> 17:
         raise ValidationError("Invalid Bank account Number")
 
 def valid_routing_number(form, field):
-    routingNumber = field.data
-    if len(routingNumber) != 9:
+    routing_number = field.data
+    if len(routing_number) != 9:
         raise ValidationError("Invalid Routing Number")
 
-def logo_exists(form, field):
-  logo = field.data
-  existingLogo = Restaurant.query.filter(Restaurant.logo == logo).first()
-  if existingLogo:
-    raise ValidationError("Logo already registered by another user")
+# def logo_exists(form, field):
+#   logo = field.data
+#   existingLogo = Restaurant.query.filter(Restaurant.logo == logo).first()
+#   if existingLogo:
+#     raise ValidationError("Logo already registered by another user")
 
 # # 00:00:00 => 8 digits
 # def valid_open_time(form, field):
@@ -53,15 +53,15 @@ CATEGORY_CHOICES = ["Asian", "American","Breakfast", "Vegan", "Mexican", "Japane
 
 class RestaurantForm(FlaskForm):
     name = StringField("Post Url", validators=[DataRequired()])
-    priceRange = IntegerField("Price Range", validators=[DataRequired(), valid_price_range])
-    restaurantPicUrl  = StringField("Restaurant Pic Url", validators=[DataRequired()])
-    logo = StringField("Logo", validators=[logo_exists])
+    price_range = IntegerField("Price Range", validators=[DataRequired(), valid_price_range])
+    restaurant_pic_url = StringField("Restaurant Pic Url", validators=[DataRequired()])
+    logo = StringField("Logo", validators=[DataRequired()])
     longitude = DecimalField("Longitude", validators=[DataRequired(), valid_longitude] )
     latitude = DecimalField("Latitude", validators=[DataRequired(), valid_latitude])
     email = StringField("Email", validators=[DataRequired(), valid_email])
-    phoneNumber = StringField("Phone number", validators=[DataRequired(), valid_phone_number])
-    bankAccount = StringField("Bank Account", validators=[DataRequired(), valid_bank_account])
-    routingNumber = StringField("Routing Number", validators = [DataRequired(), valid_routing_number])
+    phone_number = StringField("Phone number", validators=[DataRequired(), valid_phone_number])
+    bank_account = StringField("Bank Account", validators=[DataRequired(), valid_bank_account])
+    routing_number = StringField("Routing Number", validators = [DataRequired(), valid_routing_number])
     category = SelectField("Category", choices=CATEGORY_CHOICES, validators = [DataRequired()])
-    openTime = TimeField("Opening Time", validators = [DataRequired()])
-    closeTime = TimeField("Closing Time", validators = [DataRequired()])
+    open_time = StringField("Opening Time", validators = [DataRequired()])
+    close_time = StringField("Closing Time", validators = [DataRequired()])

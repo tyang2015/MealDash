@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from 'react-router-dom';
+import { useHistory,useParams } from 'react-router-dom';
 import "./Restaurant.css"
 import { createRestaurant, updateRestaurant } from '../../store/restaurant';
 import FormStep1 from './FormStep1';
@@ -27,20 +27,20 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
     const [formData, setFormData] = useState(
     {
       name: restaurant? restaurant.name: "",
-      priceRange: restaurant? restaurant.priceRange: "",
-      restaurantPicUrl: restaurant? restaurant.restaurantPicUrl: "",
+      priceRange: restaurant? restaurant.price_range: "",
+      restaurantPicUrl: restaurant? restaurant.restaurant_pic_url: "",
       logo: restaurant? restaurant.logo: "",
       longitude: restaurant? restaurant.longitude: "",
       latitude: restaurant? restaurant.latitude: "",
       email: restaurant? restaurant.email: "",
-      phoneNumber: restaurant? restaurant.phoneNumber: "",
-      bankAccount:  restaurant? restaurant.bankAccount: "",
-      routingNumber:  restaurant? restaurant.routingNumber: "",
+      phoneNumber: restaurant? restaurant.phone_number: "",
+      bankAccount:  restaurant? restaurant.bank_account: "",
+      routingNumber:  restaurant? restaurant.routing_number: "",
       category: restaurant? restaurant.category: "American",
-      openTime:  restaurant? restaurant.openTime: "",
-      closeTime:  restaurant? restaurant.closeTime: "",
+      openTime:  restaurant? restaurant.open_time: "",
+      closeTime:  restaurant? restaurant.close_time: "",
       // delete address key before sending to db in submit
-      address: restaurant? restaurant.address: ""
+      // address: restaurant? restaurant.address: ""
     })
 
     useEffect(()=> {
@@ -56,15 +56,15 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
     useEffect(()=>{
       let errors= []
       if (formData === "") return null
-      console.log('address upon change:', formData.address)
+      console.log('formData upon input chagne:', formData)
       // console.log('open time in form:', formData.openTime)
       // console.log('close time in form:', formData.closeTime)
       // let newPhoneNumber = formData.phoneNumber.split("-").join("")
       if (!formData.email.includes("@")) errors.push("Email is invalid")
       if (formData.priceRange < 1 || formData.priceRange >3) errors.push("Price range is invalid")
-      if (!isImage(formData.restaurantPicUrl)) errors.push("Restaurant pic url is invalid")
+      // if (!isImage(formData.restaurantPicUrl)) errors.push("Restaurant pic url is invalid")
       // if (!isImage(formData.logo)) errors.push("Logo url is invalid")
-      if (logoExists(formData.logo)) errors.push("Logo must be unique")
+      if (logoExists(formData.logo)) errors.push("Logo must be unique and not be used by another owner")
       if (formData.closeTime <= formData.openTime) errors.push("Closing Time must be after Opening Time")
       if (formData.longitude < -180 || formData.longitude > 180) errors.push("Longitude is invalid")
       if (formData.latitude < -90 || formData.latitude> 90) errors.push("Latitude is invalid")
@@ -77,22 +77,32 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
 
     }, [formData.name, formData.priceRange, formData.restaurantPicUrl, formData.longitude,
       formData.latitude, formData.email, formData.phoneNumber, formData.bankAccount,
-      formData.routingNumber, formData.category, formData.openTime, formData.closeTime])
+      formData.routingNumber, formData.category, formData.openTime, formData.closeTime, formData.logo])
 
 
     function logoExists(logoUrl) {
+      // get all logos that DONT below to you (you cannot duplicate a logo that DOESNT below to you)
       let logos= []
       if (restaurants.length>0){
         for (let i = 0; i< restaurants.length; i++) {
           let restaurantObj = restaurants[i]
-          logos.push(restaurantObj.logo)
+          // console.log('restaurant owner id :', restaurantObj.ownerId)
+          // console.log('session user id :', sessionUser.id)
+          if (restaurantObj.ownerId != sessionUser.id){
+            // console.log('different user, push the logo')
+            logos.push(restaurantObj.logo)
+          }
         }
       }
-      // console.log('logos from db:', logos)
-      let foundLogo = logos.find(item => item === logoUrl)
+      console.log('logos from db:', logos)
+      let foundLogo = logos.find(item => item === logoUrl.trim())
+      if (foundLogo){
+        console.log('found logo:', foundLogo)
 
-      if (foundLogo) return true
+        return true
+      }
       else {
+        console.log('logo not found:')
         return false
       }
     }
@@ -116,10 +126,17 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
     const handleSubmit= async (e) => {
       e.preventDefault();
       setHasSubmitted(true)
+      // if (logoExists(formData.logo)){
+      //   setErrors([...errors, "Logo must be unique and not be used by another owner"])
+      // }
       if (errors.length>0){
+        console.log('session user id:', sessionUser.id)
+        console.log('restaurant owner id:', restaurant.ownerId)
         alert('Cannot submit restaurant info')
+
         return
       }
+      console.log('form data right before submission:', formData)
       // let newFormData;
       // if(geolocationEnabled){
       // console.log('address to be sent in fetch...:', formData.address)
@@ -140,16 +157,29 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
 
       restaurant = {
         ...restaurant,
-        // ...newFormData
-        ...formData
+        name: formData.name,
+        price_range: formData.priceRange,
+        restaurant_pic_url: formData.restaurantPicUrl,
+        logo: formData.logo,
+        longitude: formData.longitude,
+        latitude: formData.latitude,
+        email: formData.email,
+        phone_number: formData.phoneNumber,
+        bank_account: formData.bankAccount,
+        routing_number: formData.routingNumber,
+        category: formData.category,
+        open_time: formData.openTime,
+        close_time: formData.closeTime
+        // ...formData
       }
+      console.log('restaurant to be submitted:', restaurant)
 
       if (formType === "Create Form"){
         dispatch(createRestaurant(restaurant))
         alert("Restaurant successfully created!")
         history.push('/restaurants')
       } else {
-        dispatch(updateRestaurant(restaurant))
+        dispatch(updateRestaurant(restaurant.id, restaurant))
         alert("Restaurant updated successfully!")
         history.push(`/restaurants/${restaurant.id}`)
       }

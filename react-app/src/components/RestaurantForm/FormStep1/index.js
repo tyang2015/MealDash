@@ -57,7 +57,7 @@ const FormStep1 = ({formData, setFormData}) => {
         </div>
       </div>
       <PlacesAutocompleteContainer setFormData={setFormData} formData={formData}/>
-      <div>Converted to longitude and latitude: {formData.longitude} {formData.latitude} </div>
+      {/* <div>Converted to longitude and latitude: {formData.longitude} {formData.latitude} </div> */}
       <div className='create-restaurant-form-step-1-fourth-row'>
         <div className='create-restaurant-form-step-1-left-container'>
           <div className='create-restaurant-label-input-container'>

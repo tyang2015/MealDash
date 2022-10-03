@@ -22,7 +22,7 @@ class Restaurant(db.Model):
     price_range = db.Column(db.Integer, nullable=False)
     restaurant_pic_url = db.Column(db.String, nullable=False)
     # added here
-    logo = db.Column(db.String, unique=True)
+    logo = db.Column(db.String, nullable=False)
     longitude = db.Column(db.Numeric(scale=2), nullable = False)
     latitude= db.Column(db.Numeric(scale=2), nullable = False)
     email = db.Column(db.String, nullable = False)
@@ -30,8 +30,9 @@ class Restaurant(db.Model):
     bank_account = db.Column(db.String, nullable = False)
     routing_number = db.Column(db.String, nullable = False)
     category = db.Column(db.String, nullable = False)
-    open_time = db.Column(db.Time, nullable= False)
-    close_time = db.Column(db.Time, nullable = False)
+    # OPEN TIME AND CLOSE TIME TO CHANGE DATATYPE?
+    open_time = db.Column(db.String, nullable= False)
+    close_time = db.Column(db.String, nullable = False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
 
@@ -72,7 +73,7 @@ class Restaurant(db.Model):
             "updatedAt": self.updated_at,
             "numReviews":  len(self.reviews),
             "avgRating" : self.get_avg_rating(),
-            "User": self.convert_user_to_dict()
+            # "User": self.convert_user_to_dict()
         }
     def convert_user_to_dict(self):
         return {

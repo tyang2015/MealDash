@@ -17,8 +17,8 @@ def seed_restaurants():
             "bank_account": "123456789",
             "routing_number": "123456789",
             "category": "Asian",
-            "open_time": time(hour = 8),
-            "close_time": time(hour = 17)
+            "open_time": "08:00:00",
+            "close_time": "17:00:00"
         },
         {
             "name": "Tiff's Michelin Star Restaurant",
@@ -33,8 +33,8 @@ def seed_restaurants():
             "bank_account": "123456789",
             "routing_number": "123456789",
             "category": "Japanese",
-            "open_time": time(hour = 8),
-            "close_time": time(hour = 17)
+            "open_time": "08:00:00",
+            "close_time": "17:00:00"
         },
         {
             "name": "tiff's vegan delight",
@@ -49,8 +49,8 @@ def seed_restaurants():
             "bank_account": "123456789",
             "routing_number": "123456789",
             "category": "American",
-            "open_time": time(hour = 8),
-            "close_time": time(hour = 17)
+            "open_time": "08:00:00",
+            "close_time": "17:00:00"
         },
         {
             "name": "Randy's Pho House",
@@ -65,8 +65,8 @@ def seed_restaurants():
             "bank_account": "123453789",
             "routing_number": "123456789",
             "category": "Asian",
-            "open_time": time(hour = 8),
-            "close_time": time(hour = 17)
+            "open_time": "08:00:00",
+            "close_time": "17:00:00"
         },
         {
             "name": "Ananya's French Bakery",
@@ -81,8 +81,8 @@ def seed_restaurants():
             "bank_account": "323456779",
             "routing_number": "625556789",
             "category": "French",
-            "open_time": time(hour = 8),
-            "close_time": time(hour = 17)
+            "open_time": "08:00:00",
+            "close_time": "17:00:00"
         },
         {
             "name": "Chen Dining",
@@ -97,8 +97,8 @@ def seed_restaurants():
             "bank_account": "223456999",
             "routing_number": "123432189",
             "category": "Asian",
-            "open_time": time(hour = 8),
-            "close_time": time(hour = 17)
+            "open_time": "08:00:00",
+            "close_time": "17:00:00"
         },
         {
             "name": "Ashley's Japanese Garden",
@@ -113,8 +113,8 @@ def seed_restaurants():
             "bank_account": "123522789",
             "routing_number": "273456989",
             "category": "Japanese",
-            "open_time": time(hour = 8),
-            "close_time": time(hour = 17)
+            "open_time": "08:00:00",
+            "close_time": "17:00:00"
         },
         {
             "name": "Sabrina's Sushi",
@@ -129,8 +129,8 @@ def seed_restaurants():
             "bank_account": "123459839",
             "routing_number": "151456789",
             "category": "Japanese",
-            "open_time": time(hour = 8),
-            "close_time": time(hour = 17)
+            "open_time": "08:00:00",
+            "close_time": "17:00:00"
         },
         {
             "name": "Lilith Place",
@@ -145,8 +145,8 @@ def seed_restaurants():
             "bank_account": "326456789",
             "routing_number": "144456789",
             "category": "French",
-            "open_time": time(hour = 8),
-            "close_time": time(hour = 17)
+            "open_time": "08:00:00",
+            "close_time": "17:00:00"
         },
         {
             "name": "Ben's Southern BBQ",
@@ -161,8 +161,8 @@ def seed_restaurants():
             "bank_account": "909456789",
             "routing_number": "909456789",
             "category": "American",
-            "open_time": time(hour = 9),
-            "close_time": time(hour = 18)
+            "open_time": "08:00:00",
+            "close_time": "17:00:00"
         },
         {
             "name": "Ben's Curry Place",
@@ -177,8 +177,8 @@ def seed_restaurants():
             "bank_account": "909456789",
             "routing_number": "909456789",
             "category": "Asian",
-            "open_time": time(hour = 8),
-            "close_time": time(hour = 17)
+            "open_time": "08:00:00",
+            "close_time": "17:00:00"
         },
         {
             "name": "Ben's Italian Restaurant",
@@ -193,8 +193,8 @@ def seed_restaurants():
             "bank_account": "909456789",
             "routing_number": "909456789",
             "category": "Asian",
-            "open_time": time(hour = 8),
-            "close_time": time(hour = 17)
+            "open_time": "08:00:00",
+            "close_time": "17:00:00"
         },
     ]
 

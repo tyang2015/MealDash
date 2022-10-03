@@ -27,7 +27,6 @@ const NavBar = () => {
                       Register Restaurant
                   </div>
                 </NavLink>
-
                 <div className='navbar-logout-button'>
                     <LogoutButton/>
                 </div>
@@ -55,6 +54,9 @@ const NavBar = () => {
                       <i className="fa-solid fa-burger"> DoorDash </i>
                     </NavLink>
                     <div>
+                      <div>
+                        Welcome {sessionUser.firstName}
+                      </div>
                         CART ICON
                     </div>
                 </div>

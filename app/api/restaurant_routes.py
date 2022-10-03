@@ -53,29 +53,30 @@ def create_restaurant():
         return restaurant.to_dict(), 201
     return {"errors": validation_errors_to_error_messages(form.errors)}, 400
 
-@restaurant_routes.route("<int:id>", methods=['PUT'])
+@restaurant_routes.route("/<int:id>", methods=['PUT'])
 @login_required
 def update_restaurant(id):
-    restaurant = Restaurant.query.get(id)
-    if restaurant == None:
-        return {"message": "Restaurant couldn't be found"}, 404
-
     form = RestaurantForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        restaurant = Restaurant.query.get(id)
-        if restaurant == None:
-            return {"message": "Restaurant couldn't be found"}, 404
-        if restaurant.owner_id != current_user.id:
-            return {"errors": "Forbidden"}, 403
-        restaurant_data_bytes = request.data
-        new_restaurant_data = json.loads(restaurant_data_bytes.decode('utf-8'))
-        for k,v in new_restaurant_data.items():
-            setattr(restaurant, k,v)
-        db.session.commit()
-        updated_restaurant = Restaurant.query.get(id)
-        # print('restaurant in bytes:', restaurant_data_bytes)
-        return updated_restaurant.to_dict()
+      # print('restaurant pic url in backend: ', form.data["restaurantPicUrl"])
+      restaurant = Restaurant.query.get(int(id))
+      if restaurant == None:
+          return {"message": "Restaurant couldn't be found"}, 404
+      if restaurant.owner_id != current_user.id:
+          return {"errors": "Forbidden"}, 403
+      restaurant_data_bytes = request.data
+      new_restaurant_data = json.loads(restaurant_data_bytes.decode('utf-8'))
+      print('new restaurant data after byte conversion:', new_restaurant_data)
+      # new_restaurant_data[]
+      for k,v in list(new_restaurant_data.items()):
+        setattr(restaurant, k, v)
+      print('updated restaurant from backend:', restaurant.to_dict())
+      db.session.commit()
+      updated_restaurant = Restaurant.query.get(id)
+      # print('restaurant in bytes:', restaurant_data_bytes)
+      return updated_restaurant.to_dict(),200
+    return {"errors": validation_errors_to_error_messages(form.errors)}, 400
 
 @restaurant_routes.route("<int:id>", methods=['DELETE'])
 @login_required

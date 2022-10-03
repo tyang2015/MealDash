@@ -36,10 +36,7 @@ const GetRestaurant = () => {
   console.log('hours:', today.getHours())
   console.log('minutes:', today.getMinutes())
 
-  // let closeTime;
-  // let openTime;
-  // let isOpen;
-  // let filteredItems;
+
   let finalAvgRating;
   let closeMinutesIndex;
   let closeMinutes;
@@ -78,6 +75,15 @@ const GetRestaurant = () => {
       setOpenTime(openHours.concat(openMinutes).concat(openExtension))
 
       // determine if open
+      console.log('today in hours:', todayInHours)
+      console.log( 'actualCloseHours', actualCloseHours)
+      console.log('today in minutes:')
+      if (todayInHours === actualCloseHours)console.log('hours match')
+      if ((todayInHours === actualCloseHours && todayInMinutes < Number(closeMinutes))){
+        console.log('should be open! 2nd condition')
+      } else {
+        console.log('closed')
+      }
       if ((todayInHours < actualCloseHours && todayInHours > actualOpenHours) || (todayInHours === actualCloseHours && todayInMinutes < Number(closeMinutes))
       || (todayInHours === actualCloseHours && todayInMinutes > Number(openMinutes))) {
         setIsOpen(true)
