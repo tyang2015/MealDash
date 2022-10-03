@@ -166,7 +166,7 @@ def delete_food_item(rest_id, food_item_id):
   return {"message": "Successfully deleted!"}
 
 # ------------------------------------------------
-# FEATURE 3: ORDERS
+# FEATURE 3: ORDERSs
 @restaurant_routes.route("/<int:id>/orders", methods = ['GET'])
 @login_required
 # this is just for your orders page
