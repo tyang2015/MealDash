@@ -6,7 +6,8 @@ import { createRestaurant, updateRestaurant } from '../../store/restaurant';
 import FormStep1 from './FormStep1';
 import FormStep2 from './FormStep2';
 import FormStep3 from './FormStep3';
-import { returnDigitsOnly, maskPhoneNumber } from './PhoneNumberValidation';
+import { getKey } from '../../store/maps';
+
 
 // first step: name, address (longitude & latitude), email, phone number, restaurant_pic_url
 // 2nd step: openTime, closeTime, priceRange, category
@@ -17,10 +18,12 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector(state => state.session.user)
+    const key = useSelector((state) => state.maps.key);
     const [formStep, setFormStep]= useState(0)
     const [errors, setErrors] = useState([])
     const [hasSubmitted, setHasSubmitted] =useState(false)
     // const [testName, setTestName] = useState(restaurant.name)
+
     const [formData, setFormData] = useState(
     {
       name: restaurant? restaurant.name: "",
@@ -35,25 +38,32 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
       routingNumber:  restaurant? restaurant.routingNumber: "",
       category: restaurant? restaurant.category: "American",
       openTime:  restaurant? restaurant.openTime: "",
-      closeTime:  restaurant? restaurant.closeTime: ""
+      closeTime:  restaurant? restaurant.closeTime: "",
+      // delete address key before sending to db in submit
+      address: restaurant? restaurant.address: ""
     })
+
+    useEffect(()=> {
+      if (!key) {
+        dispatch(getKey());
+      }
+    }, [dispatch, key])
 
     useEffect(()=> {
       setFormStep(formStep)
     }, [formStep])
 
-    console.log('form step:', formStep)
     useEffect(()=>{
       let errors= []
       if (formData === "") return null
-      console.log('open time in form:', formData.openTime)
-      console.log('close time in form:', formData.closeTime)
-      // console.log('phone number:', formData.phoneNumber)
+      console.log('address upon change:', formData.address)
+      // console.log('open time in form:', formData.openTime)
+      // console.log('close time in form:', formData.closeTime)
       // let newPhoneNumber = formData.phoneNumber.split("-").join("")
       if (!formData.email.includes("@")) errors.push("Email is invalid")
       if (formData.priceRange < 1 || formData.priceRange >3) errors.push("Price range is invalid")
       if (!isImage(formData.restaurantPicUrl)) errors.push("Restaurant pic url is invalid")
-      if (!isImage(formData.logo)) errors.push("Logo url is invalid")
+      // if (!isImage(formData.logo)) errors.push("Logo url is invalid")
       if (logoExists(formData.logo)) errors.push("Logo must be unique")
       if (formData.closeTime <= formData.openTime) errors.push("Closing Time must be after Opening Time")
       if (formData.longitude < -180 || formData.longitude > 180) errors.push("Longitude is invalid")
@@ -75,7 +85,6 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
       if (restaurants.length>0){
         for (let i = 0; i< restaurants.length; i++) {
           let restaurantObj = restaurants[i]
-          // console.log('restaurant obj in fucntion:', restaurantObj)
           logos.push(restaurantObj.logo)
         }
       }
@@ -84,7 +93,6 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
 
       if (foundLogo) return true
       else {
-        // console.log('logo is..:', foundLogo)
         return false
       }
     }
@@ -105,18 +113,34 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
         }
     }
 
-    const handleSubmit= (e) => {
+    const handleSubmit= async (e) => {
       e.preventDefault();
       setHasSubmitted(true)
-      // console.log('logo url before submission:', formData.logo)
-      // console.log('phone number (with masked function):', maskPhoneNumber(formData.phoneNumber))
       if (errors.length>0){
-        alert('Cannot submit restsaurant info')
+        alert('Cannot submit restaurant info')
         return
       }
-      // let newPhoneNumber = formData.phoneNumber.split("-").join("")
+      // let newFormData;
+      // if(geolocationEnabled){
+      // console.log('address to be sent in fetch...:', formData.address)
+      // const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${formData.address}&key=${key}`)
+      // if (response.ok){
+      //   const data = await response.json()
+      //   console.log('data from google api geocoder:', data)
+      //   setFormData({...formData, latitude:  data.results[0]?.geometry.location.lat})
+      //   setFormData({...formData, longitude:  data.results[0]?.geometry.location.lng})
+      //   newFormData = {...formData}
+      //   console.log('data object before deleting address:', formData)
+      //   delete newFormData.address
+      //   console.log('final data object before sending to db:', newFormData)
+      // } else {
+      //   console.log('bad fetch:', response)
+      // }
+      // }
+
       restaurant = {
         ...restaurant,
+        // ...newFormData
         ...formData
       }
 
@@ -135,6 +159,9 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
     }
 
     if (formData === '') return null
+    if (!key) {
+      return null;
+    }
     return (
 			<>
         <div className='create-restaurant-title-container'>

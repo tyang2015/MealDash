@@ -18,12 +18,12 @@ import CreateFoodItem from './components/CreateFoodItem';
 import UpdateFoodItem from './components/UpdateFoodItem';
 import NavBarSplash from './components/NavBarSplash';
 
+
 function App() {
   const [loaded, setLoaded] = useState(false);
   const loggedInUser = useSelector(state=> state.session.user)
   const dispatch = useDispatch();
-  console.log('logged in user in app:', loggedInUser)
-  console.log('!loggedInuser', !loggedInUser)
+
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());

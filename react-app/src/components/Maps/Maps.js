@@ -23,9 +23,9 @@ const Maps = ({ apiKey }) => {
 
   return (
     <>
-      <Autocomplete>
+      {/* <Autocomplete>
         <input type='text' name="restaurant-address" placeholder='address'/>
-      </Autocomplete>
+      </Autocomplete> */}
       <button
         onClick = {()=> map.panTo(center)}
       >

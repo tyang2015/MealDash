@@ -4,16 +4,19 @@ import { maskPhoneNumber } from '../PhoneNumberValidation';
 import "./FormStep1.css"
 import "../Restaurant.css"
 import MapContainer from '../../Maps';
-import PlacesAutocomplete from '../../UsePlacesAutoComplete';
+// import PlacesAutocomplete from '../../PlacesAutocomplete';
+import PlacesAutocompleteContainer from '../../PlacesAutocomplete';
+
+// const google = window.google
 
 // first step: name, address (longitude & latitude), email, phone number, restaurant_pic_url
 // for now just use number fields for long and lat
 // text, use autocomplete* , text, number?, text
 const FormStep1 = ({formData, setFormData}) => {
-  console.log('formData in form step 1: ', formData)
   return (
     <div className='create-restaurant-form-step-1-container'>
-      <MapContainer/>
+
+      {/* <MapContainer/> */}
       <div className='create-restaurant-form-step-1-first-row'>
         <div className='create-restaurant-label-input-container top-row'>
           <label htmlFor="restaurant-name">Restaurant Name</label>
@@ -53,30 +56,8 @@ const FormStep1 = ({formData, setFormData}) => {
           />
         </div>
       </div>
-      <div className='create-restaurant-form-step-1-third-row'>
-        <div className='create-restaurant-label-input-container third-row'>
-          <label htmlFor="longitude">Longitude</label>
-          <input
-            id="longitude"
-            type = 'number'
-            value = {formData.longitude}
-            onChange = {e=> setFormData({...formData, longitude: e.target.value})}
-            placeholder = "Address - Longitude"
-            required
-          />
-        </div>
-        <div className='create-restaurant-label-input-container'>
-          <label htmlFor="latitude">Latitude</label>
-          <input
-            id="latitude"
-            type = 'number'
-            value = {formData.latitude}
-            onChange = {e=> setFormData({...formData, latitude: e.target.value})}
-            placeholder = "Address - Latitude"
-            required
-          />
-        </div>
-      </div>
+      <PlacesAutocompleteContainer setFormData={setFormData} formData={formData}/>
+      <div>Converted to longitude and latitude: {formData.longitude} {formData.latitude} </div>
       <div className='create-restaurant-form-step-1-fourth-row'>
         <div className='create-restaurant-form-step-1-left-container'>
           <div className='create-restaurant-label-input-container'>
@@ -115,7 +96,6 @@ const FormStep1 = ({formData, setFormData}) => {
             className='restaurant-form-restaurant-logo'
             onError={e => { e.currentTarget.src = "https://cdn5.vectorstock.com/i/1000x1000/65/29/vintage-badge-retro-blank-labels-logo-vector-23946529.jpg"; }}
           />
-        {/* <PlacesAutocomplete/> */}
         </div>
 
       </div>
