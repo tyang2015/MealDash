@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, session, request, redirect
 from flask_login import login_required, current_user
-from app.models import User, db, Restaurant, FoodItem
+from app.models import User, db, Restaurant, FoodItem, Order
 from app.forms import LoginForm, SignUpForm, RestaurantForm, FoodItemForm
 from .auth_routes import validation_errors_to_error_messages
 import json
@@ -164,3 +164,11 @@ def delete_food_item(rest_id, food_item_id):
   db.session.delete(food_item)
   db.session.commit()
   return {"message": "Successfully deleted!"}
+
+# ------------------------------------------------
+# FEATURE 3: ORDERS
+@restaurant_routes.route("/<int:id>/orders", methods = ['GET'])
+@login_required
+def get_restaurant_orders():
+  orders = Order.query.all()
+  
