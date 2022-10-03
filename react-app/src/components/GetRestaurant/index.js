@@ -33,8 +33,8 @@ const GetRestaurant = () => {
   let today = new Date();
   let todayInHours = today.getHours()
   let todayInMinutes = today.getMinutes()
-  console.log('hours:', today.getHours())
-  console.log('minutes:', today.getMinutes())
+  // console.log('hours:', today.getHours())
+  // console.log('minutes:', today.getMinutes())
 
 
   let finalAvgRating;
@@ -66,26 +66,47 @@ const GetRestaurant = () => {
         openExtension = "PM"
       }
       closeMinutesIndex = restaurant.closeTime.split("").indexOf(':')
-      closeMinutes = restaurant.closeTime.substring(closeMinutesIndex, closeMinutesIndex+3)
+      closeMinutes = restaurant.closeTime.substring(closeMinutesIndex+1, closeMinutesIndex+3)
       // closeTime = closeHours.concat(closeMinutes).concat(closeExtension)
-      setCloseTime(closeHours.concat(closeMinutes).concat(closeExtension))
+      // setCloseTime(closeHours.concat(":").concat(closeMinutes).concat(closeExtension))
       openMinutesIndex = restaurant.openTime.split("").indexOf(':')
-      openMinutes = restaurant.openTime.substring(openMinutesIndex, openMinutesIndex+3)
+      openMinutes = restaurant.openTime.substring(openMinutesIndex+1, openMinutesIndex+3)
       // openTime = openHours.concat(openMinutes).concat(openExtension)
-      setOpenTime(openHours.concat(openMinutes).concat(openExtension))
+      if (openHours[0]==='0') {
+        let time = openHours.concat(":").concat(openMinutes).concat(openExtension)
+        setOpenTime(time.substring(1,time.length))
+      } else {
+        setOpenTime(openHours.concat(":").concat(openMinutes).concat(openExtension))
+      }
+      if (closeHours[0]==='0'){
+        let time = closeHours.concat(":").concat(closeMinutes).concat(closeExtension)
+        setCloseTime(time.substring(1, time.length))
+      } else {
+        setCloseTime(closeHours.concat(":").concat(closeMinutes).concat(closeExtension))
+      }
+      // setOpenTime(openHours.concat(":").concat(openMinutes).concat(openExtension))
+      console.log('open time:', openTime)
+      console.log('close time:', closeTime)
 
       // determine if open
-      console.log('today in hours:', todayInHours)
-      console.log( 'actualCloseHours', actualCloseHours)
-      console.log('today in minutes:')
+      // console.log('today in hours:', todayInHours)
+      // console.log( 'actualCloseHours', actualCloseHours)
+      // console.log('today in minutes:')
       if (todayInHours === actualCloseHours)console.log('hours match')
-      if ((todayInHours === actualCloseHours && todayInMinutes < Number(closeMinutes))){
-        console.log('should be open! 2nd condition')
-      } else {
-        console.log('closed')
-      }
+      // if ((todayInHours === actualCloseHours && todayInMinutes < Number(closeMinutes))){
+      //   console.log('should be open! 2nd condition')
+      // } else {
+      //   console.log('closed')
+      // }
+      console.log('today in hours:', todayInHours)
+      console.log('actual open hours', actualOpenHours)
+      console.log('todayinMinutes:', todayInMinutes)
+      console.log('restaraunt open minutes:,', openMinutes)
+      if (todayInHours === actualOpenHours && todayInMinutes > Number(openMinutes)) {
+        console.log('should be open!')
+      } else console.log('close!!!')
       if ((todayInHours < actualCloseHours && todayInHours > actualOpenHours) || (todayInHours === actualCloseHours && todayInMinutes < Number(closeMinutes))
-      || (todayInHours === actualCloseHours && todayInMinutes > Number(openMinutes))) {
+      || (todayInHours === actualOpenHours && todayInMinutes > Number(openMinutes))) {
         setIsOpen(true)
       }
     }
