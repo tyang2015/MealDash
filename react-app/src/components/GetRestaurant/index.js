@@ -320,7 +320,7 @@ const GetRestaurant = () => {
                   {foodItems.length>0 && !isFiltered && foodItems.map(item=>(
                     <div key={item.id} className="food-item-card-container">
                       <div className="food-item-left-container">
-                        <div style={{fontWeight:"700"}}> {item.name} </div>
+                        <div style={{fontWeight:"700"}}> {item.name.length>32? item.name.substring(0,33).concat("..."): item.name} </div>
                         <div> {item.description.length>87? item.description.substring(0,88).concat("..."): item.description} </div>
                         <div> {item.price} </div>
                         <div> {item.category}</div>

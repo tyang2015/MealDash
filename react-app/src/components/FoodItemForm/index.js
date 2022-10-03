@@ -30,9 +30,10 @@ const FoodItemForm = ({foodItem, formType}) => {
 
   useEffect(()=>{
     let errors =[]
+    if (name.length> 50) errors.push("Name must be less than 50 characters")
     if (description.length>500) errors.push("Description must be less than 500 chars")
     if (price>25000) errors.push("Price must be below 25000")
-    if (!isImage(foodPicUrl)) errors.push("Food pic url is invalid")
+    // if (!isImage(foodPicUrl)) errors.push("Food pic url is invalid")
     setErrors(errors)
   }, [name, foodPicUrl, description, price, category])
 
@@ -43,6 +44,7 @@ const FoodItemForm = ({foodItem, formType}) => {
       alert("Cannot submit food item info")
       return
     }
+    console.log('description length on submission:', description.length)
     foodItem = {
       ...foodItem,
       name,

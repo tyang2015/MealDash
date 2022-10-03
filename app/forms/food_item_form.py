@@ -5,8 +5,8 @@ from wtforms.validators import DataRequired, ValidationError
 
 def valid_description(form, field):
     description = field.data
-    if len(description)>100:
-      raise ValidationError("Description length must be less than 100 chars")
+    if len(description)>500:
+      raise ValidationError("Description length must be less than 500 chars")
 
 def valid_price(form, field):
   price = field.data
