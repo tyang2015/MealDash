@@ -32,7 +32,7 @@ const SplashPage = () => {
           <div className='splash-page-title-text-box'> Restaurants and more, delivered to your door</div>
         </div>
         <div className='splash-page-content-container'>
-          <div className='favorites-near-you'> Favorites Near You </div>
+          <h2 className='favorites-near-you'> Favorites Near You </h2>
             <div className='splash-page-main-grid-container'>
               {topSixRestaurants.length>0 && topSixRestaurants.map(restaurant=>(
                 <div key={restaurant.id} className='splash-page-restaurant-card-container'>
