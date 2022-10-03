@@ -36,6 +36,8 @@ const Maps = ({ apiKey }) => {
           mapContainerStyle={containerStyle}
           center={center}
           zoom={10}
+          // added here?????
+          id="map"
           options={{
             zoomControl: false,
             streetViewControl: false,

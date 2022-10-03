@@ -9,8 +9,8 @@ db = SQLAlchemy()
 order_items = db.Table(
     'order_items',
     db.Model.metadata,
-    db.Column('order_id', db.Integer, db.ForeignKey("orders.id")),
-    db.Column('food_item_id', db.Integer, db.ForeignKey("food_items.id"))
+    db.Column('orders', db.Integer, db.ForeignKey("orders.id")),
+    db.Column('food_items', db.Integer, db.ForeignKey("food_items.id"))
 )
 
 
@@ -102,20 +102,33 @@ class FoodItem(db.Model):
     item_orders = db.relationship("Order", back_populates= "order_food_items", secondary=order_items )
 
     def to_dict(self):
-        return {
-            "id": self.id,
-            "name": self.name,
-            "foodPicUrl": self.food_pic_url,
-            "description": self.description,
-            "price": str(self.price),
-            # "orderId": self.orderId,
-            "restaurantId": self.restaurant_id,
-            "category": self.category,
-            "orderQuantity": len(self.item_orders),
-            "category": self.category,
-            "Orders": [order.id for order in self.item_orders],
-            "Reviews": [review.id for review in self.reviews]
-        }
+      return {
+        "id": self.id,
+        "name": self.name,
+        "foodPicUrl": self.food_pic_url,
+        "description": self.description,
+        "price": str(self.price),
+        # "orderId": self.orderId,
+        "restaurantId": self.restaurant_id,
+        "category": self.category,
+        # "orderQuantity":
+        # "orderQuantity": len(self.item_orders),
+        "Orders": [order.id for order in self.item_orders],
+        "Reviews": [review.id for review in self.reviews]
+      }
+
+    def to_dict_for_order(self):
+      return {
+        "id": self.id,
+        "name": self.name,
+        "foodPicUrl": self.food_pic_url,
+        "description": self.description,
+        "price": str(self.price),
+        "restaurantId": self.restaurant_id,
+        "category": self.category,
+        # "orderQuantity": len(self.item_orders),
+        "category": self.category,
+      }
 
 class Order(db.Model):
     __tablename__ = "orders"
@@ -157,7 +170,8 @@ class Order(db.Model):
             "latitude": str(self.latitude),
             "phoneNumber": self.phone_number,
             "creditCard": self.credit_card,
-            "totalPrice":  self.get_total_price()
+            "totalPrice":  self.get_total_price(),
+            "orderFoodItems": [foodItem.to_dict_for_order() for foodItem in self.order_food_items]
         }
 
 
