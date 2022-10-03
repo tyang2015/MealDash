@@ -169,6 +169,7 @@ def delete_food_item(rest_id, food_item_id):
 # FEATURE 3: ORDERS
 @restaurant_routes.route("/<int:id>/orders", methods = ['GET'])
 @login_required
-def get_restaurant_orders():
-  orders = Order.query.all()
-  
+# this is just for your orders page
+def get_restaurant_orders(id):
+  orders = Order.query.filter(Order.restaurant_id == id, Order.customer_id == current_user.id).all()
+  return {"orders": [order.to_dict() for order in orders]}

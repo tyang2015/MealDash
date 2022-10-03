@@ -5,7 +5,7 @@ import random
 # orders_list = []
 
 def random_food_items():
-  max_range = random.randint(0,8)
+  max_range = random.randint(1,8)
   all_food_items = []
   # same food item can appear in multiple orders
   for i in range(max_range):

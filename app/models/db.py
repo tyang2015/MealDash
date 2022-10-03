@@ -9,8 +9,8 @@ db = SQLAlchemy()
 order_items = db.Table(
     'order_items',
     db.Model.metadata,
-    db.Column('orders', db.Integer, db.ForeignKey("orders.id")),
-    db.Column('food_items', db.Integer, db.ForeignKey("food_items.id"))
+    db.Column('order_id', db.Integer, db.ForeignKey("orders.id")),
+    db.Column('food_item_id', db.Integer, db.ForeignKey("food_items.id"))
 )
 
 
