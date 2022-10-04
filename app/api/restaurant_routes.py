@@ -166,12 +166,14 @@ def delete_food_item(rest_id, food_item_id):
   return {"message": "Successfully deleted!"}
 
 # ------------------------------------------------
+
 # FEATURE 3: ORDERS
 @restaurant_routes.route("/orders", methods= ['GET'])
 @login_required
 def get_your_orders():
   restaurant_orders = Order.query.filter(Order.customer_id == current_user.id).all()
   return {"orders": [order.to_dict() for order in orders]}
+
 
 
 @restaurant_routes.route("/<int:id>/orders", methods = ['GET'])
