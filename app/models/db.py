@@ -141,7 +141,7 @@ class Order(db.Model):
   total_price = db.Column(db.Numeric(scale = 2), nullable=False)
   distance = db.Column(db.Numeric)
   duration = db.Column(db.Integer)
-  # make another column to store the arrays
+  # make another column to store the arraysdfs
   # food_items
   food_items = db.Column(db.PickleType(), db.ForeignKey("food_items.id"))
   created_at = db.Column(db.DateTime, default=datetime.utcnow)
