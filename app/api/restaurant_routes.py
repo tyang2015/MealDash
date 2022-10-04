@@ -117,11 +117,11 @@ def create_food_item(rest_id):
   if form.validate_on_submit():
     food_item = FoodItem(
       name = form.data["name"],
-      food_pic_url = form.data["foodPicUrl"],
+      food_pic_url = form.data["food_pic_url"],
       description = form.data["description"],
       price = form.data["price"],
       category = form.data["category"],
-      restaurant_id = form.data["restaurantId"]
+      restaurant_id = form.data["restaurant_id"]
     )
     db.session.add(food_item)
     db.session.commit()

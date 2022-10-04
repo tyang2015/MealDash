@@ -98,18 +98,13 @@ const GetRestaurant = () => {
       console.log('close time:', closeTime)
 
       // determine if open
-      // console.log('today in hours:', todayInHours)
-      // console.log( 'actualCloseHours', actualCloseHours)
-      // console.log('today in minutes:')
       if (todayInHours === actualCloseHours)console.log('hours match')
       // if ((todayInHours === actualCloseHours && todayInMinutes < Number(closeMinutes))){
       //   console.log('should be open! 2nd condition')
       // } else {
       //   console.log('closed')
       // }
-      console.log('today in hours:', todayInHours)
-      console.log('actual open hours', actualOpenHours)
-      console.log('todayinMinutes:', todayInMinutes)
+
       console.log('restaraunt open minutes:,', openMinutes)
       if (todayInHours === actualOpenHours && todayInMinutes > Number(openMinutes)) {
         console.log('should be open!')
@@ -371,7 +366,7 @@ const GetRestaurant = () => {
                         </div>
                       </div>
                     ))}
-                    {foodItemModal && <FoodItemModal forceCartUpdate={forceCartUpdate} setForceCartUpdate={setForceCartUpdate} submittedCartItems={submittedCartItems} setSubmittedCartItems={setSubmittedCartItems} setSubmittedCart={setSubmittedCart} foodItem={foodItem} setFoodItemModal={setFoodItemModal}/> }
+                    {/* {foodItemModal && <FoodItemModal forceCartUpdate={forceCartUpdate} setForceCartUpdate={setForceCartUpdate} submittedCartItems={submittedCartItems} setSubmittedCartItems={setSubmittedCartItems} setSubmittedCart={setSubmittedCart} foodItem={foodItem} setFoodItemModal={setFoodItemModal}/> } */}
                     {filteredItems.length>0 && isFiltered && filteredItems.map(item=>(
                       <div key={item.id} className="food-item-card-container" onClick={()=> setFoodItemModal(true)}>
                         <div className="food-item-left-container">
@@ -402,8 +397,8 @@ const GetRestaurant = () => {
             </>
           )}
         </div>
-        {!submittedCart && (<CartRightPane/>)}
-        {submittedCart && (<CartRightPane submittedCart={submittedCart} forceCartUpdate={forceCartUpdate} restaurant={restaurant} submittedCartItems={submittedCartItems}/>) }
+        {/* {!submittedCart && (<CartRightPane/>)}
+        {submittedCart && (<CartRightPane submittedCart={submittedCart} forceCartUpdate={forceCartUpdate} restaurant={restaurant} submittedCartItems={submittedCartItems}/>) } */}
       </div>
     </>
 
