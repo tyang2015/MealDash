@@ -59,6 +59,7 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
       if (!formData.email.includes("@")) errors.push("Email is invalid")
       if (formData.priceRange < 1 || formData.priceRange >3) errors.push("Price range is invalid")
       if (logoExists(formData.logo)) errors.push("Logo must be unique and not be used by another owner")
+      if (!isImage(formData.restaurantPicUrl)) errors.push("Restaurant pic url is invalid")
       if (formData.closeTime <= formData.openTime) errors.push("Closing Time must be after Opening Time")
       if (formData.longitude < -180 || formData.longitude > 180) errors.push("Longitude is invalid")
       if (formData.latitude < -90 || formData.latitude> 90) errors.push("Latitude is invalid")
@@ -101,7 +102,14 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
     }
 
     function isImage(url) {
-      return /\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
+      let imageExtensions= ['jpg', 'jpeg', 'png', 'svg', 'gif', 'webp']
+      for (let i = 0; i< imageExtensions.length; i++){
+        let ext = imageExtensions[i]
+        if (url.toLowerCase().includes(ext)){
+          return true
+        }
+      }
+      return false
     }
 
     const FormDisplay = () => {
