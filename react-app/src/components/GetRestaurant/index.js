@@ -34,28 +34,33 @@ const GetRestaurant = () => {
 
   const [submittedCart, setSubmittedCart] =useState(false)
   const [submittedCartItems, setSubmittedCartItems] = useState([])
-  // const [quantity, setQuantity] =useState(1)
   const [forceCartUpdate, setForceCartUpdate] = useState(false)
 
+  const [finalAvgRating, setFinalAvgRating] = useState(0)
+  // const [closeMinutesIndex, setCloseMinutesIndex] = useState('')
+  // const [closeMinutes, setCloseMinutes] = useState('')
+  // const [openMinutesIndex, setOpenMinutesIndex] = useState('')
+  // const [openMinutes, setOpenMinutes] = useState('')
+  // const [openExtension, setOpenExtension] = useState('')
+  // const [closeExtension, setCloseExtension] = useState('')
+  const [closeHours, setCloseHours] = useState(restaurant?.closeTime.substring(0,2) || '')
+  const [openHours, setOpenHours] = useState(restaurant?.openTime.substring(0,2) || '')
 
-  // console.log('food items:', foodItems)
   let today = new Date();
   let todayInHours = today.getHours()
   let todayInMinutes = today.getMinutes()
-  // console.log('hours:', today.getHours())
-  // console.log('minutes:', today.getMinutes())
+  // let finalAvgRating;
+  console.log('restaurant:', restaurant)
 
-
-  let finalAvgRating;
-  let closeMinutesIndex;
-  let closeMinutes;
-  let openMinutesIndex;
-  let openMinutes;
-  let openExtension;
-  let closeExtension;
-  // keep track of actual hours from restaurant.closeTime and restaurant.openTime () to determine isOpen
   useEffect(()=>{
     if (restaurant){
+      setFinalAvgRating(String(Number(restaurant.avgRating).toFixed(2)))
+      let closeMinutesIndex;
+      let closeMinutes;
+      let openMinutesIndex;
+      let openMinutes;
+      let openExtension;
+      let closeExtension;
       // convert to readable time format => 17:00:00 to 5:00
       let closeHours = restaurant.closeTime.substring(0,2)
       let openHours = restaurant.openTime.substring(0,2)
@@ -76,11 +81,8 @@ const GetRestaurant = () => {
       }
       closeMinutesIndex = restaurant.closeTime.split("").indexOf(':')
       closeMinutes = restaurant.closeTime.substring(closeMinutesIndex+1, closeMinutesIndex+3)
-      // closeTime = closeHours.concat(closeMinutes).concat(closeExtension)
-      // setCloseTime(closeHours.concat(":").concat(closeMinutes).concat(closeExtension))
       openMinutesIndex = restaurant.openTime.split("").indexOf(':')
       openMinutes = restaurant.openTime.substring(openMinutesIndex+1, openMinutesIndex+3)
-      // openTime = openHours.concat(openMinutes).concat(openExtension)
       if (openHours[0]==='0') {
         let time = openHours.concat(":").concat(openMinutes).concat(openExtension)
         setOpenTime(time.substring(1,time.length))
@@ -93,9 +95,8 @@ const GetRestaurant = () => {
       } else {
         setCloseTime(closeHours.concat(":").concat(closeMinutes).concat(closeExtension))
       }
-      // setOpenTime(openHours.concat(":").concat(openMinutes).concat(openExtension))
-      console.log('open time:', openTime)
-      console.log('close time:', closeTime)
+      // console.log('open time:', openTime)
+      // console.log('close time:', closeTime)
 
       // determine if open
       if (todayInHours === actualCloseHours)console.log('hours match')
@@ -105,16 +106,18 @@ const GetRestaurant = () => {
       //   console.log('closed')
       // }
 
-      console.log('restaraunt open minutes:,', openMinutes)
+      // console.log('restaraunt open minutes:,', openMinutes)
       if (todayInHours === actualOpenHours && todayInMinutes > Number(openMinutes)) {
-        console.log('should be open!')
+        // console.log('should be open!')
       } else console.log('close!!!')
       if ((todayInHours < actualCloseHours && todayInHours > actualOpenHours) || (todayInHours === actualCloseHours && todayInMinutes < Number(closeMinutes))
       || (todayInHours === actualOpenHours && todayInMinutes > Number(openMinutes))) {
         setIsOpen(true)
+      } else {
+        setIsOpen(false)
       }
     }
-  }, [restaurant])
+  }, [restaurant?.openTime, restaurant?.closeTime])
 
 
 
@@ -182,10 +185,10 @@ const GetRestaurant = () => {
     dispatch(getFoodItems(id))
   }, [dispatch])
 
-  if (restaurant){
-    finalAvgRating = Number(restaurant.avgRating)
-    finalAvgRating = String(finalAvgRating.toFixed(2))
-  }
+  // if (restaurant){
+  //   // finalAvgRating = Number(restaurant.avgRating)
+  //   // finalAvgRating = String(finalAvgRating.toFixed(2))
+  // }
 
   // FOR RESTAURANT
   const handleDelete = e => {
