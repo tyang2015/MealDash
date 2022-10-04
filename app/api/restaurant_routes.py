@@ -195,11 +195,12 @@ def create_restaurant_order(id):
     return {"message": "Restaurant couldn't be found"}, 404
   form = OrderForm()
   form2 = FoodForm()
+  # order_form = OrderForm(request.form)
+  # food_item_list = order_form.order_food_items.data
+
   form['csrf_token'].data = request.cookies['csrf_token']
   form2['csrf_token'].data = request.cookies['csrf_token']
   if form.validate_on_submit():
-    # the person needs to submit food items within their order...
-    # send list of food items as an object (name, id, price, category, restaurantId, foodItem)
     print('form data:', form.data)
     # food_items = [ FoodItem(
     #   name= foodItem.name,

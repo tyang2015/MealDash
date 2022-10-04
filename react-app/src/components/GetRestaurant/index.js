@@ -97,8 +97,6 @@ const GetRestaurant = () => {
       }
       // console.log('open time:', openTime)
       // console.log('close time:', closeTime)
-
-      // determine if open
       if (todayInHours === actualCloseHours)console.log('hours match')
       // if ((todayInHours === actualCloseHours && todayInMinutes < Number(closeMinutes))){
       //   console.log('should be open! 2nd condition')
