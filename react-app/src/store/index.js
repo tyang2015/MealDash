@@ -4,11 +4,14 @@ import session from './session'
 import restaurantReducer from './restaurant';
 import foodItemReducer from './foodItem';
 import mapsReducer from './maps';
+import orderReducer from './order';
+
 const rootReducer = combineReducers({
   session,
   restaurants: restaurantReducer,
   foodItems: foodItemReducer,
-  maps: mapsReducer
+  maps: mapsReducer,
+  orders: orderReducer
 });
 
 

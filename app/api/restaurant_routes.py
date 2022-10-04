@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, session, request, redirect
 from flask_login import login_required, current_user
 from app.models import User, db, Restaurant, FoodItem, Order
-from app.forms import LoginForm, SignUpForm, RestaurantForm, FoodItemForm
+from app.forms import LoginForm, SignUpForm, RestaurantForm, FoodItemForm, OrderForm, FoodForm
 from .auth_routes import validation_errors_to_error_messages
 import json
 
@@ -32,25 +32,25 @@ def create_restaurant():
     form['csrf_token'].data = request.cookies['csrf_token']
     # print('open time from form':, form.data["openTime"])
     if form.validate_on_submit():
-        restaurant = Restaurant(
-            name = form.data["name"],
-            price_range = form.data["price_range"],
-            restaurant_pic_url = form.data["restaurant_pic_url"],
-            logo = form.data["logo"],
-            longitude = form.data["longitude"],
-            latitude = form.data["latitude"],
-            email = form.data["email"],
-            phone_number = form.data["phone_number"],
-            bank_account = form.data["bank_account"],
-            routing_number = form.data["routing_number"],
-            category = form.data["category"],
-            open_time = form.data["open_time"],
-            close_time = form.data["close_time"],
-            user = current_user
-        )
-        db.session.add(restaurant)
-        db.session.commit()
-        return restaurant.to_dict(), 201
+      restaurant = Restaurant(
+          name = form.data["name"],
+          price_range = form.data["price_range"],
+          restaurant_pic_url = form.data["restaurant_pic_url"],
+          logo = form.data["logo"],
+          longitude = form.data["longitude"],
+          latitude = form.data["latitude"],
+          email = form.data["email"],
+          phone_number = form.data["phone_number"],
+          bank_account = form.data["bank_account"],
+          routing_number = form.data["routing_number"],
+          category = form.data["category"],
+          open_time = form.data["open_time"],
+          close_time = form.data["close_time"],
+          user = current_user
+      )
+      db.session.add(restaurant)
+      db.session.commit()
+      return restaurant.to_dict(), 201
     return {"errors": validation_errors_to_error_messages(form.errors)}, 400
 
 @restaurant_routes.route("/<int:id>", methods=['PUT'])
@@ -167,12 +167,63 @@ def delete_food_item(rest_id, food_item_id):
 
 # ------------------------------------------------
 # FEATURE 3: ORDERS
-@restaurant_routes.route("/<int:id>/orders", methods = ['GET'])
+@restaurant_routes.route("/orders", methods= ['GET'])
 @login_required
-# this is just for your orders page
-def get_restaurant_orders(id):
-  orders = Order.query.filter(Order.restaurant_id == id, Order.customer_id == current_user.id).all()
+def get_your_orders():
+  restaurant_orders = Order.query.filter(Order.customer_id == current_user.id).all()
   return {"orders": [order.to_dict() for order in orders]}
 
 
+@restaurant_routes.route("/<int:id>/orders", methods = ['GET'])
+@login_required
+# this is just for your orders page based on specific restaurant
+def get_restaurant_orders(id):
+  restaurant = Restaurant.query.get(id)
+  if restaurant == None:
+    return {"message": "Restaurant couldn't be found"}, 404
+  orders = Order.query.filter(Order.restaurant_id == id, Order.customer_id == current_user.id).all()
+  return {"orders": [order.to_dict() for order in orders]}
 
+@restaurant_routes.route("/<int:id>/orders", methods=["POST"])
+@login_required
+# make authorization for this later (you CANNOT order from your restaurant)!
+def create_restaurant_order(id):
+  restaurant = Restaurant.query.get(id)
+  if restaurant == None:
+    return {"message": "Restaurant couldn't be found"}, 404
+  form = OrderForm()
+  form2 = FoodForm()
+  form['csrf_token'].data = request.cookies['csrf_token']
+  form2['csrf_token'].data = request.cookies['csrf_token']
+  if form.validate_on_submit():
+    # the person needs to submit food items within their order...
+    # send list of food items as an object (name, id, price, category, restaurantId, foodItem)
+    print('form data:', form.data)
+    # food_items = [ FoodItem(
+    #   name= foodItem.name,
+    #   food_pic_url = foodItem.food_pic_url,
+    #   description = foodItem.description,
+    #   price = foodItem.price,
+    #   category = foodItem.category,
+    #   restaurant_id = id
+    # ) for foodItem in form.data['order_food_items']]
+    order = Order(
+      customer_id = current_user.id,
+      restaurant_id = id,
+      longitude = form.data["longitude"],
+      latitude = form.data['latitude'],
+      phone_number = form.data['phone_number'],
+      credit_card = form.data['credit_card'],
+      total_price = form.data['total_price'],
+      distance = form.data['distance'],
+      duration= form.data['duration'],
+      user = current_user,
+      order_food_items = form.data['order_food_items']
+    )
+    db.session.add(order)
+    db.session.commit()
+    return order.to_dict(), 201
+  return {"errors": validation_errors_to_error_messages(form.errors)}, 400
+
+
+# @restaurant_routes.route("/<int:id>/orders/<int:order_id>")

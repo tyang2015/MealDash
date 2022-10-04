@@ -1,0 +1,93 @@
+.food-item-main-container{
+  /* background-color: lightblue; */
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.food-item-modal-pic{
+  height: 15em;
+  min-height: 15em;
+  max-height:15em;
+  width: 100%;
+  object-fit: cover;
+}
+
+.preferences-container{
+  /* background-color: lightcoral; */
+  height: 7em;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+  width: 17em;
+  margin:auto
+
+}
+
+.food-item-preference-input{
+  display: flex;
+  flex-direction: column;
+}
+
+.food-item-preference-input{
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.food-item-main-content-container{
+
+}
+
+.food-item-footer{
+  background-color: lightgoldenrodyellow;
+  height: 4em;
+  position:absolute;
+  bottom:0px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  /* justify-content: flex-end; */
+  justify-content: center;
+  align-items:center ;
+}
+
+.food-item-quantity-container{
+  /* background-color: lightgreen ; */
+  width: 9em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 65%;
+}
+
+/* .modal-add-to-cart-button-container{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 5em;
+} */
+
+.food-item-modal-add-to-cart-button{
+  position: absolute;
+  bottom:.85em;
+  right:7px;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  border: none;
+  background-color: lightcoral;
+  color: white;
+  width: 150px;
+  height: 35px;
+  border-radius: 1000px;
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}

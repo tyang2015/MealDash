@@ -2,6 +2,7 @@
   display:flex;
   justify-content: center;
   align-items: center;
+  flex-direction: row;
 }
 
 /* this controls the width of all content (will change after you put orders pane in */
