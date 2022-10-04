@@ -143,7 +143,7 @@ class Order(db.Model):
   duration = db.Column(db.Integer)
   # make another column to store the arraysdfs
   # food_items
-  food_items = db.Column(db.PickleType(), db.ForeignKey("food_items.id"))
+  # food_items = db.Column(db.PickleType(), db.ForeignKey("food_items.id"))
   created_at = db.Column(db.DateTime, default=datetime.utcnow)
   updated_at = db.Column(db.DateTime, default=datetime.utcnow)
 
