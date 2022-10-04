@@ -25,17 +25,29 @@ const FoodItemForm = ({foodItem, formType}) => {
   const [hasSubmitted, setHasSubmitted] = useState(false)
 
   function isImage(url) {
-    return /\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
+    let imageExtensions= ['jpg', 'jpeg', 'png', 'svg', 'gif', 'webp']
+    for (let i = 0; i< imageExtensions.length; i++){
+      let ext = imageExtensions[i]
+      if (url.toLowerCase().includes(ext)){
+        return true
+      }
+    }
+    return false
+    // if (url.toLowerCase().includes)
+    // return /\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
   }
 
   useEffect(()=>{
+    console.log('input change in food item form')
     let errors =[]
+    if (!name) errors.push('Name is required')
     if (name.length> 50) errors.push("Name must be less than 50 characters")
     if (description.length>500) errors.push("Description must be less than 500 chars")
     if (price>25000) errors.push("Price must be below 25000")
-    // if (!isImage(foodPicUrl)) errors.push("Food pic url is invalid")
+    if (price<=0) errors.push("Price must be greater than 0")
+    if (!isImage(foodPicUrl)) errors.push("Food pic url is invalid")
     setErrors(errors)
-  }, [name, foodPicUrl, description, price, category])
+  }, [name, foodPicUrl, description, price])
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -48,11 +60,11 @@ const FoodItemForm = ({foodItem, formType}) => {
     foodItem = {
       ...foodItem,
       name,
-      foodPicUrl,
+      food_pic_url: foodPicUrl,
       description,
       price,
       category,
-      restaurantId: id
+      restaurant_id: id
     }
     // console.log('food item before sending to db:', foodItem)
     if (formType === "Create Form") {
@@ -96,7 +108,7 @@ const FoodItemForm = ({foodItem, formType}) => {
                 placeholder="name"
                 value={name}
                 onChange={(e)=> setName(e.target.value)}
-                required
+                required={true}
               />
             </div>
             <div className='create-food-item-label-input-container not-top-food-item'>
@@ -122,7 +134,7 @@ const FoodItemForm = ({foodItem, formType}) => {
                   onChange={e => setPrice(e.target.value)}
                   placeholder='Price'
                   step='0.01'
-                  min="0.00"
+                  min="0.01"
                   required
                 />
               </div>

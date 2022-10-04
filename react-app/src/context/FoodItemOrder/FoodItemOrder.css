@@ -1,0 +1,9 @@
+/* .food-item-form-modal-background{
+
+} */
+
+#modal-content.food-item-form-modal-content{
+  /* height: 68vh; */
+  height: 35em;
+  width: 30em;
+}

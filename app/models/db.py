@@ -95,7 +95,6 @@ class FoodItem(db.Model):
     # order_id = db.Column(db.Integer, db.ForeignKey("orders.id"))
     restaurant_id = db.Column(db.Integer, db.ForeignKey("restaurants.id"))
     category = db.Column(db.String)
-
     # relationships
     reviews = db.relationship("FoodItemReview", back_populates="food_item", cascade="all,delete")
     restaurant = db.relationship("Restaurant", back_populates= "food_items")
@@ -131,50 +130,67 @@ class FoodItem(db.Model):
       }
 
 class Order(db.Model):
-    __tablename__ = "orders"
-    id = db.Column(db.Integer, primary_key=True)
-    customer_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-    restaurant_id = db.Column(db.Integer, db.ForeignKey("restaurants.id"))
-    longitude = db.Column(db.Numeric(scale=2), nullable = False)
-    latitude= db.Column(db.Numeric(scale=2), nullable = False)
-    phone_number = db.Column(db.String, nullable = False)
-    credit_card = db.Column(db.String, nullable = False)
-    total_price = db.Column(db.Numeric(scale = 2), nullable=False)
-    # distance = db.Column(db.Numeric(scale=2))
-    # duration = db.Column(db.Integer)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    updated_at = db.Column(db.DateTime, default=datetime.utcnow)
+  __tablename__ = "orders"
+  id = db.Column(db.Integer, primary_key=True)
+  customer_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+  restaurant_id = db.Column(db.Integer, db.ForeignKey("restaurants.id"))
+  longitude = db.Column(db.Numeric(scale=2), nullable = False)
+  latitude= db.Column(db.Numeric(scale=2), nullable = False)
+  phone_number = db.Column(db.String, nullable = False)
+  credit_card = db.Column(db.String, nullable = False)
+  total_price = db.Column(db.Numeric(scale = 2), nullable=False)
+  distance = db.Column(db.Numeric)
+  duration = db.Column(db.Integer)
+  # make another column to store the arrays
+  # food_items
+  food_items = db.Column(db.PickleType(), db.ForeignKey("food_items.id"))
+  created_at = db.Column(db.DateTime, default=datetime.utcnow)
+  updated_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-    # relationships
-    order_food_items = db.relationship("FoodItem", back_populates="item_orders", secondary=order_items)
-    user = db.relationship("User", back_populates="orders")
-    restaurant = db.relationship("Restaurant", back_populates = "orders")
+  # relationships
+  order_food_items = db.relationship("FoodItem", back_populates="item_orders", secondary=order_items)
+  user = db.relationship("User", back_populates="orders")
+  restaurant = db.relationship("Restaurant", back_populates = "orders")
 
-    def get_total_price(self):
-        # price from food item id in fooditems table * quantity
-        prices = {}
-        quantities = {}
-        total_price=0
-        # quantities => dictionary: {food_item_id: count}
-        for item in self.order_food_items:
-            prices[item.id] = item.price
-            quantities[item.id] = quantities.get(item.id, 0) + 1
-        for item_id,price in list(prices.items()):
-            total_price+= prices[item_id] * quantities[item_id]
-        return str(round(total_price, 2))
+  def get_total_price(self):
+      # price from food item id in fooditems table * quantity
+      prices = {}
+      quantities = {}
+      total_price=0
+      # quantities => dictionary: {food_item_id: count}
+      for item in self.order_food_items:
+          prices[item.id] = item.price
+          quantities[item.id] = quantities.get(item.id, 0) + 1
+      for item_id,price in list(prices.items()):
+          total_price+= prices[item_id] * quantities[item_id]
+      return str(round(total_price, 2))
 
+  def to_dict(self):
+      return {
+          "id": self.id,
+          "restaurantId": self.restaurant_id,
+          "customerId": self.customer_id,
+          "longitude": str(self.longitude),
+          "latitude": str(self.latitude),
+          "phoneNumber": self.phone_number,
+          "creditCard": self.credit_card,
+          "totalPrice": self.total_price,
+          "distance": str(self.distance),
+          "duration": self.duration,
+          "totalPrice":  self.get_total_price(),
+          # "orderFoodItems": [foodItem.to_dict_for_order() for foodItem in self.order_food_items],
+          "orderFoodItems": [foodItem.to_dict_for_order() for foodItem in self.order_food_items],
+          "user": self.convert_user_to_dict()
+      }
 
-    def to_dict(self):
-        return {
-            "id": self.id,
-            "customerId": self.customer_id,
-            "longitude": str(self.longitude),
-            "latitude": str(self.latitude),
-            "phoneNumber": self.phone_number,
-            "creditCard": self.credit_card,
-            "totalPrice":  self.get_total_price(),
-            "orderFoodItems": [foodItem.to_dict_for_order() for foodItem in self.order_food_items]
-        }
+  def convert_user_to_dict(self):
+    return {
+      'id': self.user.id,
+      'firstName': self.user.first_name,
+      'lastName': self.user.last_name,
+      'email': self.user.email,
+      'phoneNumber': self.user.phone_number
+    }
 
 
 class FoodItemReview(db.Model):

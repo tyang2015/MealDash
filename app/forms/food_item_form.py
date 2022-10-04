@@ -17,8 +17,8 @@ FOOD_ITEM_CATEGORIES = ["Main", "Sides", "Drinks", "Desserts"]
 
 class FoodItemForm(FlaskForm):
   name = StringField("Food Name", validators=[DataRequired()])
-  foodPicUrl = StringField("Food Pic Url",  validators=[DataRequired()])
-  restaurantId = IntegerField("restaurant id", validators=[DataRequired()])
+  food_pic_url = StringField("Food Pic Url",  validators=[DataRequired()])
+  restaurant_id = IntegerField("restaurant id", validators=[DataRequired()])
   description = StringField("Description", validators=[valid_description])
   price = DecimalField("Price", validators=[DataRequired()])
   category = SelectField("Food Category", choices = FOOD_ITEM_CATEGORIES )
