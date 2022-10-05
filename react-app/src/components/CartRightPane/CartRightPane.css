@@ -1,5 +1,76 @@
 .cart-pane-main-container{
   width: 15em;
-  background-color: lightblue;
+  background-color: white;
   height: 100vh;
+  border-left: 1px solid rgb(231, 231, 231);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.checkout-button{
+  display:flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 90%;
+  border: none;
+  background-color: lightcoral;
+  color: white;
+  border-radius: 1000px;
+  /* width: 100px; */
+  height: 35px;
+  justify-content:space-around;
+  align-items: center;
+
+}
+
+.cart-pane-food-item-card-container{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  border: 1px gray solid;
+  box-sizing: border-box;
+  justify-content: space-between;
+  height: 6em;
+}
+
+.cart-pane-food-item-card-container{
+  width: 100%;
+  background-color: lightgreen;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  height: 6em
+}
+
+.cart-pane-food-item-name-price-container{
+  width: 60%;
+  background-color: lightcoral;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.cart-pane-food-item-delete-container{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  height:100%;
+  background-color: lightcyan;
+}
+
+.cart-pane-quantity-container{
+  width: 3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+}
+.checkout-button-container{
+  margin-bottom: 1.1em;
 }

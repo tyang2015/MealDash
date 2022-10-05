@@ -5,6 +5,7 @@ from app.forms import LoginForm, SignUpForm, RestaurantForm, FoodItemForm, Order
 from .auth_routes import validation_errors_to_error_messages
 import json
 
+
 restaurant_routes = Blueprint('restaurants', __name__)
 
 @restaurant_routes.route("", methods = ['GET'])
@@ -31,6 +32,7 @@ def create_restaurant():
     form = RestaurantForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     # print('open time from form':, form.data["openTime"])
+    # data =request.json=> json this
     if form.validate_on_submit():
       restaurant = Restaurant(
           name = form.data["name"],
@@ -194,12 +196,9 @@ def create_restaurant_order(id):
   if restaurant == None:
     return {"message": "Restaurant couldn't be found"}, 404
   form = OrderForm()
-  form2 = FoodForm()
-  # order_form = OrderForm(request.form)
-  # food_item_list = order_form.order_food_items.data
-
+  print("request parsed: ", request.json)
   form['csrf_token'].data = request.cookies['csrf_token']
-  form2['csrf_token'].data = request.cookies['csrf_token']
+  # form2['csrf_token'].data = request.cookies['csrf_token']
   if form.validate_on_submit():
     print('form data:', form.data)
     # food_items = [ FoodItem(
@@ -221,7 +220,7 @@ def create_restaurant_order(id):
       distance = form.data['distance'],
       duration= form.data['duration'],
       user = current_user,
-      order_food_items = form.data['order_food_items']
+      # order_food_items = form.data['order_food_items']
     )
     db.session.add(order)
     db.session.commit()

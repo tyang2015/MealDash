@@ -42,6 +42,7 @@ class OrderForm(FlaskForm):
   distance = FloatField("Distance")
   duration = IntegerField("Duration")
 
+
   def __repr__(self):
     return f"Order Form: food items: {self.order_food_items}, for restaurant {self.restaurantId} "
 
@@ -49,10 +50,6 @@ class OrderForm(FlaskForm):
     food_items = FoodItem.query.filter(FoodItem.restaurantId == restaurantId).all()
     return len(food_items)
 
-  # min entries and max entries = number of food items for restaurant
-  # order_food_items = FieldList(FormField(FoodForm), min_entries= self.get_number_food_items(restaurantId))
-  order_food_items = FieldList(FormField(FoodForm), min_entries=1)
-
-
+  # order_food_items = FieldList(FormField(FoodForm), min_entries=1)
   # order_food_items = FieldList(FormField(FoodForm), min_entries= get_number_food_items(restaurantId), max_entries= get_number_food_items(restaurantId))
   # order_food_items = FieldList(FormField(FoodForm), min_entries=0, max_entries= 0)

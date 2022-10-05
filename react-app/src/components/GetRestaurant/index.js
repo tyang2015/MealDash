@@ -367,7 +367,7 @@ const GetRestaurant = () => {
                         </div>
                       </div>
                     ))}
-                    {/* {foodItemModal && <FoodItemModal forceCartUpdate={forceCartUpdate} setForceCartUpdate={setForceCartUpdate} submittedCartItems={submittedCartItems} setSubmittedCartItems={setSubmittedCartItems} setSubmittedCart={setSubmittedCart} foodItem={foodItem} setFoodItemModal={setFoodItemModal}/> } */}
+                    {foodItemModal && <FoodItemModal forceCartUpdate={forceCartUpdate} setForceCartUpdate={setForceCartUpdate} submittedCartItems={submittedCartItems} setSubmittedCartItems={setSubmittedCartItems} setSubmittedCart={setSubmittedCart} foodItem={foodItem} setFoodItemModal={setFoodItemModal}/> }
                     {filteredItems.length>0 && isFiltered && filteredItems.map(item=>(
                       <div key={item.id} className="food-item-card-container" onClick={()=> setFoodItemModal(true)}>
                         <div className="food-item-left-container">
@@ -398,8 +398,8 @@ const GetRestaurant = () => {
             </>
           )}
         </div>
-        {/* {!submittedCart && (<CartRightPane/>)}
-        {submittedCart && (<CartRightPane submittedCart={submittedCart} forceCartUpdate={forceCartUpdate} restaurant={restaurant} submittedCartItems={submittedCartItems}/>) } */}
+        {!submittedCart && (<CartRightPane/>)}
+        {submittedCart && (<CartRightPane submittedCart={submittedCart} forceCartUpdate={forceCartUpdate} restaurant={restaurant} submittedCartItems={submittedCartItems}/>) }
       </div>
     </>
 

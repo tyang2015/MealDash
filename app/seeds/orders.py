@@ -109,7 +109,7 @@ def seed_orders():
             distance = order['distance'],
             duration = order['duration'],
             # food_items = random_food_items()
-            order_food_items = random_food_items()
+            # order_food_items = random_food_items()
         )
         # orders_list.append(newOrder)
         db.session.add(newOrder)

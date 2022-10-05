@@ -33,8 +33,7 @@ const FoodItemForm = ({foodItem, formType}) => {
       }
     }
     return false
-    // if (url.toLowerCase().includes)
-    // return /\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
+
   }
 
   useEffect(()=>{

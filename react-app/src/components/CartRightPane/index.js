@@ -13,9 +13,7 @@ const CartRightPane = ({submittedCart, forceCartUpdate, restaurant, submittedCar
       let totalPrice = 0;
       for (let i =0; i<submittedCartItems.length;i++){
         let foodItem = submittedCartItems[i]
-        // console.log('food item in iteration: ', foodItem)
         console.log('food item price:', Number(foodItem.price).toFixed(2))
-        // console.log('food item quanitty:', foodItem.quantity)
         totalPrice+=Number(foodItem.price) * foodItem.quantity
         console.log("total price after checking out this item:", totalPrice)
       }
@@ -33,7 +31,8 @@ const CartRightPane = ({submittedCart, forceCartUpdate, restaurant, submittedCar
     <>
       <div className="cart-pane-main-container">
         <div>
-          Your cart from {restaurant.name}
+          <p>Your cart from </p>
+          <h3> {restaurant.name}</h3>
         </div>
         <div className='checkout-button-container'>
           <div className='checkout-button'>
@@ -45,12 +44,12 @@ const CartRightPane = ({submittedCart, forceCartUpdate, restaurant, submittedCar
             {submittedCartItems.length>0 && submittedCartItems.map(item=>(
               <>
                 <div className='cart-pane-food-item-card-container'>
-                  <div>
+                  <div className='cart-pane-quantity-container'>
                     {item.quantity}
                   </div>
                   <div className='cart-pane-food-item-name-price-container'>
-                    <h3> {item.name}</h3>
-                    <h3> ${(item.price*item.quantity).toFixed(2)}</h3>
+                    <h4> {item.name}</h4>
+                    <h4> ${(item.price*item.quantity).toFixed(2)}</h4>
                   </div>
                   <div className='cart-pane-food-item-delete-container'>
                     <div>Delete</div>

@@ -5,12 +5,12 @@ from .food_items import seed_food_items, undo_food_items
 from .orders import seed_orders, undo_orders
 from .restaurants import seed_restaurants, undo_restaurants
 from .reviews import seed_reviews, undo_reviews
+from .order_food_items import seed_order_food_items, undo_order_food_items
 
 
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
 seed_commands = AppGroup('seed')
-
 
 # Creates the `flask seed all` command
 @seed_commands.command('all')
@@ -21,6 +21,7 @@ def seed():
     seed_orders()
     seed_food_item_reviews()
     seed_reviews()
+    seed_order_food_items()
     print('successfully seeded!')
     # Add other seed functions here
 
@@ -34,5 +35,6 @@ def undo():
     undo_orders()
     undo_food_item_reviews()
     undo_reviews()
+    undo_order_food_items()
 
     # Add other undo functions here

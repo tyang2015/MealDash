@@ -6,12 +6,12 @@ db = SQLAlchemy()
 # account nums = 17 digits long
 
 
-order_items = db.Table(
-    'order_items',
-    db.Model.metadata,
-    db.Column('orders', db.Integer, db.ForeignKey("orders.id")),
-    db.Column('food_items', db.Integer, db.ForeignKey("food_items.id"))
-)
+# order_items = db.Table(
+#     'order_items',
+#     db.Model.metadata,
+#     db.Column('orders', db.Integer, db.ForeignKey("orders.id")),
+#     db.Column('food_items', db.Integer, db.ForeignKey("food_items.id"))
+# )
 
 
 class Restaurant(db.Model):
@@ -41,7 +41,7 @@ class Restaurant(db.Model):
     food_items = db.relationship("FoodItem", back_populates = "restaurant", cascade = "all, delete")
     reviews = db.relationship("Review", back_populates = "restaurant", cascade = "all, delete" )
     orders = db.relationship("Order", back_populates = "restaurant", cascade = "all, delete" )
-
+    order_food_items = db.relationship("OrderFoodItem", back_populates="restaurant", cascade = "all, delete")
     def get_avg_rating(self):
         total = 0
         for review in self.reviews:
@@ -53,28 +53,28 @@ class Restaurant(db.Model):
 
 
     def to_dict(self):
-        return {
-            "id": self.id,
-            "name": self.name,
-            "ownerId" : self.owner_id,
-            "priceRange" : self.price_range,
-            "restaurantPicUrl" : self.restaurant_pic_url,
-            "logo": self.logo,
-            "longitude" : str(self.longitude),
-            "latitude" : str(self.latitude),
-            "email" : self.email,
-            "phoneNumber" : self.phone_number,
-            "bankAccount" : self.bank_account,
-            "routingNumber" : self.routing_number,
-            "category" : self.category,
-            "openTime" : str(self.open_time),
-            "closeTime" : str(self.close_time),
-            "createdAt": self.created_at,
-            "updatedAt": self.updated_at,
-            "numReviews":  len(self.reviews),
-            "avgRating" : self.get_avg_rating(),
-            # "User": self.convert_user_to_dict()
-        }
+      return {
+          "id": self.id,
+          "name": self.name,
+          "ownerId" : self.owner_id,
+          "priceRange" : self.price_range,
+          "restaurantPicUrl" : self.restaurant_pic_url,
+          "logo": self.logo,
+          "longitude" : str(self.longitude),
+          "latitude" : str(self.latitude),
+          "email" : self.email,
+          "phoneNumber" : self.phone_number,
+          "bankAccount" : self.bank_account,
+          "routingNumber" : self.routing_number,
+          "category" : self.category,
+          "openTime" : str(self.open_time),
+          "closeTime" : str(self.close_time),
+          "createdAt": self.created_at,
+          "updatedAt": self.updated_at,
+          "numReviews":  len(self.reviews),
+          "avgRating" : self.get_avg_rating(),
+          # "User": self.convert_user_to_dict()
+      }
     def convert_user_to_dict(self):
         return {
             "id": self.user.id,
@@ -90,15 +90,14 @@ class FoodItem(db.Model):
     name = db.Column(db.String, nullable=False)
     food_pic_url = db.Column(db.String, nullable = False)
     description = db.Column(db.String)
-    # quantity = db.Column(db.Integer, nullable = False)
     price = db.Column(db.Numeric(scale=2), nullable = False)
-    # order_id = db.Column(db.Integer, db.ForeignKey("orders.id"))
     restaurant_id = db.Column(db.Integer, db.ForeignKey("restaurants.id"))
     category = db.Column(db.String)
     # relationships
-    reviews = db.relationship("FoodItemReview", back_populates="food_item", cascade="all,delete")
+    order_food_items = db.relationship("OrderFoodItem", back_populates="food_item", cascade = "all, delete")
+    reviews = db.relationship("FoodItemReview", back_populates="food_item", cascade="all, delete")
     restaurant = db.relationship("Restaurant", back_populates= "food_items")
-    item_orders = db.relationship("Order", back_populates= "order_food_items", secondary=order_items )
+    # item_orders = db.relationship("Order", back_populates= "order_food_items", secondary=order_items )
 
     def to_dict(self):
       return {
@@ -112,7 +111,7 @@ class FoodItem(db.Model):
         "category": self.category,
         # "orderQuantity":
         # "orderQuantity": len(self.item_orders),
-        "Orders": [order.id for order in self.item_orders],
+        "Orders": [order.id for order in self.order_food_items],
         "Reviews": [review.id for review in self.reviews]
       }
 
@@ -148,12 +147,13 @@ class Order(db.Model):
   updated_at = db.Column(db.DateTime, default=datetime.utcnow)
 
   # relationships
-  order_food_items = db.relationship("FoodItem", back_populates="item_orders", secondary=order_items)
+  # order_food_items = db.relationship("FoodItem", back_populates="item_orders", secondary=order_items)
+
   user = db.relationship("User", back_populates="orders")
   restaurant = db.relationship("Restaurant", back_populates = "orders")
+  order_food_items = db.relationship("OrderFoodItem", back_populates="food_item_order",cascade = "all, delete" )
 
   def get_total_price(self):
-      # price from food item id in fooditems table * quantity
       prices = {}
       quantities = {}
       total_price=0
@@ -179,7 +179,6 @@ class Order(db.Model):
           "duration": self.duration,
           "totalPrice":  self.get_total_price(),
           # "orderFoodItems": [foodItem.to_dict_for_order() for foodItem in self.order_food_items],
-          "orderFoodItems": [foodItem.to_dict_for_order() for foodItem in self.order_food_items],
           "user": self.convert_user_to_dict()
       }
 
@@ -191,6 +190,21 @@ class Order(db.Model):
       'email': self.user.email,
       'phoneNumber': self.user.phone_number
     }
+
+class OrderFoodItem(db.Model):
+  __tablename__ = "order_food_items"
+  id = db.Column(db.Integer, primary_key=True)
+  restaurant_id = db.Column(db.Integer, db.ForeignKey("restaurants.id"))
+  food_item_id = db.Column(db.Integer, db.ForeignKey("food_items.id"))
+  order_id = db.Column(db.Integer, db.ForeignKey("orders.id"))
+  quantity = db.Column(db.Integer)
+  price = db.Column(db.Numeric(scale=2), nullable = False)
+  preference = db.Column(db.String)
+
+  restaurant = db.relationship("Restaurant", back_populates="order_food_items")
+  food_item = db.relationship("FoodItem", back_populates="order_food_items")
+  food_item_order = db.relationship("Order", back_populates="order_food_items")
+
 
 
 class FoodItemReview(db.Model):
