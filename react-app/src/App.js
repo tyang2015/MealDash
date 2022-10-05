@@ -17,6 +17,7 @@ import GetRestaurant from './components/GetRestaurant';
 import CreateFoodItem from './components/CreateFoodItem';
 import UpdateFoodItem from './components/UpdateFoodItem';
 import NavBarSplash from './components/NavBarSplash';
+import RestaurantFooter from './components/RestaurantFooter';
 
 
 function App() {
@@ -45,11 +46,8 @@ function App() {
         <ProtectedRoute path='/restaurants/:id/edit' exact={true} >
           <UpdateRestaurantForm/>
         </ProtectedRoute>
-        {/* <div>
-          {loggedInUser && <NavBarSplash/>}
-        </div> */}
         <div>
-          {loggedInUser && <NavBar/>}
+          {/* {loggedInUser && <NavBar/>} */}
           <Route path='/' exact={true}>
             <SplashPage/>
           </Route>

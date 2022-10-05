@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllRestaurants } from '../../store/restaurant';
 import { NavLink } from 'react-router-dom';
+import NavBar from '../Navigation/NavBar';
 import "./restaurants.css"
 
 const Restaurants = () => {
@@ -13,6 +14,7 @@ const Restaurants = () => {
     }, [dispatch])
     return (
         <>
+          <NavBar/>
           <div>
             <div className="restaurant-main-grid-container">
                 {restaurants.length>0 && restaurants.map(restaurant => (

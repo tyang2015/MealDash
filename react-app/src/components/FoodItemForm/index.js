@@ -109,6 +109,7 @@ const FoodItemForm = ({foodItem, formType}) => {
                 value={name}
                 onChange={(e)=> setName(e.target.value)}
                 required={true}
+                // className='food-item-input'
               />
             </div>
             <div className='create-food-item-label-input-container not-top-food-item'>
@@ -117,11 +118,12 @@ const FoodItemForm = ({foodItem, formType}) => {
                 type='text'
                 id= "food-item-description"
                 placeholder="description"
-                rows='10'
+                rows="10"
                 cols = '33'
                 value={description}
                 onChange={e=> setDescription(e.target.value)}
                 style={{marginTop:"50px"}}
+                // className='food-item-input'
               />
             </div>
             <div className='food-item-price-category-container not-top-food-item' >
@@ -135,6 +137,7 @@ const FoodItemForm = ({foodItem, formType}) => {
                   placeholder='Price'
                   step='0.01'
                   min="0.01"
+                  // className='food-item-input'
                   required
                 />
               </div>
@@ -146,6 +149,7 @@ const FoodItemForm = ({foodItem, formType}) => {
                   onChange={(e)=> setCategory(e.target.value)}
                   required
                   style={{boxSizing:"border-box", height: "100%"}}
+                  // className='food-item-input'
                   >
                     {/* how come my default selected value does not sho */}
                   {FOOD_ITEM_CATEGORIES.map(cat => (
@@ -168,6 +172,7 @@ const FoodItemForm = ({foodItem, formType}) => {
               placeholder='food pic url'
               value={foodPicUrl}
               onChange={e=> setFoodPicUrl(e.target.value)}
+              // className='food-item-food-pic-url-input'
               required
             />
             <div className='create-food-item-container'>
