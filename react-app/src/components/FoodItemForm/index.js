@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from 'react-router-dom';
 import { createFoodItem, updateFoodItem } from '../../store/foodItem';
 import "./FoodItemForm.css"
+import NavBar from '../Navigation/NavBar';
 
 const FOOD_ITEM_CATEGORIES = ["Main", "Sides", "Drinks", "Desserts"]
 
@@ -85,6 +86,7 @@ const FoodItemForm = ({foodItem, formType}) => {
   return (
     // <h3> food item form</h3>
     <>
+    <NavBar/>
       <form className='create-food-item-form-container'>
         <h3> {formType==="Create Form"? "Create Menu Item": "Update Menu Item"} </h3>
         <div className="create-food-item-errors-container">
@@ -109,7 +111,7 @@ const FoodItemForm = ({foodItem, formType}) => {
                 value={name}
                 onChange={(e)=> setName(e.target.value)}
                 required={true}
-                // className='food-item-input'
+                className='food-item-input'
               />
             </div>
             <div className='create-food-item-label-input-container not-top-food-item'>
@@ -118,8 +120,8 @@ const FoodItemForm = ({foodItem, formType}) => {
                 type='text'
                 id= "food-item-description"
                 placeholder="description"
-                rows="10"
-                cols = '33'
+                rows="13"
+                cols = "33"
                 value={description}
                 onChange={e=> setDescription(e.target.value)}
                 style={{marginTop:"50px"}}
@@ -137,7 +139,7 @@ const FoodItemForm = ({foodItem, formType}) => {
                   placeholder='Price'
                   step='0.01'
                   min="0.01"
-                  // className='food-item-input'
+                  className='food-item-input'
                   required
                 />
               </div>
@@ -149,7 +151,7 @@ const FoodItemForm = ({foodItem, formType}) => {
                   onChange={(e)=> setCategory(e.target.value)}
                   required
                   style={{boxSizing:"border-box", height: "100%"}}
-                  // className='food-item-input'
+                  className='food-item-input'
                   >
                     {/* how come my default selected value does not sho */}
                   {FOOD_ITEM_CATEGORIES.map(cat => (
@@ -172,7 +174,8 @@ const FoodItemForm = ({foodItem, formType}) => {
               placeholder='food pic url'
               value={foodPicUrl}
               onChange={e=> setFoodPicUrl(e.target.value)}
-              // className='food-item-food-pic-url-input'
+              className='food-item-food-pic-url-input'
+              style={{height: "5.8%"}}
               required
             />
             <div className='create-food-item-container'>

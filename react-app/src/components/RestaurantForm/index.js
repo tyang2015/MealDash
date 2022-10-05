@@ -59,6 +59,7 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
       if (!formData.email.includes("@")) errors.push("Email is invalid")
       if (formData.priceRange < 1 || formData.priceRange >3) errors.push("Price range is invalid")
       if (logoExists(formData.logo)) errors.push("Logo must be unique and not be used by another owner")
+      if (!isImage(formData.logo)) errors.push("Logo url is invalid")
       if (!isImage(formData.restaurantPicUrl)) errors.push("Restaurant pic url is invalid")
       if (formData.closeTime <= formData.openTime) errors.push("Closing Time must be after Opening Time")
       if (formData.longitude < -180 || formData.longitude > 180) errors.push("Longitude is invalid")

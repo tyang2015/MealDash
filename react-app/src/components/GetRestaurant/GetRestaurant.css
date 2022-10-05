@@ -77,8 +77,7 @@
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(auto-fill);
   overflow-y: auto;
-  /* grid-template-rows: repeat() */
-  height: 92%;
+  height: 88%;
   grid-column-gap: 20px;
   grid-row-gap: 20px;
   grid-auto-rows: 140px;

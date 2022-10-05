@@ -361,16 +361,18 @@ const GetRestaurant = () => {
                             <img className="food-item-pic" src= {item.foodPicUrl} onError={e => { e.currentTarget.src =
                               "https://static.onecms.io/wp-content/uploads/sites/47/2020/08/06/cat-with-empty-bowl-1224404559-2000.jpg"; }}/>
                           </div>
-                          <div className="food-item-right-container">
-                            {sessionUser.id == restaurant.ownerId && (
-                              <>
-                                <NavLink className="navlink edit-food-item-button" to={`/restaurants/${id}/fooditems/${item.id}`}>
-                                  <button style={{width:"100%"}}className="button"><i class="fa-solid fa-pen-to-square"></i></button>
-                                </NavLink>
-                                <button onClick={(e)=> handleDeleteFoodItem(item.id)} className="button delete-food-item-button"><i class="fa-solid fa-trash-can"></i></button>
-                              </>
-                            )}
-                          </div>
+                          {sessionUser.id == restaurant.ownerId && (
+                            <div className="food-item-right-container">
+                              {/* {sessionUser.id == restaurant.ownerId && ( */}
+                                <>
+                                  <NavLink className="navlink edit-food-item-button" to={`/restaurants/${id}/fooditems/${item.id}`}>
+                                    <button style={{width:"100%"}}className="button"><i class="fa-solid fa-pen-to-square"></i></button>
+                                  </NavLink>
+                                  <button onClick={(e)=> handleDeleteFoodItem(item.id)} className="button delete-food-item-button"><i class="fa-solid fa-trash-can"></i></button>
+                                </>
+                              {/* )} */}
+                            </div>
+                          )}
                         </div>
                       ))}
                       {/* {foodItemModal && <FoodItemModal forceCartUpdate={forceCartUpdate} setForceCartUpdate={setForceCartUpdate} submittedCartItems={submittedCartItems} setSubmittedCartItems={setSubmittedCartItems} setSubmittedCart={setSubmittedCart} foodItem={foodItem} setFoodItemModal={setFoodItemModal}/> } */}
