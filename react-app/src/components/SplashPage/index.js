@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
 import { getAllRestaurants } from '../../store/restaurant';
 import NavBarSplash from '../NavBarSplash';
+import SplashFooter from '../SplashFooter';
 import "./SplashPage.css"
 // import diningTablePhoto from "./images"
 
@@ -66,8 +67,7 @@ const SplashPage = () => {
             <p style={{textAlign: "center"}}> Experience the best your neighborhood has to offer </p>
           </div>
         </div>
-      <div>
-      </div>
+      <SplashFooter/>
       </div>
     </>
 

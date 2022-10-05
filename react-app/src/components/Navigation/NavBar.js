@@ -57,7 +57,7 @@ const NavBar = () => {
                       <div>
                         Welcome {sessionUser.firstName}
                       </div>
-                        CART ICON
+                        {/* CART ICON */}
                     </div>
                 </div>
             </nav>

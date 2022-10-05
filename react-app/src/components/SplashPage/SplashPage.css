@@ -1,3 +1,10 @@
+.splash-page-main-container{
+  display: flex;
+  flex-direction: column;
+  
+}
+
+
 .splash-page-background-image-container{
   background-image: url("https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?cs=srgb&dl=pexels-ella-olsson-1640777.jpg&fm=jpg");
   height: 25em;
