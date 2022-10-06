@@ -29,6 +29,13 @@
 
 }
 
+.restaurants-categories-container{
+  display: flex;
+  width: 100vw;
+  justify-content: space-evenly;
+
+}
+
 /* .fa-solid.fa-star{
   height:2px;
 
