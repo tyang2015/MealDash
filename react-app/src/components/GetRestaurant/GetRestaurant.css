@@ -263,3 +263,13 @@ div.restaurant-page-update-delete-buttons-container{
   align-items: center;
   justify-content: center;
 }
+
+.no-food-items-container{
+  /* background-color: lightblue; */
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+}

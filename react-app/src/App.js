@@ -18,6 +18,7 @@ import CreateFoodItem from './components/CreateFoodItem';
 import UpdateFoodItem from './components/UpdateFoodItem';
 import NavBarSplash from './components/NavBarSplash';
 import RestaurantFooter from './components/RestaurantFooter';
+import "./index.css"
 
 
 function App() {

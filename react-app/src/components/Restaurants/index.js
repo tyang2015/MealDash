@@ -3,7 +3,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllRestaurants } from '../../store/restaurant';
 import { NavLink } from 'react-router-dom';
 import NavBar from '../Navigation/NavBar';
-import "./restaurants.css"
+import "./restaurants.css";
+import americanIcon from "./images/american-icon.png"
+import asianIcon from "./images/asian-icon.png"
+import breakfastIcon from "./images/breakfast-icon.png"
+import ethiopianIcon from "./images/ethiopian-icon.png"
+import fastFoodIcon from "./images/fastfood-icon.png"
+import frenchIcon from "./images/french-icon.png"
+import italianIcon from "./images/italian-icon.png"
+import japaneseIcon from "./images/japanese-icon.png"
+import mexicanIcon from "./images/mexican-icon.png"
+import veganIcon from "./images/vegan-icon.png"
+import mediterraneanIcon from "./images/mediterranean-icon.png"
 
 const CATEGORY_CHOICES = ["All","Asian", "American","Breakfast", "Vegan", "Mexican", "Japanese", "Italian", "French", "FastFood", "Ethiopian", "Mediterranean"]
 
@@ -27,6 +38,33 @@ const Restaurants = () => {
     const [fastFood, setFastFood] = useState('')
     const [ethiopian, setEthiopian ] = useState('')
     const [mediterranean, setMediterranean] = useState('')
+
+    const [lenAsian, setLenAsian] = useState(0)
+    const [lenAmerican, setLenAmerican] = useState(0)
+    const [lenBreakfast, setLenBreakfast] = useState(0)
+    const [lenVegan, setLenVegan] = useState(0)
+    const [lenMexican, setLenMexican] = useState(0)
+    const [lenJapanese, setLenJapanese] = useState(0)
+    const [lenItalian, setLenItalian] = useState(0)
+    const [lenFrench, setLenFrench] = useState(0)
+    const [lenFastFood, setLenFastFood] = useState(0)
+    const [lenEthiopian, setLenEthiopian] = useState(0)
+    const [lenMediterranean, setLenMediterranean] = useState(0)
+    const [categoryNum, setCategoryNum] = useState({
+      Asian: 0,
+      American: 0,
+      Breakfast: 0,
+      Vegan: 0,
+      Mexican: 0,
+      Japanese: 0,
+      Italian: 0,
+      French: 0,
+      FastFood: 0,
+      Ethiopian:0,
+      Mediterranean: 0
+
+    })
+
     // const [categories, setCategories] = useState({
     //   ALL:"",
     //   Asian: "",
@@ -44,7 +82,22 @@ const Restaurants = () => {
 
     useEffect(()=>{
         dispatch(getAllRestaurants())
+
     }, [dispatch])
+
+    useEffect(()=>{
+      // {name_category: count_category}
+      let countCategories={}
+      if (restaurants.length>0){
+        for (let i=0; i<restaurants.length; i++){
+          let category = restaurants[i].category
+          if (!countCategories[`${category}`]) {
+            countCategories[`${category}`] = 1
+          } else countCategories[`${category}`] +=1
+        }
+        setCategoryNum(countCategories)
+      }
+    }, [restaurants])
 
     useEffect(()=>{
       if (restaurants.length>0 && all === "All"){
@@ -381,31 +434,86 @@ const Restaurants = () => {
           <div>
             <div className='restaurants-categories-container'>
               {CATEGORY_CHOICES.map(category=> (
-                <p key={category} onClick={()=> handleCategorySelection(category)}>{category}</p>
+                <div style={{marginTop: "10px"}} key={category} onClick={()=> handleCategorySelection(category)} className="category-selection-icon-containers">
+                  {category ==="All" && <img style={{height:'3em', width: '3em'}} width="40" height="40" alt="Ships Nationwide" src="https://img.cdn4dd.com/s/managed/consumer/discovery/shipping_vertical_two_row_icon2.svg"></img>}
+                  {category === "American" && <img src={americanIcon}/>}
+                  {category === "Mexican" && <img src={mexicanIcon}/>}
+                  {category === "Asian" && <img style={{height:'3em', width: '3em'}}src={asianIcon}/>}
+                  {category === "Breakfast" && <img style={{height:'3em', width: '3em'}} src={breakfastIcon}/>}
+                  {category === "Vegan" && <img style={{height:'3em', width: '3em'}} src={veganIcon}/>}
+                  {category === "Japanese" && <img style={{height:'3em', width: '3em'}} src={japaneseIcon}/>}
+                  {category === "Italian" && <img style={{height:'3em', width: '3em'}} src={italianIcon}/>}
+                  {category === "French" && <img style={{height:'3em', width: '3em'}} src={frenchIcon}/>}
+                  {category === "FastFood" && <img style={{height:'3em', width: '3em'}} src={fastFoodIcon}/>}
+                  {category === "Ethiopian" && <img style={{height:'3em', width: '3em'}} src={ethiopianIcon}/>}
+                  {category === "Mediterranean" && <img style={{height:'3em', width: '3em'}} src={mediterraneanIcon}/>}
+                  <small style={{fontSize: "10px"}}>
+                  {category}
+                  </small>
+                </div>
               ))}
             {/* <img width="40" height="40" alt="Flowers" src="https://img.cdn4dd.com/s/media/photosV2/c8f182ec-622a-4094-bcae-68ef7242fccf-retina-large.SVG"/> */}
-            {/* <svg viewBox="0 0 760 760" width="760" height="760" preserveAspectRatio="xMidYMid meet" style={{width: "100%", height: "100%", transform: "translate3d(0px, 0px, 0px)"}}><path fill="rgb(168,214,223)" fill-opacity="1" d=" M37.49100112915039,73.51599884033203 C104.54100036621094,73.51599884033203 141.96600341796875,35.45800018310547 157.33999633789062,26.514999389648438 C164.27099609375,22.85099983215332 168.08700561523438,18.158000946044922 173.4499969482422,14.182000160217285 C182.7519989013672,7.296999931335449 182.83700561523438,-0.04899999871850014 184.67799377441406,-7.491000175476074 C187.33200073242188,-18.209999084472656 184.11199951171875,-28.756999969482422 174.44200134277344,-38.89099884033203 C168.5019989013672,-45.11399841308594 157.2449951171875,-49.4109992980957 145.77099609375,-53.40599822998047 C118.56400299072266,-62.87799835205078 88.08999633789062,-68.17500305175781 55.33000183105469,-71.0459976196289 C15.071999549865723,-74.5780029296875 -24.57200050354004,-73.6050033569336 -64.50900268554688,-72.49099731445312 C-96.75900268554688,-71.58499908447266 -124.72100067138672,-66.31500244140625 -151.1540069580078,-58.891998291015625 C-163.9499969482422,-55.3129997253418 -170.94700622558594,-49.534000396728516 -176.50100708007812,-43.16899871826172 C-188.5030059814453,-29.42799949645996 -187.66299438476562,-15.225000381469727 -179.40899658203125,-0.7490000128746033 C-175.10299682617188,6.807000160217285 -171.0330047607422,14.456000328063965 -164.77200317382812,21.72800064086914 C-154.36500549316406,33.805999755859375 -125.54299926757812,76.28399658203125 -4.145999908447266,73.16600036621094 C-4.145999908447266,73.16600036621094 37.49100112915039,73.51599884033203 37.49100112915039,73.51599884033203z"></path></svg> */}
             </div>
-            <div className="restaurant-main-grid-container" >
+            {/* <div className="restaurant-main-grid-container" > */}
+            {!isFiltered && categoryNum.Asian>0 && (
+              <>
+                <h2 className='restaurant-category-title'>Asian</h2>
+                <div className="restaurant-main-grid-container" >
                 {restaurants.length>0 && !isFiltered && restaurants.map(restaurant => (
                   <>
-                    <NavLink className='navlink' key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
-                      <div key={restaurant.id} className="restaurant-card-container">
-                        <div className= 'get-restaurants-pic-container'>
-                          <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}/>
-                        </div>
-                        <div className="get-restaurants-bottom-text-container">
-                          <div className='get-restaurants-left-inner-text-container'>
-                            <h3>{restaurant.name}</h3>
-                            <p> {restaurant.avgRating} <i class="fa-solid fa-star" ></i> ratings</p>
+                    {restaurant.category === "Asian" && (
+                        <NavLink className='navlink' key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
+                          <div key={restaurant.id} className="restaurant-card-container">
+                            <div className= 'get-restaurants-pic-container'>
+                              <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}/>
+                            </div>
+                            <div className="get-restaurants-bottom-text-container">
+                              <div className='get-restaurants-left-inner-text-container'>
+                                <h4>{restaurant.name}</h4>
+                                <p> {restaurant.avgRating} <i class="fa-solid fa-star" ></i> ratings</p>
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                      </div>
-                    </NavLink>
+                        </NavLink>
+                    )}
                   </>
                 ))}
-                {filteredItems.length>0 && isFiltered && filteredItems.map(restaurant => (
+                </div>
+              </>
+            )}
+            {!isFiltered && categoryNum.American>0 && (
+              <>
+                <h2 className='restaurant-category-title'>American</h2>
+                <div className="restaurant-main-grid-container" >
+                {restaurants.length>0 && !isFiltered && restaurants.map(restaurant => (
                   <>
+                    {restaurant.category === "American" && (
+                        <NavLink className='navlink' key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
+                          <div key={restaurant.id} className="restaurant-card-container">
+                            <div className= 'get-restaurants-pic-container'>
+                              <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}/>
+                            </div>
+                            <div className="get-restaurants-bottom-text-container">
+                              <div className='get-restaurants-left-inner-text-container'>
+                                <h4>{restaurant.name}</h4>
+                                <p> {restaurant.avgRating} <i class="fa-solid fa-star" ></i> ratings</p>
+                              </div>
+                            </div>
+                          </div>
+                        </NavLink>
+                    )}
+                  </>
+                ))}
+                </div>
+              </>
+            )}
+            {!isFiltered && categoryNum.Breakfast >0 && (
+            <>
+              <h2 className='restaurant-category-title'>Breakfast</h2>
+              <div className="restaurant-main-grid-container" >
+              {restaurants.length>0 && !isFiltered && restaurants.map(restaurant => (
+                <>
+                  {restaurant.category==="Breakfast" && (
                     <NavLink className='navlink' key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
                       <div key={restaurant.id} className="restaurant-card-container">
                         <div className= 'get-restaurants-pic-container'>
@@ -413,15 +521,251 @@ const Restaurants = () => {
                         </div>
                         <div className="get-restaurants-bottom-text-container">
                           <div className='get-restaurants-left-inner-text-container'>
-                            <h3>{restaurant.name}</h3>
+                            <h4>{restaurant.name}</h4>
                             <p> {restaurant.avgRating} <i class="fa-solid fa-star" ></i> ratings</p>
                           </div>
                         </div>
                       </div>
                     </NavLink>
-                  </>
-                ))}
+                    )}
+                </>
+              ))}
+              </div>
+            </>
+            )}
+            {!isFiltered && categoryNum.Vegan >0 && (
+            <>
+              <h2 className='restaurant-category-title'>Vegan</h2>
+              <div className="restaurant-main-grid-container" >
+              {restaurants.length>0 && !isFiltered && restaurants.map(restaurant => (
+                <>
+                  {restaurant.category==="Vegan" && (
+                    <NavLink className='navlink' key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
+                      <div key={restaurant.id} className="restaurant-card-container">
+                        <div className= 'get-restaurants-pic-container'>
+                          <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}/>
+                        </div>
+                        <div className="get-restaurants-bottom-text-container">
+                          <div className='get-restaurants-left-inner-text-container'>
+                            <h4>{restaurant.name}</h4>
+                            <p> {restaurant.avgRating} <i class="fa-solid fa-star" ></i> ratings</p>
+                          </div>
+                        </div>
+                      </div>
+                    </NavLink>
+                    )}
+                </>
+              ))}
+              </div>
+            </>
+            )}
+            {!isFiltered && categoryNum.Mexican >0 && (
+            <>
+              <h2 className='restaurant-category-title'>Mexican</h2>
+              <div className="restaurant-main-grid-container" >
+              {restaurants.length>0 && !isFiltered && restaurants.map(restaurant => (
+                <>
+                  {restaurant.category==="Mexican" && (
+                    <NavLink className='navlink' key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
+                      <div key={restaurant.id} className="restaurant-card-container">
+                        <div className= 'get-restaurants-pic-container'>
+                          <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}/>
+                        </div>
+                        <div className="get-restaurants-bottom-text-container">
+                          <div className='get-restaurants-left-inner-text-container'>
+                            <h4>{restaurant.name}</h4>
+                            <p> {restaurant.avgRating} <i class="fa-solid fa-star" ></i> ratings</p>
+                          </div>
+                        </div>
+                      </div>
+                    </NavLink>
+                    )}
+                </>
+              ))}
+              </div>
+            </>
+            )}
+
+            {!isFiltered && categoryNum.Japanese >0 && (
+            <>
+              <h2 className='restaurant-category-title'>Japanese</h2>
+              <div className="restaurant-main-grid-container" >
+              {restaurants.length>0 && !isFiltered && restaurants.map(restaurant => (
+                <>
+                  {restaurant.category==="Japanese" && (
+                    <NavLink className='navlink' key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
+                      <div key={restaurant.id} className="restaurant-card-container">
+                        <div className= 'get-restaurants-pic-container'>
+                          <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}/>
+                        </div>
+                        <div className="get-restaurants-bottom-text-container">
+                          <div className='get-restaurants-left-inner-text-container'>
+                            <h4>{restaurant.name}</h4>
+                            <p> {restaurant.avgRating} <i class="fa-solid fa-star" ></i> ratings</p>
+                          </div>
+                        </div>
+                      </div>
+                    </NavLink>
+                    )}
+                </>
+              ))}
+              </div>
+            </>
+            )}
+
+            {!isFiltered && categoryNum.Italian >0 && (
+            <>
+              <h2 className='restaurant-category-title'>Italian</h2>
+              <div className="restaurant-main-grid-container" >
+              {restaurants.length>0 && !isFiltered && restaurants.map(restaurant => (
+                <>
+                  {restaurant.category==="Italian" && (
+                    <NavLink className='navlink' key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
+                      <div key={restaurant.id} className="restaurant-card-container">
+                        <div className= 'get-restaurants-pic-container'>
+                          <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}/>
+                        </div>
+                        <div className="get-restaurants-bottom-text-container">
+                          <div className='get-restaurants-left-inner-text-container'>
+                            <h4>{restaurant.name}</h4>
+                            <p> {restaurant.avgRating} <i class="fa-solid fa-star" ></i> ratings</p>
+                          </div>
+                        </div>
+                      </div>
+                    </NavLink>
+                    )}
+                </>
+              ))}
+              </div>
+            </>
+            )}
+
+            {!isFiltered && categoryNum.French >0 && (
+            <>
+              <h2 className='restaurant-category-title'>French</h2>
+              <div className="restaurant-main-grid-container" >
+              {restaurants.length>0 && !isFiltered && restaurants.map(restaurant => (
+                <>
+                  {restaurant.category==="French" && (
+                    <NavLink className='navlink' key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
+                      <div key={restaurant.id} className="restaurant-card-container">
+                        <div className= 'get-restaurants-pic-container'>
+                          <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}/>
+                        </div>
+                        <div className="get-restaurants-bottom-text-container">
+                          <div className='get-restaurants-left-inner-text-container'>
+                            <h4>{restaurant.name}</h4>
+                            <p> {restaurant.avgRating} <i class="fa-solid fa-star" ></i> ratings</p>
+                          </div>
+                        </div>
+                      </div>
+                    </NavLink>
+                    )}
+                </>
+              ))}
+              </div>
+            </>
+            )}
+
+            {!isFiltered && categoryNum.FastFood >0 && (
+            <>
+              <h2 className='restaurant-category-title'>FastFood</h2>
+              <div className="restaurant-main-grid-container" >
+              {restaurants.length>0 && !isFiltered && restaurants.map(restaurant => (
+                <>
+                  {restaurant.category==="FastFood" && (
+                    <NavLink className='navlink' key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
+                      <div key={restaurant.id} className="restaurant-card-container">
+                        <div className= 'get-restaurants-pic-container'>
+                          <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}/>
+                        </div>
+                        <div className="get-restaurants-bottom-text-container">
+                          <div className='get-restaurants-left-inner-text-container'>
+                            <h4>{restaurant.name}</h4>
+                            <p> {restaurant.avgRating} <i class="fa-solid fa-star" ></i> ratings</p>
+                          </div>
+                        </div>
+                      </div>
+                    </NavLink>
+                    )}
+                </>
+              ))}
+              </div>
+            </>
+            )}
+            {!isFiltered && categoryNum.Ethiopian >0 && (
+            <>
+              <h2 className='restaurant-category-title'>Ethiopian</h2>
+              <div className="restaurant-main-grid-container" >
+              {restaurants.length>0 && !isFiltered && restaurants.map(restaurant => (
+                <>
+                  {restaurant.category==="Ethiopian" && (
+                    <NavLink className='navlink' key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
+                      <div key={restaurant.id} className="restaurant-card-container">
+                        <div className= 'get-restaurants-pic-container'>
+                          <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}/>
+                        </div>
+                        <div className="get-restaurants-bottom-text-container">
+                          <div className='get-restaurants-left-inner-text-container'>
+                            <h4>{restaurant.name}</h4>
+                            <p> {restaurant.avgRating} <i class="fa-solid fa-star" ></i> ratings</p>
+                          </div>
+                        </div>
+                      </div>
+                    </NavLink>
+                    )}
+                </>
+              ))}
+              </div>
+            </>
+            )}
+            {!isFiltered && categoryNum.Mediterranean >0 && (
+            <>
+              <h2 className='restaurant-category-title'>Mediterranean</h2>
+              <div className="restaurant-main-grid-container" >
+              {restaurants.length>0 && !isFiltered && restaurants.map(restaurant => (
+                <>
+                  {restaurant.category==="Mediterranean" && (
+                    <NavLink className='navlink' key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
+                      <div key={restaurant.id} className="restaurant-card-container">
+                        <div className= 'get-restaurants-pic-container'>
+                          <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}/>
+                        </div>
+                        <div className="get-restaurants-bottom-text-container">
+                          <div className='get-restaurants-left-inner-text-container'>
+                            <h4>{restaurant.name}</h4>
+                            <p> {restaurant.avgRating} <i class="fa-solid fa-star" ></i> ratings</p>
+                          </div>
+                        </div>
+                      </div>
+                    </NavLink>
+                    )}
+                </>
+              ))}
+              </div>
+            </>
+            )}
+
+            <div className='restaurant-filtered-main-grid-container'>
+              {filteredItems.length>0 && isFiltered && filteredItems.map(restaurant => (
+                <>
+                  <NavLink className='navlink' key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
+                    <div key={restaurant.id} className="restaurant-card-container">
+                      <div className= 'get-restaurants-pic-container'>
+                        <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}/>
+                      </div>
+                      <div className="get-restaurants-bottom-text-container">
+                        <div className='get-restaurants-left-inner-text-container'>
+                          <h3>{restaurant.name}</h3>
+                          <p> {restaurant.avgRating} <i class="fa-solid fa-star" ></i> ratings</p>
+                        </div>
+                      </div>
+                    </div>
+                  </NavLink>
+                </>
+              ))}
             </div>
+            {/* </div> */}
           </div>
         </>
     )

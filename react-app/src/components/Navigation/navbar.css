@@ -3,7 +3,7 @@
     height: 50px;
     /* background-color: lightcoral; */
     display:flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     border-bottom: #E7E7E7 1px solid;
 }

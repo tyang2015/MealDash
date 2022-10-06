@@ -42,7 +42,7 @@ const SplashPage = () => {
                   </div>
                   <div className='splash-page-restaurant-text-box'>
                     <p>{restaurant.name}</p>
-                    <p>{restaurant.avgRating}</p>
+                    <p>{restaurant.avgRating} <i class="fa-solid fa-star" ></i> rating</p>
                   </div>
                 </div>
               ))}
@@ -57,9 +57,9 @@ const SplashPage = () => {
           <div className='become-a-partner-container splash-middle-link-container'>
             <img className="image-link-pic" src="https://cdn.doordash.com/media/consumer/home/landing/new/Storefront.svg"/>
             <h1> Become a Partner </h1>
-            <NavLink to="/restaurants/new">
-              <p style={{textAlign: "center"}}> Click here to sign up your store </p>
-            </NavLink>
+            {/* <NavLink to="/restaurants/new"> */}
+              <p style={{textAlign: "center"}}> Create your account first to register your store </p>
+            {/* </NavLink> */}
           </div>
           <div className='try-the-app splash-middle-link-container' >
             <img className="image-link-pic" src="https://cdn.doordash.com/media/consumer/home/landing/new/iphone.svg"/>

@@ -51,7 +51,7 @@ const NavBar = () => {
                         {profileMenu()}
                     </div>
                     <NavLink to="/restaurants">
-                      <i className="fa-solid fa-burger"> DoorDash </i>
+                      <i className="fa-solid fa-burger"> MealDash </i>
                     </NavLink>
                     <div>
                       <div>
