@@ -1,0 +1,111 @@
+.splashpage-footer{
+  width: 100%;
+  height: 20em;
+  color:white;
+  background-color: black;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+
+  /* position: fixed; */
+  /* bottom: 0;
+  left: 0;
+  right:0; */
+}
+
+.splashpage-footer-left-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+
+.splashpage-footer-right-container{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+}
+
+.splashpage-top-cities-title-container{
+  width: 100%;
+  height: 2em;
+  /* background-color: lightsalmon; */
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  padding-left: 20px;
+  font-weight: 700;
+}
+
+.splashpage-cities-container{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+  /* background-color: green; */
+}
+
+.github-container{
+  /* background-color: lightcoral; */
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.linked-in-container{
+  /* background-color: lightcoral; */
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+}
+
+.footer-github-link-container{
+  height: 40px;
+  /* background-color: green; */
+  width: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.github-svg-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background-color: lightgreen; */
+  height:100%;
+  width: 28%;
+}
+
+.footer-linkedin-link-container{
+  height: 40px;
+  /* background-color: green; */
+  width: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.linked-in-svg-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background-color: lightgreen; */
+  height:100%;
+  width: 28%;
+}
+
+.link{
+  color:white;
+  text-decoration: none;
+}

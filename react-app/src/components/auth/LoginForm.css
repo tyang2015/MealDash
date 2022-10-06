@@ -43,3 +43,10 @@
   color: white;
   font-weight: 700;
 }
+
+.login-form-validation-errors{
+  color: red;
+  /* background-color: lightblue; */
+
+  /* margin-bottom: 20px; */
+}

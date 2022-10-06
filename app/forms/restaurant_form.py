@@ -49,7 +49,7 @@ def valid_routing_number(form, field):
 # def valid_open_time(form, field):
 #     openTime = field.data
 
-CATEGORY_CHOICES = ["Asian", "American","Breakfast", "Vegan", "Mexican", "Japanese", "Italian", "French","Dessert", "FastFood"]
+CATEGORY_CHOICES = ["Asian", "American","Breakfast", "Vegan", "Mexican", "Japanese", "Italian", "French", "FastFood", "Ethiopian", "Mediterranean"]
 
 class RestaurantForm(FlaskForm):
     name = StringField("Post Url", validators=[DataRequired()])

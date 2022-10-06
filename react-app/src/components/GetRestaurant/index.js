@@ -9,6 +9,8 @@ import "./GetRestaurant.css"
 import { Modal } from "../../context/FoodItemOrder";
 import FoodItemModal from "../FoodItemModal";
 import CartRightPane from "../CartRightPane";
+import RestaurantFooter from "../RestaurantFooter";
+import NavBar from "../Navigation/NavBar";
 
 const GetRestaurant = () => {
   let { id } = useParams();
@@ -95,14 +97,12 @@ const GetRestaurant = () => {
       } else {
         setCloseTime(closeHours.concat(":").concat(closeMinutes).concat(closeExtension))
       }
+<<<<<<< HEAD
       // console.log('open time:', openTime)
       // console.log('close time:', closeTime)
+=======
+>>>>>>> main
       if (todayInHours === actualCloseHours)console.log('hours match')
-      // if ((todayInHours === actualCloseHours && todayInMinutes < Number(closeMinutes))){
-      //   console.log('should be open! 2nd condition')
-      // } else {
-      //   console.log('closed')
-      // }
 
       // console.log('restaraunt open minutes:,', openMinutes)
       if (todayInHours === actualOpenHours && todayInMinutes > Number(openMinutes)) {
@@ -251,121 +251,67 @@ const GetRestaurant = () => {
 
   return (
     <>
+    <NavBar/>
       <div className="restaurant-page-main-container">
-        <div className="restaurant-page-main-content-container">
-          {/* <h3> restaurant page</h3> */}
-          {restaurant  && (
-            <>
-              <div className="restaurant-page-pic-container">
-                <img className="restaurant-page-pic" src={restaurant.restaurantPicUrl} onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
-              </div>
-              <div className="restaurant-page-logo-pic-container" style={{marginTop: "27px"}}>
-                <img className="restaurant-page-logo-pic" src={restaurant.logo} onError={e => { e.currentTarget.src = "https://cdn5.vectorstock.com/i/1000x1000/65/29/vintage-badge-retro-blank-labels-logo-vector-23946529.jpg"; }} />
-              </div>
-              <div className="restaurant-page-name" style={{marginTop: "20px"}}>
-                {restaurant.name}
-              </div>
-              <div className="restaurant-page-description-container">
-                <div className="restaurant-page-left-description-text-box">
-                  <div> {restaurant.category} • {restaurant.avgRating == "0"? null: finalAvgRating}&nbsp;
-                  <i class="fa-solid fa-star" ></i> • {restaurant.numReviews == "0"? "No": restaurant.numReviews}&nbsp;{restaurant.numReviews=== 1? "rating": "ratings"} • {restaurant.priceRange == "1"? "$": "2"? "$$": "$$$"}
-                  </div>
-                  <div className="restaurant-page-hours-container">
-                    <div className="restaurant-page-open-status" style={{color: isOpen? "green": "red"}}>
-                      {isOpen? "Open Now": "Closed"}&nbsp;
-                    </div>
-                    <div className="restaurant-page-close-information">
-                    •&nbsp;Closes at {restaurant? closeTime: null}
-                    </div>
-                  </div>
+        <div className="restaurant-page-main-content-top-outer-container">
+          <div className="restaurant-page-main-content-container">
+            {/* <h3> restaurant page</h3> */}
+            {restaurant  && (
+              <>
+                <div className="restaurant-page-pic-container">
+                  <img className="restaurant-page-pic" src={restaurant.restaurantPicUrl} onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
                 </div>
-                <div style={{width: "330px"}} className="restaurant-page-update-delete-buttons-container">
-                  {sessionUser.id == restaurant.ownerId && (
-                    <>
-                      <NavLink className='navlink' to={`/restaurants/${restaurant.id}/edit`}>
-                        <div className = "restaurant-page-update-button button">
-                          Update Restaurant
-                        </div>
-                      </NavLink>
-                      <button onClick={handleDelete} className="restaurant-page-delete-button button">
-                        Delete Restaurant
-                      </button>
-                      <NavLink className='navlink' to={`/restaurants/${restaurant.id}/new`}>
-                        <div className="restaurant-page-create-food-item-button button">
-                          Add to the Menu
-                        </div>
-                      </NavLink>
-                    </>
-                  )}
+                <div className="restaurant-page-logo-pic-container" style={{marginTop: "27px"}}>
+                  <img className="restaurant-page-logo-pic" src={restaurant.logo} onError={e => { e.currentTarget.src = "https://cdn5.vectorstock.com/i/1000x1000/65/29/vintage-badge-retro-blank-labels-logo-vector-23946529.jpg"; }} />
                 </div>
-              </div>
-              <div className="restaurant-page-middle-container">
-                  <div style={{marginTop:"15px"}}><b>Full Menu</b></div>
-                  <div style={{color: "#7A7876"}}> {openTime} - {closeTime}</div>
-                  <div className="filter-food-item-category-container">
-                    <div onClick={ e=> handleFilter("All")} className='restaurant-page-category-container'>
-                      All
-                      {categoryChosen === "All" && (
-                        <div className="restaurant-page-category-selection-bar"></div>
-                      )}
+                <div className="restaurant-page-name" style={{marginTop: "20px"}}>
+                  {restaurant.name}
+                </div>
+                <div className="restaurant-page-description-container">
+                  <div className="restaurant-page-left-description-text-box">
+                    <div> {restaurant.category} • {restaurant.avgRating == "0"? null: finalAvgRating}&nbsp;
+                    <i class="fa-solid fa-star" ></i> • {restaurant.numReviews == "0"? "No": restaurant.numReviews}&nbsp;{restaurant.numReviews=== 1? "rating": "ratings"} • {restaurant.priceRange == "1"? "$": "2"? "$$": "$$$"}
                     </div>
-                    <div onClick={ e=> handleFilter("Main")} className='restaurant-page-category-container not-first-category'>
-                      Main
-                      {categoryChosen === "Main" && (
-                        <div className="restaurant-page-category-selection-bar"></div>
-                      )}
-                    </div>
-                    <div onClick={e=> handleFilter("Sides")} className='restaurant-page-category-container not-first-category'>
-                      Sides
-                      {categoryChosen === "Sides" && (
-                        <div className="restaurant-page-category-selection-bar"></div>
-                      )}
-                    </div>
-                    <div onClick={e=>  handleFilter("Drinks")} className="restaurant-page-category-container not-first-category">
-                      Drinks
-                      {categoryChosen === "Drinks" && (
-                        <div className="restaurant-page-category-selection-bar"></div>
-                      )}
-                    </div>
-                    <div onClick={e=>  handleFilter("Desserts")} className="restaurant-page-category-container not-first-category">
-                      Desserts
-                      {categoryChosen === "Desserts" && (
-                        <div className="restaurant-page-category-selection-bar"></div>
-                      )}
-                    </div>
-                  </div>
-                  <div className="filter-food-item-category-dynamic-bar-selection" style={{}}>
-                  </div>
-              </div>
-              <div className="restaurant-page-bottom-container">
-                <h2> {categoryChosen} </h2>
-                <div className="food-items-grid-container">
-                    {foodItems.length>0 && !isFiltered && foodItems.map(item=>(
-                      <div key={item.id} className="food-item-card-container" onClick={()=> {
-                        setFoodItemModal(true)
-                        setFoodItem(item)
-                        }}>
-                        <div className="food-item-left-container">
-                          <div style={{fontWeight:"700"}}> {item.name.length>32? item.name.substring(0,33).concat("..."): item.name} </div>
-                          <div> {item.description.length>87? item.description.substring(0,88).concat("..."): item.description} </div>
-                          <div> {item.price} </div>
-                          <div> {item.category}</div>
-                        </div>
-                        <div className="food-item-middle-container">
-                          <img className="food-item-pic" src= {item.foodPicUrl} onError={e => { e.currentTarget.src =
-                            "https://static.onecms.io/wp-content/uploads/sites/47/2020/08/06/cat-with-empty-bowl-1224404559-2000.jpg"; }}/>
-                        </div>
-                        <div className="food-item-right-container">
-                          {sessionUser.id == restaurant.ownerId && (
-                            <>
-                              <NavLink className="navlink" to={`/restaurants/${id}/fooditems/${item.id}`}>
-                                <button className="button">edit item</button>
-                              </NavLink>
-                              <button onClick={(e)=> handleDeleteFoodItem(item.id)} className="button">delete item</button>
-                            </>
-                          )}
-                        </div>
+                    <div className="restaurant-page-hours-container">
+                      <div className="restaurant-page-open-status" style={{color: isOpen? "green": "red"}}>
+                        {isOpen? "Open Now": "Closed"}&nbsp;
                       </div>
+                      <div className="restaurant-page-close-information">
+                      •&nbsp;Closes at {restaurant? closeTime: null}
+                      </div>
+                    </div>
+                  </div>
+                  <div style={{width: "330px"}} className="restaurant-page-update-delete-buttons-container">
+                    {sessionUser.id == restaurant.ownerId && (
+                      <>
+                        <NavLink className='navlink' to={`/restaurants/${restaurant.id}/edit`}>
+                          <div className = "restaurant-page-update-button button">
+                            Update Restaurant
+                          </div>
+                        </NavLink>
+                        <button onClick={handleDelete} className="restaurant-page-delete-button button">
+                          Delete Restaurant
+                        </button>
+                        <NavLink className='navlink' to={`/restaurants/${restaurant.id}/new`}>
+                          <div className="restaurant-page-create-food-item-button button">
+                            Add to the Menu
+                          </div>
+                        </NavLink>
+                      </>
+                    )}
+                  </div>
+                </div>
+                <div className="restaurant-page-middle-container">
+                    <div style={{marginTop:"15px"}}><b>Full Menu</b></div>
+                    <div style={{color: "#7A7876"}}> {openTime} - {closeTime}</div>
+                    <div className="filter-food-item-category-container">
+                      <div onClick={ e=> handleFilter("All")} className='restaurant-page-category-container'>
+                        All
+                        {categoryChosen === "All" && (
+                          <div className="restaurant-page-category-selection-bar"></div>
+                        )}
+                      </div>
+<<<<<<< HEAD
                     ))}
                     {foodItemModal && <FoodItemModal forceCartUpdate={forceCartUpdate} setForceCartUpdate={setForceCartUpdate} submittedCartItems={submittedCartItems} setSubmittedCartItems={setSubmittedCartItems} setSubmittedCart={setSubmittedCart} foodItem={foodItem} setFoodItemModal={setFoodItemModal}/> }
                     {filteredItems.length>0 && isFiltered && filteredItems.map(item=>(
@@ -390,16 +336,118 @@ const GetRestaurant = () => {
                             </>
                           )}
                         </div>
+=======
+                      <div onClick={ e=> handleFilter("Main")} className='restaurant-page-category-container not-first-category'>
+                        Main
+                        {categoryChosen === "Main" && (
+                          <div className="restaurant-page-category-selection-bar"></div>
+                        )}
+>>>>>>> main
                       </div>
-                    ))}
+                      <div onClick={e=> handleFilter("Sides")} className='restaurant-page-category-container not-first-category'>
+                        Sides
+                        {categoryChosen === "Sides" && (
+                          <div className="restaurant-page-category-selection-bar"></div>
+                        )}
+                      </div>
+                      <div onClick={e=>  handleFilter("Drinks")} className="restaurant-page-category-container not-first-category">
+                        Drinks
+                        {categoryChosen === "Drinks" && (
+                          <div className="restaurant-page-category-selection-bar"></div>
+                        )}
+                      </div>
+                      <div onClick={e=>  handleFilter("Desserts")} className="restaurant-page-category-container not-first-category">
+                        Desserts
+                        {categoryChosen === "Desserts" && (
+                          <div className="restaurant-page-category-selection-bar"></div>
+                        )}
+                      </div>
+                    </div>
+                    <div className="filter-food-item-category-dynamic-bar-selection" style={{}}>
+                    </div>
                 </div>
-
-              </div>
-            </>
-          )}
+                <div className="restaurant-page-bottom-container">
+                  {foodItems.length === 0 && (
+                    <div className="no-food-items-container">
+                      No food items &nbsp;<i class="fa-solid fa-plate-wheat"></i>&nbsp;
+                      {sessionUser.id === restaurant.ownerId && (<p>Add to your menu!</p>)}
+                    </div>
+                  )}
+                  {foodItems.length>0 && (
+                    <>
+                      <h2 className="category-name-container" > {categoryChosen} </h2>
+                        <div className="food-items-grid-container">
+                            {foodItems.length>0 && !isFiltered && foodItems.map(item=>(
+                              <div key={item.id} className="food-item-card-container" onClick={()=> {
+                                setFoodItemModal(true)
+                                setFoodItem(item)
+                                }}>
+                                <div className="food-item-left-container">
+                                  <div style={{fontWeight:"700"}}> {item.name.length>32? item.name.substring(0,33).concat("..."): item.name} </div>
+                                  <div> {item.description.length>87? item.description.substring(0,88).concat("..."): item.description} </div>
+                                  <div> ${item.price} </div>
+                                  {/* <div> {item.category}</div> */}
+                                </div>
+                                <div className="food-item-middle-container">
+                                  <img className="food-item-pic" src= {item.foodPicUrl} onError={e => { e.currentTarget.src =
+                                    "https://static.onecms.io/wp-content/uploads/sites/47/2020/08/06/cat-with-empty-bowl-1224404559-2000.jpg"; }}/>
+                                </div>
+                                {sessionUser.id == restaurant.ownerId && (
+                                  <div className="food-item-right-container">
+                                    {/* {sessionUser.id == restaurant.ownerId && ( */}
+                                      <>
+                                        <NavLink className="navlink edit-food-item-button" to={`/restaurants/${id}/fooditems/${item.id}`}>
+                                          <button style={{width:"100%"}}className="button"><i class="fa-solid fa-pen-to-square"></i></button>
+                                        </NavLink>
+                                        <button onClick={(e)=> handleDeleteFoodItem(item.id)} className="button delete-food-item-button"><i class="fa-solid fa-trash-can"></i></button>
+                                      </>
+                                    {/* )} */}
+                                  </div>
+                                )}
+                              </div>
+                            ))}
+                            {/* {foodItemModal && <FoodItemModal forceCartUpdate={forceCartUpdate} setForceCartUpdate={setForceCartUpdate} submittedCartItems={submittedCartItems} setSubmittedCartItems={setSubmittedCartItems} setSubmittedCart={setSubmittedCart} foodItem={foodItem} setFoodItemModal={setFoodItemModal}/> } */}
+                            {filteredItems.length>0 && isFiltered && filteredItems.map(item=>(
+                              <div key={item.id} className="food-item-card-container" onClick={()=> setFoodItemModal(true)}>
+                                <div className="food-item-left-container">
+                                  <div style={{fontWeight:"700"}}> {item.name} </div>
+                                  <div> {item.description.length>87? item.description.substring(0,88).concat("..."): item.description} </div>
+                                  <div> {item.price} </div>
+                                  {/* <div> {item.category}</div> */}
+                                </div>
+                                <div className="food-item-middle-container">
+                                  <img className="food-item-pic" src= {item.foodPicUrl} onError={e => { e.currentTarget.src =
+                                    "https://static.onecms.io/wp-content/uploads/sites/47/2020/08/06/cat-with-empty-bowl-1224404559-2000.jpg"; }}/>
+                                </div>
+                                <div className="food-item-right-container">
+                                  {sessionUser.id == restaurant.ownerId && (
+                                    <>
+                                      <NavLink className="navlink edit-food-item-button" to={`/restaurants/${id}/fooditems/${item.id}`}>
+                                        <button style={{width:"100%"}}className="button"><i class="fa-solid fa-pen-to-square"></i></button>
+                                      </NavLink>
+                                      <button onClick={(e)=> handleDeleteFoodItem(item.id)} className="button delete-food-item-button"><i class="fa-solid fa-trash-can"></i></button>
+                                    </>
+                                  )}
+                                </div>
+                              </div>
+                            ))}
+                        </div>
+                    </>
+                  ) }
+                </div>
+              </>
+            )}
+          </div>
         </div>
+<<<<<<< HEAD
         {!submittedCart && (<CartRightPane/>)}
         {submittedCart && (<CartRightPane submittedCart={submittedCart} forceCartUpdate={forceCartUpdate} restaurant={restaurant} submittedCartItems={submittedCartItems}/>) }
+=======
+        <RestaurantFooter/>
+        {/* {!submittedCart && (<CartRightPane/>)}
+        {submittedCart && (<CartRightPane submittedCart={submittedCart} forceCartUpdate={forceCartUpdate} restaurant={restaurant} submittedCartItems={submittedCartItems}/>) } */}
+
+>>>>>>> main
       </div>
     </>
 

@@ -4,7 +4,7 @@ import "./FormStep2.css"
 
 // 2nd step: openTime, closeTime, priceRange, category
 // time inputs, number, select
-const CATEGORY_CHOICES = ["Asian", "American","Breakfast", "Vegan", "Mexican", "Japanese", "Italian", "French","Dessert", "FastFood"]
+const CATEGORY_CHOICES = ["Asian", "American","Breakfast", "Vegan", "Mexican", "Japanese", "Italian", "French", "FastFood", "Ethiopian", "Mediterranean"]
 
 const FormStep2 = ({formData, setFormData}) => {
   // console.log('form data in form step 2:', formData)

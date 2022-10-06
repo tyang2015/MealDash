@@ -7,8 +7,11 @@
 
 .create-food-item-food-pic{
   height: 100%;
+  min-height: 430.883px;
+  max-height: 430.883px;
   width: 100%;
   object-fit: cover;
+
 }
 
 .create-food-item-content-container{
@@ -52,7 +55,7 @@
   height:100%;
   width: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 }
 
@@ -71,7 +74,11 @@
 .create-food-item-submit-container{
   width:100%;
   /* background-color: lightblue; */
-  margin-top: 90px;
+  /* margin-top: 90px; */
+  height: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
 }
 
 .create-food-item-label-input-container{
@@ -94,6 +101,11 @@
   background-position:center;
   border: 0.5px solid
 } */
+
+.food-item-input{
+  height: 2em;
+}
+
 
 .validation-errors{
   color:red;
