@@ -11,34 +11,34 @@ const SplashFooter = () => {
         <div className='splashpage-top-cities-title-container'>Top Cities</div>
         <div className='splashpage-cities-container'>
           <div className='splashpage-top-cities-first-column'>
-            <p>New York City</p>
-            <p> Los Angeles </p>
-            <p> Toronto </p>
-            <p> Chicago </p>
-            <p> Houston</p>
-            <p> Brooklyn</p>
-            <p> San Diego</p>
-            <p> Las Vegas</p>
+            <p style={{fontSize:"11px"}}>New York City</p>
+            <p style={{fontSize:"11px"}}> Los Angeles </p>
+            <p style={{fontSize:"11px"}}> Toronto </p>
+            <p style={{fontSize:"11px"}}> Chicago </p>
+            <p style={{fontSize:"11px"}}> Houston</p>
+            <p style={{fontSize:"11px"}}> Brooklyn</p>
+            <p style={{fontSize:"11px"}}> San Diego</p>
+            <p style={{fontSize:"11px"}}> Las Vegas</p>
           </div>
           <div className='splashpage-top-cities-second-column'>
-            <p>San Francisco</p>
-            <p>Seattle</p>
-            <p>Atlanta</p>
-            <p>Queens</p>
-            <p>Vancouver, BC</p>
-            <p>Miami</p>
-            <p>San Antonio</p>
-            <p>Phoenix</p>
+            <p style={{fontSize:"11px"}}>San Francisco</p>
+            <p style={{fontSize:"11px"}}>Seattle</p>
+            <p style={{fontSize:"11px"}}>Atlanta</p>
+            <p style={{fontSize:"11px"}}>Queens</p>
+            <p style={{fontSize:"11px"}}>Vancouver, BC</p>
+            <p style={{fontSize:"11px"}}>Miami</p>
+            <p style={{fontSize:"11px"}}>San Antonio</p>
+            <p style={{fontSize:"11px"}}>Phoenix</p>
           </div>
           <div className='splashpage-top-cities-third-column'>
-            <p>Denver</p>
-            <p>Austin</p>
-            <p>Washington, DC</p>
-            <p>Dallas</p>
-            <p>Melbourne</p>
-            <p>Sydney</p>
-            <p>Montreal</p>
-            <p>All Cities</p>
+            <p style={{fontSize:"11px"}}>Denver</p>
+            <p style={{fontSize:"11px"}}>Austin</p>
+            <p style={{fontSize:"11px"}}>Washington, DC</p>
+            <p style={{fontSize:"11px"}}>Dallas</p>
+            <p style={{fontSize:"11px"}}>Melbourne</p>
+            <p style={{fontSize:"11px"}}>Sydney</p>
+            <p style={{fontSize:"11px"}}>Montreal</p>
+            <p style={{fontSize:"11px"}}>All Cities</p>
           </div>
         </div>
       </div>
