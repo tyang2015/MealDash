@@ -97,11 +97,6 @@ const GetRestaurant = () => {
       } else {
         setCloseTime(closeHours.concat(":").concat(closeMinutes).concat(closeExtension))
       }
-<<<<<<< HEAD
-      // console.log('open time:', openTime)
-      // console.log('close time:', closeTime)
-=======
->>>>>>> main
       if (todayInHours === actualCloseHours)console.log('hours match')
 
       // console.log('restaraunt open minutes:,', openMinutes)
@@ -311,38 +306,11 @@ const GetRestaurant = () => {
                           <div className="restaurant-page-category-selection-bar"></div>
                         )}
                       </div>
-<<<<<<< HEAD
-                    ))}
-                    {foodItemModal && <FoodItemModal forceCartUpdate={forceCartUpdate} setForceCartUpdate={setForceCartUpdate} submittedCartItems={submittedCartItems} setSubmittedCartItems={setSubmittedCartItems} setSubmittedCart={setSubmittedCart} foodItem={foodItem} setFoodItemModal={setFoodItemModal}/> }
-                    {filteredItems.length>0 && isFiltered && filteredItems.map(item=>(
-                      <div key={item.id} className="food-item-card-container" onClick={()=> setFoodItemModal(true)}>
-                        <div className="food-item-left-container">
-                          <div style={{fontWeight:"700"}}> {item.name} </div>
-                          <div> {item.description.length>87? item.description.substring(0,88).concat("..."): item.description} </div>
-                          <div> {item.price} </div>
-                          <div> {item.category}</div>
-                        </div>
-                        <div className="food-item-middle-container">
-                          <img className="food-item-pic" src= {item.foodPicUrl} onError={e => { e.currentTarget.src =
-                            "https://static.onecms.io/wp-content/uploads/sites/47/2020/08/06/cat-with-empty-bowl-1224404559-2000.jpg"; }}/>
-                        </div>
-                        <div className="food-item-right-container">
-                          {sessionUser.id == restaurant.ownerId && (
-                            <>
-                              <NavLink to={`/restaurants/${id}/fooditems/${item.id}`}>
-                                <button className="button">edit item</button>
-                              </NavLink>
-                              <button onClick={(e)=> handleDeleteFoodItem(item.id)} className="button">delete item</button>
-                            </>
-                          )}
-                        </div>
-=======
                       <div onClick={ e=> handleFilter("Main")} className='restaurant-page-category-container not-first-category'>
                         Main
                         {categoryChosen === "Main" && (
                           <div className="restaurant-page-category-selection-bar"></div>
                         )}
->>>>>>> main
                       </div>
                       <div onClick={e=> handleFilter("Sides")} className='restaurant-page-category-container not-first-category'>
                         Sides
@@ -439,15 +407,10 @@ const GetRestaurant = () => {
             )}
           </div>
         </div>
-<<<<<<< HEAD
-        {!submittedCart && (<CartRightPane/>)}
-        {submittedCart && (<CartRightPane submittedCart={submittedCart} forceCartUpdate={forceCartUpdate} restaurant={restaurant} submittedCartItems={submittedCartItems}/>) }
-=======
         <RestaurantFooter/>
         {/* {!submittedCart && (<CartRightPane/>)}
         {submittedCart && (<CartRightPane submittedCart={submittedCart} forceCartUpdate={forceCartUpdate} restaurant={restaurant} submittedCartItems={submittedCartItems}/>) } */}
 
->>>>>>> main
       </div>
     </>
 
