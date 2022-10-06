@@ -17,6 +17,13 @@
   background-color: lightpink;
 }
 
+.restaurant-page-main-content-top-outer-container{
+  display:flex;
+  flex-direction: row;
+  width:100%;
+  height: 100%;
+}
+
 /* this controls the width of all content (will change after you put orders pane in */
 .restaurant-page-main-content-container{
   height: fit-content;

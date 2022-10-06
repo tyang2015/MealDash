@@ -20,14 +20,15 @@ def valid_phone_number(form, field):
         raise ValidationError("Invalid phone number")
 
 
-
+# i do not need a form validation for this - you can remove FoodForm
+# just parse it from backend with request.json()
 # you want as many forms as there food items in the restaurant menu
 class FoodForm(Form):
   # if a customer changes this item, i need to find it by id
   id = IntegerField("Food id")
   name = StringField('Item')
   quantity = IntegerField("Quantity")
-  total_price = FloatField("Total Price")
+  price = FloatField("Price")
   preference = StringField("Preference")
 
 

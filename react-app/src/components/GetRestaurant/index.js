@@ -12,6 +12,8 @@ import CartRightPane from "../CartRightPane";
 import RestaurantFooter from "../RestaurantFooter";
 import NavBar from "../Navigation/NavBar";
 
+const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart' || "[]"))
+
 const GetRestaurant = () => {
   let { id } = useParams();
   const dispatch = useDispatch();
@@ -35,24 +37,23 @@ const GetRestaurant = () => {
   let [filteredItems, setFilteredItems] = useState([])
 
   const [submittedCart, setSubmittedCart] =useState(false)
-  const [submittedCartItems, setSubmittedCartItems] = useState([])
+  const [submittedCartItems, setSubmittedCartItems] = useState(cartFromLocalStorage || [])
+  // const [submittedCartItems, setSubmittedCartItems] = useState( [])
   const [forceCartUpdate, setForceCartUpdate] = useState(false)
 
   const [finalAvgRating, setFinalAvgRating] = useState(0)
-  // const [closeMinutesIndex, setCloseMinutesIndex] = useState('')
-  // const [closeMinutes, setCloseMinutes] = useState('')
-  // const [openMinutesIndex, setOpenMinutesIndex] = useState('')
-  // const [openMinutes, setOpenMinutes] = useState('')
-  // const [openExtension, setOpenExtension] = useState('')
-  // const [closeExtension, setCloseExtension] = useState('')
   const [closeHours, setCloseHours] = useState(restaurant?.closeTime.substring(0,2) || '')
   const [openHours, setOpenHours] = useState(restaurant?.openTime.substring(0,2) || '')
 
   let today = new Date();
   let todayInHours = today.getHours()
   let todayInMinutes = today.getMinutes()
-  // let finalAvgRating;
-  console.log('restaurant:', restaurant)
+
+  console.log('cart from local storage:', cartFromLocalStorage)
+
+  useEffect(()=> {
+    localStorage.setItem("cart", JSON.stringify(submittedCartItems))
+  }, [submittedCartItems])
 
   useEffect(()=>{
     if (restaurant){
@@ -374,7 +375,7 @@ const GetRestaurant = () => {
                                 )}
                               </div>
                             ))}
-                            {/* {foodItemModal && <FoodItemModal forceCartUpdate={forceCartUpdate} setForceCartUpdate={setForceCartUpdate} submittedCartItems={submittedCartItems} setSubmittedCartItems={setSubmittedCartItems} setSubmittedCart={setSubmittedCart} foodItem={foodItem} setFoodItemModal={setFoodItemModal}/> } */}
+                            {foodItemModal && <FoodItemModal forceCartUpdate={forceCartUpdate} setForceCartUpdate={setForceCartUpdate} submittedCartItems={submittedCartItems} setSubmittedCartItems={setSubmittedCartItems} setSubmittedCart={setSubmittedCart} foodItem={foodItem} setFoodItemModal={setFoodItemModal}/> }
                             {filteredItems.length>0 && isFiltered && filteredItems.map(item=>(
                               <div key={item.id} className="food-item-card-container" onClick={()=> setFoodItemModal(true)}>
                                 <div className="food-item-left-container">
@@ -406,10 +407,9 @@ const GetRestaurant = () => {
               </>
             )}
           </div>
+        {(<CartRightPane setSubmittedCartItems={setSubmittedCartItems} submittedCart={submittedCart} forceCartUpdate={forceCartUpdate} restaurant={restaurant} submittedCartItems={submittedCartItems}/>) }
         </div>
         <RestaurantFooter/>
-        {/* {!submittedCart && (<CartRightPane/>)}
-        {submittedCart && (<CartRightPane submittedCart={submittedCart} forceCartUpdate={forceCartUpdate} restaurant={restaurant} submittedCartItems={submittedCartItems}/>) } */}
 
       </div>
     </>

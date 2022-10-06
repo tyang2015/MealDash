@@ -19,6 +19,7 @@ import UpdateFoodItem from './components/UpdateFoodItem';
 import NavBarSplash from './components/NavBarSplash';
 import RestaurantFooter from './components/RestaurantFooter';
 import "./index.css"
+import OrderConfirmationPage from './components/OrderConfirmation';
 
 
 function App() {
@@ -72,6 +73,9 @@ function App() {
           </ProtectedRoute>
           <ProtectedRoute path='/restaurants/:id/fooditems/:foodItemId' exact={true} >
             <UpdateFoodItem/>
+          </ProtectedRoute>
+          <ProtectedRoute path='/checkout' exact={true} >
+            <OrderConfirmationPage/>
           </ProtectedRoute>
         </div>
       </Switch>

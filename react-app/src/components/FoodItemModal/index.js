@@ -15,6 +15,23 @@ const FoodItemModal = ({setForceCartUpdate, forceCartUpdate,setSubmittedCartItem
     setSubmittedCart(true)
     // append quantity to the foodItem and return a new?? foodItem object
     // modify original first
+
+    // i also need to check the cartItems and see if the food name already exists
+    // if it does I need to update THAT particular item in submittedCartItems
+    for (let i = 0; i< submittedCartItems.length; i++){
+      let item = submittedCartItems[i]
+      if (item.id === foodItem.id){
+        // do not add foodItem to submittedCartItems if already in cart, just increment quantity
+        item.quantity+=quantity
+        // update the quantity in the total price display
+        quantity = item.quantity
+        // add food preference to foodItem
+        setForceCartUpdate(!forceCartUpdate)
+        setSubmittedCartItems([...submittedCartItems])
+        setFoodItemModal(false)
+        return
+      }
+    }
     foodItem.quantity = quantity
     setForceCartUpdate(!forceCartUpdate)
     setSubmittedCartItems([...submittedCartItems, foodItem])
