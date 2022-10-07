@@ -73,10 +73,9 @@
 
 
 .create-restaurant-form-step-1-third-row{
-  /* background-color: lightcoral; */
   display:flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
 
 }

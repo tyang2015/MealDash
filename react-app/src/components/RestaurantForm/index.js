@@ -39,6 +39,7 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
       category: restaurant? restaurant.category: "American",
       openTime:  restaurant? restaurant.open_time: "",
       closeTime:  restaurant? restaurant.close_time: "",
+      address: restaurant? restaurant.address: ""
       // delete address key before sending to db in submit
       // address: restaurant? restaurant.address: ""
     })
@@ -55,8 +56,9 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
 
     useEffect(()=>{
       let errors= []
-      if (formData === "") return null
-      if (!formData.email.includes("@")) errors.push("Email is invalid")
+      // if (formData === "") return null
+      if (!validateEmail(formData.email)) errors.push("Email is invalid")
+      if (!formData.name) errors.push("Restaurant name is required")
       if (formData.name.length>50) errors.push("Name must be less than 50 characters")
       if (formData.email.length>30) errors.push("Email must be less than 50 characters")
       if (formData.priceRange < 1 || formData.priceRange >3) errors.push("Price range is invalid")
@@ -75,7 +77,7 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
 
     }, [formData.name, formData.priceRange, formData.restaurantPicUrl, formData.longitude,
       formData.latitude, formData.email, formData.phoneNumber, formData.bankAccount,
-      formData.routingNumber, formData.category, formData.openTime, formData.closeTime, formData.logo])
+      formData.routingNumber, formData.category, formData.openTime, formData.closeTime, formData.logo, formData.address])
 
 
     function logoExists(logoUrl) {
@@ -84,24 +86,23 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
       if (restaurants.length>0){
         for (let i = 0; i< restaurants.length; i++) {
           let restaurantObj = restaurants[i]
-          // console.log('restaurant owner id :', restaurantObj.ownerId)
-          // console.log('session user id :', sessionUser.id)
           if (restaurantObj.ownerId != sessionUser.id){
-            // console.log('different user, push the logo')
             logos.push(restaurantObj.logo)
           }
         }
       }
-      // console.log('logos from db:', logos)
       let foundLogo = logos.find(item => item === logoUrl.trim())
       if (foundLogo){
-        // console.log('found logo:', foundLogo)
         return true
       }
       else {
-        // console.log('logo not found:')
         return false
       }
+    }
+
+    function validateEmail(email) {
+      let re = /\S+@\S+\.\S+/;
+      return re.test(email);
     }
 
     function isImage(url) {
@@ -135,24 +136,6 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
 
         return
       }
-      // console.log('form data right before submission:', formData)
-      // let newFormData;
-      // if(geolocationEnabled){
-      // console.log('address to be sent in fetch...:', formData.address)
-      // const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${formData.address}&key=${key}`)
-      // if (response.ok){
-      //   const data = await response.json()
-      //   console.log('data from google api geocoder:', data)
-      //   setFormData({...formData, latitude:  data.results[0]?.geometry.location.lat})
-      //   setFormData({...formData, longitude:  data.results[0]?.geometry.location.lng})
-      //   newFormData = {...formData}
-      //   console.log('data object before deleting address:', formData)
-      //   delete newFormData.address
-      //   console.log('final data object before sending to db:', newFormData)
-      // } else {
-      //   console.log('bad fetch:', response)
-      // }
-      // }
 
       restaurant = {
         ...restaurant,
@@ -171,7 +154,6 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
         close_time: formData.closeTime
         // ...formData
       }
-      // console.log('restaurant to be submitted:', restaurant)
 
       if (formType === "Create Form"){
         dispatch(createRestaurant(restaurant))

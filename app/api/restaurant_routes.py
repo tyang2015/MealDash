@@ -48,6 +48,7 @@ def create_restaurant():
           category = form.data["category"],
           open_time = form.data["open_time"],
           close_time = form.data["close_time"],
+          address = form.data["address"],
           user = current_user
       )
       db.session.add(restaurant)

@@ -65,3 +65,5 @@ class RestaurantForm(FlaskForm):
     category = SelectField("Category", choices=CATEGORY_CHOICES, validators = [DataRequired()])
     open_time = StringField("Opening Time", validators = [DataRequired()])
     close_time = StringField("Closing Time", validators = [DataRequired()])
+    # remove after monday
+    address = StringField("Address")

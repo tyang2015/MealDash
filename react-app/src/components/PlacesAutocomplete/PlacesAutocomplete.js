@@ -15,12 +15,14 @@ import {
 import "@reach/combobox/styles.css";
 
 const google = window.google
-// this can have the geocoder inside
 const PlacesAutocomplete = ({apiKey, setFormData, formData}) => {
   // const ref = useRef(null);
-  // BIND event (your onChange in input) to the autocomplete object
-  const {ready, value, setValue, suggestions: {status, data}, clearSuggestions} = usePlacesAutocomplete();
+  let {ready, value, setValue, suggestions: {status, data}, clearSuggestions} = usePlacesAutocomplete();
   // const autocomplete = new google.maps.places.Autocomplete()
+  // const temporaryAddress= formData.address
+  // if (formData.address){
+  //   setValue(formData.address)
+  // }
 
   const handleSelect = async (address) => {
     setValue(address, false);
@@ -30,8 +32,14 @@ const PlacesAutocomplete = ({apiKey, setFormData, formData}) => {
     const {lat, lng} = await getLatLng(results[0]);
     console.log('lat:', lat)
     console.log('lng:' , lng)
-    await setFormData({...formData, latitude: lat, longitude: lng})
+    await setFormData({...formData, latitude: lat, longitude: lng, address: address})
   }
+  useEffect(()=>{
+    let item = document.getElementById("create-restaurant-address-input")
+    item.setAttribute('value', formData?.address)
+    // console.log('address field after change:', item)
+    // item.innerHTML = formData.address
+  }, [])
 
 
   return (
@@ -49,7 +57,7 @@ const PlacesAutocomplete = ({apiKey, setFormData, formData}) => {
                 name="restaurant-address"
                 placeholder='Search an address'
                 required
-                disabled = {!ready}
+                // disabled = {!ready}
               />
             {/* </div> */}
             <ComboboxPopover>

@@ -33,6 +33,8 @@ class Restaurant(db.Model):
     # OPEN TIME AND CLOSE TIME TO CHANGE DATATYPE?
     open_time = db.Column(db.String, nullable= False)
     close_time = db.Column(db.String, nullable = False)
+    # ADDED HERE FOR PROJECT - remove after monday
+    address = db.Column(db.String, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
 
@@ -53,6 +55,7 @@ class Restaurant(db.Model):
 
 
     def to_dict(self):
+<<<<<<< HEAD
       return {
           "id": self.id,
           "name": self.name,
@@ -75,6 +78,31 @@ class Restaurant(db.Model):
           "avgRating" : self.get_avg_rating(),
           # "User": self.convert_user_to_dict()
       }
+=======
+        return {
+            "id": self.id,
+            "name": self.name,
+            "ownerId" : self.owner_id,
+            "priceRange" : self.price_range,
+            "restaurantPicUrl" : self.restaurant_pic_url,
+            "logo": self.logo,
+            "longitude" : str(self.longitude),
+            "latitude" : str(self.latitude),
+            "email" : self.email,
+            "phoneNumber" : self.phone_number,
+            "bankAccount" : self.bank_account,
+            "routingNumber" : self.routing_number,
+            "category" : self.category,
+            "openTime" : str(self.open_time),
+            "closeTime" : str(self.close_time),
+            "address": self.address,
+            "createdAt": self.created_at,
+            "updatedAt": self.updated_at,
+            "numReviews":  len(self.reviews),
+            "avgRating" : self.get_avg_rating(),
+            # "User": self.convert_user_to_dict()
+        }
+>>>>>>> main
     def convert_user_to_dict(self):
         return {
             "id": self.user.id,

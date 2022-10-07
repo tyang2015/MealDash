@@ -745,9 +745,9 @@ const Restaurants = () => {
               </div>
             </>
             )}
-
+            {filteredItems.length>0 && isFiltered && (
             <div className='restaurant-filtered-main-grid-container'>
-              {filteredItems.length>0 && isFiltered && filteredItems.map(restaurant => (
+               {filteredItems.map(restaurant => (
                 <>
                   <NavLink className='navlink' key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
                     <div key={restaurant.id} className="restaurant-card-container">
@@ -765,7 +765,12 @@ const Restaurants = () => {
                 </>
               ))}
             </div>
-            {/* </div> */}
+            )}
+            {filteredItems.length === 0 && isFiltered && (
+              <div className='restaurants-no-items-display'>
+               <i class="fa-solid fa-utensils"> </i> &nbsp;&nbsp;No Restaurants in this Category
+              </div>
+            )}
           </div>
         </>
     )

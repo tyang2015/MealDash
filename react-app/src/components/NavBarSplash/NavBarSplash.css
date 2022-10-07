@@ -16,7 +16,7 @@
   position:absolute;
   right: 2em;
   /* background-color: lightcyan; */
-  width: 10em;
+  width: 15em;;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -41,4 +41,20 @@
 
 .splash-page-session-button.sign-in-button{
   background-color: lightcoral;
+}
+
+.demo-login-button{
+  border: none;
+  background-color: white;
+  color: black;
+  font-weight: bold;
+  border-radius: 100px;
+  width: 12em;
+  height: 35px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 14px;
+  text-align: center;
 }

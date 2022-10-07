@@ -1,7 +1,7 @@
 """create all tables
 
 Revision ID: 999a7ca987a2
-Revises: 
+Revises:
 Create Date: 2022-10-06 10:21:07.640420
 
 """
@@ -35,8 +35,8 @@ def upgrade():
     sa.Column('price_range', sa.Integer(), nullable=False),
     sa.Column('restaurant_pic_url', sa.String(), nullable=False),
     sa.Column('logo', sa.String(), nullable=False),
-    sa.Column('longitude', sa.Numeric(scale=2), nullable=False),
-    sa.Column('latitude', sa.Numeric(scale=2), nullable=False),
+    sa.Column('longitude', sa.Numeric(scale=15), nullable=False),
+    sa.Column('latitude', sa.Numeric(scale=15), nullable=False),
     sa.Column('email', sa.String(), nullable=False),
     sa.Column('phone_number', sa.String(), nullable=False),
     sa.Column('bank_account', sa.String(), nullable=False),
@@ -44,6 +44,7 @@ def upgrade():
     sa.Column('category', sa.String(), nullable=False),
     sa.Column('open_time', sa.String(), nullable=False),
     sa.Column('close_time', sa.String(), nullable=False),
+    sa.Column('address', sa.String(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),

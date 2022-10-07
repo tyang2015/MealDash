@@ -304,3 +304,24 @@ div.restaurant-page-update-delete-buttons-container{
   font-size: 20px;
 
 }
+
+
+/* .no-food-items-container{
+  background-color: lightblue;
+  width:57em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 100px;
+
+} */
+
+.no-food-items-main-container{
+  /* background-color: lightblue; */
+  width:57em;
+  /* height: 100%; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height:77%;
+}

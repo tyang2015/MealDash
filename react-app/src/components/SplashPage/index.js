@@ -36,15 +36,17 @@ const SplashPage = () => {
           <h2 className='favorites-near-you'> Favorites Near You </h2>
             <div className='splash-page-main-grid-container'>
               {topSixRestaurants.length>0 && topSixRestaurants.map(restaurant=>(
-                <div key={restaurant.id} className='splash-page-restaurant-card-container'>
-                  <div className='splash-page-restaurant-pic-container'>
-                    <img className="splash-page-restaurant-pic" src={restaurant.restaurantPicUrl}/>
+                <NavLink className="navlink" to="/sign-up">
+                  <div key={restaurant.id} className='splash-page-restaurant-card-container'>
+                    <div className='splash-page-restaurant-pic-container'>
+                      <img className="splash-page-restaurant-pic" src={restaurant.restaurantPicUrl}/>
+                    </div>
+                    <div className='splash-page-restaurant-text-box'>
+                      <p>{restaurant.name}</p>
+                      <p>{restaurant.avgRating} <i class="fa-solid fa-star" ></i> rating</p>
+                    </div>
                   </div>
-                  <div className='splash-page-restaurant-text-box'>
-                    <p>{restaurant.name}</p>
-                    <p>{restaurant.avgRating} <i class="fa-solid fa-star" ></i> rating</p>
-                  </div>
-                </div>
+                </NavLink>
               ))}
             </div>
         </div>
