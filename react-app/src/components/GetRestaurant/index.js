@@ -335,7 +335,7 @@ const GetRestaurant = () => {
                     </div>
                 </div>
                 <div className="restaurant-page-bottom-container">
-                  {foodItems.length === 0 && (
+                  {foodItems.length === 0 && !isFiltered && (
                     <div className="no-food-items-container">
                       No food items &nbsp;<i class="fa-solid fa-plate-wheat"></i>&nbsp;
                       {sessionUser.id === restaurant.ownerId && (<p>Add to your menu!</p>)}
@@ -344,44 +344,48 @@ const GetRestaurant = () => {
                   {foodItems.length>0 && (
                     <>
                       <h2 className="category-name-container" > {categoryChosen} </h2>
-                        <div className="food-items-grid-container">
-                            {foodItems.length>0 && !isFiltered && foodItems.map(item=>(
-                              <div key={item.id} className="food-item-card-container" onClick={()=> {
-                                setFoodItemModal(true)
-                                setFoodItem(item)
-                                }}>
-                                <div className="food-item-left-container">
-                                  <div style={{fontWeight:"700"}}> {item.name.length>32? item.name.substring(0,33).concat("..."): item.name} </div>
-                                  <div> {item.description.length>87? item.description.substring(0,88).concat("..."): item.description} </div>
-                                  <div> ${item.price} </div>
-                                  {/* <div> {item.category}</div> */}
-                                </div>
-                                <div className="food-item-middle-container">
-                                  <img className="food-item-pic" src= {item.foodPicUrl} onError={e => { e.currentTarget.src =
-                                    "https://static.onecms.io/wp-content/uploads/sites/47/2020/08/06/cat-with-empty-bowl-1224404559-2000.jpg"; }}/>
-                                </div>
-                                {sessionUser.id == restaurant.ownerId && (
-                                  <div className="food-item-right-container">
-                                    {/* {sessionUser.id == restaurant.ownerId && ( */}
-                                      <>
-                                        <NavLink className="navlink edit-food-item-button" to={`/restaurants/${id}/fooditems/${item.id}`}>
-                                          <button style={{width:"100%"}}className="button"><i class="fa-solid fa-pen-to-square"></i></button>
-                                        </NavLink>
-                                        <button onClick={(e)=> handleDeleteFoodItem(item.id)} className="button delete-food-item-button"><i class="fa-solid fa-trash-can"></i></button>
-                                      </>
-                                    {/* )} */}
+                        {foodItems.length>0 && !isFiltered && (
+                          <div className="food-items-grid-container">
+                              {foodItems.length>0 && !isFiltered && foodItems.map(item=>(
+                                <div key={item.id} className="food-item-card-container" onClick={()=> {
+                                  setFoodItemModal(true)
+                                  setFoodItem(item)
+                                  }}>
+                                  <div className="food-item-left-container">
+                                    <div style={{fontWeight:"700"}}> {item.name.length>32? item.name.substring(0,33).concat("..."): item.name} </div>
+                                    <div> {item.description.length>87? item.description.substring(0,88).concat("..."): item.description} </div>
+                                    <div> ${item.price} </div>
+                                    {/* <div> {item.category}</div> */}
                                   </div>
-                                )}
-                              </div>
-                            ))}
-                            {/* {foodItemModal && <FoodItemModal forceCartUpdate={forceCartUpdate} setForceCartUpdate={setForceCartUpdate} submittedCartItems={submittedCartItems} setSubmittedCartItems={setSubmittedCartItems} setSubmittedCart={setSubmittedCart} foodItem={foodItem} setFoodItemModal={setFoodItemModal}/> } */}
-                            {filteredItems.length>0 && isFiltered && filteredItems.map(item=>(
+                                  <div className="food-item-middle-container">
+                                    <img className="food-item-pic" src= {item.foodPicUrl} onError={e => { e.currentTarget.src =
+                                      "https://static.onecms.io/wp-content/uploads/sites/47/2020/08/06/cat-with-empty-bowl-1224404559-2000.jpg"; }}/>
+                                  </div>
+                                  {sessionUser.id == restaurant.ownerId && (
+                                    <div className="food-item-right-container">
+                                      {/* {sessionUser.id == restaurant.ownerId && ( */}
+                                        <>
+                                          <NavLink className="navlink edit-food-item-button" to={`/restaurants/${id}/fooditems/${item.id}`}>
+                                            <button style={{width:"100%"}}className="button"><i class="fa-solid fa-pen-to-square"></i></button>
+                                          </NavLink>
+                                          <button onClick={(e)=> handleDeleteFoodItem(item.id)} className="button delete-food-item-button"><i class="fa-solid fa-trash-can"></i></button>
+                                        </>
+                                      {/* )} */}
+                                    </div>
+                                  )}
+                                </div>
+                              ))}
+                              {/* {foodItemModal && <FoodItemModal forceCartUpdate={forceCartUpdate} setForceCartUpdate={setForceCartUpdate} submittedCartItems={submittedCartItems} setSubmittedCartItems={setSubmittedCartItems} setSubmittedCart={setSubmittedCart} foodItem={foodItem} setFoodItemModal={setFoodItemModal}/> } */}
+                          </div>
+                        )}
+                        {filteredItems.length>0 && isFiltered && (
+                          <div className="food-items-grid-container">
+                            {filteredItems.map(item=>(
                               <div key={item.id} className="food-item-card-container" onClick={()=> setFoodItemModal(true)}>
                                 <div className="food-item-left-container">
                                   <div style={{fontWeight:"700"}}> {item.name} </div>
                                   <div> {item.description.length>87? item.description.substring(0,88).concat("..."): item.description} </div>
                                   <div> {item.price} </div>
-                                  {/* <div> {item.category}</div> */}
                                 </div>
                                 <div className="food-item-middle-container">
                                   <img className="food-item-pic" src= {item.foodPicUrl} onError={e => { e.currentTarget.src =
@@ -399,9 +403,19 @@ const GetRestaurant = () => {
                                 </div>
                               </div>
                             ))}
-                        </div>
+                          </div>
+                        )}
+                        {filteredItems.length === 0 && isFiltered && (
+                          <div className='no-food-items-main-container'>
+                            {
+                              <>
+                                <i class="fa-solid fa-plate-wheat"></i> &nbsp; <h3> No filtered food items</h3>
+                              </>
+                            }
+                          </div>
+                        )}
                     </>
-                  ) }
+                  )}
                 </div>
               </>
             )}

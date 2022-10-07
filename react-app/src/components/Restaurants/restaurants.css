@@ -75,3 +75,13 @@
   /* background-color: lightcyan; */
   height: 5em;
 }
+
+.restaurants-no-items-display{
+  width:57em;
+  height: 30em;
+  /* background-color: lightcyan; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
