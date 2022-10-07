@@ -57,6 +57,7 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
       let errors= []
       if (formData === "") return null
       if (!formData.email.includes("@")) errors.push("Email is invalid")
+      if (!formData.name) errors.push("Restaurant name is required")
       if (formData.name.length>50) errors.push("Name must be less than 50 characters")
       if (formData.email.length>30) errors.push("Email must be less than 50 characters")
       if (formData.priceRange < 1 || formData.priceRange >3) errors.push("Price range is invalid")
