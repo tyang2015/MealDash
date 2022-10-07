@@ -28,7 +28,7 @@ def valid_phone_number(form, field):
 
 def valid_email(form, field):
   email = field.data
-  # if "@" not in email:
+  # if "@" not in email:dd
   #   raise ValidationError("Invalid email")
   if not re.fullmatch(regex, email):
     raise ValidationError("Invalid email")
