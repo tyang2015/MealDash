@@ -56,7 +56,7 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
 
     useEffect(()=>{
       let errors= []
-      if (formData === "") return null
+      // if (formData === "") return null
       if (!validateEmail(formData.email)) errors.push("Email is invalid")
       if (!formData.name) errors.push("Restaurant name is required")
       if (formData.name.length>50) errors.push("Name must be less than 50 characters")
@@ -87,7 +87,6 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
         for (let i = 0; i< restaurants.length; i++) {
           let restaurantObj = restaurants[i]
           if (restaurantObj.ownerId != sessionUser.id){
-            // console.log('different user, push the logo')
             logos.push(restaurantObj.logo)
           }
         }
@@ -155,7 +154,6 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
         close_time: formData.closeTime
         // ...formData
       }
-      // console.log('restaurant to be submitted:', restaurant)
 
       if (formType === "Create Form"){
         dispatch(createRestaurant(restaurant))

@@ -23,8 +23,8 @@ class Restaurant(db.Model):
     restaurant_pic_url = db.Column(db.String, nullable=False)
     # added here
     logo = db.Column(db.String, nullable=False)
-    longitude = db.Column(db.Numeric(scale=15), nullable = False)
-    latitude= db.Column(db.Numeric(scale=15), nullable = False)
+    longitude = db.Column(db.Numeric(scale=2), nullable = False)
+    latitude= db.Column(db.Numeric(scale=2), nullable = False)
     email = db.Column(db.String, nullable = False)
     phone_number = db.Column(db.String, nullable= False)
     bank_account = db.Column(db.String, nullable = False)

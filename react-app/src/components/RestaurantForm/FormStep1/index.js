@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { maskPhoneNumber } from '../PhoneNumberValidation';
+import { maskPhoneNumber, returnDigitsOnly } from '../PhoneNumberValidation';
 import "./FormStep1.css"
 import "../Restaurant.css"
 import MapContainer from '../../Maps';
@@ -34,7 +34,7 @@ const FormStep1 = ({formData, setFormData}) => {
           <input
             id="phone-number"
             type = 'tel'
-            value = {maskPhoneNumber(formData.phoneNumber)}
+            value = {formData.phoneNumber? maskPhoneNumber(formData.phoneNumber): null}
             onChange = {e=> setFormData({...formData, phoneNumber: e.target.value})}
             placeholder = "(123) 456-789"
             // pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
@@ -56,7 +56,37 @@ const FormStep1 = ({formData, setFormData}) => {
           />
         </div>
       </div>
-      <PlacesAutocompleteContainer setFormData={setFormData} formData={formData}/>
+      <div className='create-restaurant-form-step-1-third-row'>
+        <div className='create-restaurant-form-step-1-left-container'>
+          <div className='create-restaurant-label-input-container'>
+            <label htmlFor='longitude'>Longitude</label>
+            <input
+              id="longitude"
+              type= 'number'
+              value={formData.longitude}
+              onChange = {e=> setFormData({...formData, longitude: e.target.value})}
+              placeholder = "Longitude"
+              required
+            />
+          </div>
+        </div>
+        <div className='create-restaurant-form-step-2-right-container'>
+          <div className='create-restaurant-label-input-container'>
+            <label htmlFor='latitude'>Latitude</label>
+            <input
+              id="latitude"
+              type= 'number'
+              value={formData.latitude}
+              onChange = {e=> setFormData({...formData, latitude: e.target.value})}
+              placeholder = "Latitude"
+              required
+            />
+
+          </div>
+        </div>
+
+      </div>
+      {/* <PlacesAutocompleteContainer setFormData={setFormData} formData={formData}/> */}
       {/* <div>Converted to longitude and latitude: {formData.longitude} {formData.latitude} </div> */}
       <div className='create-restaurant-form-step-1-fourth-row'>
         <div className='create-restaurant-form-step-1-left-container'>

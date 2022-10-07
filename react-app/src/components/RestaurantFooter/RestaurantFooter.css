@@ -31,8 +31,8 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding-left:8em;
+  align-items: center;
+  /* padding-left:8em; */
   padding-top: 2em;
 }
 
@@ -43,8 +43,8 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding-left:8em;
+  align-items: center;
+  /* padding-left:8em; */
   padding-top: 2em;
 
 }

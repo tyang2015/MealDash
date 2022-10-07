@@ -17,7 +17,6 @@ import "@reach/combobox/styles.css";
 const google = window.google
 const PlacesAutocomplete = ({apiKey, setFormData, formData}) => {
   // const ref = useRef(null);
-  // BIND event (your onChange in input) to the autocomplete object
   let {ready, value, setValue, suggestions: {status, data}, clearSuggestions} = usePlacesAutocomplete();
   // const autocomplete = new google.maps.places.Autocomplete()
   // const temporaryAddress= formData.address
@@ -37,11 +36,8 @@ const PlacesAutocomplete = ({apiKey, setFormData, formData}) => {
   }
   useEffect(()=>{
     let item = document.getElementById("create-restaurant-address-input")
-    // console.log('address field:', item)
     item.setAttribute('value', formData?.address)
     // console.log('address field after change:', item)
-
-    // return
     // item.innerHTML = formData.address
   }, [])
 
