@@ -23,8 +23,8 @@ class Restaurant(db.Model):
     restaurant_pic_url = db.Column(db.String, nullable=False)
     # added here
     logo = db.Column(db.String, nullable=False)
-    longitude = db.Column(db.Numeric(scale=2), nullable = False)
-    latitude= db.Column(db.Numeric(scale=2), nullable = False)
+    longitude = db.Column(db.Numeric(scale=15), nullable = False)
+    latitude= db.Column(db.Numeric(scale=15), nullable = False)
     email = db.Column(db.String, nullable = False)
     phone_number = db.Column(db.String, nullable= False)
     bank_account = db.Column(db.String, nullable = False)
@@ -33,6 +33,8 @@ class Restaurant(db.Model):
     # OPEN TIME AND CLOSE TIME TO CHANGE DATATYPE?
     open_time = db.Column(db.String, nullable= False)
     close_time = db.Column(db.String, nullable = False)
+    # ADDED HERE FOR PROJECT - remove after monday
+    address = db.Column(db.String, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
 
@@ -69,6 +71,7 @@ class Restaurant(db.Model):
             "category" : self.category,
             "openTime" : str(self.open_time),
             "closeTime" : str(self.close_time),
+            "address": self.address,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
             "numReviews":  len(self.reviews),

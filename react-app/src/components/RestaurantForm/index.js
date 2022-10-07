@@ -39,6 +39,7 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
       category: restaurant? restaurant.category: "American",
       openTime:  restaurant? restaurant.open_time: "",
       closeTime:  restaurant? restaurant.close_time: "",
+      address: restaurant? restaurant.address: ""
       // delete address key before sending to db in submit
       // address: restaurant? restaurant.address: ""
     })
@@ -56,7 +57,7 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
     useEffect(()=>{
       let errors= []
       if (formData === "") return null
-      if (!formData.email.includes("@")) errors.push("Email is invalid")
+      if (!validateEmail(formData.email)) errors.push("Email is invalid")
       if (!formData.name) errors.push("Restaurant name is required")
       if (formData.name.length>50) errors.push("Name must be less than 50 characters")
       if (formData.email.length>30) errors.push("Email must be less than 50 characters")
@@ -76,7 +77,7 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
 
     }, [formData.name, formData.priceRange, formData.restaurantPicUrl, formData.longitude,
       formData.latitude, formData.email, formData.phoneNumber, formData.bankAccount,
-      formData.routingNumber, formData.category, formData.openTime, formData.closeTime, formData.logo])
+      formData.routingNumber, formData.category, formData.openTime, formData.closeTime, formData.logo, formData.address])
 
 
     function logoExists(logoUrl) {
@@ -91,16 +92,18 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
           }
         }
       }
-      // console.log('logos from db:', logos)
       let foundLogo = logos.find(item => item === logoUrl.trim())
       if (foundLogo){
-        // console.log('found logo:', foundLogo)
         return true
       }
       else {
-        // console.log('logo not found:')
         return false
       }
+    }
+
+    function validateEmail(email) {
+      let re = /\S+@\S+\.\S+/;
+      return re.test(email);
     }
 
     function isImage(url) {

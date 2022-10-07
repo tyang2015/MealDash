@@ -37,6 +37,7 @@ const FoodItemForm = ({foodItem, formType}) => {
     // if (url.toLowerCase().includes)
     // return /\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
   }
+  
 
   useEffect(()=>{
     console.log('input change in food item form')

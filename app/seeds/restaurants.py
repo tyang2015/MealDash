@@ -18,7 +18,8 @@ def seed_restaurants():
             "routing_number": "123456789",
             "category": "Asian",
             "open_time": "08:00:00",
-            "close_time": "17:00:00"
+            "close_time": "17:00:00",
+            "address": "fake address 1"
         },
         {
             "name": "Tiff's Michelin Star Restaurant",
@@ -34,7 +35,8 @@ def seed_restaurants():
             "routing_number": "123456789",
             "category": "Japanese",
             "open_time": "08:00:00",
-            "close_time": "17:00:00"
+            "close_time": "17:00:00",
+            "address": "fake address 2"
         },
         {
             "name": "tiff's vegan delight",
@@ -50,7 +52,8 @@ def seed_restaurants():
             "routing_number": "123456789",
             "category": "American",
             "open_time": "08:00:00",
-            "close_time": "17:00:00"
+            "close_time": "17:00:00",
+            "address": "fake address 3"
         },
         {
             "name": "Randy's Pho House",
@@ -66,7 +69,9 @@ def seed_restaurants():
             "routing_number": "123456789",
             "category": "Asian",
             "open_time": "08:00:00",
-            "close_time": "17:00:00"
+            "close_time": "17:00:00",
+            "address": "fake address 4"
+
         },
         {
             "name": "Ananya's French Bakery",
@@ -82,7 +87,9 @@ def seed_restaurants():
             "routing_number": "625556789",
             "category": "French",
             "open_time": "08:00:00",
-            "close_time": "17:00:00"
+            "close_time": "17:00:00",
+            "address": "fake address 5"
+
         },
         {
             "name": "Chen Dining",
@@ -98,7 +105,9 @@ def seed_restaurants():
             "routing_number": "123432189",
             "category": "Asian",
             "open_time": "08:00:00",
-            "close_time": "17:00:00"
+            "close_time": "17:00:00",
+            "address": "fake address 6"
+
         },
         {
             "name": "Ashley's Japanese Garden",
@@ -114,7 +123,9 @@ def seed_restaurants():
             "routing_number": "273456989",
             "category": "Japanese",
             "open_time": "08:00:00",
-            "close_time": "17:00:00"
+            "close_time": "17:00:00",
+            "address": "fake address 7"
+
         },
         {
             "name": "Sabrina's Sushi",
@@ -130,7 +141,9 @@ def seed_restaurants():
             "routing_number": "151456789",
             "category": "Japanese",
             "open_time": "08:00:00",
-            "close_time": "17:00:00"
+            "close_time": "17:00:00",
+            "address": "fake address 8"
+
         },
         {
             "name": "Lilith Place",
@@ -146,7 +159,9 @@ def seed_restaurants():
             "routing_number": "144456789",
             "category": "French",
             "open_time": "08:00:00",
-            "close_time": "17:00:00"
+            "close_time": "17:00:00",
+            "address": "fake address 9"
+
         },
         {
             "name": "Ben's Southern BBQ",
@@ -162,7 +177,9 @@ def seed_restaurants():
             "routing_number": "909456789",
             "category": "American",
             "open_time": "08:00:00",
-            "close_time": "17:00:00"
+            "close_time": "17:00:00",
+            "address": "fake address 10"
+
         },
         {
             "name": "Ben's Curry Place",
@@ -178,7 +195,9 @@ def seed_restaurants():
             "routing_number": "909456789",
             "category": "Asian",
             "open_time": "08:00:00",
-            "close_time": "17:00:00"
+            "close_time": "17:00:00",
+            "address": "fake address 11"
+
         },
         {
             "name": "Ben's Italian Restaurant",
@@ -194,7 +213,9 @@ def seed_restaurants():
             "routing_number": "909456789",
             "category": "Asian",
             "open_time": "08:00:00",
-            "close_time": "17:00:00"
+            "close_time": "17:00:00",
+            "address": "fake address 12"
+
         },
     ]
 
@@ -213,7 +234,8 @@ def seed_restaurants():
             routing_number = restaurant["routing_number"],
             category = restaurant["category"],
             open_time = restaurant["open_time"],
-            close_time = restaurant["close_time"]
+            close_time = restaurant["close_time"],
+            address = restaurant["address"]
         )
         db.session.add(restaurant)
     db.session.commit()

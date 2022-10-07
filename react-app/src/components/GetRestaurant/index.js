@@ -265,7 +265,7 @@ const GetRestaurant = () => {
                 <div className="restaurant-page-description-container">
                   <div className="restaurant-page-left-description-text-box">
                     <div> {restaurant.category} • {restaurant.avgRating == "0"? null: finalAvgRating}&nbsp;
-                    <i class="fa-solid fa-star" ></i> • {restaurant.numReviews == "0"? "No": restaurant.numReviews}&nbsp;{restaurant.numReviews=== 1? "rating": "ratings"} • {restaurant.priceRange == "1"? "$": "2"? "$$": "$$$"}
+                    <i class="fa-solid fa-star" ></i> • {restaurant.numReviews == "0"? "No": restaurant.numReviews}&nbsp;{restaurant.numReviews=== 1? "rating": "ratings"} • {restaurant.priceRange == 1? "$": restaurant.priceRange == 2? "$$": "$$$"}
                     </div>
                     <div className="restaurant-page-hours-container">
                       <div className="restaurant-page-open-status" style={{color: isOpen? "green": "red"}}>
