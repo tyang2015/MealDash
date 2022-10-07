@@ -3,6 +3,11 @@ import RestaurantForm from '../RestaurantForm'
 import { useDispatch, useSelector } from 'react-redux'
 import restaurantReducer, { getAllRestaurants } from '../../store/restaurant'
 import { useParams } from 'react-router-dom'
+import { GoogleMap, useJsApiLoader, Marker, Autocomplete, LoadScript } from '@react-google-maps/api';
+import usePlacesAutocomplete, {
+  getGeocode, getLatLng
+} from "use-places-autocomplete"
+
 
 const UpdateRestaurantForm = () => {
   const dispatch = useDispatch();
@@ -26,6 +31,7 @@ const UpdateRestaurantForm = () => {
     open_time: restaurant.openTime,
     close_time: restaurant.closeTime
   }
+
 
   useEffect(()=>{
     dispatch(getAllRestaurants())

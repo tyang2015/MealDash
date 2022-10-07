@@ -85,8 +85,6 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
       if (restaurants.length>0){
         for (let i = 0; i< restaurants.length; i++) {
           let restaurantObj = restaurants[i]
-          // console.log('restaurant owner id :', restaurantObj.ownerId)
-          // console.log('session user id :', sessionUser.id)
           if (restaurantObj.ownerId != sessionUser.id){
             // console.log('different user, push the logo')
             logos.push(restaurantObj.logo)
@@ -136,24 +134,6 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
 
         return
       }
-      // console.log('form data right before submission:', formData)
-      // let newFormData;
-      // if(geolocationEnabled){
-      // console.log('address to be sent in fetch...:', formData.address)
-      // const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${formData.address}&key=${key}`)
-      // if (response.ok){
-      //   const data = await response.json()
-      //   console.log('data from google api geocoder:', data)
-      //   setFormData({...formData, latitude:  data.results[0]?.geometry.location.lat})
-      //   setFormData({...formData, longitude:  data.results[0]?.geometry.location.lng})
-      //   newFormData = {...formData}
-      //   console.log('data object before deleting address:', formData)
-      //   delete newFormData.address
-      //   console.log('final data object before sending to db:', newFormData)
-      // } else {
-      //   console.log('bad fetch:', response)
-      // }
-      // }
 
       restaurant = {
         ...restaurant,
