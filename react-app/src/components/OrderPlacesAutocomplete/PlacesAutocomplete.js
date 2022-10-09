@@ -14,8 +14,8 @@ import {
 } from "@reach/combobox";
 import "@reach/combobox/styles.css";
 
-// const google = window.google
-const PlacesAutocomplete = ({apiKey, setFormData, formData, destinationRef}) => {
+const google = window.google
+const PlacesAutocomplete = ({apiKey, destinationRef, calculateRoute, setDestinationRef}) => {
   let {ready, value, setValue, suggestions: {status, data}, clearSuggestions} = usePlacesAutocomplete();
   // const autocomplete = new google.maps.places.Autocomplete()
   // const temporaryAddress= formData.address
@@ -31,12 +31,9 @@ const PlacesAutocomplete = ({apiKey, setFormData, formData, destinationRef}) => 
   const handleSelect = async (address) => {
     setValue(address, false);
     clearSuggestions();
+    console.log('address after select:', address)
 
-    const results = await getGeocode({address});
-    const {lat, lng} = await getLatLng(results[0]);
-    console.log('lat:', lat)
-    console.log('lng:' , lng)
-    await setFormData({...formData, latitude: lat, longitude: lng, address: address})
+
   }
   // useEffect(()=>{
   //   let item = document.getElementById("create-restaurant-address-input")
@@ -55,13 +52,13 @@ const PlacesAutocomplete = ({apiKey, setFormData, formData, destinationRef}) => 
             {/* <div className="create-restaurant-label-input-container address"> */}
               <label htmlFor='create-restaurant-address-input'>Address</label>
               <ComboboxInput
-                id="create-restaurant-address-input"
+                // id="create-restaurant-address-input"
                 className='one-input-per-row'
                 value={value}
                 onChange={(e)=> setValue(e.target.value)}
-                ref={destinationRef}
+                // ref={destinationRef}
                 type='text'
-                name="restaurant-address"
+                // name="restaurant-address"
                 placeholder='Search an address'
                 required
                 disabled = {!ready}

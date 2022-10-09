@@ -1,13 +1,12 @@
 import usePlacesAutocomplete from "use-places-autocomplete";
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
+import PlacesAutocomplete from "./PlacesAutocomplete.js";
 import { getKey } from '../../store/maps';
 
 // import { GoogleMap, useJsApiLoader, Marker, Autocomplete, LoadScript } from '@react-google-maps/api';
-import PlacesAutocomplete from "./PlacesAutocomplete";
 
-const PlacesAutocompleteContainer = ({setFormData, formData, destinationRef}) => {
+const OrderPlacesAutocompleteContainer = ({ setDestinationRef,destinationRef, calculateRoute}) => {
   const key = useSelector((state) => state.maps.key);
   const dispatch = useDispatch();
 
@@ -23,7 +22,7 @@ const PlacesAutocompleteContainer = ({setFormData, formData, destinationRef}) =>
 
   return (
     <>
-      <PlacesAutocomplete destinationRef={destinationRef} apiKey={key} formData={formData} setFormData={setFormData} />
+      <PlacesAutocomplete setDestinationRef={setDestinationRef} calculateRoute={calculateRoute} destinationRef={destinationRef} apiKey={key}/>
     </>
   )
 
@@ -31,4 +30,4 @@ const PlacesAutocompleteContainer = ({setFormData, formData, destinationRef}) =>
 
 };
 
-export default PlacesAutocompleteContainer
+export default OrderPlacesAutocompleteContainer

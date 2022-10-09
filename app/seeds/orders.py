@@ -27,6 +27,10 @@ def seed_orders():
             "total_price": 20.80,
             "distance": 3.9,
             "duration": 8,
+            "delivery_fee": 1.50,
+            "delivery_method": "Delivery",
+            "credit_card": '1111222233334444',
+            "delivery_option": "Hand it to me"
         },
         {
             "customer_id": 4,
@@ -37,7 +41,11 @@ def seed_orders():
             "credit_card": "1111222231110987",
             "total_price": 15.50,
             "distance": 4.3,
-            "duration": 25
+            "duration": 25,
+            "delivery_fee": 1.50,
+            "delivery_method": "Pickup",
+            "credit_card": '1111233233334444',
+            "delivery_option": ""
         },
         {
             "customer_id": 4,
@@ -49,7 +57,10 @@ def seed_orders():
             "total_price": 40.99,
             "distance": 7.9,
             "duration": 16,
-
+            "delivery_fee": 2.50,
+            "delivery_method": "Delivery",
+            "credit_card": '1111233233334489',
+            "delivery_option": "Leave at door"
         },
         {
             "customer_id": 4,
@@ -61,7 +72,10 @@ def seed_orders():
             "total_price": 35.99,
             "distance": 7.9,
             "duration": 16,
-
+            "delivery_fee": 3.50,
+            "delivery_method": "Delivery",
+            "credit_card": '1111233233334489',
+            "delivery_option": "Hand it to me"
         },
         {
             "customer_id": 6,
@@ -73,6 +87,10 @@ def seed_orders():
             "total_price": 20.80,
             "distance": 10.9,
             "duration": 35,
+            "delivery_fee": 2.50,
+            "delivery_method": "Delivery",
+            "credit_card": '1111233233334489',
+            "delivery_option": "Leave at door"
         },
         {
             "customer_id": 7,
@@ -84,10 +102,14 @@ def seed_orders():
             "total_price": 30.80,
             "distance": 2.9,
             "duration": 10,
+            "delivery_fee": 1.50,
+            "delivery_method": "Delivery",
+            "credit_card": '1132233233334489',
+            "delivery_option": "Leave at door",
         },
         {
             "customer_id": 8,
-            "restaurant_id": 5,
+            "restaurant_id": 1,
             "longitude": 10,
             "latitude": 10,
             "phone_number": "(626) 400-9027",
@@ -95,7 +117,41 @@ def seed_orders():
             "total_price": 20.80,
             "distance": 3.9,
             "duration": 10,
+            "delivery_fee": 1.50,
+            "delivery_method": "Delivery",
+            "credit_card": '1872233233355489',
+            "delivery_option": "Leave at door",
         },
+        {
+            "customer_id": 6,
+            "restaurant_id": 1,
+            "longitude": 10,
+            "latitude": 10,
+            "phone_number": "(626) 400-9027",
+            "credit_card": "9000222231110987",
+            "total_price": 20.80,
+            "distance": 3.9,
+            "duration": 10,
+            "delivery_fee": 1.50,
+            "delivery_method": "Delivery",
+            "credit_card": '1872233233355489',
+            "delivery_option": "Leave at door",
+        },
+        {
+            "customer_id": 7,
+            "restaurant_id": 1,
+            "longitude": 10,
+            "latitude": 10,
+            "phone_number": "(626) 400-9027",
+            "credit_card": "9000222231110987",
+            "total_price": 20.80,
+            "distance": 3.9,
+            "duration": 10,
+            "delivery_fee": 1.50,
+            "delivery_method": "Pickup",
+            "credit_card": '1872233233355489',
+            "delivery_option": ""
+        }
     ]
     for order in orders:
         newOrder = Order(
@@ -110,6 +166,9 @@ def seed_orders():
             duration = order['duration'],
             # food_items = random_food_items()
             # order_food_items = random_food_items()
+            delivery_fee= order['delivery_fee'],
+            delivery_method = order["delivery_method"],
+            delivery_option = order['delivery_option']
         )
         # orders_list.append(newOrder)
         db.session.add(newOrder)

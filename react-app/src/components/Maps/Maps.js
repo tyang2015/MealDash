@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { GoogleMap, useJsApiLoader,Marker, Autocomplete } from '@react-google-maps/api';
 
 const containerStyle = {
-  width: '400px',
-  height: '400px',
+  width: '450px',
+  height: '180px',
 };
 
 const center = {
@@ -26,11 +26,11 @@ const Maps = ({ apiKey }) => {
       {/* <Autocomplete>
         <input type='text' name="restaurant-address" placeholder='address'/>
       </Autocomplete> */}
-      <button
+      {/* <button
         onClick = {()=> map.panTo(center)}
       >
         CLICK TO CENTER BACK
-      </button>
+      </button> */}
       {isLoaded && (
         <GoogleMap
           mapContainerStyle={containerStyle}

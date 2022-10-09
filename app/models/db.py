@@ -31,10 +31,10 @@ class Restaurant(db.Model):
     routing_number = db.Column(db.String, nullable = False)
     category = db.Column(db.String, nullable = False)
     # OPEN TIME AND CLOSE TIME TO CHANGE DATATYPE?
+    address = db.Column(db.String, nullable= False)
     open_time = db.Column(db.String, nullable= False)
     close_time = db.Column(db.String, nullable = False)
     # ADDED HERE FOR PROJECT - remove after monday
-    address = db.Column(db.String, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
 
@@ -115,7 +115,8 @@ class FoodItem(db.Model):
         # "orderQuantity":
         # "orderQuantity": len(self.item_orders),
         "Orders": [order.id for order in self.order_food_items],
-        "Reviews": [review.id for review in self.reviews]
+        "Reviews": [review.id for review in self.reviews],
+        "Restaurant": self.to_dict_for_restaurant()
       }
 
     def to_dict_for_order(self):
@@ -127,8 +128,19 @@ class FoodItem(db.Model):
         "price": str(self.price),
         "restaurantId": self.restaurant_id,
         "category": self.category,
-        # "orderQuantity": len(self.item_orders),
         "category": self.category,
+      }
+
+    def to_dict_for_restaurant(self):
+      return {
+        "id": self.restaurant.id,
+        "name": self.restaurant.name,
+        "email": self.restaurant.email,
+        "phoneNumber": self.restaurant.phone_number,
+        "address": self.restaurant.address,
+        "openTime": self.restaurant.open_time,
+        "closeTime": self.restaurant.close_time,
+        "category": self.restaurant.category
       }
 
 class Order(db.Model):
@@ -143,9 +155,12 @@ class Order(db.Model):
   total_price = db.Column(db.Numeric(scale = 2), nullable=False)
   distance = db.Column(db.Numeric)
   duration = db.Column(db.Integer)
-  # make another column to store the arraysdfs
-  # food_items
-  # food_items = db.Column(db.PickleType(), db.ForeignKey("food_items.id"))
+  # added
+  delivery_fee = db.Column(db.Numeric(scale=2))
+  delivery_method = db.Column(db.String)
+  credit_card = db.Column(db.String, nullable=False)
+  delivery_option = db.Column(db.String)
+
   created_at = db.Column(db.DateTime, default=datetime.utcnow)
   updated_at = db.Column(db.DateTime, default=datetime.utcnow)
 
@@ -155,6 +170,18 @@ class Order(db.Model):
   user = db.relationship("User", back_populates="orders")
   restaurant = db.relationship("Restaurant", back_populates = "orders")
   order_food_items = db.relationship("OrderFoodItem", back_populates="food_item_order",cascade = "all, delete" )
+
+  def restaurant_to_dict(self):
+    return {
+      "id": self.restaurant.id,
+      "name": self.restaurant.name,
+      "email": self.restaurant.email,
+      "phoneNumber": self.restaurant.phone_number,
+      "address": self.restaurant.address,
+      "openTime": self.restaurant.open_time,
+      "closeTime": self.restaurant.close_time,
+      "category": self.restaurant.category
+    }
 
   def get_total_price(self):
       prices = {}
@@ -182,7 +209,8 @@ class Order(db.Model):
           "duration": self.duration,
           "totalPrice":  self.get_total_price(),
           # "orderFoodItems": [foodItem.to_dict_for_order() for foodItem in self.order_food_items],
-          "user": self.convert_user_to_dict()
+          "user": self.convert_user_to_dict(),
+          "restaurant": self.restaurant_to_dict()
       }
 
   def convert_user_to_dict(self):
@@ -207,6 +235,28 @@ class OrderFoodItem(db.Model):
   restaurant = db.relationship("Restaurant", back_populates="order_food_items")
   food_item = db.relationship("FoodItem", back_populates="order_food_items")
   food_item_order = db.relationship("Order", back_populates="order_food_items")
+
+  def to_dict(self):
+    return {
+      "id" : self.id,
+      "quantity" : self.quantity,
+      "price" : self.price,
+      "preference": self.preference,
+      "Restaurant": self.restaurant_to_dict()
+    }
+
+  def restaurant_to_dict(self):
+    return {
+      "id": self.restaurant.id,
+      "name": self.restaurant.name,
+      "email": self.restaurant.email,
+      "phoneNumber": self.restaurant.phone_number,
+      "address": self.restaurant.address,
+      "openTime": self.restaurant.open_time,
+      "closeTime": self.restaurant.close_time,
+      "category": self.restaurant.category
+    }
+
 
 
 

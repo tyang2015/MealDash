@@ -1,0 +1,45 @@
+.order-confirmation-main-container{
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+}
+
+
+.order-confirmation-content-outer-container{
+  width: 75em;
+  height: 100%;
+  background-color: lightblue;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+}
+
+.account-details-container{
+  background-color: white;
+  border: 1px #E7E7E7 solid;
+  border-radius: 5px;
+  width: 32em;
+  height: 3em;
+}
+
+.shipping-details-container{
+  width: 32em;
+  background-color: white;
+  border: 1px #E7E7E7 solid;
+  border-radius: 5px;
+  height: 40em;
+}
+
+.payment-details-container{
+  background-color: white;
+  height: 3em;
+  width: 32em;
+  border-radius: 5px;
+}
+
+
+.order-confirmation-right-pane{
+  width: 23em;
+  background: lightgreen;
+}

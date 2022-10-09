@@ -1,8 +1,8 @@
-"""create all tables
+"""create tables
 
-Revision ID: 999a7ca987a2
-Revises:
-Create Date: 2022-10-06 10:21:07.640420
+Revision ID: 1d1b5b437ae2
+Revises: 
+Create Date: 2022-10-09 16:21:08.314068
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '999a7ca987a2'
+revision = '1d1b5b437ae2'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -35,16 +35,16 @@ def upgrade():
     sa.Column('price_range', sa.Integer(), nullable=False),
     sa.Column('restaurant_pic_url', sa.String(), nullable=False),
     sa.Column('logo', sa.String(), nullable=False),
-    sa.Column('longitude', sa.Numeric(scale=15), nullable=False),
-    sa.Column('latitude', sa.Numeric(scale=15), nullable=False),
+    sa.Column('longitude', sa.Numeric(scale=2), nullable=False),
+    sa.Column('latitude', sa.Numeric(scale=2), nullable=False),
     sa.Column('email', sa.String(), nullable=False),
     sa.Column('phone_number', sa.String(), nullable=False),
     sa.Column('bank_account', sa.String(), nullable=False),
     sa.Column('routing_number', sa.String(), nullable=False),
     sa.Column('category', sa.String(), nullable=False),
+    sa.Column('address', sa.String(), nullable=False),
     sa.Column('open_time', sa.String(), nullable=False),
     sa.Column('close_time', sa.String(), nullable=False),
-    sa.Column('address', sa.String(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),
@@ -68,10 +68,13 @@ def upgrade():
     sa.Column('longitude', sa.Numeric(scale=2), nullable=False),
     sa.Column('latitude', sa.Numeric(scale=2), nullable=False),
     sa.Column('phone_number', sa.String(), nullable=False),
-    sa.Column('credit_card', sa.String(), nullable=False),
     sa.Column('total_price', sa.Numeric(scale=2), nullable=False),
     sa.Column('distance', sa.Numeric(), nullable=True),
     sa.Column('duration', sa.Integer(), nullable=True),
+    sa.Column('delivery_fee', sa.Numeric(scale=2), nullable=True),
+    sa.Column('delivery_method', sa.String(), nullable=True),
+    sa.Column('credit_card', sa.String(), nullable=False),
+    sa.Column('delivery_option', sa.String(), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['customer_id'], ['users.id'], ),

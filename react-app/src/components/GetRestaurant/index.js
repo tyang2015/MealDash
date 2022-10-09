@@ -112,7 +112,8 @@ const GetRestaurant = () => {
       }
     }
   }, [restaurant?.openTime, restaurant?.closeTime])
-
+  console.log("food items on get restaurant page: ", foodItems)
+  console.log('submitted cart items on get restaurant page:', submittedCartItems)
 
 
   useEffect(()=>{
@@ -179,12 +180,7 @@ const GetRestaurant = () => {
     dispatch(getFoodItems(id))
   }, [dispatch])
 
-  // if (restaurant){
-  //   // finalAvgRating = Number(restaurant.avgRating)
-  //   // finalAvgRating = String(finalAvgRating.toFixed(2))
-  // }
 
-  // FOR RESTAURANT
   const handleDelete = e => {
     dispatch(deleteRestaurant(id))
     alert('successfully deleted!')
@@ -347,7 +343,7 @@ const GetRestaurant = () => {
                       <h2 className="category-name-container" > {categoryChosen} </h2>
                         {foodItems.length>0 && !isFiltered && (
                           <div className="food-items-grid-container">
-                              {foodItems.length>0 && !isFiltered && foodItems.map(item=>(
+                              {foodItems.map(item=>(
                                 <div key={item.id} className="food-item-card-container" onClick={()=> {
                                   setFoodItemModal(true)
                                   setFoodItem(item)
@@ -358,13 +354,6 @@ const GetRestaurant = () => {
                                     <div> ${item.price} </div>
                                     {/* <div> {item.category}</div> */}
                                   </div>
-<<<<<<< HEAD
-                                )}
-                              </div>
-                            ))}
-                            {foodItemModal && <FoodItemModal forceCartUpdate={forceCartUpdate} setForceCartUpdate={setForceCartUpdate} submittedCartItems={submittedCartItems} setSubmittedCartItems={setSubmittedCartItems} setSubmittedCart={setSubmittedCart} foodItem={foodItem} setFoodItemModal={setFoodItemModal}/> }
-                            {filteredItems.length>0 && isFiltered && filteredItems.map(item=>(
-=======
                                   <div className="food-item-middle-container">
                                     <img className="food-item-pic" src= {item.foodPicUrl} onError={e => { e.currentTarget.src =
                                       "https://static.onecms.io/wp-content/uploads/sites/47/2020/08/06/cat-with-empty-bowl-1224404559-2000.jpg"; }}/>
@@ -383,13 +372,12 @@ const GetRestaurant = () => {
                                   )}
                                 </div>
                               ))}
-                              {/* {foodItemModal && <FoodItemModal forceCartUpdate={forceCartUpdate} setForceCartUpdate={setForceCartUpdate} submittedCartItems={submittedCartItems} setSubmittedCartItems={setSubmittedCartItems} setSubmittedCart={setSubmittedCart} foodItem={foodItem} setFoodItemModal={setFoodItemModal}/> } */}
+                              {foodItemModal && <FoodItemModal forceCartUpdate={forceCartUpdate} setForceCartUpdate={setForceCartUpdate} submittedCartItems={submittedCartItems} setSubmittedCartItems={setSubmittedCartItems} setSubmittedCart={setSubmittedCart} foodItem={foodItem} setFoodItemModal={setFoodItemModal}/> }
                           </div>
                         )}
                         {filteredItems.length>0 && isFiltered && (
                           <div className="food-items-grid-container">
                             {filteredItems.map(item=>(
->>>>>>> main
                               <div key={item.id} className="food-item-card-container" onClick={()=> setFoodItemModal(true)}>
                                 <div className="food-item-left-container">
                                   <div style={{fontWeight:"700"}}> {item.name} </div>

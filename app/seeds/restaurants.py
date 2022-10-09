@@ -19,7 +19,7 @@ def seed_restaurants():
             "category": "Asian",
             "open_time": "08:00:00",
             "close_time": "17:00:00",
-            "address": "fake address 1"
+            "address": "Frank & Son Collectible Show, Gale Avenue, Rowland Heights, CA, USA"
         },
         {
             "name": "Tiff's Michelin Star Restaurant",
@@ -36,7 +36,7 @@ def seed_restaurants():
             "category": "Japanese",
             "open_time": "08:00:00",
             "close_time": "17:00:00",
-            "address": "fake address 2"
+            "address": "Ginger's Divine Ice Creams, West Washington Boulevard, Los Angeles, CA, USA"
         },
         {
             "name": "tiff's vegan delight",
@@ -53,7 +53,8 @@ def seed_restaurants():
             "category": "American",
             "open_time": "08:00:00",
             "close_time": "17:00:00",
-            "address": "fake address 3"
+            "address": "The Cheesecake Factory, Brea Mall, Brea, CA, USA"
+
         },
         {
             "name": "Randy's Pho House",
@@ -70,8 +71,7 @@ def seed_restaurants():
             "category": "Asian",
             "open_time": "08:00:00",
             "close_time": "17:00:00",
-            "address": "fake address 4"
-
+            "address": "iLanet Coffee, Brookhurst Street, Garden Grove, CA, USA"
         },
         {
             "name": "Ananya's French Bakery",
@@ -88,8 +88,7 @@ def seed_restaurants():
             "category": "French",
             "open_time": "08:00:00",
             "close_time": "17:00:00",
-            "address": "fake address 5"
-
+            "address": "Blossom Soju & Beer, Fullerton Road, Rowland Heights, CA, USA"
         },
         {
             "name": "Chen Dining",
@@ -106,8 +105,7 @@ def seed_restaurants():
             "category": "Asian",
             "open_time": "08:00:00",
             "close_time": "17:00:00",
-            "address": "fake address 6"
-
+            "address": "GRANVILLE, Ventura Boulevard, Studio City, CA, USA"
         },
         {
             "name": "Ashley's Japanese Garden",
@@ -124,7 +122,7 @@ def seed_restaurants():
             "category": "Japanese",
             "open_time": "08:00:00",
             "close_time": "17:00:00",
-            "address": "fake address 7"
+            "address": "Hong Kong Plaza, Colima Road, Rowland Heights, CA, USA"
 
         },
         {
@@ -142,7 +140,7 @@ def seed_restaurants():
             "category": "Japanese",
             "open_time": "08:00:00",
             "close_time": "17:00:00",
-            "address": "fake address 8"
+            "address": "Tender Greens, East Colorado Boulevard, Pasadena, CA, USA"
 
         },
         {
@@ -160,7 +158,7 @@ def seed_restaurants():
             "category": "French",
             "open_time": "08:00:00",
             "close_time": "17:00:00",
-            "address": "fake address 9"
+            "address": "Mendocino Farms, East Imperial Highway, Brea, CA, USA"
 
         },
         {
@@ -178,7 +176,7 @@ def seed_restaurants():
             "category": "American",
             "open_time": "08:00:00",
             "close_time": "17:00:00",
-            "address": "fake address 10"
+            "address": "Pinnacle Peak Steakhouse- San Dimas, West Foothill Boulevard, San Dimas, CA, USA"
 
         },
         {
@@ -196,7 +194,7 @@ def seed_restaurants():
             "category": "Asian",
             "open_time": "08:00:00",
             "close_time": "17:00:00",
-            "address": "fake address 11"
+            "address": "Chengdu Taste, Colima Road, Rowland Heights, CA, USA"
 
         },
         {
@@ -214,8 +212,7 @@ def seed_restaurants():
             "category": "Asian",
             "open_time": "08:00:00",
             "close_time": "17:00:00",
-            "address": "fake address 12"
-
+            "address": "Popeyes Louisiana Kitchen, Yorba Linda Boulevard, Fullerton, CA, USA"
         },
     ]
 
@@ -235,7 +232,7 @@ def seed_restaurants():
             category = restaurant["category"],
             open_time = restaurant["open_time"],
             close_time = restaurant["close_time"],
-            address = restaurant["address"]
+            address = restaurant['address']
         )
         db.session.add(restaurant)
     db.session.commit()

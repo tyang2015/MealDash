@@ -13,8 +13,6 @@ import { getKey } from '../../store/maps';
 // 2nd step: openTime, closeTime, priceRange, category
 // 3rd step: bankAccount, routingNumber
 const RestaurantForm = ({restaurant, formType, restaurants}) => {
-    // console.log('inside create restaurant form')
-    // console.log('restaurant in restaurant form:', restaurant)
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector(state => state.session.user)

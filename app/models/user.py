@@ -37,6 +37,7 @@ class User(db.Model, UserMixin):
             'email': self.email,
             "firstName": self.first_name,
             "lastName": self.last_name,
+            "phoneNumber": self.phone_number,
             "reviews": [review.to_dict() for review in self.reviews],
             "foodItemReviews": [item_review.to_dict() for item_review in self.food_item_reviews],
             "restaurantsOwned": [restaurant.to_dict() for restaurant in self.restaurants],

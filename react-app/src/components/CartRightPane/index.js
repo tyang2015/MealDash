@@ -5,19 +5,24 @@ import "./CartRightPane.css"
 
 const CartRightPane = ({setSubmittedCartItems, forceCartUpdate, restaurant, submittedCartItems}) => {
 
-  console.log('submitted cart items:', submittedCartItems)
+  // console.log('submitted cart items:', submittedCartItems)
   const [orderTotal, setOrderTotal] = useState(0)
+
+  const calculateOrderTotal = () => {
+    let totalPrice = 0;
+    for (let i =0; i<submittedCartItems.length;i++){
+      let foodItem = submittedCartItems[i]
+      totalPrice+=Number(foodItem.price) * foodItem.quantity
+     }
+    setOrderTotal(totalPrice)
+  }
 
   useEffect(()=>{
     if (submittedCartItems?.length>0){
-      let totalPrice = 0;
-      for (let i =0; i<submittedCartItems.length;i++){
-        let foodItem = submittedCartItems[i]
-        totalPrice+=Number(foodItem.price) * foodItem.quantity
-       }
-      setOrderTotal(totalPrice)
+      // change the order total every time the cart items are added or deleted
+      calculateOrderTotal()
     }
-  }, [forceCartUpdate])
+  }, [forceCartUpdate, submittedCartItems])
 
 
   if (submittedCartItems?.length<=0) return (
@@ -25,7 +30,6 @@ const CartRightPane = ({setSubmittedCartItems, forceCartUpdate, restaurant, subm
   )
 
   const handleDeleteItem = (itemToDelete) => {
-    console.log('item to delete:', itemToDelete)
     let i =0;
     let copiedCartItems = [...submittedCartItems]
     while (i< submittedCartItems.length){
@@ -51,13 +55,13 @@ const CartRightPane = ({setSubmittedCartItems, forceCartUpdate, restaurant, subm
             <NavLink className="navlink" style={{color: "white"}} to="/checkout">
               <h3> Checkout </h3>
             </NavLink>
-            <h3> {orderTotal} </h3>
+            <h3> {orderTotal.toFixed(2)} </h3>
           </div>
         </div>
         <div className='cart-pane-food-items-container'>
             {submittedCartItems?.length>0 && submittedCartItems.map(item=>(
               <>
-                <div className='cart-pane-food-item-card-container'>
+                <div key={item.id} className='cart-pane-food-item-card-container'>
                   <div className='cart-pane-quantity-container'>
                     {item.quantity}
                   </div>
