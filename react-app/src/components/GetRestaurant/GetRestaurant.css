@@ -156,6 +156,7 @@ div.restaurant-page-update-delete-buttons-container{
   justify-content: center;
   align-items: center;
   text-align: center;
+  font-size: 14px;
 }
 
 .restaurant-page-delete-button.button{
@@ -169,7 +170,8 @@ div.restaurant-page-update-delete-buttons-container{
   justify-content: center;
   align-items: center;
   cursor: pointer;
-
+  font-size:14px;
+  font-weight: 400;
 }
 
 .button{

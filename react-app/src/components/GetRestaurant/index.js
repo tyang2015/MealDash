@@ -289,7 +289,7 @@ const GetRestaurant = () => {
                         </button>
                         <NavLink className='navlink' to={`/restaurants/${restaurant.id}/new`}>
                           <div className="restaurant-page-create-food-item-button button">
-                            Add to the Menu
+                            Add to Menu
                           </div>
                         </NavLink>
                       </>
@@ -385,7 +385,7 @@ const GetRestaurant = () => {
                                 <div className="food-item-left-container">
                                   <div style={{fontWeight:"700"}}> {item.name} </div>
                                   <div> {item.description.length>87? item.description.substring(0,88).concat("..."): item.description} </div>
-                                  <div> {item.price} </div>
+                                  <div> ${item.price} </div>
                                 </div>
                                 <div className="food-item-middle-container">
                                   <img className="food-item-pic" src= {item.foodPicUrl} onError={e => { e.currentTarget.src =

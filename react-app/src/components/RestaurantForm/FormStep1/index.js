@@ -19,7 +19,7 @@ const FormStep1 = ({formData, setFormData}) => {
       {/* <MapContainer/> */}
       <div className='create-restaurant-form-step-1-first-row'>
         <div className='create-restaurant-label-input-container top-row'>
-          <label htmlFor="restaurant-name">Restaurant Name</label>
+          <label htmlFor="restaurant-name">Restaurant Name *</label>
           <input
             id= "restaurant-name"
             type = 'text'
@@ -30,7 +30,7 @@ const FormStep1 = ({formData, setFormData}) => {
           />
         </div>
         <div className='create-restaurant-label-input-container top-row'>
-          <label htmlFor="phone-number">Phone Number</label>
+          <label htmlFor="phone-number">Phone Number *</label>
           <input
             id="phone-number"
             type = 'tel'
@@ -44,7 +44,7 @@ const FormStep1 = ({formData, setFormData}) => {
       </div>
       <div className='create-restaurant-form-step-1-second-row'>
         <div className='create-restaurant-label-input-container'>
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">Email *</label>
           <input
             id="email"
             type = 'text'
@@ -59,26 +59,28 @@ const FormStep1 = ({formData, setFormData}) => {
       <div className='create-restaurant-form-step-1-third-row'>
         <div className='create-restaurant-form-step-1-left-container'>
           <div className='create-restaurant-label-input-container'>
-            <label htmlFor='longitude'>Longitude</label>
+            <label htmlFor='longitude'>Longitude *</label>
             <input
               id="longitude"
               type= 'number'
               value={formData.longitude}
               onChange = {e=> setFormData({...formData, longitude: e.target.value})}
               placeholder = "Longitude"
+              step='0.01'
               required
             />
           </div>
         </div>
         <div className='create-restaurant-form-step-2-right-container'>
           <div className='create-restaurant-label-input-container'>
-            <label htmlFor='latitude'>Latitude</label>
+            <label htmlFor='latitude'>Latitude *</label>
             <input
               id="latitude"
               type= 'number'
               value={formData.latitude}
               onChange = {e=> setFormData({...formData, latitude: e.target.value})}
               placeholder = "Latitude"
+              step='0.01'
               required
             />
 
@@ -91,7 +93,7 @@ const FormStep1 = ({formData, setFormData}) => {
       <div className='create-restaurant-form-step-1-fourth-row'>
         <div className='create-restaurant-form-step-1-left-container'>
           <div className='create-restaurant-label-input-container'>
-            <label htmlFor="restaurant-pic-url">Restaurant Pic Url</label>
+            <label htmlFor="restaurant-pic-url">Restaurant Pic Url *</label>
             <input
               id="restaurant-pic-url"
               type = 'text'
@@ -110,7 +112,7 @@ const FormStep1 = ({formData, setFormData}) => {
         </div>
         <div className='create-restaurant-form-step-1-right-container'>
           <div className='create-restaurant-label-input-container'>
-            <label htmlFor="logo-url">Logo Url</label>
+            <label htmlFor="logo-url">Logo Url *</label>
             <input
               id="logo-url"
               type = 'text'

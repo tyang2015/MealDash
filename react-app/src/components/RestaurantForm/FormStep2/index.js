@@ -13,7 +13,7 @@ const FormStep2 = ({formData, setFormData}) => {
     <div className='create-restaurant-form-step-2-container'>
       <div className='form-step-2-top-bottom-row'>
         <div className='form-step-2-label-input-container left-box'>
-          <label htmlFor="open-time">Open Hours</label>
+          <label htmlFor="open-time">Open Hours *</label>
           <input
             id='open-time'
             type="time"
@@ -26,7 +26,7 @@ const FormStep2 = ({formData, setFormData}) => {
           />
         </div>
         <div className='form-step-2-label-input-container'>
-          <label  htmlFor="close-time">Close Hours</label>
+          <label  htmlFor="close-time">Close Hours *</label>
           <input
             id='close-time'
             type="time"
@@ -42,7 +42,7 @@ const FormStep2 = ({formData, setFormData}) => {
       </div>
       <div className='form-step-2-top-bottom-row' style={{marginTop:"30px"}}>
         <div className='form-step-2-label-input-container left-box'>
-          <label htmlFor="price-range">Price Range</label>
+          <label htmlFor="price-range">Price Range *</label>
           <input
             id='price-range'
             type="number"
@@ -58,7 +58,7 @@ const FormStep2 = ({formData, setFormData}) => {
           />
         </div>
         <div className='form-step-2-label-input-container'>
-          <label htmlFor="restaurant-category">Category</label>
+          <label htmlFor="restaurant-category">Category *</label>
           <select
             id="restaurant-category"
             value={formData.category}
