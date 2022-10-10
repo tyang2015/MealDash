@@ -60,7 +60,7 @@ def seed_orders():
             "delivery_fee": 2.50,
             "delivery_method": "Delivery",
             "credit_card": '1111233233334489',
-            "delivery_option": "Leave at door"
+            "delivery_option": "Leave at my door"
         },
         {
             "customer_id": 4,
@@ -90,7 +90,7 @@ def seed_orders():
             "delivery_fee": 2.50,
             "delivery_method": "Delivery",
             "credit_card": '1111233233334489',
-            "delivery_option": "Leave at door"
+            "delivery_option": "Leave at my door"
         },
         {
             "customer_id": 7,
@@ -105,7 +105,7 @@ def seed_orders():
             "delivery_fee": 1.50,
             "delivery_method": "Delivery",
             "credit_card": '1132233233334489',
-            "delivery_option": "Leave at door",
+            "delivery_option": "Leave at my door",
         },
         {
             "customer_id": 8,
@@ -120,7 +120,7 @@ def seed_orders():
             "delivery_fee": 1.50,
             "delivery_method": "Delivery",
             "credit_card": '1872233233355489',
-            "delivery_option": "Leave at door",
+            "delivery_option": "Leave at my door",
         },
         {
             "customer_id": 6,
@@ -135,7 +135,7 @@ def seed_orders():
             "delivery_fee": 1.50,
             "delivery_method": "Delivery",
             "credit_card": '1872233233355489',
-            "delivery_option": "Leave at door",
+            "delivery_option": "Leave at my door",
         },
         {
             "customer_id": 7,

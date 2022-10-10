@@ -15,13 +15,9 @@ import {
 import "@reach/combobox/styles.css";
 
 const google = window.google
-const PlacesAutocomplete = ({apiKey, destinationRef, calculateRoute, setDestinationRef}) => {
+const PlacesAutocomplete = ({apiKey,setRouteLoaded, destinationRef, calculateRoute, setDestinationRef}) => {
   let {ready, value, setValue, suggestions: {status, data}, clearSuggestions} = usePlacesAutocomplete();
-  // const autocomplete = new google.maps.places.Autocomplete()
-  // const temporaryAddress= formData.address
-  // if (formData.address){
-  //   setValue(formData.address)
-  // }
+
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: apiKey,
@@ -32,15 +28,9 @@ const PlacesAutocomplete = ({apiKey, destinationRef, calculateRoute, setDestinat
     setValue(address, false);
     clearSuggestions();
     console.log('address after select:', address)
-
+    await setDestinationRef(address)
 
   }
-  // useEffect(()=>{
-  //   let item = document.getElementById("create-restaurant-address-input")
-  //   item.setAttribute('value', formData?.address)
-  //   // console.log('address field after change:', item)
-  //   // item.innerHTML = formData.address
-  // }, [])
 
 
   return (

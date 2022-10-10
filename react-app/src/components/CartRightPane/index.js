@@ -52,7 +52,7 @@ const CartRightPane = ({setSubmittedCartItems, forceCartUpdate, restaurant, subm
         </div>
         <div className='checkout-button-container'>
           <div className='checkout-button'>
-            <NavLink className="navlink" style={{color: "white"}} to="/checkout">
+            <NavLink className="navlink" style={{color: "white"}} to={`/checkout`}>
               <h3> Checkout </h3>
             </NavLink>
             <h3> {orderTotal.toFixed(2)} </h3>

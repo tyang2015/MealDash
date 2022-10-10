@@ -136,6 +136,7 @@ class FoodItem(db.Model):
         "id": self.restaurant.id,
         "name": self.restaurant.name,
         "email": self.restaurant.email,
+        "restaurantPicUrl": self.restaurant.restaurant_pic_url,
         "phoneNumber": self.restaurant.phone_number,
         "address": self.restaurant.address,
         "openTime": self.restaurant.open_time,
@@ -148,8 +149,9 @@ class Order(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   customer_id = db.Column(db.Integer, db.ForeignKey("users.id"))
   restaurant_id = db.Column(db.Integer, db.ForeignKey("restaurants.id"))
-  longitude = db.Column(db.Numeric(scale=2), nullable = False)
-  latitude= db.Column(db.Numeric(scale=2), nullable = False)
+  # consider removing longitude and latitude, temporarily removed null constraint
+  longitude = db.Column(db.Numeric(scale=2))
+  latitude= db.Column(db.Numeric(scale=2))
   phone_number = db.Column(db.String, nullable = False)
   credit_card = db.Column(db.String, nullable = False)
   total_price = db.Column(db.Numeric(scale = 2), nullable=False)
@@ -158,7 +160,6 @@ class Order(db.Model):
   # added
   delivery_fee = db.Column(db.Numeric(scale=2))
   delivery_method = db.Column(db.String)
-  credit_card = db.Column(db.String, nullable=False)
   delivery_option = db.Column(db.String)
 
   created_at = db.Column(db.DateTime, default=datetime.utcnow)

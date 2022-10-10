@@ -1,5 +1,5 @@
 .order-confirmation-main-container{
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: row;
 }
@@ -42,4 +42,25 @@
 .order-confirmation-right-pane{
   width: 23em;
   background: lightgreen;
+}
+
+.payment-details-container-toggle-false{
+  background-color: white;
+  height: 3em;
+  width: 32em;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.payment-details-container-toggle-true{
+  background-color: white;
+  height: 8em;
+  width: 32em;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+input[type="radio"]{
+  /* display:none */
+  background-color: yellowgreen;
 }

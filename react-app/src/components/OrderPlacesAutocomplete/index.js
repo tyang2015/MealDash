@@ -6,7 +6,7 @@ import { getKey } from '../../store/maps';
 
 // import { GoogleMap, useJsApiLoader, Marker, Autocomplete, LoadScript } from '@react-google-maps/api';
 
-const OrderPlacesAutocompleteContainer = ({ setDestinationRef,destinationRef, calculateRoute}) => {
+const OrderPlacesAutocompleteContainer = ({setRouteLoaded,setDestinationRef,destinationRef, calculateRoute}) => {
   const key = useSelector((state) => state.maps.key);
   const dispatch = useDispatch();
 
@@ -22,7 +22,7 @@ const OrderPlacesAutocompleteContainer = ({ setDestinationRef,destinationRef, ca
 
   return (
     <>
-      <PlacesAutocomplete setDestinationRef={setDestinationRef} calculateRoute={calculateRoute} destinationRef={destinationRef} apiKey={key}/>
+      <PlacesAutocomplete setRouteLoaded={setRouteLoaded} setDestinationRef={setDestinationRef} calculateRoute={calculateRoute} destinationRef={destinationRef} apiKey={key}/>
     </>
   )
 
