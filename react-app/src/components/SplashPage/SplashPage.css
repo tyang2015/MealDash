@@ -1,7 +1,7 @@
 .splash-page-main-container{
   display: flex;
   flex-direction: column;
-  
+
 }
 
 
@@ -93,4 +93,8 @@
   height: fit-content;
   margin: auto;
   /* background-color: lightcyan; */
+}
+
+.splash-page-middle-link-title-text{
+  text-align: center;
 }
