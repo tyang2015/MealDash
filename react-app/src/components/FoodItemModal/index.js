@@ -26,6 +26,7 @@ const FoodItemModal = ({setForceCartUpdate, forceCartUpdate,setSubmittedCartItem
         // update the quantity in the total price display
         quantity = item.quantity
         // add food preference to foodItem
+        item.preferences = preferences
         setForceCartUpdate(!forceCartUpdate)
         setSubmittedCartItems([...submittedCartItems])
         setFoodItemModal(false)
@@ -33,6 +34,7 @@ const FoodItemModal = ({setForceCartUpdate, forceCartUpdate,setSubmittedCartItem
       }
     }
     foodItem.quantity = quantity
+    foodItem.preferences = preferences
     setForceCartUpdate(!forceCartUpdate)
     setSubmittedCartItems([...submittedCartItems, foodItem])
     setFoodItemModal(false)
@@ -66,7 +68,7 @@ const FoodItemModal = ({setForceCartUpdate, forceCartUpdate,setSubmittedCartItem
             </div>
           </div>
           {/* <div className="modal-add-to-cart-button-container"> */}
-            <div className='food-item-modal-add-to-cart-button' onClick={()=> handleCartSubmission(foodItem, quantity)}>
+            <div className='food-item-modal-add-to-cart-button' onClick={()=> handleCartSubmission(foodItem, quantity, preferences)}>
                 Add to cart - {(foodItem.price * quantity).toFixed(2)}
             </div>
           {/* </div> */}

@@ -11,7 +11,11 @@ def seed_order_food_items():
       "food_item_id": 1,
       "quantity": 3,
       "price": 15.99,
-      "preference": "less salt on food"
+      "preferences": "less salt on food",
+      "name": "chicken soup",
+      "food_pic_url": "https://d27k8xmh3cuzik.cloudfront.net/wp-content/uploads/2018/12/michelin-restaurants-in-the-world-og.jpg",
+      "description": 'delicious soup',
+      "category": "Sides"
     },
     {
       "order_id": 1,
@@ -19,7 +23,11 @@ def seed_order_food_items():
       "food_item_id": 1,
       "quantity": 2,
       "price": 5.99,
-      "preference": "less sugar"
+      "preferences": "less sugar",
+      "name": "baked potato",
+      "food_pic_url": "https://d27k8xmh3cuzik.cloudfront.net/wp-content/uploads/2018/12/michelin-restaurants-in-the-world-og.jpg",
+      "description": 'delicious potato',
+      "category": "Sides"
     },
     {
       "order_id": 2,
@@ -27,23 +35,35 @@ def seed_order_food_items():
       "food_item_id": 2,
       "quantity": 1,
       "price": 16.99,
-      "preference": "more seasoning with added sides"
+      "preferences": "more seasoning with added Sides",
+      "name": "pesto pasta with chicken",
+      "food_pic_url": "https://d27k8xmh3cuzik.cloudfront.net/wp-content/uploads/2018/12/michelin-restaurants-in-the-world-og.jpg",
+      "description": 'pasta',
+      "category": "Main"
     },
     {
       "order_id": 3,
       "restaurant_id": 1,
       "food_item_id": 2,
       "quantity": 5,
-      "price": 5.99,
-      "preference": "less salt on food"
+      "price": 16.99,
+      "preferences": "more asparagus",
+      "name": "chipotle pasta",
+      "food_pic_url": "https://d27k8xmh3cuzik.cloudfront.net/wp-content/uploads/2018/12/michelin-restaurants-in-the-world-og.jpg",
+      "description": 'pasta',
+      "category": "Main"
     },
     {
       "order_id": 4,
       "restaurant_id": 1,
       "food_item_id": 4,
       "quantity": 2,
-      "price": 8.99,
-      "preference": "Less olive oil and more sundried tomatoes"
+      "price": 20.99,
+      "preferences": "Less olive oil and more sundried tomatoes",
+      "name": "ribeye steak",
+      "food_pic_url": "https://d27k8xmh3cuzik.cloudfront.net/wp-content/uploads/2018/12/michelin-restaurants-in-the-world-og.jpg",
+      "description": '',
+      "category": "Main"
     },
     {
       "order_id": 4,
@@ -51,7 +71,11 @@ def seed_order_food_items():
       "food_item_id": 3,
       "quantity": 2,
       "price": 10.99,
-      "preference": "more onions"
+      "preferences": "more onions",
+      "name": "margherita pizza",
+      "food_pic_url": "https://d27k8xmh3cuzik.cloudfront.net/wp-content/uploads/2018/12/michelin-restaurants-in-the-world-og.jpg",
+      "description": 'meat toppings on pizza too',
+      "category": "Main"
     },
     {
       "order_id": 5,
@@ -59,7 +83,11 @@ def seed_order_food_items():
       "price": 12.99,
       "restaurant_id": 4,
       "food_item_id": 8,
-      "preference": "add extra anchovies"
+      "preferences": "add extra anchovies",
+      "name": "veggie pizza",
+      "food_pic_url": "https://d27k8xmh3cuzik.cloudfront.net/wp-content/uploads/2018/12/michelin-restaurants-in-the-world-og.jpg",
+      "description": 'pizza with veggies',
+      "category": "Main"
     },
     {
       "order_id": 6,
@@ -67,7 +95,11 @@ def seed_order_food_items():
       "price": 12.99,
       "restaurant_id": 4,
       "food_item_id": 9,
-      "preference": "more beef and hoison"
+      "preferences": "more beef and hoison",
+      "name": "french fries",
+      "food_pic_url": "https://d27k8xmh3cuzik.cloudfront.net/wp-content/uploads/2018/12/michelin-restaurants-in-the-world-og.jpg",
+      "description": '',
+      "category": "Sides"
     },
   ]
 
@@ -78,7 +110,11 @@ def seed_order_food_items():
       price = item['price'],
       restaurant_id = item['restaurant_id'],
       food_item_id = item['food_item_id'],
-      preference = item['preference']
+      preferences = item['preferences'],
+      name = item['name'],
+      food_pic_url = item['food_pic_url'],
+      description = item['description'],
+      category = item['category']
     )
     db.session.add(ordered_food_item)
   db.session.commit()

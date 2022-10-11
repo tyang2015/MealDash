@@ -1,8 +1,8 @@
-"""create tables
+"""create all tables
 
-Revision ID: 1d1b5b437ae2
+Revision ID: 8ef1b310f568
 Revises: 
-Create Date: 2022-10-09 16:21:08.314068
+Create Date: 2022-10-10 22:45:21.937899
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '1d1b5b437ae2'
+revision = '8ef1b310f568'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -65,15 +65,14 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('customer_id', sa.Integer(), nullable=True),
     sa.Column('restaurant_id', sa.Integer(), nullable=True),
-    sa.Column('longitude', sa.Numeric(scale=2), nullable=False),
-    sa.Column('latitude', sa.Numeric(scale=2), nullable=False),
     sa.Column('phone_number', sa.String(), nullable=False),
+    sa.Column('credit_card', sa.String(), nullable=False),
     sa.Column('total_price', sa.Numeric(scale=2), nullable=False),
     sa.Column('distance', sa.Numeric(), nullable=True),
     sa.Column('duration', sa.Integer(), nullable=True),
     sa.Column('delivery_fee', sa.Numeric(scale=2), nullable=True),
+    sa.Column('tip', sa.Numeric(scale=2), nullable=True),
     sa.Column('delivery_method', sa.String(), nullable=True),
-    sa.Column('credit_card', sa.String(), nullable=False),
     sa.Column('delivery_option', sa.String(), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
@@ -107,11 +106,15 @@ def upgrade():
     op.create_table('order_food_items',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('restaurant_id', sa.Integer(), nullable=True),
+    sa.Column('name', sa.String(), nullable=True),
+    sa.Column('food_pic_url', sa.String(), nullable=True),
+    sa.Column('description', sa.String(), nullable=True),
+    sa.Column('category', sa.String(), nullable=True),
     sa.Column('food_item_id', sa.Integer(), nullable=True),
     sa.Column('order_id', sa.Integer(), nullable=True),
     sa.Column('quantity', sa.Integer(), nullable=True),
     sa.Column('price', sa.Numeric(scale=2), nullable=False),
-    sa.Column('preference', sa.String(), nullable=True),
+    sa.Column('preferences', sa.String(), nullable=True),
     sa.ForeignKeyConstraint(['food_item_id'], ['food_items.id'], ),
     sa.ForeignKeyConstraint(['order_id'], ['orders.id'], ),
     sa.ForeignKeyConstraint(['restaurant_id'], ['restaurants.id'], ),

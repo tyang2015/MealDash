@@ -35,8 +35,8 @@ class FoodForm(Form):
 class OrderForm(FlaskForm):
   # you will pass the restaurant id in manually yourelf when they submit order
   restaurantId = IntegerField("Restaurant id", validators=[DataRequired()])
-  longitude = FloatField("Longitude", validators=[DataRequired(), valid_longitude] )
-  latitude = FloatField("Latitude", validators=[DataRequired(), valid_latitude])
+  # longitude = FloatField("Longitude", validators=[valid_longitude] )
+  # latitude = FloatField("Latitude", validators=[valid_latitude])
   phone_number = StringField("Phone number", validators=[DataRequired(), valid_phone_number])
   credit_card = StringField("Credit Card", validators=[DataRequired()])
   total_price = FloatField("Total Price", validators=[DataRequired()])

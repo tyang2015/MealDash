@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from 'react-router-dom';
 import MapContainer from '../Maps';
 // import PlacesAutocompleteContainer from '../PlacesAutocomplete'
 import OrderPlacesAutocompleteContainer from '../OrderPlacesAutocomplete';
@@ -18,6 +19,7 @@ const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart' || "[]"))
 
 const OrderConfirmationPage = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
   const key = useSelector(state=> state.session.user)
   const user = useSelector(state=> state.session.user)
   // const restaurant = useSelectr
@@ -28,7 +30,6 @@ const OrderConfirmationPage = () => {
   const [duration, setDuration] = useState('')
 
   const [paymentDropdown, setPaymentDropdown] = useState(false)
-  // const destinationRef = useRef()
   let [destinationRef, setDestinationRef] = useState('')
   let [originRef, setOriginRef] = useState('')
   // set your form use states below
@@ -38,6 +39,8 @@ const OrderConfirmationPage = () => {
   let [errors, setErrors] = useState([])
 
   const google = window.google
+  const orderSubtotal = location.data.orderSubtotal
+  console.log('order subtotal on order confirmation page:', orderSubtotal)
 
   useEffect(()=> {
     if (!key) {
@@ -45,10 +48,12 @@ const OrderConfirmationPage = () => {
     }
   }, [dispatch, key])
 
+
   useEffect(()=>{
+    if (cartItems.length ===0) return
     let itemAddress = cartItems[0].Restaurant.address
     setOriginRef(itemAddress)
-  }, [dispatch, cartItems[0].Restaurant.address])
+  }, [dispatch, cartItems[0]?.Restaurant.address])
 
   useEffect(()=>{
     calculateRoute()
@@ -58,12 +63,11 @@ const OrderConfirmationPage = () => {
   useEffect(()=>{
     let errs= []
     if (!creditCard) errs.push('Please enter credit card number')
-    if (creditCard.length!=16) errs.push("Please enter valid credit card ")
-  }, [])
+    if (creditCard.length!=16) errs.push("Please enter valid credit card")
+    setErrors(errs)
+  }, [creditCard])
 
 
-  // console.log('cart items on confirm. page:', cartItems)
-  // console.log('cart item at index 0:', cartItems[0])
   console.log('restaurant on confirm page:', restaurant)
   console.log('address at restaurant origin:', originRef)
   console.log('address at user destination:', destinationRef)
@@ -133,7 +137,7 @@ const OrderConfirmationPage = () => {
                       value='Leave at my door'
                       name='delivery-option'
                       onChange={(e)=> setDeliveryOption("Leave at my door")}
-                      checked= {deliveryOption==="Delivery"? true: false}
+                      checked= {deliveryOption==="Leave at my door"? true: false}
                     />
                     Leave at my door
                   </label>
@@ -176,10 +180,8 @@ const OrderConfirmationPage = () => {
               )}
             </form>
         </div>
-        <OrderConfirmationRightPane restaurant={restaurant}/>
-        {/* <div className='order-confirmation-right-pane'>
-
-        </div> */}
+        <OrderConfirmationRightPane deliveryMethod={deliveryMethod} deliveryOption={deliveryOption} distance={distance} duration={duration} errors={errors}
+         restaurant={restaurant} creditCard={creditCard} orderSubtotal={orderSubtotal}/>
       </div>
     </>
   )

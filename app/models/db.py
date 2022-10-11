@@ -150,8 +150,8 @@ class Order(db.Model):
   customer_id = db.Column(db.Integer, db.ForeignKey("users.id"))
   restaurant_id = db.Column(db.Integer, db.ForeignKey("restaurants.id"))
   # consider removing longitude and latitude, temporarily removed null constraint
-  longitude = db.Column(db.Numeric(scale=2))
-  latitude= db.Column(db.Numeric(scale=2))
+  # longitude = db.Column(db.Numeric(scale=2))
+  # latitude= db.Column(db.Numeric(scale=2))
   phone_number = db.Column(db.String, nullable = False)
   credit_card = db.Column(db.String, nullable = False)
   total_price = db.Column(db.Numeric(scale = 2), nullable=False)
@@ -159,6 +159,7 @@ class Order(db.Model):
   duration = db.Column(db.Integer)
   # added
   delivery_fee = db.Column(db.Numeric(scale=2))
+  tip = db.Column(db.Numeric(scale=2))
   delivery_method = db.Column(db.String)
   delivery_option = db.Column(db.String)
 
@@ -197,22 +198,26 @@ class Order(db.Model):
       return str(round(total_price, 2))
 
   def to_dict(self):
-      return {
-          "id": self.id,
-          "restaurantId": self.restaurant_id,
-          "customerId": self.customer_id,
-          "longitude": str(self.longitude),
-          "latitude": str(self.latitude),
-          "phoneNumber": self.phone_number,
-          "creditCard": self.credit_card,
-          "totalPrice": self.total_price,
-          "distance": str(self.distance),
-          "duration": self.duration,
-          "totalPrice":  self.get_total_price(),
-          # "orderFoodItems": [foodItem.to_dict_for_order() for foodItem in self.order_food_items],
-          "user": self.convert_user_to_dict(),
-          "restaurant": self.restaurant_to_dict()
-      }
+    return {
+        "id": self.id,
+        "restaurantId": self.restaurant_id,
+        "customerId": self.customer_id,
+        # "longitude": str(self.longitude),
+        # "latitude": str(self.latitude),
+        "phoneNumber": self.phone_number,
+        "creditCard": self.credit_card,
+        "totalPrice": self.total_price,
+        "distance": str(self.distance),
+        "duration": self.duration,
+        "deliveryFee": self.delivery_fee,
+        "tip": self.tip,
+        "deliveryMethod": self.delivery_method,
+        "deliveryOption": self.delivery_option,
+        # "totalPrice":  self.get_total_price(),
+        # "orderFoodItems": [foodItem.to_dict_for_order() for foodItem in self.order_food_items],
+        "user": self.convert_user_to_dict(),
+        "restaurant": self.restaurant_to_dict()
+    }
 
   def convert_user_to_dict(self):
     return {
@@ -227,11 +232,16 @@ class OrderFoodItem(db.Model):
   __tablename__ = "order_food_items"
   id = db.Column(db.Integer, primary_key=True)
   restaurant_id = db.Column(db.Integer, db.ForeignKey("restaurants.id"))
+  # CONSIDER Removing name,food_pic_url, description, category later after fixing submittedCartItems to get order food item data
+  name = db.Column(db.String)
+  food_pic_url = db.Column(db.String)
+  description = db.Column(db.String)
+  category = db.Column(db.String)
   food_item_id = db.Column(db.Integer, db.ForeignKey("food_items.id"))
   order_id = db.Column(db.Integer, db.ForeignKey("orders.id"))
   quantity = db.Column(db.Integer)
   price = db.Column(db.Numeric(scale=2), nullable = False)
-  preference = db.Column(db.String)
+  preferences = db.Column(db.String)
 
   restaurant = db.relationship("Restaurant", back_populates="order_food_items")
   food_item = db.relationship("FoodItem", back_populates="order_food_items")
@@ -242,7 +252,7 @@ class OrderFoodItem(db.Model):
       "id" : self.id,
       "quantity" : self.quantity,
       "price" : self.price,
-      "preference": self.preference,
+      "preferences": self.preferences,
       "Restaurant": self.restaurant_to_dict()
     }
 

@@ -191,7 +191,8 @@ def get_restaurant_orders(id):
 
 @restaurant_routes.route("/<int:id>/orders", methods=["POST"])
 @login_required
-# make authorization for this later (you CANNOT order from your restaurant)!
+# MUST insert into 2 tables: order (first) and order food items (second)
+# make authorization for this later (you CANNOT order from your restaurant)
 def create_restaurant_order(id):
   restaurant = Restaurant.query.get(id)
   if restaurant == None:
@@ -201,30 +202,38 @@ def create_restaurant_order(id):
   form['csrf_token'].data = request.cookies['csrf_token']
   # form2['csrf_token'].data = request.cookies['csrf_token']
   if form.validate_on_submit():
-    print('form data:', form.data)
-    # food_items = [ FoodItem(
-    #   name= foodItem.name,
-    #   food_pic_url = foodItem.food_pic_url,
-    #   description = foodItem.description,
-    #   price = foodItem.price,
-    #   category = foodItem.category,
-    #   restaurant_id = id
-    # ) for foodItem in form.data['order_food_items']]
     order = Order(
       customer_id = current_user.id,
       restaurant_id = id,
-      longitude = form.data["longitude"],
-      latitude = form.data['latitude'],
       phone_number = form.data['phone_number'],
       credit_card = form.data['credit_card'],
       total_price = form.data['total_price'],
       distance = form.data['distance'],
       duration= form.data['duration'],
+      delivery_fee = form.data['delivery_fee'],
+      tip = form.data['tip'],
+      delivery_method = form.data['delivery_method'],
+      delivery_option = form.data['delivery_option'],
       user = current_user,
+      restaurant = restaurant,
       # order_food_items = form.data['order_food_items']
     )
     db.session.add(order)
     db.session.commit()
+    # created_order = Order.query.filter(Order.customer_id === current_user.id).order_by(Order.created_at.desc()).first()
+    for food_item in request.json.food_items:
+      console.log('food item sent from form:', food_item)
+      food_item = OrderFoodItem(
+        restaurant_id = food_item.id,
+        food_item_id = food_item.id,
+        order_id = order.id,
+        quantity = food_item.quantity,
+        price = food_item.price,
+        preferences = food_item.preferences
+      )
+      db.session.add(food_item)
+      db.session.commit()
+
     return order.to_dict(), 201
   return {"errors": validation_errors_to_error_messages(form.errors)}, 400
 
