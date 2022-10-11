@@ -206,11 +206,11 @@ class Order(db.Model):
         # "latitude": str(self.latitude),
         "phoneNumber": self.phone_number,
         "creditCard": self.credit_card,
-        "totalPrice": self.total_price,
+        "totalPrice": str(self.total_price),
         "distance": str(self.distance),
         "duration": self.duration,
-        "deliveryFee": self.delivery_fee,
-        "tip": self.tip,
+        "deliveryFee": str(self.delivery_fee),
+        "tip": str(self.tip),
         "deliveryMethod": self.delivery_method,
         "deliveryOption": self.delivery_option,
         # "totalPrice":  self.get_total_price(),
@@ -250,9 +250,15 @@ class OrderFoodItem(db.Model):
   def to_dict(self):
     return {
       "id" : self.id,
+      "name": self.name,
+      "foodPicUrl": self.food_pic_url,
+      "order_id": self.order_id,
+      "category": self.category,
+      "description": self.description,
       "quantity" : self.quantity,
-      "price" : self.price,
+      "price" : str(self.price),
       "preferences": self.preferences,
+      "quantity": self.quantity,
       "Restaurant": self.restaurant_to_dict()
     }
 

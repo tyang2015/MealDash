@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, session, request, redirect
 from flask_login import login_required, current_user
-from app.models import User, db, Restaurant, FoodItem, Order
+from app.models import User, db, Restaurant, FoodItem, Order, OrderFoodItem
 from app.forms import LoginForm, SignUpForm, RestaurantForm, FoodItemForm, OrderForm, FoodForm
 from .auth_routes import validation_errors_to_error_messages
 import json
@@ -202,6 +202,7 @@ def create_restaurant_order(id):
   form['csrf_token'].data = request.cookies['csrf_token']
   # form2['csrf_token'].data = request.cookies['csrf_token']
   if form.validate_on_submit():
+    print('form data (looking for fee):', form.data)
     order = Order(
       customer_id = current_user.id,
       restaurant_id = id,
@@ -221,20 +222,26 @@ def create_restaurant_order(id):
     db.session.add(order)
     db.session.commit()
     # created_order = Order.query.filter(Order.customer_id === current_user.id).order_by(Order.created_at.desc()).first()
-    for food_item in request.json.food_items:
-      console.log('food item sent from form:', food_item)
+    # print('request parsed before iteration:', request.json)
+    for food_item in request.json["food_items"]:
+      print('food item sent from form:', food_item)
       food_item = OrderFoodItem(
         restaurant_id = food_item.id,
         food_item_id = food_item.id,
         order_id = order.id,
         quantity = food_item.quantity,
         price = food_item.price,
-        preferences = food_item.preferences
+        preferences = food_item.preferences,
+        name = food_item.name,
+        food_pic_url = food_item.foodPicUrl,
+        description = food_item.description,
+        category = food_item.category
       )
       db.session.add(food_item)
       db.session.commit()
-
-    return order.to_dict(), 201
+    created_food_items = OrderFoodItem.query.filter(OrderFoodItem.order_id ==order.id)
+    return {'orderFoodItems': [food_item.to_dict() for food_item in created_food_items]}
+    # return order.to_dict(), 201
   return {"errors": validation_errors_to_error_messages(form.errors)}, 400
 
 
