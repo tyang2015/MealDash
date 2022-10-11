@@ -465,7 +465,7 @@ const Restaurants = () => {
                         <NavLink className='navlink' key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
                           <div key={restaurant.id} className="restaurant-card-container">
                             <div className= 'get-restaurants-pic-container'>
-                              <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}/>
+                              <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}  onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
                             </div>
                             <div className="get-restaurants-bottom-text-container">
                               <div className='get-restaurants-left-inner-text-container'>
@@ -491,7 +491,7 @@ const Restaurants = () => {
                         <NavLink className='navlink' key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
                           <div key={restaurant.id} className="restaurant-card-container">
                             <div className= 'get-restaurants-pic-container'>
-                              <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}/>
+                              <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}  onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
                             </div>
                             <div className="get-restaurants-bottom-text-container">
                               <div className='get-restaurants-left-inner-text-container'>
@@ -517,7 +517,7 @@ const Restaurants = () => {
                     <NavLink className='navlink' key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
                       <div key={restaurant.id} className="restaurant-card-container">
                         <div className= 'get-restaurants-pic-container'>
-                          <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}/>
+                          <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}  onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
                         </div>
                         <div className="get-restaurants-bottom-text-container">
                           <div className='get-restaurants-left-inner-text-container'>
@@ -543,7 +543,7 @@ const Restaurants = () => {
                     <NavLink className='navlink' key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
                       <div key={restaurant.id} className="restaurant-card-container">
                         <div className= 'get-restaurants-pic-container'>
-                          <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}/>
+                          <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}  onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
                         </div>
                         <div className="get-restaurants-bottom-text-container">
                           <div className='get-restaurants-left-inner-text-container'>
@@ -569,7 +569,7 @@ const Restaurants = () => {
                     <NavLink className='navlink' key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
                       <div key={restaurant.id} className="restaurant-card-container">
                         <div className= 'get-restaurants-pic-container'>
-                          <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}/>
+                          <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}  onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
                         </div>
                         <div className="get-restaurants-bottom-text-container">
                           <div className='get-restaurants-left-inner-text-container'>
@@ -596,7 +596,7 @@ const Restaurants = () => {
                     <NavLink className='navlink' key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
                       <div key={restaurant.id} className="restaurant-card-container">
                         <div className= 'get-restaurants-pic-container'>
-                          <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}/>
+                          <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl} onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
                         </div>
                         <div className="get-restaurants-bottom-text-container">
                           <div className='get-restaurants-left-inner-text-container'>
@@ -623,7 +623,7 @@ const Restaurants = () => {
                     <NavLink className='navlink' key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
                       <div key={restaurant.id} className="restaurant-card-container">
                         <div className= 'get-restaurants-pic-container'>
-                          <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}/>
+                          <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl} onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
                         </div>
                         <div className="get-restaurants-bottom-text-container">
                           <div className='get-restaurants-left-inner-text-container'>
@@ -650,7 +650,7 @@ const Restaurants = () => {
                     <NavLink className='navlink' key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
                       <div key={restaurant.id} className="restaurant-card-container">
                         <div className= 'get-restaurants-pic-container'>
-                          <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}/>
+                          <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl} onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
                         </div>
                         <div className="get-restaurants-bottom-text-container">
                           <div className='get-restaurants-left-inner-text-container'>
@@ -677,7 +677,7 @@ const Restaurants = () => {
                     <NavLink className='navlink' key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
                       <div key={restaurant.id} className="restaurant-card-container">
                         <div className= 'get-restaurants-pic-container'>
-                          <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}/>
+                          <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl} onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
                         </div>
                         <div className="get-restaurants-bottom-text-container">
                           <div className='get-restaurants-left-inner-text-container'>
@@ -703,7 +703,7 @@ const Restaurants = () => {
                     <NavLink className='navlink' key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
                       <div key={restaurant.id} className="restaurant-card-container">
                         <div className= 'get-restaurants-pic-container'>
-                          <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}/>
+                          <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl} onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
                         </div>
                         <div className="get-restaurants-bottom-text-container">
                           <div className='get-restaurants-left-inner-text-container'>
@@ -729,7 +729,7 @@ const Restaurants = () => {
                     <NavLink className='navlink' key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
                       <div key={restaurant.id} className="restaurant-card-container">
                         <div className= 'get-restaurants-pic-container'>
-                          <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}/>
+                          <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl} onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
                         </div>
                         <div className="get-restaurants-bottom-text-container">
                           <div className='get-restaurants-left-inner-text-container'>
@@ -752,7 +752,7 @@ const Restaurants = () => {
                   <NavLink className='navlink' key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
                     <div key={restaurant.id} className="restaurant-card-container">
                       <div className= 'get-restaurants-pic-container'>
-                        <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}/>
+                        <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl} onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
                       </div>
                       <div className="get-restaurants-bottom-text-container">
                         <div className='get-restaurants-left-inner-text-container'>

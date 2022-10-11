@@ -57,8 +57,8 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
       // if (formData === "") return null
       if (!validateEmail(formData.email)) errors.push("Email is invalid")
       if (!formData.name) errors.push("Restaurant name is required")
-      if (formData.name.length>50) errors.push("Name must be less than 50 characters")
-      if (formData.email.length>30) errors.push("Email must be less than 50 characters")
+      if (formData.name?.length>50) errors.push("Name must be less than 50 characters")
+      if (formData.email?.length>30) errors.push("Email must be less than 50 characters")
       if (formData.priceRange < 1 || formData.priceRange >3) errors.push("Price range is invalid")
       if (logoExists(formData.logo)) errors.push("Logo must be unique and not be used by another owner")
       if (!isImage(formData.logo)) errors.push("Logo url is invalid")
@@ -66,8 +66,8 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
       if (formData.closeTime <= formData.openTime) errors.push("Closing Time must be after Opening Time")
       if (formData.longitude < -180 || formData.longitude > 180) errors.push("Longitude is invalid")
       if (formData.latitude < -90 || formData.latitude> 90) errors.push("Latitude is invalid")
-      if (formData.phoneNumber.length!= 14) errors.push("Phone Number is invalid")
-      if (formData.bankAccount.length < 8 || formData.bankAccount.length > 17) {
+      if (formData.phoneNumber?.length!= 14) errors.push("Phone Number is invalid")
+      if (formData.bankAccount?.length < 8 || formData.bankAccount?.length > 17) {
         errors.push("Bank Account is invalid")
       }
       if (String(formData.routingNumber).length != 9) errors.push("Routing number is invalid")
@@ -89,7 +89,7 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
           }
         }
       }
-      let foundLogo = logos.find(item => item === logoUrl.trim())
+      let foundLogo = logos.find(item => item === logoUrl?.trim())
       if (foundLogo){
         return true
       }
@@ -105,13 +105,15 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
 
     function isImage(url) {
       let imageExtensions= ['jpg', 'jpeg', 'png', 'svg', 'gif', 'webp']
-      for (let i = 0; i< imageExtensions.length; i++){
-        let ext = imageExtensions[i]
-        if (url.toLowerCase().includes(ext)){
-          return true
+      if (url){
+        for (let i = 0; i< imageExtensions.length; i++){
+          let ext = imageExtensions[i]
+          if (url.toLowerCase().includes(ext)){
+            return true
+          }
         }
+        return false
       }
-      return false
     }
 
     const FormDisplay = () => {

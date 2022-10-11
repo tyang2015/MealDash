@@ -51,23 +51,27 @@ const SplashPage = () => {
             </div>
         </div>
         <div className='splash-page-3-links-middle-container'>
-          <div className='become-a-dasher-container splash-middle-link-container'>
-            <img className='image-link-pic'src="https://cdn.doordash.com/media/consumer/home/landing/new/ScootScoot.svg"/>
-            <h1> Become a Dasher! </h1>
-            <p style={{textAlign: "center"}}> As a delivery driver, you'll make reliable money</p>
-          </div>
-          <div className='become-a-partner-container splash-middle-link-container'>
-            <img className="image-link-pic" src="https://cdn.doordash.com/media/consumer/home/landing/new/Storefront.svg"/>
-            <h1> Become a Partner </h1>
-            {/* <NavLink to="/restaurants/new"> */}
-              <p style={{textAlign: "center"}}> Create your account first to register your store </p>
-            {/* </NavLink> */}
-          </div>
-          <div className='try-the-app splash-middle-link-container' >
-            <img className="image-link-pic" src="https://cdn.doordash.com/media/consumer/home/landing/new/iphone.svg"/>
-            <h1> Try the App </h1>
-            <p style={{textAlign: "center"}}> Experience the best your neighborhood has to offer </p>
-          </div>
+          <NavLink to="/sign-up" className="navlink">
+            <div className='become-a-dasher-container splash-middle-link-container'>
+              <img className='image-link-pic'src="https://cdn.doordash.com/media/consumer/home/landing/new/ScootScoot.svg"/>
+              <h1 className='splash-page-middle-link-title-text'> Become a Dasher! </h1>
+              <p style={{textAlign: "center"}}> As a delivery driver, you'll make reliable money</p>
+            </div>
+          </NavLink>
+          <NavLink to="/sign-up" className="navlink">
+            <div className='become-a-partner-container splash-middle-link-container'>
+              <img className="image-link-pic" src="https://cdn.doordash.com/media/consumer/home/landing/new/Storefront.svg"/>
+              <h1 className='splash-page-middle-link-title-text'> Become a Partner </h1>
+                <p style={{textAlign: "center"}}> Create your account first to register your store </p>
+            </div>
+          </NavLink>
+          <NavLink to="/sign-up" className="navlink">
+            <div className='try-the-app splash-middle-link-container' >
+              <img className="image-link-pic" src="https://cdn.doordash.com/media/consumer/home/landing/new/iphone.svg"/>
+              <h1 className='splash-page-middle-link-title-text'> Try the App </h1>
+              <p style={{textAlign: "center"}}> Experience the best your neighborhood has to offer </p>
+            </div>
+          </NavLink>
         </div>
       <SplashFooter/>
       </div>

@@ -8,7 +8,7 @@ const FormStep3 = ({formData, setFormData}) => {
     <div className='create-restaurant-form-step-3-container'>
       <div className='form-step-3-row'>
         <div style={{marginRight:"15em"}} className='form-step-3-label-input-container'>
-          <label htmlFor="restaurant-bank-account">Account Number</label>
+          <label htmlFor="restaurant-bank-account">Account Number *</label>
           <input
             id="restaurant-bank-account"
             type="number"
@@ -18,7 +18,7 @@ const FormStep3 = ({formData, setFormData}) => {
           />
         </div>
         <div className='form-step-3-label-input-container' >
-          <label htmlFor="restaurant-routing-number">Routing Number</label>
+          <label htmlFor="restaurant-routing-number">Routing Number *</label>
           <input
             id="restaurant-routing-number"
             type="number"

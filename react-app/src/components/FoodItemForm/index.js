@@ -36,7 +36,7 @@ const FoodItemForm = ({foodItem, formType}) => {
     return false
 
   }
-  
+
 
   useEffect(()=>{
     console.log('input change in food item form')
@@ -103,7 +103,7 @@ const FoodItemForm = ({foodItem, formType}) => {
         <div className='create-food-item-content-container'>
           <div className='create-food-item-left-container'>
             <div className='create-food-item-label-input-container'>
-              <label htmlFor='food-item-name'>Food Item Name</label>
+              <label htmlFor='food-item-name'>Food Item Name *</label>
               <input
                 id="food-item-name"
                 type='text'
@@ -130,7 +130,7 @@ const FoodItemForm = ({foodItem, formType}) => {
             </div>
             <div className='food-item-price-category-container not-top-food-item' >
               <div className='create-food-item-label-input-container' >
-                <label htmlFor="food-item-price">Price</label>
+                <label htmlFor="food-item-price">Price *</label>
                 <input
                   id='food-item-price'
                   type="number"
@@ -144,7 +144,7 @@ const FoodItemForm = ({foodItem, formType}) => {
                 />
               </div>
               <div className='create-food-item-label-input-container' >
-                <label htmlFor="food-item-category">Food Category</label>
+                <label htmlFor="food-item-category">Food Category *</label>
                 <select
                   id='food-item-category'
                   value={category}
@@ -167,7 +167,7 @@ const FoodItemForm = ({foodItem, formType}) => {
             </div>
           </div>
           <div className='create-food-item-right-container'>
-            <label htmlFor="food-item-pic">Food Item Picture</label>
+            <label htmlFor="food-item-pic">Food Item Picture *</label>
             <input
               id="food-item-pic"
               type='text'
