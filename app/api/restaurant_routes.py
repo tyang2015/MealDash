@@ -221,26 +221,24 @@ def create_restaurant_order(id):
     )
     db.session.add(order)
     db.session.commit()
-    # created_order = Order.query.filter(Order.customer_id === current_user.id).order_by(Order.created_at.desc()).first()
-    # print('request parsed before iteration:', request.json)
+    # print('created order:', order)
     for food_item in request.json["food_items"]:
-      print('food item sent from form:', food_item)
       food_item = OrderFoodItem(
-        restaurant_id = food_item.id,
-        food_item_id = food_item.id,
+        restaurant_id = id,
+        food_item_id = food_item["foodItemId"],
         order_id = order.id,
-        quantity = food_item.quantity,
-        price = food_item.price,
-        preferences = food_item.preferences,
-        name = food_item.name,
-        food_pic_url = food_item.foodPicUrl,
-        description = food_item.description,
-        category = food_item.category
+        quantity = food_item["quantity"],
+        price = food_item["price"],
+        preferences = food_item["preferences"],
+        name = food_item["name"],
+        food_pic_url = food_item["foodPicUrl"],
+        description = food_item["description"],
+        category = food_item["category"]
       )
       db.session.add(food_item)
       db.session.commit()
     created_food_items = OrderFoodItem.query.filter(OrderFoodItem.order_id ==order.id)
-    return {'orderFoodItems': [food_item.to_dict() for food_item in created_food_items]}
+    return {'orderFoodItems': [food_item.to_dict() for food_item in created_food_items]}, 201
     # return order.to_dict(), 201
   return {"errors": validation_errors_to_error_messages(form.errors)}, 400
 

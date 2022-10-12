@@ -1,0 +1,147 @@
+.order-confirmation-right-pane-main-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: lightgoldenrodyellow;
+  width: 30%;
+}
+
+.order-summary-container{
+  margin-bottom:20px;
+}
+
+.order-confirmation-restaurant-logo-pic{
+  height: 3em;
+  width: 3em;
+  border-radius: 50%;
+}
+.order-confirmation-title-container{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+/* .order-confirmation-restaurant-title-text-container{
+  font-size: 14px;
+} */
+
+.order-confirmation-title-text-container-top-row{
+  font-size: 12px;
+}
+
+.order-confirmation-title-text-container-bottom-row{
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  display: flex;
+  justify-content: flex-start;
+  font-size: 10.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.order-confirmation-place-order-container{
+  height: 2em;
+  background-color: lightgreen;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px
+    /* align-items: center; */
+}
+
+.right-pane-place-order-button{
+  display:flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+  border: none;
+  background-color: lightcoral;
+  color: white;
+  border-radius: 1000px;
+  /* width: 100px; */
+  height: 100%;
+  justify-content:space-around;
+  align-items: center;
+}
+
+.right-pane-top-one-fifth-container{
+  width: 85%;
+}
+
+/* 2-fifth-container */
+.order-confirmation-price-breakdown-container{
+  width: 85%;
+  background-color: lightgreen;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.price-breakdown-row-container{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 2em;
+  align-items: center;
+}
+
+.dasher-tip-container{
+  width: 85%;
+  background: lightblue;
+  display: flex;
+  justify-content: flex-start;
+  height: 9.7em;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.dasher-tip-container-top-row{
+  background-color: lightcoral;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dasher-tip-container-middle-row{
+  width: 100%;
+  height: 3em;
+  background-color: lightcyan;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.dasher-tip-container-bottom-row{
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  display: flex;
+  justify-content: flex-start;
+  font-size: 10.5px;
+  align-items: center;
+}
+
+.order-final-total-container{
+  width: 85%;
+  background-color: lightgreen;
+  display: flex;
+  justify-content: space-between;
+  height: 3em;
+  align-items: center;
+
+}
+
+.order-amount-due-container{
+  width: 85%;
+  background-color: lightgreen;
+  display: flex;
+  justify-content: space-between;
+  height: 3em;
+  align-items: center;
+}
+
+.dasher-tip-input{
+  height: 25px;
+  width: 100%;
+}

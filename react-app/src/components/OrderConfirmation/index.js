@@ -22,8 +22,10 @@ const OrderConfirmationPage = () => {
   const location = useLocation();
   const key = useSelector(state=> state.session.user)
   const user = useSelector(state=> state.session.user)
-  // const restaurant = useSelectr
-  const [cartItems, setCartItems] = useState(cartFromLocalStorage)
+  // const [cartItems, setCartItems] = useState(cartFromLocalStorage)
+  const orderSubtotal = location.data.orderSubtotal
+  const cartItems = location.data.cartItems
+  
   const [restaurant, setRestaurant] = useState(cartItems[0]?.Restaurant ||null)
   const [directionsResponse, setDirectionsResponse] = useState(null)
   const [distance, setDistance] = useState('')
@@ -39,7 +41,6 @@ const OrderConfirmationPage = () => {
   let [errors, setErrors] = useState([])
 
   const google = window.google
-  const orderSubtotal = location.data.orderSubtotal
   console.log('order subtotal on order confirmation page:', orderSubtotal)
 
   useEffect(()=> {
@@ -101,60 +102,68 @@ const OrderConfirmationPage = () => {
             </div>
             <form id='order-form' className='order-confirmation-form-container'>
               <div className='shipping-details-container'>
-                <h4> 2. Shipping details </h4>
-                <MapContainer/>
-                <div className='delivery-pickup-container'>
-                  <label>
-                    <input
-                      type='radio'
-                      value='Delivery'
-                      name='delivery-method'
-                      onChange={(e)=> setDeliveryMethod("Delivery")}
-                      checked= {deliveryMethod==="Delivery"? true: false}
-                    />
-                    Delivery
-                  </label>
-                  <label>
-                    <input
-                      type='radio'
-                      value='Pickup'
-                      name='delivery-method'
-                      onChange={(e)=> setDeliveryMethod("Pickup")}
-                      checked= {deliveryMethod==="Pickup"? true: false}
-                    />
-                    Pickup
-                  </label>
-                </div>
-                <div>
-                  {deliveryMethod=== "Delivery" && (<p> Delivery Time {duration? duration: null}</p>)}
-                </div>
-                <OrderPlacesAutocompleteContainer destinationRef={destinationRef} setDestinationRef={setDestinationRef} calculateRoute={calculateRoute}/>
-                {deliveryMethod==="Delivery" && (
-                <div className='delivery-option-container'>
-                  <label>
-                    <input
-                      type='radio'
-                      value='Leave at my door'
-                      name='delivery-option'
-                      onChange={(e)=> setDeliveryOption("Leave at my door")}
-                      checked= {deliveryOption==="Leave at my door"? true: false}
-                    />
-                    Leave at my door
-                  </label>
-                  <label>
-                    <input
-                      type='radio'
-                      value='Pickup'
-                      name='delivery-option'
-                      onChange={(e)=> setDeliveryOption("Hand it to me")}
-                      checked= {deliveryOption==="Hand it to me"? true: false}
-                    />
-                    Hand it to me
-                  </label>
-                </div>
-                )}
-                <div>
-                  <p> {user.phoneNumber}</p>
+                <h4 style={{textAlign: "left", width: '100%'}}> 2. Shipping details </h4>
+                <div className='shipping-details-container-excluding-title'>
+                  <MapContainer/>
+                  <div className='delivery-pickup-container'>
+                    <label>
+                      <input
+                        type='radio'
+                        value='Delivery'
+                        name='delivery-method'
+                        onChange={(e)=> setDeliveryMethod("Delivery")}
+                        checked= {deliveryMethod==="Delivery"? true: false}
+                      />
+                      Delivery
+                    </label>
+                    <label>
+                      <input
+                        type='radio'
+                        value='Pickup'
+                        name='delivery-method'
+                        onChange={(e)=> setDeliveryMethod("Pickup")}
+                        checked= {deliveryMethod==="Pickup"? true: false}
+                      />
+                      Pickup
+                    </label>
+                  </div>
+                  <div className='delivery-time-container'>
+                    {deliveryMethod=== "Delivery" && (
+                      <>
+                        <p> Delivery Time</p>
+                        <p>{duration? duration: null}</p>
+                      </>
+                    )}
+                  </div>
+                  <OrderPlacesAutocompleteContainer destinationRef={destinationRef} setDestinationRef={setDestinationRef} calculateRoute={calculateRoute}/>
+                  {deliveryMethod==="Delivery" && (
+                  <div className='delivery-option-container'>
+                    <label>
+                      <input
+                        type='radio'
+                        value='Leave at my door'
+                        name='delivery-option'
+                        onChange={(e)=> setDeliveryOption("Leave at my door")}
+                        checked= {deliveryOption==="Leave at my door"? true: false}
+                      />
+                      Leave at my door
+                    </label>
+                    <label>
+                      <input
+                        type='radio'
+                        value='Pickup'
+                        name='delivery-option'
+                        onChange={(e)=> setDeliveryOption("Hand it to me")}
+                        checked= {deliveryOption==="Hand it to me"? true: false}
+                      />
+                      Hand it to me
+                    </label>
+                  </div>
+                  )}
+                  <div className='order-confirmation-phone-number-container'>
+                    <i class="fa-solid fa-phone"></i>
+                    <p> {user.phoneNumber}</p>
+                  </div>
                 </div>
               </div>
               {!paymentDropdown && (

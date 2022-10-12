@@ -36,20 +36,22 @@ const PlacesAutocomplete = ({apiKey,setRouteLoaded, destinationRef, calculateRou
   return (
     <>
       {isLoaded && (
-        <div className="create-restaurant-form-step-1-third-row">
+        <div className="order-confirmation-address-container">
         {/* <Autocomplete> */}
+          <i class="fa-solid fa-location-dot"></i>
           <Combobox className='create-restaurant-address-dropdown' onSelect={handleSelect}>
             {/* <div className="create-restaurant-label-input-container address"> */}
-              <label htmlFor='create-restaurant-address-input'>Address</label>
+              {/* <label htmlFor='create-restaurant-address-input'>Address</label> */}
+
               <ComboboxInput
                 // id="create-restaurant-address-input"
-                className='one-input-per-row'
+                className='order-confirmation-address-input'
                 value={value}
                 onChange={(e)=> setValue(e.target.value)}
                 // ref={destinationRef}
                 type='text'
                 // name="restaurant-address"
-                placeholder='Search an address'
+                placeholder='Address'
                 required
                 disabled = {!ready}
               />

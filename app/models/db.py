@@ -137,6 +137,7 @@ class FoodItem(db.Model):
         "name": self.restaurant.name,
         "email": self.restaurant.email,
         "restaurantPicUrl": self.restaurant.restaurant_pic_url,
+        "logo": self.restaurant.logo,
         "phoneNumber": self.restaurant.phone_number,
         "address": self.restaurant.address,
         "openTime": self.restaurant.open_time,

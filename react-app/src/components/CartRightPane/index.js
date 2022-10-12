@@ -5,7 +5,7 @@ import "./CartRightPane.css"
 
 const CartRightPane = ({setSubmittedCartItems, forceCartUpdate, restaurant, submittedCartItems}) => {
 
-  // console.log('submitted cart items:', submittedCartItems)
+  console.log('submitted cart items in cart right pane:', submittedCartItems)
   const [orderSubtotal, setOrderSubtotal] = useState(0)
 
   const calculateOrderTotal = () => {
@@ -19,7 +19,6 @@ const CartRightPane = ({setSubmittedCartItems, forceCartUpdate, restaurant, subm
 
   useEffect(()=>{
     if (submittedCartItems?.length>0){
-      // change the order total every time the cart items are added or deleted
       calculateOrderTotal()
     }
   }, [forceCartUpdate, submittedCartItems])
@@ -52,7 +51,7 @@ const CartRightPane = ({setSubmittedCartItems, forceCartUpdate, restaurant, subm
         </div>
         <div className='checkout-button-container'>
           <div className='checkout-button'>
-            <NavLink className="navlink" style={{color: "white"}} to={{pathname: `/checkout`, data: {orderSubtotal: orderSubtotal}}}>
+            <NavLink className="navlink" style={{color: "white"}} to={{pathname: `/checkout`, data: {orderSubtotal: orderSubtotal, cartItems: submittedCartItems}}}>
               <h3> Checkout </h3>
             </NavLink>
             <h3> {orderSubtotal.toFixed(2)} </h3>
