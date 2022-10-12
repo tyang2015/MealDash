@@ -4,13 +4,13 @@ import { useState } from 'react';
 import { GoogleMap, useJsApiLoader,Marker, Autocomplete } from '@react-google-maps/api';
 
 const containerStyle = {
-  width: '450px',
+  width: '29em',
   height: '180px',
 };
 
 const center = {
-  lat: 34.0522,
-  lng: 118.2437,
+  lat: 34.05,
+  lng: -118.24,
 };
 
 const Maps = ({ apiKey }) => {
