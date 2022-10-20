@@ -1,12 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import OrderConfirmationPage from '../OrderConfirmation';
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from 'react-router-dom';
+import { createNewOrder } from '../../store/order';
 import "./OrderConfirmationRightPane.css"
 const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart' || "[]"))
 
 const OrderConfirmationRightPane = ({orderSubtotal, deliveryMethod, deliveryOption, creditCard, distance, duration, restaurant, errors}) => {
   const sessionUser = useSelector(state=> state.session.user)
-
+  const dispatch = useDispatch()
+  const history = useHistory()
   const [cartItems, setCartItems] = useState(cartFromLocalStorage)
   // const [orderSubtotal, setOrderSubtotal] = useState(0)
   // tip is delivery fee
@@ -14,6 +17,7 @@ const OrderConfirmationRightPane = ({orderSubtotal, deliveryMethod, deliveryOpti
   const [tip, setTip] = useState(Number(2).toFixed(2))
   const [orderFinalTotal, setOrderFinalTotal] = useState(0)
   const [fees, setFees] = useState(0)
+  const [hasSubmitted, setHasSubmitted] = useState(false)
   console.log('cart items on order confirm right pane:', cartItems)
   console.log('restaurant on right pane:', restaurant)
 
@@ -41,6 +45,7 @@ const OrderConfirmationRightPane = ({orderSubtotal, deliveryMethod, deliveryOpti
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setHasSubmitted(true)
     if (errors.length > 0) {
       alert('cannot submit order confirmation form')
       return
@@ -51,19 +56,34 @@ const OrderConfirmationRightPane = ({orderSubtotal, deliveryMethod, deliveryOpti
       phone_number: sessionUser.phoneNumber,
       credit_card: creditCard,
       total_price: orderFinalTotal,
-      distance: distance,
-      duration: duration,
-      delivery_fee: deliveryFee,
-      tip: tip,
+      distance: parseFloat(distance),
+      duration: parseInt(duration),
+      delivery_fee: Number(deliveryFee),
+      tip: Number(tip),
       delivery_method: deliveryMethod,
       delivery_option: deliveryOption,
       food_items: cartItems
     }
+    console.log('order object:', order)
+    dispatch(createNewOrder(order))
+    alert('We have confirmed your order!')
+    setHasSubmitted(false)
+    history.push({pathname: '/orders/new', data: {duration, cartItems, restaurant}})
+    return
 
   }
 
   return (
     <div className='order-confirmation-right-pane-main-container'>
+      {errors.length>0 && hasSubmitted && (
+        <div className="validation-errors-container">
+            <ul className='validation-errors'>
+                {errors.map((error, idx) => (
+                <li key={idx}>{error}</li>
+                ))}
+            </ul>
+        </div>
+      )}
       <div className='right-pane-top-one-fifth-container'>
         <div className='order-confirmation-title-container'>
           <div className='order-confirmation-restaurant-logo-container'>

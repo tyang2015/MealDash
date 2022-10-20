@@ -71,7 +71,6 @@ def update_restaurant(id):
       restaurant_data_bytes = request.data
       new_restaurant_data = json.loads(restaurant_data_bytes.decode('utf-8'))
       print('new restaurant data after byte conversion:', new_restaurant_data)
-      # new_restaurant_data[]
       for k,v in list(new_restaurant_data.items()):
         setattr(restaurant, k, v)
       print('updated restaurant from backend:', restaurant.to_dict())
@@ -202,7 +201,7 @@ def create_restaurant_order(id):
   form['csrf_token'].data = request.cookies['csrf_token']
   # form2['csrf_token'].data = request.cookies['csrf_token']
   if form.validate_on_submit():
-    print('form data (looking for fee):', form.data)
+    # print('form data (looking for fee):', form.data)
     order = Order(
       customer_id = current_user.id,
       restaurant_id = id,
@@ -217,30 +216,32 @@ def create_restaurant_order(id):
       delivery_option = form.data['delivery_option'],
       user = current_user,
       restaurant = restaurant,
-      # order_food_items = form.data['order_food_items']
     )
     db.session.add(order)
     db.session.commit()
-    # print('created order:', order)
-    for food_item in request.json["food_items"]:
-      food_item = OrderFoodItem(
-        restaurant_id = id,
-        food_item_id = food_item["foodItemId"],
-        order_id = order.id,
-        quantity = food_item["quantity"],
-        price = food_item["price"],
-        preferences = food_item["preferences"],
-        name = food_item["name"],
-        food_pic_url = food_item["foodPicUrl"],
-        description = food_item["description"],
-        category = food_item["category"]
-      )
-      db.session.add(food_item)
-      db.session.commit()
-    created_food_items = OrderFoodItem.query.filter(OrderFoodItem.order_id ==order.id)
-    return {'orderFoodItems': [food_item.to_dict() for food_item in created_food_items]}, 201
-    # return order.to_dict(), 201
+    order_food_items = create_food_items(request.json["food_items"], id, order.id)
+    # final_order = order.to_dict()
+    return order.to_dict(), 201
   return {"errors": validation_errors_to_error_messages(form.errors)}, 400
 
-
-# @restaurant_routes.route("/<int:id>/orders/<int:order_id>")
+# remove order_id from params (you should not enter it as user)
+@restaurant_routes.route("/orders/fooditems", methods = ["POST"])
+def create_food_items(food_items, id, order_id):
+  for food_item in food_items:
+    food_item = OrderFoodItem(
+      restaurant_id = id,
+      food_item_id = food_item["id"],
+      order_id = order_id,
+      quantity = food_item["quantity"],
+      price = food_item["price"],
+      preferences = food_item["preferences"],
+      name = food_item["name"],
+      food_pic_url = food_item["foodPicUrl"],
+      description = food_item["description"],
+      category = food_item["category"]
+    )
+    db.session.add(food_item)
+    db.session.commit()
+  created_food_items = OrderFoodItem.query.filter(OrderFoodItem.order_id ==order_id)
+  return {'orderFoodItems': [food_item.to_dict() for food_item in created_food_items]}, 201
+  # return {"errors": validation_errors_to_error_messages(form.errors)}, 400

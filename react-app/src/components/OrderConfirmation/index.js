@@ -25,7 +25,7 @@ const OrderConfirmationPage = () => {
   // const [cartItems, setCartItems] = useState(cartFromLocalStorage)
   const orderSubtotal = location.data.orderSubtotal
   const cartItems = location.data.cartItems
-  
+
   const [restaurant, setRestaurant] = useState(cartItems[0]?.Restaurant ||null)
   const [directionsResponse, setDirectionsResponse] = useState(null)
   const [distance, setDistance] = useState('')
@@ -65,18 +65,16 @@ const OrderConfirmationPage = () => {
     let errs= []
     if (!creditCard) errs.push('Please enter credit card number')
     if (creditCard.length!=16) errs.push("Please enter valid credit card")
+    if (!distance || !duration) errs.push("Please select an address in dropdown box")
     setErrors(errs)
-  }, [creditCard])
+  }, [creditCard, distance, duration])
 
 
-  console.log('restaurant on confirm page:', restaurant)
-  console.log('address at restaurant origin:', originRef)
-  console.log('address at user destination:', destinationRef)
+  // console.log('restaurant on confirm page:', restaurant)
+  // console.log('address at restaurant origin:', originRef)
+  // console.log('address at user destination:', destinationRef)
   // your address input = destination
-  // this will be attached to the address input below
   async function calculateRoute() {
-    // if (routeLoaded){
-      console.log('in calculate route')
       if (originRef === "" || destinationRef === "") return
 
       const directionsService = new google.maps.DirectionsService()
@@ -178,7 +176,7 @@ const OrderConfirmationPage = () => {
                     <label> Card Details </label>
                     <input
                       type='text'
-                      placeholder='xxx xxx xxxx xxxx'
+                      placeholder='xxxx xxxx xxxx xxxx'
                       value={creditCard}
                       className='credit-card-input'
                       onChange={(e)=> setCreditCard(e.target.value)}

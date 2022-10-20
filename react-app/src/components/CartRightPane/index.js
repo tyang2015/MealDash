@@ -58,22 +58,22 @@ const CartRightPane = ({setSubmittedCartItems, forceCartUpdate, restaurant, subm
           </div>
         </div>
         <div className='cart-pane-food-items-container'>
-            {submittedCartItems?.length>0 && submittedCartItems.map(item=>(
-              <>
-                <div key={item.id} className='cart-pane-food-item-card-container'>
-                  <div className='cart-pane-quantity-container'>
-                    {item.quantity}
-                  </div>
-                  <div className='cart-pane-food-item-name-price-container'>
-                    <h4> {item.name}</h4>
-                    <h4> ${(item.price*item.quantity).toFixed(2)}</h4>
-                  </div>
-                  <div className='cart-pane-food-item-delete-container'>
-                    <div onClick={()=> handleDeleteItem(item)}>Delete</div>
-                  </div>
+          {submittedCartItems?.length>0 && submittedCartItems.map(item=>(
+            <>
+              <div key={item.id} className='cart-pane-food-item-card-container'>
+                <div className='cart-pane-quantity-container'>
+                  {item.quantity}
                 </div>
-              </>
-            ))}
+                <div className='cart-pane-food-item-name-price-container'>
+                  <h4> {item.name}</h4>
+                  <h4> ${(item.price*item.quantity).toFixed(2)}</h4>
+                </div>
+                <div className='cart-pane-food-item-delete-container'>
+                  <div onClick={()=> handleDeleteItem(item)}>Delete</div>
+                </div>
+              </div>
+            </>
+          ))}
         </div>
         <h3>{submittedCartItems?.name}</h3>
 

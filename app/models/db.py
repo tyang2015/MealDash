@@ -183,7 +183,7 @@ class Order(db.Model):
       "address": self.restaurant.address,
       "openTime": self.restaurant.open_time,
       "closeTime": self.restaurant.close_time,
-      "category": self.restaurant.category
+      "category": self.restaurant.category,
     }
 
   def get_total_price(self):
@@ -217,7 +217,8 @@ class Order(db.Model):
         # "totalPrice":  self.get_total_price(),
         # "orderFoodItems": [foodItem.to_dict_for_order() for foodItem in self.order_food_items],
         "user": self.convert_user_to_dict(),
-        "restaurant": self.restaurant_to_dict()
+        "restaurant": self.restaurant_to_dict(),
+        "foodItems": [item.to_dict() for item in self.order_food_items]
     }
 
   def convert_user_to_dict(self):
@@ -248,6 +249,7 @@ class OrderFoodItem(db.Model):
   food_item = db.relationship("FoodItem", back_populates="order_food_items")
   food_item_order = db.relationship("Order", back_populates="order_food_items")
 
+# i dont think you need to establish a user relationship...
   def to_dict(self):
     return {
       "id" : self.id,
@@ -260,7 +262,7 @@ class OrderFoodItem(db.Model):
       "price" : str(self.price),
       "preferences": self.preferences,
       "quantity": self.quantity,
-      "Restaurant": self.restaurant_to_dict()
+      "Restaurant": self.restaurant_to_dict(),
     }
 
   def restaurant_to_dict(self):

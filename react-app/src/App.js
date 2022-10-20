@@ -20,6 +20,7 @@ import NavBarSplash from './components/NavBarSplash';
 import RestaurantFooter from './components/RestaurantFooter';
 import "./index.css"
 import OrderConfirmationPage from './components/OrderConfirmation';
+import FinalOrderConfirmation from './components/FinalOrderConfirmation';
 
 
 function App() {
@@ -49,7 +50,6 @@ function App() {
           <UpdateRestaurantForm/>
         </ProtectedRoute>
         <div>
-          {/* {loggedInUser && <NavBar/>} */}
           <Route path='/' exact={true}>
             <SplashPage/>
           </Route>
@@ -76,6 +76,9 @@ function App() {
           </ProtectedRoute>
           <ProtectedRoute path='/checkout' exact={true} >
             <OrderConfirmationPage/>
+          </ProtectedRoute>
+          <ProtectedRoute path='/orders/new' exact={true} >
+            <FinalOrderConfirmation/>
           </ProtectedRoute>
         </div>
       </Switch>

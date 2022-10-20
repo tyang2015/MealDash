@@ -1,0 +1,72 @@
+.final-order-confirmation-page{
+  display: flex;
+  flex-direction: row;
+}
+
+.final-order-left-pane-top-container {
+  border-bottom: #E7E7E7 1px solid;
+  margin-left: 1em;
+  /* background-color: lightcoral; */
+}
+
+.final-order-left-pane-middle-container{
+  border-bottom: #E7E7E7 1px solid;
+  /* background-color: lightcyan; */
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-left: 1em;
+}
+
+.final-order-right-pane{
+  width: 100vw;
+  background-color: lightblue;
+}
+
+.arrives-in-container{
+  display:flex;
+  flex-direction: row;
+  color: #7F767F;
+  font-size: 16px;
+  font-weight: 550;
+
+}
+
+.order-confirmation-restaurant-container{
+  color: #7F767F;
+  font-weight: 550;
+}
+
+.countdown-time-container{
+  color: black;
+  font-weight: 700;
+}
+
+
+.final-order-order-item-card{
+  height: 50px;
+  /* background-color: lightgoldenrodyellow; */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-weight: 700;
+  /* padding-left: 0.8rem; */
+  /* border-bottom: #E7E7E7 1px solid; */
+}
+
+.final-order-left-pane-bottom-container{
+  display: flex;
+  flex-direction: column;
+  padding-top: 19.92px;
+  margin-left: 1em;
+}
+
+.final-order-delivery-address-container{
+  font-weight: 700;
+  padding-bottom: 19.92px;
+}
+
+.final-order-order-item-card:not(:last-child){
+  border-bottom: #E7E7E7 1px solid;
+}
