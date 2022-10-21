@@ -1,0 +1,28 @@
+.checkout-page-nav-bar{
+  display: flex;
+  justify-content: center;
+  border-bottom: #E7E7E7 1px solid;
+  height: 3em;
+  align-items: center;
+}
+
+.checkout-page-back-button-container{
+  width:  8em;
+  height: 3em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  box-sizing: border-box;
+  position: absolute;
+  left: 2px;
+  top:2px;
+  justify-content: space-between;
+}
+
+.back-to-store-text{
+  width: 70%;
+  /* background-color: lightcyan; */
+  font-size: 14px;
+  color: lightcoral
+
+}

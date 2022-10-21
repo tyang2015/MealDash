@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import "./CartRightPane.css"
 
 const CartRightPane = ({setSubmittedCartItems, forceCartUpdate, restaurant, submittedCartItems}) => {
-
+  console.log('restaurant name from cart:', restaurant)
   console.log('submitted cart items in cart right pane:', submittedCartItems)
+  const location = useLocation();
   const [orderSubtotal, setOrderSubtotal] = useState(0)
 
   const calculateOrderTotal = () => {
@@ -51,7 +52,7 @@ const CartRightPane = ({setSubmittedCartItems, forceCartUpdate, restaurant, subm
         </div>
         <div className='checkout-button-container'>
           <div className='checkout-button'>
-            <NavLink className="navlink" style={{color: "white"}} to={{pathname: `/checkout`, data: {orderSubtotal: orderSubtotal, cartItems: submittedCartItems}}}>
+            <NavLink className="navlink" style={{color: "white"}} to={{pathname: `/checkout`, data: {orderSubtotal: orderSubtotal, cartItems: submittedCartItems, restaurant: restaurant}, state: {prevPath: location.pathname}}}>
               <h3> Checkout </h3>
             </NavLink>
             <h3> {orderSubtotal.toFixed(2)} </h3>
@@ -62,14 +63,20 @@ const CartRightPane = ({setSubmittedCartItems, forceCartUpdate, restaurant, subm
             <>
               <div key={item.id} className='cart-pane-food-item-card-container'>
                 <div className='cart-pane-quantity-container'>
-                  {item.quantity}
+                  <div className='cart-pane-quantity-circle'>
+                    {item.quantity} <p style={{fontSize:'10px'}}>x</p>
+                  </div>
                 </div>
                 <div className='cart-pane-food-item-name-price-container'>
-                  <h4> {item.name}</h4>
-                  <h4> ${(item.price*item.quantity).toFixed(2)}</h4>
+                  <div className='cart-pane-food-item-name-container'>
+                    <h4 className='cart-pane-food-item-name-text-box'> {item.name}</h4>
+                  </div>
+                  <div className="cart-pane-food-item-price-container">
+                    <h4> ${(item.price*item.quantity).toFixed(2)}</h4>
+                  </div>
                 </div>
                 <div className='cart-pane-food-item-delete-container'>
-                  <div onClick={()=> handleDeleteItem(item)}>Delete</div>
+                  <div onClick={()=> handleDeleteItem(item)}><i class="fa-solid fa-trash-can"></i></div>
                 </div>
               </div>
             </>

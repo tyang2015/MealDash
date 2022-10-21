@@ -2,31 +2,36 @@
   height: 100%;
   display: flex;
   flex-direction: row;
+  /* margin-top: 2em; */
 }
 
 
 .order-confirmation-content-outer-container{
   width: 83%;
   height: 100%;
-  background-color: lightblue;
+  /* background-color: lightblue; */
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
   align-items: center;
+  margin-top: 1.6em;
 }
 
 .account-details-container{
   background-color: white;
-  border: 1px #E7E7E7 solid;
+  border: 1.3px #E7E7E7 solid;
   border-radius: 5px;
   width: 32em;
   height: 3em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .shipping-details-container{
   width: 32em;
   background-color: white;
-  border: 1px #E7E7E7 solid;
+  border: 1.3px #E7E7E7 solid;
   border-radius: 5px;
   height: fit-content;
   margin-top: .9em;
@@ -54,18 +59,26 @@
   height: 3em;
   width: 32em;
   border-radius: 5px;
-  box-sizing: border-box;
-  margin-top: -5px;
+  /* box-sizing: border-box; */
+  /* margin-top: -5px; */
+  margin-top: 1.2em;
+  border: 1.3px #E7E7E7 solid;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.payment-details-container-toggle-true{
+/* .payment-details-container-toggle-true{
   background-color: white;
   height: 8em;
   width: 32em;
   border-radius: 5px;
   box-sizing: border-box;
   margin-top: -5px;
-}
+  border: 1.3px #E7E7E7 solid;
+  box-sizing: border-box;
+} */
 
 input[type="radio"]{
   /* display:none */
@@ -75,7 +88,7 @@ input[type="radio"]{
 .shipping-details-container-excluding-title{
   width: 29em;
   margin:auto;
-  background-color: lightsalmon;
+  /* background-color: lightsalmon; */
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -83,7 +96,7 @@ input[type="radio"]{
 }
 
 .delivery-pickup-container{
-  background-color: lightseagreen;
+  /* background-color: lightseagreen; */
   width: 100%;
   height: 2em;
   display: flex;
@@ -91,18 +104,17 @@ input[type="radio"]{
   justify-content: center;
 }
 .delivery-time-container{
-  background-color: lightcyan;
+  /* background-color: lightcyan; */
   height: 3.2em;
   width: 100%;
   font-weight: 700;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   /* padding-left:2em ; */
   box-sizing: border-box;
 }
 
 .order-confirmation-address-container{
-  background-color: lightgoldenrodyellow;
   height: 4.6em;
   width: 100%;
   display: flex;
@@ -115,7 +127,6 @@ input[type="radio"]{
 
 
 .order-confirmation-address-input{
-  background-color: lightgoldenrodyellow;
   height: 3.2em;
   width: 100%;
   display: flex;
@@ -127,7 +138,6 @@ input[type="radio"]{
 
 .delivery-option-container{
   width: 100%;
-  background-color: lightcyan;
   height: 3.2em;
   display: flex;
   justify-content: center;
@@ -136,7 +146,6 @@ input[type="radio"]{
 
 .order-confirmation-phone-number-container{
   width: 100%;
-  background-color: lightsalmon;
   height: 3.2em;
   display: flex;
   justify-content: flex-start;
@@ -145,6 +154,13 @@ input[type="radio"]{
 .fa-solid.fa-phone{
   display: flex;
   align-items: center;
-  width: 50px;
-  justify-content: center;
+  width: 30px;
+  justify-content: flex-start;
+}
+
+.order-confirm-delivery-time-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
 }

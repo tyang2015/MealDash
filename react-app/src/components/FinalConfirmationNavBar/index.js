@@ -8,7 +8,7 @@ import "./FinalConfirmationNavBar.css"
 const FinalConfirmationNavBar = () => {
   return (
     <nav className="final-confirmation-nav-bar">
-      <NavLink to="/">
+      <NavLink to="/restaurants">
         <i className="fa-solid fa-burger order-confirmation-page"> MealDash </i>
       </NavLink>
     </nav>

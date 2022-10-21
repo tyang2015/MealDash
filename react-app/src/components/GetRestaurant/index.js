@@ -417,7 +417,7 @@ const GetRestaurant = () => {
               </>
             )}
           </div>
-        {(<CartRightPane setSubmittedCartItems={setSubmittedCartItems} submittedCart={submittedCart} forceCartUpdate={forceCartUpdate} restaurant={restaurant} submittedCartItems={submittedCartItems}/>) }
+        {(<CartRightPane setSubmittedCartItems={setSubmittedCartItems} forceCartUpdate={forceCartUpdate} restaurant={submittedCartItems.length>0? submittedCartItems[0].Restaurant: null} submittedCartItems={submittedCartItems}/>) }
         </div>
         <RestaurantFooter/>
 

@@ -1,0 +1,9 @@
+#modal-content.order-confirm-payment-modal-content{
+  height: 25em;
+  width: 32em;
+  background-color: lightblue;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+
+}

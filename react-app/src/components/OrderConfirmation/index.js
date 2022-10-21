@@ -8,6 +8,9 @@ import "./OrderConfirmation.css"
 import { getKey } from '../../store/maps';
 import OrderConfirmationRightPane from '../OrderConfirmationRightPane';
 import { getAllRestaurants } from '../../store/restaurant';
+import PaymentModal from '../PaymentModal';
+import CheckoutPageNavBar from '../CheckoutPageNavBar';
+
 import {
   GoogleMap,
   Marker,
@@ -16,6 +19,7 @@ import {
 } from '@react-google-maps/api'
 
 const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart' || "[]"))
+const subTotalFromLocalStorage = localStorage.getItem("orderSubtotal") ? JSON.parse(localStorage.getItem("orderSubtotal" )): 0
 
 const OrderConfirmationPage = () => {
   const dispatch = useDispatch();
@@ -23,13 +27,18 @@ const OrderConfirmationPage = () => {
   const key = useSelector(state=> state.session.user)
   const user = useSelector(state=> state.session.user)
   // const [cartItems, setCartItems] = useState(cartFromLocalStorage)
-  const orderSubtotal = location.data.orderSubtotal
-  const cartItems = location.data.cartItems
-
-  const [restaurant, setRestaurant] = useState(cartItems[0]?.Restaurant ||null)
+  const landingOrderSubtotal = location?.data?.orderSubtotal
+  const restaurant= location?.data?.restaurant
+  const cartItems = cartFromLocalStorage
+  const [orderSubtotal, setOrderSubtotal] = useState(landingOrderSubtotal? landingOrderSubtotal: subTotalFromLocalStorage)
+  // const [restaurant, setRestaurant] = useState(cartItems[0]?.Restaurant ||null)
+  const [paymentModal, setPaymentModal] = useState(false)
+  const [userCoordinates,setUserCoordinates] =useState({lat: Number(restaurant.latitude), lng: Number(restaurant.longitude)})
   const [directionsResponse, setDirectionsResponse] = useState(null)
   const [distance, setDistance] = useState('')
   const [duration, setDuration] = useState('')
+  // console.log('refactored local storage:' , orderSubtotal)
+  console.log('restaurant in order confirm page:', restaurant)
 
   const [paymentDropdown, setPaymentDropdown] = useState(false)
   let [destinationRef, setDestinationRef] = useState('')
@@ -41,13 +50,21 @@ const OrderConfirmationPage = () => {
   let [errors, setErrors] = useState([])
 
   const google = window.google
-  console.log('order subtotal on order confirmation page:', orderSubtotal)
+  // console.log('order subtotal on order confirmation page:', orderSubtotal)
+  console.log("user coordinates:", userCoordinates)
+  useEffect(()=>{
+    if(landingOrderSubtotal){
+      localStorage.setItem("orderSubtotal", JSON.stringify(landingOrderSubtotal))
+    }
+  }, [])
+
 
   useEffect(()=> {
     if (!key) {
       dispatch(getKey());
     }
   }, [dispatch, key])
+
 
 
   useEffect(()=>{
@@ -91,18 +108,24 @@ const OrderConfirmationPage = () => {
       }
   }
 
+  const handlePaymentEdit = () => {
+    setPaymentModal(true)
+  }
+
   return (
     <>
+      <CheckoutPageNavBar />
       <div className='order-confirmation-main-container'>
         <div className='order-confirmation-content-outer-container'>
             <div className='account-details-container'>
               <h4>  1. Account details </h4>
+              <p> {user.email}</p>
             </div>
             <form id='order-form' className='order-confirmation-form-container'>
               <div className='shipping-details-container'>
                 <h4 style={{textAlign: "left", width: '100%'}}> 2. Shipping details </h4>
                 <div className='shipping-details-container-excluding-title'>
-                  <MapContainer/>
+                  <MapContainer restaurant={restaurant} userCoordinates={userCoordinates}/>
                   <div className='delivery-pickup-container'>
                     <label>
                       <input
@@ -128,12 +151,15 @@ const OrderConfirmationPage = () => {
                   <div className='delivery-time-container'>
                     {deliveryMethod=== "Delivery" && (
                       <>
-                        <p> Delivery Time</p>
+                        <div className='order-confirm-delivery-time-container'>
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="styles__StyledInlineSvg-sc-12l8vvi-0 jFpckg"><path d="M13 7C13 6.44772 12.5523 6 12 6C11.4477 6 11 6.44772 11 7V12C11 12.2652 11.1054 12.5196 11.2929 12.7071L14.2929 15.7071C14.6834 16.0976 15.3166 16.0976 15.7071 15.7071C16.0976 15.3166 16.0976 14.6834 15.7071 14.2929L13 11.5858V7Z" fill="#494949"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM20 12C20 16.4183 16.4183 20 12 20C7.58172 20 4 16.4183 4 12C4 7.58172 7.58172 4 12 4C16.4183 4 20 7.58172 20 12Z" fill="#494949"></path></svg>
+                          <p> Delivery Time</p>
+                        </div>
                         <p>{duration? duration: null}</p>
                       </>
                     )}
                   </div>
-                  <OrderPlacesAutocompleteContainer destinationRef={destinationRef} setDestinationRef={setDestinationRef} calculateRoute={calculateRoute}/>
+                  <OrderPlacesAutocompleteContainer setUserCoordinates={setUserCoordinates} destinationRef={destinationRef} setDestinationRef={setDestinationRef} calculateRoute={calculateRoute}/>
                   {deliveryMethod==="Delivery" && (
                   <div className='delivery-option-container'>
                     <label>
@@ -164,28 +190,30 @@ const OrderConfirmationPage = () => {
                   </div>
                 </div>
               </div>
-              {!paymentDropdown && (
-                <div className='payment-details-container-toggle-false'>
-                  <h4> 3. Payment details <div onClick={()=> setPaymentDropdown(true)}> ▼ </div></h4>
-                </div>
-              )}
-              {paymentDropdown  && (
-                <div className='payment-details-container-toggle-true'>
-                  <h4>3. Payment details <div onClick={()=> setPaymentDropdown(false)}> ▲ </div> </h4>
-                  <div className='credit-card-input-label-container'>
-                    <label> Card Details </label>
-                    <input
-                      type='text'
-                      placeholder='xxxx xxxx xxxx xxxx'
-                      value={creditCard}
-                      className='credit-card-input'
-                      onChange={(e)=> setCreditCard(e.target.value)}
-                      required
-                    />
-                  </div>
-                </div>
-              )}
             </form>
+            {/* {!paymentDropdown && ( */}
+              <div className='payment-details-container-toggle-false'>
+                <h4> 3. Payment details </h4>
+                <div onClick={handlePaymentEdit}> Edit </div>
+              </div>
+              {paymentModal && (<PaymentModal setPaymentModal={setPaymentModal} creditCard={creditCard} setCreditCard={setCreditCard} />)}
+            {/* )} */}
+            {/* {paymentDropdown  && (
+              <div className='payment-details-container-toggle-true'>
+                <h4>3. Payment details <div onClick={()=> setPaymentDropdown(false)}> ▲ </div> </h4>
+                <div className='credit-card-input-label-container'>
+                  <label> Card Details </label>
+                  <input
+                    type='text'
+                    placeholder='xxxx xxxx xxxx xxxx'
+                    value={creditCard}
+                    className='credit-card-input'
+                    onChange={(e)=> setCreditCard(e.target.value)}
+                    required
+                  />
+                </div>
+              </div>
+            )} */}
         </div>
         <OrderConfirmationRightPane deliveryMethod={deliveryMethod} deliveryOption={deliveryOption} distance={distance} duration={duration} errors={errors}
          restaurant={restaurant} creditCard={creditCard} orderSubtotal={orderSubtotal}/>

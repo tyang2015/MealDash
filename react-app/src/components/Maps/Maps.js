@@ -8,19 +8,21 @@ const containerStyle = {
   height: '180px',
 };
 
-const center = {
-  lat: 34.05,
-  lng: -118.24,
-};
+// const center = {
+//   lat: 34.05,
+//   lng: -118.24,
+// };
 
-const Maps = ({ apiKey }) => {
+const Maps = ({ apiKey, userCoordinates, restaurant }) => {
   const [map, setMap] = useState(/** @type google.maps.GoogleMap */null)
+  const [restaurantCoord, setRestaurantCoord] = useState({'lat': restaurant?.latitude, "lng": restaurant?.longitude })
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: apiKey,
     libraries: ['places']
   });
-
+  console.log('restaurant in maps:', restaurant)
+  console.log('restaurant coordintes in maps:', restaurantCoord)
   return (
     <>
       {/* <Autocomplete>
@@ -34,7 +36,7 @@ const Maps = ({ apiKey }) => {
       {isLoaded && (
         <GoogleMap
           mapContainerStyle={containerStyle}
-          center={center}
+          center={userCoordinates? userCoordinates: restaurantCoord}
           zoom={10}
           // added here?????
           id="map"
@@ -46,7 +48,7 @@ const Maps = ({ apiKey }) => {
           }}
           onLoad={map=> setMap(map)}
         >
-          <Marker position={center}/>
+          <Marker position={userCoordinates? userCoordinates: restaurantCoord}/>
         </GoogleMap>
       )}
     </>

@@ -37,7 +37,7 @@ const FinalOrderConfirmation = () => {
       <div className='final-order-confirmation-page'>
         <div className='final-order-left-pane'>
           <div className='final-order-left-pane-top-container'>
-              <h2>Preparing your order</h2>
+              <h2>{countdown>0? "Preparing your order": "Order Completed"}</h2>
               <p className='arrives-in-container'> Arrives in&nbsp;<div className='countdown-time-container'>{countdown} min</div></p>
               <div className='order-delivery-progress-bar'></div>
               <p className='order-confirmation-restaurant-container'> {restaurant.name} is preparing your order</p>
@@ -46,7 +46,7 @@ const FinalOrderConfirmation = () => {
             <h3 className='order-details-container'>Order Details</h3>
             <div className='final-order-order-items'>
               {cartItems.map(item=> (
-                <div className='final-order-order-item-card'> x{item.quantity} {item.name}</div>
+                <div className='final-order-order-item-card'> {item.quantity}x {item.name}</div>
               ))}
             </div>
           </div>

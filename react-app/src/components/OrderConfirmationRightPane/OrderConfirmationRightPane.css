@@ -2,12 +2,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: lightgoldenrodyellow;
+  /* background-color: lightgoldenrodyellow; */
   width: 30%;
+  border-left: 1.5px solid #dbd8d8;
 }
 
 .order-summary-container{
   margin-bottom:20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .order-confirmation-restaurant-logo-pic{
@@ -19,10 +24,11 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  /* margin-left: 3px; */
 }
-/* .order-confirmation-restaurant-title-text-container{
-  font-size: 14px;
-} */
+.order-confirmation-restaurant-title-text-container{
+  margin-left: 10px;
+}
 
 .order-confirmation-title-text-container-top-row{
   font-size: 12px;
@@ -34,7 +40,7 @@
   text-align: left;
   display: flex;
   justify-content: flex-start;
-  font-size: 10.5px;
+  /* font-size: 10.5px; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,7 +48,7 @@
 
 .order-confirmation-place-order-container{
   height: 2em;
-  background-color: lightgreen;
+  /* background-color: lightgreen; */
   display: flex;
   justify-content: center;
   margin-bottom: 20px
@@ -66,15 +72,18 @@
 
 .right-pane-top-one-fifth-container{
   width: 85%;
+  border-bottom: 1.5px solid #dbd8d8;
+  margin-top: 1.2em;
 }
 
 /* 2-fifth-container */
 .order-confirmation-price-breakdown-container{
   width: 85%;
-  background-color: lightgreen;
+  /* background-color: lightgreen; */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  border-bottom: 1.5px solid #dbd8d8;
 }
 
 .price-breakdown-row-container{
@@ -87,7 +96,7 @@
 
 .dasher-tip-container{
   width: 85%;
-  background: lightblue;
+  /* background: lightblue; */
   display: flex;
   justify-content: flex-start;
   height: 9.7em;
@@ -96,7 +105,7 @@
 }
 
 .dasher-tip-container-top-row{
-  background-color: lightcoral;
+  /* background-color: lightcoral; */
   width: 100%;
   display: flex;
   align-items: center;
@@ -120,21 +129,23 @@
   justify-content: flex-start;
   font-size: 10.5px;
   align-items: center;
+  border-bottom:1.5px solid #dbd8d8;
 }
 
 .order-final-total-container{
   width: 85%;
-  background-color: lightgreen;
+  /* background-color: lightgreen; */
   display: flex;
   justify-content: space-between;
   height: 3em;
   align-items: center;
+  border-bottom: 1.5px solid #dbd8d8;
 
 }
 
 .order-amount-due-container{
   width: 85%;
-  background-color: lightgreen;
+  /* background-color: lightgreen; */
   display: flex;
   justify-content: space-between;
   height: 3em;

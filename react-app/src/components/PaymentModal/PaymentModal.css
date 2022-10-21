@@ -1,0 +1,57 @@
+.credit-card-modal-inner-container{
+  display:flex;
+  flex-direction:column;
+  background-color: lightgoldenrodyellow;
+  width: 30em;
+  height:100%;
+  border-radius: 20px;
+  align-items: center;
+  justify-content: flex-start;
+  /* padding-top: 10em; */
+}
+
+.add-new-card-title-container{
+  margin-top: 2em;
+  width: 100%;
+  text-align: center;
+}
+
+.payment-button-container{
+  background-color: lightblue;
+  width:100%;
+  height:2em;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 1.2em;
+  
+
+}
+
+.credit-card-input-label-container{
+  width: 100%;
+  background-color:lightpink;
+  display: flex;
+  justify-content: center;
+  height: fit-content;
+  align-items: center;
+}
+
+.credit-card-input{
+  height: 30px;
+}
+
+.add-card-button{
+  display:flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width:13rem;
+  border: none;
+  background-color: lightcoral;
+  color: white;
+  border-radius: 1000px;
+  /* width: 100px; */
+  height: 100%;
+  justify-content:space-around;
+  align-items: center;
+}

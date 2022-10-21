@@ -142,7 +142,9 @@ class FoodItem(db.Model):
         "address": self.restaurant.address,
         "openTime": self.restaurant.open_time,
         "closeTime": self.restaurant.close_time,
-        "category": self.restaurant.category
+        "category": self.restaurant.category,
+        "longitude": str(self.restaurant.longitude),
+        "latitude": str(self.restaurant.latitude)
       }
 
 class Order(db.Model):

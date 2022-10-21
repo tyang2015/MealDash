@@ -1,0 +1,12 @@
+.location-dot-container{
+  display: flex;
+  align-items: center;
+  width: 30px;
+  justify-content: flex-start;
+}
+
+.order-confirmation-address-input{
+  border: none;
+  background-color: #C8C8C8;
+  /* background-color: black; */
+}
