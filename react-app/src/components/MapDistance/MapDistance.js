@@ -21,8 +21,8 @@ const MapDistance = ({ apiKey, restaurant }) => {
   //   lat:
   // }
   const restaurantLoc ={
-    lat: restaurant.latitude,
-    long: restaurant.longitude
+    lat: restaurant?.latitude,
+    long: restaurant?.longitude
   }
 
   const center = {

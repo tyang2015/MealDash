@@ -174,7 +174,7 @@ def delete_food_item(rest_id, food_item_id):
 @login_required
 def get_your_orders():
   restaurant_orders = Order.query.filter(Order.customer_id == current_user.id).all()
-  return {"orders": [order.to_dict() for order in orders]}
+  return {"orders": [order.to_dict() for order in restaurant_orders]}
 
 
 

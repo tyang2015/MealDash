@@ -21,7 +21,7 @@ const GetRestaurant = () => {
   const sessionUser = useSelector(state=> state.session.user)
   const restaurant = useSelector(state=> state.restaurants[id])
   let foodItems = useSelector(state => Object.values(state.foodItems))
-  console.log('all food items:', foodItems)
+  // console.log('all food items:', foodItems)
   const [foodItemModal, setFoodItemModal] = useState(false)
   const [foodItem, setFoodItem] =useState(null)
   const [isOpen, setIsOpen] = useState(false)
@@ -38,7 +38,6 @@ const GetRestaurant = () => {
 
   const [submittedCart, setSubmittedCart] =useState(false)
   const [submittedCartItems, setSubmittedCartItems] = useState(cartFromLocalStorage || [])
-  // const [submittedCartItems, setSubmittedCartItems] = useState( [])
   const [forceCartUpdate, setForceCartUpdate] = useState(false)
 
   const [finalAvgRating, setFinalAvgRating] = useState(0)
@@ -49,7 +48,7 @@ const GetRestaurant = () => {
   let todayInHours = today.getHours()
   let todayInMinutes = today.getMinutes()
 
-  console.log('cart from local storage:', cartFromLocalStorage)
+  // console.log('cart from local storage:', cartFromLocalStorage)
 
   useEffect(()=> {
     localStorage.setItem("cart", JSON.stringify(submittedCartItems))
@@ -112,7 +111,7 @@ const GetRestaurant = () => {
       }
     }
   }, [restaurant?.openTime, restaurant?.closeTime])
-  console.log("food items on get restaurant page: ", foodItems)
+  // console.log("food items on get restaurant page: ", foodItems)
   console.log('submitted cart items on get restaurant page:', submittedCartItems)
 
 
@@ -127,10 +126,8 @@ const GetRestaurant = () => {
   useEffect(()=>{
     if (foodItems.length>0 && main=== "Main"){
       filteredItems = foodItems.filter(item => item.category === main)
-      console.log('filtered Items: ', filteredItems)
       setFilteredItems(filteredItems)
       setIsFiltered(true)
-      console.log('filtered?', isFiltered)
       return filteredItems
 
     }
@@ -139,10 +136,8 @@ const GetRestaurant = () => {
   useEffect(()=>{
     if (foodItems.length>0 && sides === "Sides"){
       filteredItems = foodItems.filter(item => item.category === sides)
-      console.log('filtered Items: ', filteredItems)
       setFilteredItems(filteredItems)
       setIsFiltered(true)
-      console.log('filtered?', isFiltered)
       return filteredItems
 
     }
@@ -152,10 +147,8 @@ const GetRestaurant = () => {
   useEffect(()=>{
     if (foodItems.length>0 && desserts === "Desserts"){
       filteredItems = foodItems.filter(item => item.category === desserts)
-      console.log('filtered Items: ', filteredItems)
       setFilteredItems(filteredItems)
       setIsFiltered(true)
-      console.log('filtered?', isFiltered)
       return filteredItems
     }
 
@@ -164,10 +157,8 @@ const GetRestaurant = () => {
   useEffect(()=>{
     if (foodItems.length>0 && drinks === "Drinks"){
       filteredItems = foodItems.filter(item => item.category === drinks)
-      console.log('filtered Items: ', filteredItems)
       setFilteredItems(filteredItems)
       setIsFiltered(true)
-      console.log('filtered?', isFiltered)
       return filteredItems
     }
   }, [drinks])
@@ -188,7 +179,6 @@ const GetRestaurant = () => {
   }
 
   const handleDeleteFoodItem = (foodItemId)=> {
-    console.log('food item id in handle delete function:', foodItemId)
     dispatch(deleteFoodItem(id, foodItemId))
     alert('food item deleted!')
     return
@@ -247,7 +237,6 @@ const GetRestaurant = () => {
       <div className="restaurant-page-main-container">
         <div className="restaurant-page-main-content-top-outer-container">
           <div className="restaurant-page-main-content-container">
-            {/* <h3> restaurant page</h3> */}
             {restaurant  && (
               <>
                 <div className="restaurant-page-pic-container">
@@ -417,7 +406,7 @@ const GetRestaurant = () => {
               </>
             )}
           </div>
-        {(<CartRightPane setSubmittedCartItems={setSubmittedCartItems} forceCartUpdate={forceCartUpdate} restaurant={submittedCartItems.length>0? submittedCartItems[0].Restaurant: null} submittedCartItems={submittedCartItems}/>) }
+        <CartRightPane setSubmittedCartItems={setSubmittedCartItems} forceCartUpdate={forceCartUpdate} restaurant={submittedCartItems.length>0? submittedCartItems[0].Restaurant: null} submittedCartItems={submittedCartItems}/>
         </div>
         <RestaurantFooter/>
 

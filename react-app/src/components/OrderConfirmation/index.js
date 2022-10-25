@@ -33,7 +33,7 @@ const OrderConfirmationPage = () => {
   const [orderSubtotal, setOrderSubtotal] = useState(landingOrderSubtotal? landingOrderSubtotal: subTotalFromLocalStorage)
   // const [restaurant, setRestaurant] = useState(cartItems[0]?.Restaurant ||null)
   const [paymentModal, setPaymentModal] = useState(false)
-  const [userCoordinates,setUserCoordinates] =useState({lat: Number(restaurant.latitude), lng: Number(restaurant.longitude)})
+  const [userCoordinates,setUserCoordinates] =useState({lat: Number(restaurant?.latitude), lng: Number(restaurant?.longitude)})
   const [directionsResponse, setDirectionsResponse] = useState(null)
   const [distance, setDistance] = useState('')
   const [duration, setDuration] = useState('')
@@ -111,6 +111,7 @@ const OrderConfirmationPage = () => {
   const handlePaymentEdit = () => {
     setPaymentModal(true)
   }
+  console.log('duration:', duration)
 
   return (
     <>

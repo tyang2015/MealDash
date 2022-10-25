@@ -6,13 +6,13 @@ import "./FoodItemModal.css"
 import "../../context/Modal.css"
 
 const FoodItemModal = ({setForceCartUpdate, forceCartUpdate,setSubmittedCartItems, submittedCartItems,setSubmittedCart, setFoodItemModal, foodItem}) => {
-  console.log('food item:', foodItem)
   const [totalPrice, setTotalPrice] = useState("")
   const [preferences, setPreferences] = useState("")
   const [quantity, setQuantity] = useState(1)
 
   const handleCartSubmission = (foodItem, quantity) => {
     setSubmittedCart(true)
+    console.log('food item in cart submission:', foodItem)
     // append quantity to the foodItem and return a new?? foodItem object
     // modify original first
 
@@ -38,15 +38,17 @@ const FoodItemModal = ({setForceCartUpdate, forceCartUpdate,setSubmittedCartItem
     setForceCartUpdate(!forceCartUpdate)
     setSubmittedCartItems([...submittedCartItems, foodItem])
     setFoodItemModal(false)
+    return
   }
+
   return (
     <Modal onClose={()=> setFoodItemModal(false)}>
       <div className='food-item-main-container'>
         <div className='food-item-main-content-container'>
           <div>x</div>
-          <h1>{foodItem.name}</h1>
-          <h3>{foodItem.description}</h3>
-          <img className="food-item-modal-pic" src={foodItem.foodPicUrl} />
+          <h1>{foodItem?.name}</h1>
+          <h3>{foodItem?.description}</h3>
+          <img className="food-item-modal-pic" src={foodItem?.foodPicUrl} />
           <div className='preferences-container'>
             <label htmlFor="food-item-preference-input">Preferences</label>
             <textarea
@@ -69,7 +71,7 @@ const FoodItemModal = ({setForceCartUpdate, forceCartUpdate,setSubmittedCartItem
           </div>
           {/* <div className="modal-add-to-cart-button-container"> */}
             <div className='food-item-modal-add-to-cart-button' onClick={()=> handleCartSubmission(foodItem, quantity, preferences)}>
-                Add to cart - {(foodItem.price * quantity).toFixed(2)}
+                Add to cart - {(foodItem?.price * quantity).toFixed(2)}
             </div>
           {/* </div> */}
         </div>

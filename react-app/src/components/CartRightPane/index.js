@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useLocation } from 'react-router-dom';
+import FinalConfirmationNavBar from '../FinalConfirmationNavBar';
 import "./CartRightPane.css"
 
-const CartRightPane = ({setSubmittedCartItems, forceCartUpdate, restaurant, submittedCartItems}) => {
-  console.log('restaurant name from cart:', restaurant)
-  console.log('submitted cart items in cart right pane:', submittedCartItems)
+// can we access the submitted Cart items from local instead??
+// const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart'))
+
+const CartRightPane = ({ forceCartUpdate, restaurant, submittedCartItems, setSubmittedCartItems}) => {
   const location = useLocation();
   const [orderSubtotal, setOrderSubtotal] = useState(0)
+  // let [submittedCartItems, setSubmittedCartItems] = useState(cartFromLocalStorage)
+  console.log('cart directly from local storage in cart right pane:', submittedCartItems)
 
   const calculateOrderTotal = () => {
     let totalPrice = 0;
@@ -17,6 +21,19 @@ const CartRightPane = ({setSubmittedCartItems, forceCartUpdate, restaurant, subm
      }
     setOrderSubtotal(totalPrice)
   }
+
+  useEffect(()=> {
+    if (location?.state?.prevPath && location.state.cartItems){
+      console.log('location state prevPath is TRUE')
+      // submittedCartItems = location.state.cartItems
+      setSubmittedCartItems(location.state.cartItems)
+      restaurant = location?.state?.cartItems[0]?.Restaurant
+    }
+  }, [])
+
+  useEffect(()=> {
+    localStorage.setItem("cart", JSON.stringify(submittedCartItems))
+  }, [submittedCartItems])
 
   useEffect(()=>{
     if (submittedCartItems?.length>0){
@@ -31,7 +48,9 @@ const CartRightPane = ({setSubmittedCartItems, forceCartUpdate, restaurant, subm
 
   const handleDeleteItem = (itemToDelete) => {
     let i =0;
+    // console.log('delete food item button clicked')
     let copiedCartItems = [...submittedCartItems]
+    console.log('copied cart items:', copiedCartItems)
     while (i< submittedCartItems.length){
       let item = submittedCartItems[i]
       if (item.id === itemToDelete.id){
@@ -41,6 +60,7 @@ const CartRightPane = ({setSubmittedCartItems, forceCartUpdate, restaurant, subm
       }
       i=i+1
     }
+    // console.log('cart items after deletion from right pane:', submittedCartItems)
   }
 
   return (
@@ -52,7 +72,7 @@ const CartRightPane = ({setSubmittedCartItems, forceCartUpdate, restaurant, subm
         </div>
         <div className='checkout-button-container'>
           <div className='checkout-button'>
-            <NavLink className="navlink" style={{color: "white"}} to={{pathname: `/checkout`, data: {orderSubtotal: orderSubtotal, cartItems: submittedCartItems, restaurant: restaurant}, state: {prevPath: location.pathname}}}>
+            <NavLink className="navlink" style={{color: "white"}} to={{pathname: `/checkout`, data: {orderSubtotal: orderSubtotal, cartItems: submittedCartItems, restaurant: restaurant, setCartItems: setSubmittedCartItems}, state: {prevPath: location.pathname}}}>
               <h3> Checkout </h3>
             </NavLink>
             <h3> {orderSubtotal.toFixed(2)} </h3>

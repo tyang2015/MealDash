@@ -11,6 +11,7 @@ const OrderConfirmationRightPane = ({orderSubtotal, deliveryMethod, deliveryOpti
   const dispatch = useDispatch()
   const history = useHistory()
   const [cartItems, setCartItems] = useState(cartFromLocalStorage)
+  // const [countdown, setCountdown] = useState(duration? Number(parseInt(duration.split(" ")[0])): null)
   // const [orderSubtotal, setOrderSubtotal] = useState(0)
   // tip is delivery fee
   const [deliveryFee, setDeliveryFee] = useState(0)
@@ -43,7 +44,19 @@ const OrderConfirmationRightPane = ({orderSubtotal, deliveryMethod, deliveryOpti
     setOrderFinalTotal(total)
   }, [fees, tip])
 
-  const handleSubmit = (e) => {
+  const MinuteCountdown = (countdown, setCountdown) => {
+    let countdownInSec = countdown* 60
+    let deliveryInterval = setInterval(()=> {
+      console.log('timer:', countdownInSec)
+      if (countdownInSec <= 0) {
+        clearInterval(deliveryInterval);
+      }
+      countdownInSec-=1
+      setCountdown(Math.ceil(countdownInSec/60))
+    }, 1000)
+  }
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setHasSubmitted(true)
     if (errors.length > 0) {
@@ -52,7 +65,7 @@ const OrderConfirmationRightPane = ({orderSubtotal, deliveryMethod, deliveryOpti
     }
     let order = {
       customer_id: sessionUser.id,
-      restaurant_id : restaurant.id,
+      restaurant_id : restaurant?.id,
       phone_number: sessionUser.phoneNumber,
       credit_card: creditCard,
       total_price: orderFinalTotal,
@@ -65,10 +78,11 @@ const OrderConfirmationRightPane = ({orderSubtotal, deliveryMethod, deliveryOpti
       food_items: cartItems
     }
     console.log('order object:', order)
-    dispatch(createNewOrder(order))
+    let createdOrder = await dispatch(createNewOrder(order))
     alert('We have confirmed your order!')
     setHasSubmitted(false)
-    history.push({pathname: '/orders/new', data: {duration, cartItems, restaurant}})
+    console.log('created order:', createdOrder)
+    history.push({pathname: `/orders/${createdOrder.id}/new`, data: {duration, cartItems, restaurant}})
     return
 
   }
@@ -107,7 +121,7 @@ const OrderConfirmationRightPane = ({orderSubtotal, deliveryMethod, deliveryOpti
         </div>
       </div>
       <div className='order-confirmation-price-breakdown-container'>
-        <div className='price-breakdown-row-container'> <p>Subtotal</p>  <p>${orderSubtotal}</p> </div>
+        <div className='price-breakdown-row-container'> <p>Subtotal</p>  <p>${(Number(orderSubtotal)).toFixed(2)}</p> </div>
         <div className='price-breakdown-row-container'> <p>Delivery Fee</p>  <p>${deliveryFee}</p></div>
         <div className='price-breakdown-row-container'> <p>Fees & Estimated Tax</p> <p>${fees}</p></div>
       </div>

@@ -51,6 +51,7 @@ export const createNewOrder = (payload) => async dispatch => {
     let order = await response.json()
     console.log('order in thunk:', order)
     dispatch(createOrder(order))
+    return order
   }
 }
 

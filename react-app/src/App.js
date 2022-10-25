@@ -21,6 +21,7 @@ import RestaurantFooter from './components/RestaurantFooter';
 import "./index.css"
 import OrderConfirmationPage from './components/OrderConfirmation';
 import FinalOrderConfirmation from './components/FinalOrderConfirmation';
+import GetOrders from './components/GetOrders';
 
 
 function App() {
@@ -62,6 +63,9 @@ function App() {
           <ProtectedRoute path='/users/:userId' exact={true} >
             <User />
           </ProtectedRoute>
+          <ProtectedRoute path='/orders' exact={true} >
+            <GetOrders/>
+          </ProtectedRoute>
           <ProtectedRoute path='/restaurants' exact={true} >
             <Restaurants/>
           </ProtectedRoute>
@@ -77,7 +81,7 @@ function App() {
           <ProtectedRoute path='/checkout' exact={true} >
             <OrderConfirmationPage/>
           </ProtectedRoute>
-          <ProtectedRoute path='/orders/new' exact={true} >
+          <ProtectedRoute path='/orders/:orderId/new' exact={true} >
             <FinalOrderConfirmation/>
           </ProtectedRoute>
         </div>

@@ -30,6 +30,11 @@ const NavBar = () => {
                 <div className='navbar-logout-button'>
                     <LogoutButton/>
                 </div>
+                <NavLink to="/orders">
+                  <div className='orders-container'>
+                    Orders
+                  </div>
+                </NavLink>
             </div>
         )
 
@@ -57,7 +62,6 @@ const NavBar = () => {
                       <div>
                         Welcome {sessionUser.firstName}
                       </div>
-                        {/* CART ICON */}
                     </div>
                 </div>
             </nav>

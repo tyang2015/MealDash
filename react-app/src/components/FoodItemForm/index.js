@@ -39,7 +39,7 @@ const FoodItemForm = ({foodItem, formType}) => {
 
 
   useEffect(()=>{
-    console.log('input change in food item form')
+    // console.log('input change in food item form')
     let errors =[]
     if (!name) errors.push('Name is required')
     if (name.length> 50) errors.push("Name must be less than 50 characters")
@@ -57,7 +57,7 @@ const FoodItemForm = ({foodItem, formType}) => {
       alert("Cannot submit food item info")
       return
     }
-    console.log('description length on submission:', description.length)
+    // console.log('description length on submission:', description.length)
     foodItem = {
       ...foodItem,
       name,
