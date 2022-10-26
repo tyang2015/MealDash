@@ -165,6 +165,7 @@ class Order(db.Model):
   tip = db.Column(db.Numeric(scale=2))
   delivery_method = db.Column(db.String)
   delivery_option = db.Column(db.String)
+  order_completed = db.Column(db.Boolean, nullable=False)
 
   created_at = db.Column(db.DateTime, default=datetime.utcnow)
   updated_at = db.Column(db.DateTime, default=datetime.utcnow)
@@ -186,6 +187,8 @@ class Order(db.Model):
       "openTime": self.restaurant.open_time,
       "closeTime": self.restaurant.close_time,
       "category": self.restaurant.category,
+      "longitude": str(self.restaurant.longitude),
+      "latitude": str(self.restaurant.latitude)
     }
 
   def get_total_price(self):
@@ -216,6 +219,7 @@ class Order(db.Model):
         "tip": str(self.tip),
         "deliveryMethod": self.delivery_method,
         "deliveryOption": self.delivery_option,
+
         # "totalPrice":  self.get_total_price(),
         # "orderFoodItems": [foodItem.to_dict_for_order() for foodItem in self.order_food_items],
         "user": self.convert_user_to_dict(),

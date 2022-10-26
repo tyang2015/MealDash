@@ -214,6 +214,7 @@ def create_restaurant_order(id):
       tip = form.data['tip'],
       delivery_method = form.data['delivery_method'],
       delivery_option = form.data['delivery_option'],
+      order_completed = False,
       user = current_user,
       restaurant = restaurant,
     )

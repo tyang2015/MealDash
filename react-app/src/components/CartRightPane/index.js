@@ -5,16 +5,24 @@ import FinalConfirmationNavBar from '../FinalConfirmationNavBar';
 import "./CartRightPane.css"
 
 // can we access the submitted Cart items from local instead??
-// const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart'))
-
-const CartRightPane = ({ forceCartUpdate, restaurant, submittedCartItems, setSubmittedCartItems}) => {
+let cartFromLocalStorage = JSON.parse(localStorage.getItem('cart'))
+// we have cart items passed from PARENT and cart items from storage (this is not updating correctly...)
+const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems}) => {
+  // console.log('cart in rightt pane passed down from parent', cartItems)
   const location = useLocation();
   const [orderSubtotal, setOrderSubtotal] = useState(0)
-  // let [submittedCartItems, setSubmittedCartItems] = useState(cartFromLocalStorage)
-  console.log('cart directly from local storage in cart right pane:', submittedCartItems)
-
+  let [submittedCartItems, setSubmittedCartItems] = useState(cartFromLocalStorage || [])
+  console.log('cart in rightt pane from local storage', submittedCartItems)
   const calculateOrderTotal = () => {
     let totalPrice = 0;
+    if (cartItems){
+      for (let i =0; i<cartItems.length;i++){
+        let foodItem = cartItems[i]
+        totalPrice+=Number(foodItem.price) * foodItem.quantity
+       }
+      setOrderSubtotal(totalPrice)
+      return
+    }
     for (let i =0; i<submittedCartItems.length;i++){
       let foodItem = submittedCartItems[i]
       totalPrice+=Number(foodItem.price) * foodItem.quantity
@@ -23,45 +31,77 @@ const CartRightPane = ({ forceCartUpdate, restaurant, submittedCartItems, setSub
   }
 
   useEffect(()=> {
+    let initialCartItems = localStorage.getItem('cart')? JSON.parse(localStorage.getItem('cart')): []
+    setSubmittedCartItems(initialCartItems)
     if (location?.state?.prevPath && location.state.cartItems){
-      console.log('location state prevPath is TRUE')
+      // console.log('location state prevPath is TRUE')
       // submittedCartItems = location.state.cartItems
       setSubmittedCartItems(location.state.cartItems)
       restaurant = location?.state?.cartItems[0]?.Restaurant
     }
   }, [])
 
+  // THIS IS BREAKING YOUR DELETE FUNCTION (if u include cartFromLocalStorage as a dependency)
   useEffect(()=> {
-    localStorage.setItem("cart", JSON.stringify(submittedCartItems))
-  }, [submittedCartItems])
+    if (cartItems?.length>0){
+      localStorage.setItem("cart", JSON.stringify(cartItems))
+    }
+    console.log('after setting it in local storage use effect...', submittedCartItems)
+    // setSubmittedCartItems(cartFromLocalStorage)
+  }, [ forceCartUpdate, cartItems])
 
   useEffect(()=>{
+    if (cartItems?.length>0){
+      calculateOrderTotal()
+      return
+    }
     if (submittedCartItems?.length>0){
       calculateOrderTotal()
+      return
     }
-  }, [forceCartUpdate, submittedCartItems])
+  }, [forceCartUpdate, submittedCartItems, cartItems])
 
 
-  if (submittedCartItems?.length<=0) return (
+  if (cartItems?.length<=0 && submittedCartItems?.length<=0) return (
     <h3> Empty Cart </h3>
   )
 
   const handleDeleteItem = (itemToDelete) => {
     let i =0;
     // console.log('delete food item button clicked')
+    if (cartItems?.length>0){
+      let copiedCartItems = [...cartItems]
+      // console.log('copied cart items from passed down cart items:', copiedCartItems)
+      while (i< cartItems.length){
+        let item = cartItems[i]
+        if (item.id === itemToDelete.id){
+          copiedCartItems.splice(i,1)
+          // console.log('after deletion:', copiedCartItems)
+          setSubmittedCartItems(copiedCartItems)
+          setCartItems(copiedCartItems)
+          localStorage.setItem('cart', JSON.stringify(copiedCartItems))
+          return
+        }
+        i=i+1
+      }
+      return
+    }
+    // if there are no cartItems, there will be no setCartItems from parent too
     let copiedCartItems = [...submittedCartItems]
-    console.log('copied cart items:', copiedCartItems)
+    console.log('copied cart items from broken usestate local storage cart items:', copiedCartItems)
     while (i< submittedCartItems.length){
       let item = submittedCartItems[i]
       if (item.id === itemToDelete.id){
         copiedCartItems.splice(i,1)
+        console.log('after deletion:', copiedCartItems)
         setSubmittedCartItems(copiedCartItems)
+        localStorage.setItem('cart', JSON.stringify(copiedCartItems))
         return
       }
       i=i+1
     }
-    // console.log('cart items after deletion from right pane:', submittedCartItems)
   }
+  console.log('cart items at the end in right pane', submittedCartItems)
 
   return (
     <>
@@ -79,7 +119,50 @@ const CartRightPane = ({ forceCartUpdate, restaurant, submittedCartItems, setSub
           </div>
         </div>
         <div className='cart-pane-food-items-container'>
-          {submittedCartItems?.length>0 && submittedCartItems.map(item=>(
+          {/* {cartItems.length>0 && cartItems.map(item=> (
+            <>
+              <div key={item.id} className='cart-pane-food-item-card-container'>
+                <div className='cart-pane-quantity-container'>
+                  <div className='cart-pane-quantity-circle'>
+                    {item.quantity} <p style={{fontSize:'10px'}}>x</p>
+                  </div>
+                </div>
+                <div className='cart-pane-food-item-name-price-container'>
+                  <div className='cart-pane-food-item-name-container'>
+                    <h4 className='cart-pane-food-item-name-text-box'> {item.name}</h4>
+                  </div>
+                  <div className="cart-pane-food-item-price-container">
+                    <h4> ${(item.price*item.quantity).toFixed(2)}</h4>
+                  </div>
+                </div>
+                <div className='cart-pane-food-item-delete-container'>
+                  <div onClick={()=> handleDeleteItem(item)}><i class="fa-solid fa-trash-can"></i></div>
+                </div>
+              </div>
+            </>
+          ))} */}
+          {cartItems?.length>0? cartItems.map(item=> (
+            <>
+              <div key={item.id} className='cart-pane-food-item-card-container'>
+                <div className='cart-pane-quantity-container'>
+                  <div className='cart-pane-quantity-circle'>
+                    {item.quantity} <p style={{fontSize:'10px'}}>x</p>
+                  </div>
+                </div>
+                <div className='cart-pane-food-item-name-price-container'>
+                  <div className='cart-pane-food-item-name-container'>
+                    <h4 className='cart-pane-food-item-name-text-box'> {item.name}</h4>
+                  </div>
+                  <div className="cart-pane-food-item-price-container">
+                    <h4> ${(item.price*item.quantity).toFixed(2)}</h4>
+                  </div>
+                </div>
+                <div className='cart-pane-food-item-delete-container'>
+                  <div onClick={()=> handleDeleteItem(item)}><i class="fa-solid fa-trash-can"></i></div>
+                </div>
+              </div>
+            </>
+          )): submittedCartItems.map(item=>(
             <>
               <div key={item.id} className='cart-pane-food-item-card-container'>
                 <div className='cart-pane-quantity-container'>
@@ -101,6 +184,28 @@ const CartRightPane = ({ forceCartUpdate, restaurant, submittedCartItems, setSub
               </div>
             </>
           ))}
+          {/* {submittedCartItems?.length>0 && submittedCartItems.map(item=>(
+            <>
+              <div key={item.id} className='cart-pane-food-item-card-container'>
+                <div className='cart-pane-quantity-container'>
+                  <div className='cart-pane-quantity-circle'>
+                    {item.quantity} <p style={{fontSize:'10px'}}>x</p>
+                  </div>
+                </div>
+                <div className='cart-pane-food-item-name-price-container'>
+                  <div className='cart-pane-food-item-name-container'>
+                    <h4 className='cart-pane-food-item-name-text-box'> {item.name}</h4>
+                  </div>
+                  <div className="cart-pane-food-item-price-container">
+                    <h4> ${(item.price*item.quantity).toFixed(2)}</h4>
+                  </div>
+                </div>
+                <div className='cart-pane-food-item-delete-container'>
+                  <div onClick={()=> handleDeleteItem(item)}><i class="fa-solid fa-trash-can"></i></div>
+                </div>
+              </div>
+            </>
+          ))} */}
         </div>
         <h3>{submittedCartItems?.name}</h3>
 

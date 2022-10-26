@@ -29,14 +29,17 @@ const FoodItemModal = ({setForceCartUpdate, forceCartUpdate,setSubmittedCartItem
         item.preferences = preferences
         setForceCartUpdate(!forceCartUpdate)
         setSubmittedCartItems([...submittedCartItems])
+        localStorage.setItem('cart', JSON.stringify([...submittedCartItems]))
         setFoodItemModal(false)
         return
       }
     }
+    console.log('new item being added')
     foodItem.quantity = quantity
     foodItem.preferences = preferences
     setForceCartUpdate(!forceCartUpdate)
     setSubmittedCartItems([...submittedCartItems, foodItem])
+    localStorage.setItem('cart', JSON.stringify([...submittedCartItems, foodItem]))
     setFoodItemModal(false)
     return
   }

@@ -30,7 +30,8 @@ def seed_orders():
             "delivery_fee": 1.50,
             "tip": 2.50,
             "delivery_method": "Delivery",
-            "delivery_option": "Hand it to me"
+            "delivery_option": "Hand it to me",
+            "order_completed": True
         },
         {
             "customer_id": 4,
@@ -45,7 +46,8 @@ def seed_orders():
             "delivery_fee": 1.50,
             "tip": 2.50,
             "delivery_method": "Pickup",
-            "delivery_option": ""
+            "delivery_option": "",
+            "order_completed": True
         },
         {
             "customer_id": 4,
@@ -60,7 +62,8 @@ def seed_orders():
             "delivery_fee": 2.50,
             "tip": 3.50,
             "delivery_method": "Delivery",
-            "delivery_option": "Leave at my door"
+            "delivery_option": "Leave at my door",
+            "order_completed": True
         },
         {
             "customer_id": 4,
@@ -75,7 +78,8 @@ def seed_orders():
             "delivery_fee": 3.50,
             "tip": 3.50,
             "delivery_method": "Delivery",
-            "delivery_option": "Hand it to me"
+            "delivery_option": "Hand it to me",
+            "order_completed": True
         },
         {
             "customer_id": 6,
@@ -90,7 +94,8 @@ def seed_orders():
             "delivery_fee": 2.50,
             "tip": 3.50,
             "delivery_method": "Delivery",
-            "delivery_option": "Leave at my door"
+            "delivery_option": "Leave at my door",
+            "order_completed": True
         },
         {
             "customer_id": 7,
@@ -106,6 +111,7 @@ def seed_orders():
             "tip": 3.50,
             "delivery_method": "Delivery",
             "delivery_option": "Leave at my door",
+            "order_completed": True
         },
         {
             "customer_id": 8,
@@ -121,6 +127,7 @@ def seed_orders():
             "tip": 3.50,
             "delivery_method": "Delivery",
             "delivery_option": "Leave at my door",
+            "order_completed": True
         },
         {
             "customer_id": 6,
@@ -136,6 +143,7 @@ def seed_orders():
             "tip": 3.50,
             "delivery_method": "Delivery",
             "delivery_option": "Leave at my door",
+            "order_completed": True
         },
         {
             "customer_id": 7,
@@ -150,7 +158,8 @@ def seed_orders():
             "delivery_fee": 1.50,
             "tip": 3.50,
             "delivery_method": "Pickup",
-            "delivery_option": ""
+            "delivery_option": "",
+            "order_completed": True
         }
     ]
     for order in orders:
@@ -167,7 +176,8 @@ def seed_orders():
             delivery_fee= order['delivery_fee'],
             tip = order['tip'],
             delivery_method = order["delivery_method"],
-            delivery_option = order['delivery_option']
+            delivery_option = order['delivery_option'],
+            order_completed = order["order_completed"]
         )
         # orders_list.append(newOrder)
         db.session.add(newOrder)

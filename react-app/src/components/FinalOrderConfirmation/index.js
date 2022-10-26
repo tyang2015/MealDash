@@ -6,19 +6,19 @@ import MapDistanceContainer from '../MapDistance';
 import FinalConfirmationNavBar from '../FinalConfirmationNavBar';
 import MinuteCountdown from './Countdown';
 
-const countdownFromStorage = localStorage.getItem('countdown')? Number(parseInt(localStorage.getItem('countdown'))) : 0
-// let restaurantFromStorage = localStorage.getItem('restaurant')? localStorage.getItem('restaurant') : "restaurant name"
-// let cartItemsFromStorage = JSON.parse(localStorage.getItem('cartItems')? localStorage.getItem('cartItems'): "[]")
+const countdownFromStorage = localStorage.getItem('countdown')? Number(localStorage.getItem('countdown')) : 0
+let restaurantFromStorage = JSON.parse(localStorage.getItem('restaurant'|| ""))
+let cartFromLocalStorage = JSON.parse(localStorage.getItem('cart' ||'[]'))
 let orderStarted = true
 
 const FinalOrderConfirmation = () => {
   const location = useLocation()
-  let restaurant= location?.data?.restaurant
-  let cartItems= location?.data?.cartItems
-  let duration= location?.data?.duration
+  let restaurant= location?.state?.restaurant
+  let cartItems= location?.state?.cartItems
+  let duration= location?.state?.duration
+  // console.log('restaurant from local storage', restaurantFromStorage)
+  // console.log('restaurant name from local storage', restaurantFromStorage.name)
   // console.log('duration in final confirm:', duration)
-  // const countdown = location?.data?.countdown
-  // const setCountdown = location?.data?.setCountdown
   // const [orderStarted, setOrderStarted] = useState(true)
   const [countdown, setCountdown] = useState(countdownFromStorage? countdownFromStorage: Number(parseInt(duration?.split(" ")[0])))
   // const [countdownInSec, setCountdownInSec] = useState(countdown? countdown* 60: null)
@@ -69,14 +69,17 @@ const FinalOrderConfirmation = () => {
   //     localStorage.setItem('cartItems', JSON.stringify(cartItems))
   //   }
   // }, [restaurant, cartItems.length])
+  // useEffect(()=>{
+  //   localStorage.setItem('restaurant', restaurant)
+  //   // localStorage.setItem('cartItems', JSON.stringify(cartItems) )
+
+  // }, [])
 
 
   if (orderStarted){
     // console.log('cart items in final confirmation page:')
     console.log('order started TRUE')
     orderStarted = false
-    // localStorage.setItem('restaurant', restaurant)
-    // localStorage.setItem('cartItems', JSON.stringify(cartItems) )
     // localStorage.setItem('duration', duration)
     setTriggerCountdown(true)
     // change the countdown state every second THE FIRST TIME (aka only when order has started NOT when component mounts)
@@ -114,19 +117,23 @@ const FinalOrderConfirmation = () => {
               <h2>{countdown>0? "Preparing your order": "Order Completed"}</h2>
               <p className='arrives-in-container'> Arrives in&nbsp;<div className='countdown-time-container'>{countdown} min</div></p>
               <div className='order-delivery-progress-bar'></div>
-              <p className='order-confirmation-restaurant-container'> {countdown>0? `${restaurant?.name} is preparing your order`: "Your order is complete. Enjoy!"} </p>
+              <p className='order-confirmation-restaurant-container'> {countdown>0? `${restaurant? restaurant.name: restaurantFromStorage.name} is preparing your order`: "Your order is complete. Enjoy!"} </p>
           </div>
           <div className='final-order-left-pane-middle-container'>
             <h3 className='order-details-container'>Order Details</h3>
             <div className='final-order-order-items'>
-              {cartItems?.length>0 && cartItems.map(item=> (
+              {/* {cartItems?.length>0 && cartItems.map(item=> (
+                <div className='final-order-order-item-card'> {item.quantity}x {item.name}</div>
+              ))
+              } */}
+              {cartFromLocalStorage.length>0 && cartFromLocalStorage.map(item=>(
                 <div className='final-order-order-item-card'> {item.quantity}x {item.name}</div>
               ))}
             </div>
           </div>
           <div className='final-order-left-pane-bottom-container'>
             <div className='final-order-delivery-address-container'> Delivery Address </div>
-            <div style={{width:"94.5%", color: "#7F767F", fontWeight:"520"}}> {restaurant?.address}</div>
+            <div style={{width:"94.5%", color: "#7F767F", fontWeight:"520"}}> {restaurant? restaurant.address: restaurantFromStorage.address}</div>
           </div>
         </div>
         <div className='final-order-right-pane'>

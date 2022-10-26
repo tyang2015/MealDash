@@ -5,14 +5,13 @@ import { useHistory } from 'react-router-dom';
 import { createNewOrder } from '../../store/order';
 import "./OrderConfirmationRightPane.css"
 const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart' || "[]"))
+// const restaurantFromStorage = localStorage.getItem('restaurant')!= undefined? localStorage.getItem('restaurant'): "restaurant name"
 
 const OrderConfirmationRightPane = ({orderSubtotal, deliveryMethod, deliveryOption, creditCard, distance, duration, restaurant, errors}) => {
   const sessionUser = useSelector(state=> state.session.user)
   const dispatch = useDispatch()
   const history = useHistory()
   const [cartItems, setCartItems] = useState(cartFromLocalStorage)
-  // const [countdown, setCountdown] = useState(duration? Number(parseInt(duration.split(" ")[0])): null)
-  // const [orderSubtotal, setOrderSubtotal] = useState(0)
   // tip is delivery fee
   const [deliveryFee, setDeliveryFee] = useState(0)
   const [tip, setTip] = useState(Number(2).toFixed(2))
@@ -43,6 +42,10 @@ const OrderConfirmationRightPane = ({orderSubtotal, deliveryMethod, deliveryOpti
     // total
     setOrderFinalTotal(total)
   }, [fees, tip])
+
+  useEffect(()=> {
+    localStorage.setItem('restaurant', JSON.stringify(restaurant))
+  }, [])
 
   const MinuteCountdown = (countdown, setCountdown) => {
     let countdownInSec = countdown* 60
@@ -75,14 +78,14 @@ const OrderConfirmationRightPane = ({orderSubtotal, deliveryMethod, deliveryOpti
       tip: Number(tip),
       delivery_method: deliveryMethod,
       delivery_option: deliveryOption,
-      food_items: cartItems
+      food_items: cartItems,
     }
     console.log('order object:', order)
     let createdOrder = await dispatch(createNewOrder(order))
+    console.log('created order:', createdOrder)
     alert('We have confirmed your order!')
     setHasSubmitted(false)
-    console.log('created order:', createdOrder)
-    history.push({pathname: `/orders/${createdOrder.id}/new`, data: {duration, cartItems, restaurant}})
+    history.push({pathname: `/orders/${createdOrder?.id}/new`, state: {duration, cartItems, restaurant}})
     return
 
   }

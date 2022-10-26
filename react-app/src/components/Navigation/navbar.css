@@ -44,3 +44,13 @@
      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
 
 }
+
+.toggle-cart-panel{
+  position: absolute;
+  top: 3em;
+  right: 1em;
+  background-color: lightblue;
+  z-index:1;
+  overflow-y: auto;
+  width: 15em;
+}

@@ -17,13 +17,15 @@ import veganIcon from "./images/vegan-icon.png"
 import mediterraneanIcon from "./images/mediterranean-icon.png"
 
 const CATEGORY_CHOICES = ["All","Asian", "American","Breakfast", "Vegan", "Mexican", "Japanese", "Italian", "French", "FastFood", "Ethiopian", "Mediterranean"]
-
+const cartFromLocalStorage = localStorage.getItem('cart')!=undefined? JSON.parse(localStorage.getItem('cart' || "[]")): []
 
 const Restaurants = () => {
     const dispatch = useDispatch()
-    let restaurants = useSelector(state => Object.values(state.restaurants))
-    // console.log('restaurants:', restaurants)
+    const restaurantObj = useSelector(state => state.restaurants)
+    let restaurants = Object.values(restaurantObj)
+    // const [cartItems, setCartItems] = useState(cartFromLocalStorage || [])
     let [filteredItems, setFilteredItems] = useState([])
+    const [submittedCartItems, setSubmittedCartItems] = useState(cartFromLocalStorage || [])
     const [isFiltered, setIsFiltered] = useState(false)
     const [categoryChosen, setCategoryChosen] = useState('')
     const [all, setAll] = useState('')
@@ -97,7 +99,7 @@ const Restaurants = () => {
         }
         setCategoryNum(countCategories)
       }
-    }, [restaurants])
+    }, [restaurantObj])
 
     useEffect(()=>{
       if (restaurants.length>0 && all === "All"){
@@ -452,9 +454,7 @@ const Restaurants = () => {
                   </small>
                 </div>
               ))}
-            {/* <img width="40" height="40" alt="Flowers" src="https://img.cdn4dd.com/s/media/photosV2/c8f182ec-622a-4094-bcae-68ef7242fccf-retina-large.SVG"/> */}
             </div>
-            {/* <div className="restaurant-main-grid-container" > */}
             {!isFiltered && categoryNum.Asian>0 && (
               <>
                 <h2 className='restaurant-category-title'>Asian</h2>
@@ -462,8 +462,8 @@ const Restaurants = () => {
                 {restaurants.length>0 && !isFiltered && restaurants.map(restaurant => (
                   <>
                     {restaurant.category === "Asian" && (
-                        <NavLink className='navlink' key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
-                          <div key={restaurant.id} className="restaurant-card-container">
+                        <NavLink className='navlink' key={restaurant.id} to={{pathname:`restaurants/${restaurant.id}`}} >
+                        <div key={restaurant.id} className="restaurant-card-container">
                             <div className= 'get-restaurants-pic-container'>
                               <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}  onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
                             </div>
@@ -488,8 +488,8 @@ const Restaurants = () => {
                 {restaurants.length>0 && !isFiltered && restaurants.map(restaurant => (
                   <>
                     {restaurant.category === "American" && (
-                        <NavLink className='navlink' key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
-                          <div key={restaurant.id} className="restaurant-card-container">
+                        <NavLink className='navlink' key={restaurant.id} to={{pathname:`restaurants/${restaurant.id}`}} >
+                        <div key={restaurant.id} className="restaurant-card-container">
                             <div className= 'get-restaurants-pic-container'>
                               <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}  onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
                             </div>
@@ -514,8 +514,8 @@ const Restaurants = () => {
               {restaurants.length>0 && !isFiltered && restaurants.map(restaurant => (
                 <>
                   {restaurant.category==="Breakfast" && (
-                    <NavLink className='navlink' key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
-                      <div key={restaurant.id} className="restaurant-card-container">
+                      <NavLink className='navlink' key={restaurant.id} to={{pathname:`restaurants/${restaurant.id}`}} >
+                        <div key={restaurant.id} className="restaurant-card-container">
                         <div className= 'get-restaurants-pic-container'>
                           <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}  onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
                         </div>
@@ -540,7 +540,7 @@ const Restaurants = () => {
               {restaurants.length>0 && !isFiltered && restaurants.map(restaurant => (
                 <>
                   {restaurant.category==="Vegan" && (
-                    <NavLink className='navlink' key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
+                    <NavLink className='navlink' key={restaurant.id} to={{pathname:`restaurants/${restaurant.id}`}} >
                       <div key={restaurant.id} className="restaurant-card-container">
                         <div className= 'get-restaurants-pic-container'>
                           <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}  onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
@@ -566,7 +566,7 @@ const Restaurants = () => {
               {restaurants.length>0 && !isFiltered && restaurants.map(restaurant => (
                 <>
                   {restaurant.category==="Mexican" && (
-                    <NavLink className='navlink' key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
+                    <NavLink className='navlink' key={restaurant.id} to={{pathname:`restaurants/${restaurant.id}`}} >
                       <div key={restaurant.id} className="restaurant-card-container">
                         <div className= 'get-restaurants-pic-container'>
                           <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}  onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
@@ -593,7 +593,7 @@ const Restaurants = () => {
               {restaurants.length>0 && !isFiltered && restaurants.map(restaurant => (
                 <>
                   {restaurant.category==="Japanese" && (
-                    <NavLink className='navlink' key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
+                    <NavLink className='navlink' key={restaurant.id} to={{pathname:`restaurants/${restaurant.id}`}} >
                       <div key={restaurant.id} className="restaurant-card-container">
                         <div className= 'get-restaurants-pic-container'>
                           <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl} onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
@@ -620,7 +620,7 @@ const Restaurants = () => {
               {restaurants.length>0 && !isFiltered && restaurants.map(restaurant => (
                 <>
                   {restaurant.category==="Italian" && (
-                    <NavLink className='navlink' key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
+                    <NavLink className='navlink' key={restaurant.id} to={{pathname:`restaurants/${restaurant.id}`}} >
                       <div key={restaurant.id} className="restaurant-card-container">
                         <div className= 'get-restaurants-pic-container'>
                           <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl} onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
@@ -647,7 +647,7 @@ const Restaurants = () => {
               {restaurants.length>0 && !isFiltered && restaurants.map(restaurant => (
                 <>
                   {restaurant.category==="French" && (
-                    <NavLink className='navlink' key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
+                    <NavLink className='navlink' key={restaurant.id} to={{pathname:`restaurants/${restaurant.id}`}} >
                       <div key={restaurant.id} className="restaurant-card-container">
                         <div className= 'get-restaurants-pic-container'>
                           <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl} onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
@@ -674,7 +674,7 @@ const Restaurants = () => {
               {restaurants.length>0 && !isFiltered && restaurants.map(restaurant => (
                 <>
                   {restaurant.category==="FastFood" && (
-                    <NavLink className='navlink' key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
+                    <NavLink className='navlink' key={restaurant.id} to={{pathname:`restaurants/${restaurant.id}`}} >
                       <div key={restaurant.id} className="restaurant-card-container">
                         <div className= 'get-restaurants-pic-container'>
                           <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl} onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
@@ -700,7 +700,7 @@ const Restaurants = () => {
               {restaurants.length>0 && !isFiltered && restaurants.map(restaurant => (
                 <>
                   {restaurant.category==="Ethiopian" && (
-                    <NavLink className='navlink' key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
+                    <NavLink className='navlink' key={restaurant.id} to={{pathname:`restaurants/${restaurant.id}`}} >
                       <div key={restaurant.id} className="restaurant-card-container">
                         <div className= 'get-restaurants-pic-container'>
                           <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl} onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
@@ -713,7 +713,7 @@ const Restaurants = () => {
                         </div>
                       </div>
                     </NavLink>
-                    )}
+                  )}
                 </>
               ))}
               </div>
@@ -726,7 +726,7 @@ const Restaurants = () => {
               {restaurants.length>0 && !isFiltered && restaurants.map(restaurant => (
                 <>
                   {restaurant.category==="Mediterranean" && (
-                    <NavLink className='navlink' key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
+                    <NavLink className='navlink' key={restaurant.id} to={{pathname:`restaurants/${restaurant.id}`}} >
                       <div key={restaurant.id} className="restaurant-card-container">
                         <div className= 'get-restaurants-pic-container'>
                           <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl} onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
@@ -739,7 +739,7 @@ const Restaurants = () => {
                         </div>
                       </div>
                     </NavLink>
-                    )}
+                  )}
                 </>
               ))}
               </div>
@@ -749,7 +749,7 @@ const Restaurants = () => {
             <div className='restaurant-filtered-main-grid-container'>
                {filteredItems.map(restaurant => (
                 <>
-                  <NavLink className='navlink' key={restaurant.id} to = {`restaurants/${restaurant.id}`}>
+                    <NavLink className='navlink' key={restaurant.id} to={{pathname:`restaurants/${restaurant.id}`}} >
                     <div key={restaurant.id} className="restaurant-card-container">
                       <div className= 'get-restaurants-pic-container'>
                         <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl} onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>

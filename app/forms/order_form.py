@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm, Form
-from wtforms import StringField, SelectField, IntegerField, FloatField, DecimalField, DateTimeField, FormField, FieldList
+from wtforms import StringField, SelectField, IntegerField, FloatField, DecimalField, DateTimeField, FormField, FieldList, BooleanField
 from wtforms.fields.html5 import TimeField
 from wtforms.validators import DataRequired, ValidationError
 from app.models import Restaurant, Order, FoodItem
@@ -46,7 +46,6 @@ class OrderForm(FlaskForm):
   tip = DecimalField("Tip")
   delivery_method = StringField("delivery method")
   delivery_option = StringField("delivery option")
-  
 
 
   def __repr__(self):

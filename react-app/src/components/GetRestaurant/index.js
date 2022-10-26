@@ -1,4 +1,4 @@
-import { useParams, useHistory, NavLink } from "react-router-dom"
+import { useParams, useHistory, NavLink, useLocation } from "react-router-dom"
 import React,{useState, useEffect} from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { getAllRestaurants } from "../../store/restaurant";
@@ -12,15 +12,18 @@ import CartRightPane from "../CartRightPane";
 import RestaurantFooter from "../RestaurantFooter";
 import NavBar from "../Navigation/NavBar";
 
-const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart' || "[]"))
+let cartFromLocalStorage =  JSON.parse(localStorage.getItem('cart' || "[]"))
 
 const GetRestaurant = () => {
   let { id } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
+  const location = useLocation();
   const sessionUser = useSelector(state=> state.session.user)
   const restaurant = useSelector(state=> state.restaurants[id])
   let foodItems = useSelector(state => Object.values(state.foodItems))
+  // const {submittedCartItems} = location?.state
+  // const setSubmittedCartItems = location?.state?.setSubmittedCartItems
   // console.log('all food items:', foodItems)
   const [foodItemModal, setFoodItemModal] = useState(false)
   const [foodItem, setFoodItem] =useState(null)
@@ -49,7 +52,13 @@ const GetRestaurant = () => {
   let todayInMinutes = today.getMinutes()
 
   // console.log('cart from local storage:', cartFromLocalStorage)
+  useEffect(()=>{
+    let initialCartItems = localStorage.getItem('cart')? JSON.parse(localStorage.getItem('cart')): []
+    cartFromLocalStorage = initialCartItems
+    setSubmittedCartItems(initialCartItems)
+  }, [])
 
+  // // DONT SEND SUBMITTED CART ITEMS AS A PROP
   useEffect(()=> {
     localStorage.setItem("cart", JSON.stringify(submittedCartItems))
   }, [submittedCartItems])
@@ -406,7 +415,7 @@ const GetRestaurant = () => {
               </>
             )}
           </div>
-        <CartRightPane setSubmittedCartItems={setSubmittedCartItems} forceCartUpdate={forceCartUpdate} restaurant={submittedCartItems.length>0? submittedCartItems[0].Restaurant: null} submittedCartItems={submittedCartItems}/>
+        <CartRightPane cartItems={submittedCartItems} setCartItems={setSubmittedCartItems} forceCartUpdate={forceCartUpdate} restaurant={submittedCartItems?.length>0? submittedCartItems[0].Restaurant: null} />
         </div>
         <RestaurantFooter/>
 
