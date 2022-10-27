@@ -6,7 +6,7 @@ import "./CartRightPane.css"
 
 // can we access the submitted Cart items from local instead??
 let cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]')
-let restaurantFromLocalStorage = JSON.parse(localStorage.getItem('restaurant') || '')
+let restaurantFromLocalStorage = JSON.parse(localStorage.getItem('restaurant'))
 // we have cart items passed from PARENT and cart items from storage (this is not updating correctly...)
 const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems, setToggleCartPane, toggleCartPane}) => {
   // console.log('cart in rightt pane passed down from parent', cartItems)
@@ -14,10 +14,11 @@ const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems, s
   const location = useLocation();
   const [orderSubtotal, setOrderSubtotal] = useState(0)
   let [submittedCartItems, setSubmittedCartItems] = useState(cartFromLocalStorage || [])
-  let [storedRestaurant, setStoredRestaurant] = useState(restaurantFromLocalStorage)
+  let [storedRestaurant, setStoredRestaurant] = useState(restaurantFromLocalStorage || [])
   const [isOrderZero, setIsOrderZero] = useState(false)
   console.log('cart in rightt pane from local storage', submittedCartItems)
   console.log('cart in right pane passed down as propsss', cartItems)
+  console.log('stored restaurant value:', storedRestaurant)
 
   useEffect(()=> {
     console.log('order subtotal use effect triggered')

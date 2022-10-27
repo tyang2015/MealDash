@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import MapContainer from '../Maps';
 // import PlacesAutocompleteContainer from '../PlacesAutocomplete'
 import OrderPlacesAutocompleteContainer from '../OrderPlacesAutocomplete';
@@ -25,6 +25,7 @@ let restaurantFromLocalStorage = JSON.parse(localStorage.getItem('restaurant') |
 const OrderConfirmationPage = () => {
   const dispatch = useDispatch();
   const location = useLocation();
+  const {id} = useParams();
   const key = useSelector(state=> state.session.user)
   const user = useSelector(state=> state.session.user)
   // const [cartItems, setCartItems] = useState(cartFromLocalStorage)
@@ -34,11 +35,12 @@ const OrderConfirmationPage = () => {
   const [orderSubtotal, setOrderSubtotal] = useState(landingOrderSubtotal? landingOrderSubtotal: subTotalFromLocalStorage)
   const [storedRestaurant, setStoredRestaurant] = useState(restaurantFromLocalStorage)
   const [paymentModal, setPaymentModal] = useState(false)
-  const [userCoordinates,setUserCoordinates] =useState({lat: Number(restaurant? restaurant.latitude: storedRestaurant.latitude), lng: Number(restaurant? restaurant.longitude: storedRestaurant.longitude)} )
+  const [userCoordinates,setUserCoordinates] =useState({lat: Number(restaurant? restaurant.latitude: storedRestaurant.latitude), lng: Number(restaurant? restaurant.longitude: storedRestaurant.longitude)})
   const [directionsResponse, setDirectionsResponse] = useState(null)
   const [distance, setDistance] = useState('')
   const [duration, setDuration] = useState('')
   console.log('restaurant in order confirm page:', restaurant)
+  console.log('restaurant from local storageeee', storedRestaurant)
 
   const [paymentDropdown, setPaymentDropdown] = useState(false)
   let [destinationRef, setDestinationRef] = useState('')
@@ -199,7 +201,7 @@ const OrderConfirmationPage = () => {
               {paymentModal && (<PaymentModal setPaymentModal={setPaymentModal} creditCard={creditCard} setCreditCard={setCreditCard} />)}
         </div>
         <OrderConfirmationRightPane deliveryMethod={deliveryMethod} deliveryOption={deliveryOption} distance={distance} duration={duration} errors={errors}
-         restaurant={restaurant? restaurant: restaurantFromLocalStorage} creditCard={creditCard} orderSubtotal={orderSubtotal}/>
+         restaurant={restaurant? restaurant: storedRestaurant} creditCard={creditCard} orderSubtotal={orderSubtotal}/>
       </div>
     </>
   )
