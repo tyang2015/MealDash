@@ -83,9 +83,10 @@ const OrderConfirmationRightPane = ({orderSubtotal, deliveryMethod, deliveryOpti
     console.log('order object:', order)
     let createdOrder = await dispatch(createNewOrder(order))
     console.log('created order:', createdOrder)
+    localStorage.setItem("orders", JSON.stringify({...JSON.parse(localStorage.getItem('orders')), [createdOrder.id]: createdOrder}))
     alert('We have confirmed your order!')
     setHasSubmitted(false)
-    history.push({pathname: `/orders/${createdOrder?.id}/new`, state: {duration, cartItems, restaurant}})
+    history.push({pathname: `restaurants/${restaurant.id}/orders/${createdOrder?.id}/new`, state: {duration, cartItems, restaurant, createdOrder}})
     return
 
   }

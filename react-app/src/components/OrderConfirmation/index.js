@@ -20,7 +20,7 @@ import {
 
 const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart' || "[]"))
 const subTotalFromLocalStorage = localStorage.getItem("orderSubtotal") ? JSON.parse(localStorage.getItem("orderSubtotal" )): 0
-let restaurantFromLocalStorage = JSON.parse(localStorage.getItem('restaurant') || '')
+let restaurantFromLocalStorage = JSON.parse(localStorage.getItem('restaurants'))
 
 const OrderConfirmationPage = () => {
   const dispatch = useDispatch();
@@ -33,7 +33,9 @@ const OrderConfirmationPage = () => {
   const restaurant= location?.data?.restaurant
   const cartItems = cartFromLocalStorage
   const [orderSubtotal, setOrderSubtotal] = useState(landingOrderSubtotal? landingOrderSubtotal: subTotalFromLocalStorage)
-  const [storedRestaurant, setStoredRestaurant] = useState(restaurantFromLocalStorage)
+  // const [storedRestaurant, setStoredRestaurant] = useState(restaurantFromLocalStorage)
+  // let [restaurantId, setRestaurantId] = useState(cartItems?.length>0? cartItems[0].Restaurant.id: submittedCartItems?.length>0? submittedCartItems[0].Restaurant.id: "")
+  let [storedRestaurant, setStoredRestaurant] = useState(restaurantFromLocalStorage[restaurant?`${restaurant.id}`: `${id}`])
   const [paymentModal, setPaymentModal] = useState(false)
   const [userCoordinates,setUserCoordinates] =useState({lat: Number(restaurant? restaurant.latitude: storedRestaurant.latitude), lng: Number(restaurant? restaurant.longitude: storedRestaurant.longitude)})
   const [directionsResponse, setDirectionsResponse] = useState(null)

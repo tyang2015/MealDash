@@ -1,24 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation , useParams} from 'react-router-dom';
 import "./FinalOrderConfirmation.css"
 import MapDistanceContainer from '../MapDistance';
 import FinalConfirmationNavBar from '../FinalConfirmationNavBar';
 import MinuteCountdown from './Countdown';
 
 const countdownFromStorage = localStorage.getItem('countdown')? Number(localStorage.getItem('countdown')) : 0
-let restaurantFromStorage = JSON.parse(localStorage.getItem('restaurant'|| ""))
+let restaurantsFromStorage = JSON.parse(localStorage.getItem(`restaurants`))
 let cartFromLocalStorage = JSON.parse(localStorage.getItem('cart' ||'[]'))
+let ordersFromStorage = JSON.parse(localStorage.getItem('orders'))
 let orderStarted = true
 
 const FinalOrderConfirmation = () => {
-  const location = useLocation()
+  const location = useLocation();
+  const {orderId, restaurantId} = useParams();
   let restaurant= location?.state?.restaurant
-  let cartItems= location?.state?.cartItems
+  // let cartItems= location?.state?.cartItems
   let duration= location?.state?.duration
-  // console.log('restaurant from local storage', restaurantFromStorage)
-  // console.log('restaurant name from local storage', restaurantFromStorage.name)
-  // console.log('duration in final confirm:', duration)
+  let order = location?.state?.createdOrder
   // const [orderStarted, setOrderStarted] = useState(true)
   const [countdown, setCountdown] = useState(countdownFromStorage? countdownFromStorage: Number(parseInt(duration?.split(" ")[0])))
   // const [countdownInSec, setCountdownInSec] = useState(countdown? countdown* 60: null)
@@ -26,24 +26,10 @@ const FinalOrderConfirmation = () => {
   const [orderCompleted, setOrderCompleted] = useState(false)
   const [triggerMinuteChange, setTriggerMinuteChange] = useState(false)
   const [triggerCountdown, setTriggerCountdown] = useState(false)
-  // useEffect(()=>{
-  //   // // set timer to the duration value
-  //   // let countdownInSec = countdown* 60
-  //   // let deliveryInterval = setInterval(()=> {
-  //   //   console.log('timer:', countdownInSec)
-  //   //   if (countdownInSec <= 0) {
-  //   //     clearInterval(deliveryInterval);
-  //   //   }
-  //   //   countdownInSec-=1
-  //   //   setCountdown(Math.ceil(countdownInSec/60))
-  //   // }, 1000)
-  //   MinuteCountdown(countdown, setCountdown)
-  // }, [])
+  let [storedRestaurant, setStoredRestaurant] = useState(restaurantsFromStorage[restaurant?`${restaurant.id}`: restaurantId] )
+  let [storedOrder, setStoredOrder]= useState(ordersFromStorage[order?`${order.id}`: orderId])
+  console.log("stored restaurant in final order confirm page:", storedRestaurant)
 
-  // useEffect(()=>{
-  //   console.log('trigerring countdown use effect')
-  //   localStorage.setItem('countdown', countdown)
-  // }, [countdown])
 
   const MinuteCountdown = async () => {
     let countdownInSec = countdown* 60
@@ -74,25 +60,35 @@ const FinalOrderConfirmation = () => {
   //   // localStorage.setItem('cartItems', JSON.stringify(cartItems) )
 
   // }, [])
-
-
-  if (orderStarted){
-    // console.log('cart items in final confirmation page:')
-    console.log('order started TRUE')
-    orderStarted = false
-    // localStorage.setItem('duration', duration)
+  useEffect(()=>{
+    // TODO: make orderStarted a useState? no.. because everytime it enters the component (change the url back to this), it will reset to default value
+    if (!orderStarted) return
+    console.log('order started should be TRUE:', orderStarted)
     setTriggerCountdown(true)
-    // change the countdown state every second THE FIRST TIME (aka only when order has started NOT when component mounts)
+    orderStarted = false
+  }, [])
 
-    // MinuteCountdown()
-  }
+
+  // if (orderStarted){
+  //   console.log('order started TRUE')
+  //   orderStarted = false
+  //   setTriggerCountdown(true)
+  //   // change the countdown state every second THE FIRST TIME (aka only when order has started NOT when component mounts)
+  // }
 
   useEffect(()=> {
+    console.log('trigger countdown state in use effect:', triggerCountdown)
+    // if (!triggerCountdown) return
     let countdownInSec = countdown* 60
     let deliveryInterval = setInterval(()=> {
       console.log('timer:', countdownInSec)
       if (countdownInSec <= 0) {
         clearInterval(deliveryInterval);
+        setStoredOrder({...storedOrder, orderCompleted: true })
+        localStorage.setItem('orders', JSON.stringify({...JSON.parse(localStorage.getItem('orders')), [orderId]:storedOrder }))
+        setTriggerCountdown(false)
+        console.log("countdown completed")
+        return
       }
       countdownInSec-=1
       if (Math.ceil(countdownInSec/60) != countdown){
@@ -117,7 +113,7 @@ const FinalOrderConfirmation = () => {
               <h2>{countdown>0? "Preparing your order": "Order Completed"}</h2>
               <p className='arrives-in-container'> Arrives in&nbsp;<div className='countdown-time-container'>{countdown} min</div></p>
               <div className='order-delivery-progress-bar'></div>
-              <p className='order-confirmation-restaurant-container'> {countdown>0? `${restaurant? restaurant.name: restaurantFromStorage.name} is preparing your order`: "Your order is complete. Enjoy!"} </p>
+              <p className='order-confirmation-restaurant-container'> {countdown>0? `${restaurant? restaurant.name: storedRestaurant.name} is preparing your order`: "Your order is complete. Enjoy!"} </p>
           </div>
           <div className='final-order-left-pane-middle-container'>
             <h3 className='order-details-container'>Order Details</h3>
@@ -133,7 +129,7 @@ const FinalOrderConfirmation = () => {
           </div>
           <div className='final-order-left-pane-bottom-container'>
             <div className='final-order-delivery-address-container'> Delivery Address </div>
-            <div style={{width:"94.5%", color: "#7F767F", fontWeight:"520"}}> {restaurant? restaurant.address: restaurantFromStorage.address}</div>
+            <div style={{width:"94.5%", color: "#7F767F", fontWeight:"520"}}> {restaurant? restaurant.address: storedRestaurant.address}</div>
           </div>
         </div>
         <div className='final-order-right-pane'>

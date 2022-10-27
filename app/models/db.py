@@ -219,7 +219,7 @@ class Order(db.Model):
         "tip": str(self.tip),
         "deliveryMethod": self.delivery_method,
         "deliveryOption": self.delivery_option,
-
+        "orderCompleted": self.order_completed,
         # "totalPrice":  self.get_total_price(),
         # "orderFoodItems": [foodItem.to_dict_for_order() for foodItem in self.order_food_items],
         "user": self.convert_user_to_dict(),

@@ -6,7 +6,7 @@ import "./CartRightPane.css"
 
 // can we access the submitted Cart items from local instead??
 let cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]')
-let restaurantFromLocalStorage = JSON.parse(localStorage.getItem('restaurant'))
+let restaurantFromLocalStorage = JSON.parse(localStorage.getItem('restaurants') )
 // we have cart items passed from PARENT and cart items from storage (this is not updating correctly...)
 const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems, setToggleCartPane, toggleCartPane}) => {
   // console.log('cart in rightt pane passed down from parent', cartItems)
@@ -14,10 +14,12 @@ const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems, s
   const location = useLocation();
   const [orderSubtotal, setOrderSubtotal] = useState(0)
   let [submittedCartItems, setSubmittedCartItems] = useState(cartFromLocalStorage || [])
-  let [storedRestaurant, setStoredRestaurant] = useState(restaurantFromLocalStorage || [])
+  let [restaurantId, setRestaurantId] = useState(cartItems?.length>0? cartItems[0].Restaurant.id: submittedCartItems?.length>0? submittedCartItems[0].Restaurant.id: "")
+  let [storedRestaurant, setStoredRestaurant] = useState(restaurantId? restaurantFromLocalStorage[`${restaurantId}`] : {})
   const [isOrderZero, setIsOrderZero] = useState(false)
-  console.log('cart in rightt pane from local storage', submittedCartItems)
-  console.log('cart in right pane passed down as propsss', cartItems)
+  console.log('restaurant id use state:', restaurantId)
+  // console.log('cart in rightt pane from local storage', submittedCartItems)
+  // console.log('cart in right pane passed down as propsss', cartItems)
   console.log('stored restaurant value:', storedRestaurant)
 
   useEffect(()=> {
@@ -135,7 +137,7 @@ const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems, s
         </div>
         <div className='checkout-button-container'>
           <div className='checkout-button'>
-            <NavLink className="navlink" style={{color: "white"}} to={{pathname: `/checkout`, data: {orderSubtotal: orderSubtotal, cartItems: submittedCartItems, restaurant: restaurant, setCartItems: setSubmittedCartItems}, state: {prevPath: location.pathname}}}>
+            <NavLink className="navlink" style={{color: "white"}} to={{pathname: `/restaurants/${restaurant? restaurant.id: restaurantId}/checkout`, data: {orderSubtotal: orderSubtotal, restaurant: restaurant? restaurant: storedRestaurant, setCartItems: setSubmittedCartItems}, state: {prevPath: location.pathname}}}>
               <h3> Checkout </h3>
             </NavLink>
             <h3> {orderSubtotal.toFixed(2)} </h3>

@@ -78,10 +78,10 @@ function App() {
           <ProtectedRoute path='/restaurants/:id/fooditems/:foodItemId' exact={true} >
             <UpdateFoodItem/>
           </ProtectedRoute>
-          <ProtectedRoute path='/checkout' exact={true} >
+          <ProtectedRoute path='/restaurants/:id/checkout' exact={true} >
             <OrderConfirmationPage/>
           </ProtectedRoute>
-          <ProtectedRoute path='/orders/:orderId/new' exact={true} >
+          <ProtectedRoute path='/restaurants/:restaurantId/orders/:orderId/new' exact={true} >
             <FinalOrderConfirmation/>
           </ProtectedRoute>
         </div>
