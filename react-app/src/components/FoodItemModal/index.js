@@ -52,6 +52,7 @@ const FoodItemModal = ({setForceCartUpdate, forceCartUpdate,setSubmittedCartItem
     setForceCartUpdate(!forceCartUpdate)
     setSubmittedCartItems([...submittedCartItems, foodItem])
     localStorage.setItem('cart', JSON.stringify([...submittedCartItems, foodItem]))
+    localStorage.setItem('restaurant', JSON.stringify(foodItem.Restaurant))
     setFoodItemModal(false)
     return
   }

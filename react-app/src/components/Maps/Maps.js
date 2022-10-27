@@ -15,7 +15,7 @@ const containerStyle = {
 
 const Maps = ({ apiKey, userCoordinates, restaurant }) => {
   const [map, setMap] = useState(/** @type google.maps.GoogleMap */null)
-  const [restaurantCoord, setRestaurantCoord] = useState({'lat': restaurant?.latitude, "lng": restaurant?.longitude })
+  const [restaurantCoord, setRestaurantCoord] = useState({'lat': Number(restaurant?.latitude), "lng": Number(restaurant?.longitude) })
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: apiKey,
@@ -23,6 +23,7 @@ const Maps = ({ apiKey, userCoordinates, restaurant }) => {
   });
   console.log('restaurant in maps:', restaurant)
   console.log('restaurant coordintes in maps:', restaurantCoord)
+  console.log('user coordinates:', userCoordinates)
   return (
     <>
       {/* <Autocomplete>

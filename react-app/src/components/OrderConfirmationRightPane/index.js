@@ -43,9 +43,9 @@ const OrderConfirmationRightPane = ({orderSubtotal, deliveryMethod, deliveryOpti
     setOrderFinalTotal(total)
   }, [fees, tip])
 
-  useEffect(()=> {
-    localStorage.setItem('restaurant', JSON.stringify(restaurant))
-  }, [])
+  // useEffect(()=> {
+  //   localStorage.setItem('restaurant', JSON.stringify(restaurant))
+  // }, [])
 
   const MinuteCountdown = (countdown, setCountdown) => {
     let countdownInSec = countdown* 60
