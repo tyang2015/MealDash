@@ -54,3 +54,14 @@
   overflow-y: auto;
   width: 15em;
 }
+
+.cart-button-container{
+  cursor: pointer;
+  background-color: lightcoral;
+  width: 3.5em;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  height: 27px;
+  justify-content: center;
+}
