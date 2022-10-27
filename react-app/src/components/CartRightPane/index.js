@@ -5,14 +5,26 @@ import FinalConfirmationNavBar from '../FinalConfirmationNavBar';
 import "./CartRightPane.css"
 
 // can we access the submitted Cart items from local instead??
-let cartFromLocalStorage = JSON.parse(localStorage.getItem('cart'))
+let cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]')
 // we have cart items passed from PARENT and cart items from storage (this is not updating correctly...)
 const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems, setToggleCartPane, toggleCartPane}) => {
   // console.log('cart in rightt pane passed down from parent', cartItems)
   const location = useLocation();
   const [orderSubtotal, setOrderSubtotal] = useState(0)
   let [submittedCartItems, setSubmittedCartItems] = useState(cartFromLocalStorage || [])
+  const [isOrderZero, setIsOrderZero] = useState(false)
   console.log('cart in rightt pane from local storage', submittedCartItems)
+  console.log('cart in right pane passed down as propsss', cartItems)
+
+  useEffect(()=> {
+    console.log('order subtotal use effect triggered')
+    if (orderSubtotal == 0){
+      setIsOrderZero(true)
+    } else {
+      setIsOrderZero(false)
+    }
+  }, [orderSubtotal])
+
   const calculateOrderTotal = () => {
     let totalPrice = 0;
     if (cartItems){
@@ -46,25 +58,25 @@ const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems, s
     if (cartItems?.length>0){
       localStorage.setItem("cart", JSON.stringify(cartItems))
     }
-    console.log('after setting it in local storage use effect...', submittedCartItems)
+    // console.log('after setting it in local storage use effect...', submittedCartItems)
     // setSubmittedCartItems(cartFromLocalStorage)
   }, [ forceCartUpdate, cartItems])
 
   useEffect(()=>{
-    if (cartItems?.length>0){
+    if (cartItems?.length>=0){
       calculateOrderTotal()
       return
     }
-    if (submittedCartItems?.length>0){
+    if (submittedCartItems?.length>=0){
       calculateOrderTotal()
       return
     }
   }, [forceCartUpdate, submittedCartItems, cartItems])
 
 
-  if (cartItems?.length<=0 && submittedCartItems?.length<=0) return (
-    <h3> Empty Cart </h3>
-  )
+  // if ((cartItems?.length<=0 && submittedCartItems?.length<=0) || (!submittedCartItems)) return (
+  //   <h3> Empty Cart </h3>
+  // )
 
   const handleDeleteItem = (itemToDelete) => {
     let i =0;
@@ -88,12 +100,11 @@ const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems, s
     }
     // if there are no cartItems, there will be no setCartItems from parent too
     let copiedCartItems = [...submittedCartItems]
-    console.log('copied cart items from broken usestate local storage cart items:', copiedCartItems)
     while (i< submittedCartItems.length){
       let item = submittedCartItems[i]
       if (item.id === itemToDelete.id){
         copiedCartItems.splice(i,1)
-        console.log('after deletion:', copiedCartItems)
+        // console.log('after deletion:', copiedCartItems)
         setSubmittedCartItems(copiedCartItems)
         localStorage.setItem('cart', JSON.stringify(copiedCartItems))
         return
@@ -101,7 +112,12 @@ const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems, s
       i=i+1
     }
   }
-  console.log('cart items at the end in right pane', submittedCartItems)
+  console.log('cart items at the end in right pane passed as props', cartItems)
+  console.log('cart items from local storage at end in right pane', submittedCartItems )
+
+  if (isOrderZero) return (
+    <div className="cart-pane-main-container"> EMPTY CART </div>
+  )
 
   return (
     <>
@@ -144,6 +160,11 @@ const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems, s
               </div>
             </>
           ))} */}
+          {/* {(submittedCartItems && submittedCartItems.length=== 0) && (cartItems && cartItems.length === 0) && (
+            <div className='cart-pane-food-item-card-container'>
+              EMPTY CART :(
+            </div>
+          )} */}
           {cartItems?.length>0? cartItems.map(item=> (
             <>
               <div key={item.id} className='cart-pane-food-item-card-container'>
@@ -210,7 +231,7 @@ const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems, s
             </>
           ))} */}
         </div>
-        <h3>{submittedCartItems?.name}</h3>
+        {/* <h3>{submittedCartItems?.name}</h3> */}
 
       </div>
     </>

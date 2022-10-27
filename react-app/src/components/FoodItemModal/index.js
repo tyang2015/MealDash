@@ -1,11 +1,13 @@
 import { Modal } from '../../context/FoodItemOrder'
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from 'react-router-dom';
 import CartRightPane from '../CartRightPane';
 import "./FoodItemModal.css"
 import "../../context/Modal.css"
 
 const FoodItemModal = ({setForceCartUpdate, forceCartUpdate,setSubmittedCartItems, submittedCartItems,setSubmittedCart, setFoodItemModal, foodItem}) => {
+  const {id} = useParams();
   const [totalPrice, setTotalPrice] = useState("")
   const [preferences, setPreferences] = useState("")
   const [quantity, setQuantity] = useState(1)
@@ -13,8 +15,18 @@ const FoodItemModal = ({setForceCartUpdate, forceCartUpdate,setSubmittedCartItem
   const handleCartSubmission = (foodItem, quantity) => {
     setSubmittedCart(true)
     console.log('food item in cart submission:', foodItem)
-    // append quantity to the foodItem and return a new?? foodItem object
-    // modify original first
+    // if (!checkSameRestaurant(foodItem)){
+    //   setSubmittedCartItems([])
+    // }
+    // if (submittedCartItems.length>0){
+    //   let restaurantId = submittedCartItems[0].Restaurant.id
+    //   if (foodItem.Restaurant.id != restaurantId){
+    //     console.log('DIFFERENT RESTAURANT')
+    //     setSubmittedCartItems([])
+    //     localStorage.setItem('cart', JSON.stringify([]))
+    //   }
+    // }
+
 
     // i also need to check the cartItems and see if the food name already exists
     // if it does I need to update THAT particular item in submittedCartItems
@@ -42,6 +54,16 @@ const FoodItemModal = ({setForceCartUpdate, forceCartUpdate,setSubmittedCartItem
     localStorage.setItem('cart', JSON.stringify([...submittedCartItems, foodItem]))
     setFoodItemModal(false)
     return
+  }
+
+  const checkSameRestaurant = (foodItem) => {
+    let restaurantId = foodItem.Restaurant.id
+    if (restaurantId != id){
+      console.log('Different restaurant!')
+      return false
+    }
+    console.log('Same restaurant :)')
+    return true
   }
 
   return (

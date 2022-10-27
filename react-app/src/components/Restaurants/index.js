@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllRestaurants } from '../../store/restaurant';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import NavBar from '../Navigation/NavBar';
 import "./restaurants.css";
 import americanIcon from "./images/american-icon.png"
@@ -20,10 +20,11 @@ const CATEGORY_CHOICES = ["All","Asian", "American","Breakfast", "Vegan", "Mexic
 const cartFromLocalStorage = localStorage.getItem('cart')!=undefined? JSON.parse(localStorage.getItem('cart' || "[]")): []
 
 const Restaurants = () => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const location = useLocation();
     const restaurantObj = useSelector(state => state.restaurants)
     let restaurants = Object.values(restaurantObj)
-    // const [cartItems, setCartItems] = useState(cartFromLocalStorage || [])
+    const [toggleCartPane, setToggleCartPane] = useState(false)
     let [filteredItems, setFilteredItems] = useState([])
     const [submittedCartItems, setSubmittedCartItems] = useState(cartFromLocalStorage || [])
     const [isFiltered, setIsFiltered] = useState(false)
@@ -66,6 +67,7 @@ const Restaurants = () => {
       Mediterranean: 0
 
     })
+    console.log('location on main page:', location.pathname)
 
     // const [categories, setCategories] = useState({
     //   ALL:"",
@@ -84,7 +86,6 @@ const Restaurants = () => {
 
     useEffect(()=>{
         dispatch(getAllRestaurants())
-
     }, [dispatch])
 
     useEffect(()=>{
@@ -432,7 +433,7 @@ const Restaurants = () => {
     // }
     return (
         <>
-          <NavBar/>
+          <NavBar setToggleCartPane={setToggleCartPane} toggleCartPane={toggleCartPane}/>
           <div>
             <div className='restaurants-categories-container'>
               {CATEGORY_CHOICES.map(category=> (

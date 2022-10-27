@@ -7,10 +7,10 @@ import LogoutButton from '../auth/LogoutButton';
 import CartRightPane from '../CartRightPane';
 
 
-const NavBar = () => {
+const NavBar = ({toggleCartPane, setToggleCartPane}) => {
     const sessionUser = useSelector((state) => state.session.user);
     const [open, setOpen] = useState(false)
-    const [toggleCartPane, setToggleCartPane] = useState(false)
+    // const [toggleCartPane, setToggleCartPane] = useState(false)
     const profileMenu = () => {
         const dropDownMenu = (
             <div className='dropdown-container'>
@@ -48,7 +48,7 @@ const NavBar = () => {
         )
       }
     const handleToggleCart = (e)=> {
-      console.log('clicked toggle')
+      // console.log('clicked toggle')
       // console.log(toggleCartPane)
       setToggleCartPane(!toggleCartPane)
     }

@@ -37,6 +37,7 @@ const GetRestaurant = () => {
   const [all, setAll] = useState('')
   const [categoryChosen, setCategoryChosen] = useState('All')
   const [isFiltered, setIsFiltered] = useState(false)
+  const [toggleCartPane, setToggleCartPane] = useState(false)
   let [filteredItems, setFilteredItems] = useState([])
 
   const [submittedCart, setSubmittedCart] =useState(false)
@@ -44,8 +45,7 @@ const GetRestaurant = () => {
   const [forceCartUpdate, setForceCartUpdate] = useState(false)
 
   const [finalAvgRating, setFinalAvgRating] = useState(0)
-  const [closeHours, setCloseHours] = useState(restaurant?.closeTime.substring(0,2) || '')
-  const [openHours, setOpenHours] = useState(restaurant?.openTime.substring(0,2) || '')
+
 
   let today = new Date();
   let todayInHours = today.getHours()
@@ -242,7 +242,7 @@ const GetRestaurant = () => {
 
   return (
     <>
-    <NavBar/>
+    <NavBar toggleCartPane={toggleCartPane} setToggleCartPane={setToggleCartPane}/>
       <div className="restaurant-page-main-container">
         <div className="restaurant-page-main-content-top-outer-container">
           <div className="restaurant-page-main-content-container">
@@ -415,7 +415,7 @@ const GetRestaurant = () => {
               </>
             )}
           </div>
-        <CartRightPane cartItems={submittedCartItems} setCartItems={setSubmittedCartItems} forceCartUpdate={forceCartUpdate} restaurant={submittedCartItems?.length>0? submittedCartItems[0].Restaurant: null} />
+        {toggleCartPane && <CartRightPane setToggleCartPane={setToggleCartPane} toggleCartPane={toggleCartPane} cartItems={submittedCartItems} setCartItems={setSubmittedCartItems} forceCartUpdate={forceCartUpdate} restaurant={submittedCartItems?.length>0? submittedCartItems[0].Restaurant: null} />}
         </div>
         <RestaurantFooter/>
 
