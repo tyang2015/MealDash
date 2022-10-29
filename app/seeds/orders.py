@@ -41,7 +41,10 @@ def seed_orders():
             "tip": 2.50,
             "delivery_method": "Delivery",
             "delivery_option": "Hand it to me",
-            "order_completed": True
+            "order_completed": True,
+            "user_address": "15225 Whittier Blvd, Whittier, CA 90603",
+            "fees": 2.80,
+            "subtotal": 14.80
         },
         {
             "customer_id": 4,
@@ -57,7 +60,10 @@ def seed_orders():
             "tip": 2.50,
             "delivery_method": "Pickup",
             "delivery_option": "",
-            "order_completed": True
+            "order_completed": True,
+            "user_address": "1420 S Azusa Ave, West Covina, CA 91791",
+            'fees': 2.00,
+            "subtotal": 9.50
         },
         {
             "customer_id": 4,
@@ -73,7 +79,10 @@ def seed_orders():
             "tip": 3.50,
             "delivery_method": "Delivery",
             "delivery_option": "Leave at my door",
-            "order_completed": True
+            "order_completed": True,
+            "user_address": "2276 E 16th St, Los Angeles, CA 90021",
+            "fees": 2.00,
+            "subtotal": 32.99
         },
         {
             "customer_id": 4,
@@ -89,7 +98,10 @@ def seed_orders():
             "tip": 3.50,
             "delivery_method": "Delivery",
             "delivery_option": "Hand it to me",
-            "order_completed": True
+            "order_completed": True,
+            "user_address": "1151 Oxford Rd, San Marino, CA 91108",
+            "fees": 2.00,
+            "subtotal": 26.99
         },
         {
             "customer_id": 6,
@@ -105,7 +117,10 @@ def seed_orders():
             "tip": 3.50,
             "delivery_method": "Delivery",
             "delivery_option": "Leave at my door",
-            "order_completed": True
+            "order_completed": True,
+            "user_address": "2600 Ocean Park Blvd, Santa Monica, CA 90405",
+            "fees": 2.00,
+            "subtotal": 12.80
         },
         {
             "customer_id": 7,
@@ -121,7 +136,10 @@ def seed_orders():
             "tip": 3.50,
             "delivery_method": "Delivery",
             "delivery_option": "Leave at my door",
-            "order_completed": True
+            "order_completed": True,
+            "user_address": "14105 Don Julian Rd, La Puente, CA 91746",
+            "fees": 2.00,
+            "subtotal": 23.80
         },
         {
             "customer_id": 8,
@@ -137,7 +155,10 @@ def seed_orders():
             "tip": 3.50,
             "delivery_method": "Delivery",
             "delivery_option": "Leave at my door",
-            "order_completed": True
+            "order_completed": True,
+            "user_address": "14105 Don Julian Rd, La Puente, CA 91746",
+            "fees": 2.00,
+            "subtotal": 13.80
         },
         {
             "customer_id": 6,
@@ -153,7 +174,10 @@ def seed_orders():
             "tip": 3.50,
             "delivery_method": "Delivery",
             "delivery_option": "Leave at my door",
-            "order_completed": True
+            "order_completed": True,
+            "user_address": "N California Ave, La Puente, CA 91744",
+            "fees": 2.00,
+            "subtotal": 13.80
         },
         {
             "customer_id": 7,
@@ -169,7 +193,10 @@ def seed_orders():
             "tip": 3.50,
             "delivery_method": "Pickup",
             "delivery_option": "",
-            "order_completed": True
+            "order_completed": True,
+            "user_address": "618 Shoppers Ln, Covina, CA 91723",
+            "fees": 2.00,
+            "subtotal": 13.80
         }
     ]
     for order in orders:
@@ -188,6 +215,9 @@ def seed_orders():
             delivery_method = order["delivery_method"],
             delivery_option = order['delivery_option'],
             order_completed = order["order_completed"],
+            user_address = order["user_address"],
+            subtotal = order["subtotal"],
+            fees = order["fees"],
             order_food_items = random_food_items()
         )
         # orders_list.append(newOrder)

@@ -1,0 +1,115 @@
+.get-order-receipt-left-pane{
+  /* background-color: lightblue; */
+  width: 23em;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.get-order-receipt-top-container{
+  border-bottom: 1px solid #E7E7E7;
+}
+
+.get-order-price-line{
+  display:flex;
+  /* background-color: lightgoldenrodyellow; */
+  width:100%;
+  justify-content: space-between;
+  font-weight: 700;
+}
+
+.get-order-price-line:not(:first-child){
+  margin-top: 20px;
+}
+
+.get-order-price-line.middle{
+  font-weight: 550;
+}
+
+.get-order-price-line:first-child, .get-order-price-line:first-child{
+  font-weight: 700;
+}
+
+.get-order-receipt-details-item-details-container{
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+}
+
+.get-order-receipt-food-item-card{
+  display: flex;
+  flex-direction: column;
+  /* background-color: lightblue; */
+  height: fit-content;
+  border-bottom: 1px solid #E7E7E7;
+  padding-bottom: 1em;
+  /* padding-top: 1em; */
+}
+
+div.get-order-receipt-food-item-card:not(:first-child){
+  padding-top: 1em;
+}
+
+/* get-order-receipt-food-item-container */
+.get-order-receipt-food-item-container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: lightgreen;
+  height: 30%;
+}
+
+.get-order-receipt-food-item-left-container-name-quantity{
+  display:flex;
+  justify-content: space-between;
+  /* background-color: lightgreen; */
+  align-items: center;
+  height: 2em;
+  min-height: 2em;
+}
+
+.get-order-food-item-name-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 65%;
+  align-items: center;
+  height: 100%;
+}
+
+.get-order-food-item-name{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width:100%;
+  height: 100%;
+}
+.get-order-receipt-food-item-left-container-preference{
+  height: 40%;
+}
+
+.get-order-total-price-per-item-container{
+  height: 75%;
+  /* background-color: lightcyan; */
+  display: flex;
+  align-items: center;
+  font-weight: 550;
+}
+
+
+.get-order-receipt-price-breakdown-container{
+  /* background-color: lightgrey; */
+  /* padding-top: 30px; */
+  height: 16em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+/* .get-order-receipt-food-item-left-container-name-quantity{
+  background-color: lightgoldenrodyellow;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-start;
+} */

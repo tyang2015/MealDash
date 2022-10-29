@@ -30,7 +30,7 @@
 
 .prepare-your-order-container{
   padding-left: 20px;
-  background-color: lightpink;
+  /* background-color: lightpink; */
   height: 3em;
 }
 
@@ -70,6 +70,14 @@
   padding-left: 20px;
 }
 
+.get-orders-in-progress-text-content-right-container{
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: 20px;
+}
+
 
 .get-orders-completed-text-content-right-container{
   width: 30%;
@@ -78,7 +86,18 @@
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
+  margin-right: 20px;
+}
 
+.view-order-button{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(231, 231, 231);
+  border-radius: 30px;
+  width: 11em;
+  height: 45px;
 }
 
 .view-receipt-button{

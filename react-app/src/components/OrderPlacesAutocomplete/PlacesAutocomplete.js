@@ -16,7 +16,7 @@ import "@reach/combobox/styles.css";
 import "./OrderPlacesAutocomplete.css"
 
 const google = window.google
-const PlacesAutocomplete = ({apiKey,setRouteLoaded, setUserCoordinates, destinationRef, calculateRoute, setDestinationRef}) => {
+const PlacesAutocomplete = ({apiKey,setRouteLoaded, setAddress, setUserCoordinates, destinationRef, calculateRoute, setDestinationRef}) => {
   let {ready, value, setValue, suggestions: {status, data}, clearSuggestions} = usePlacesAutocomplete();
 
   const { isLoaded } = useJsApiLoader({
@@ -30,6 +30,7 @@ const PlacesAutocomplete = ({apiKey,setRouteLoaded, setUserCoordinates, destinat
     clearSuggestions();
     console.log('address after select:', address)
     await setDestinationRef(address)
+    await setAddress(address)
 
     const results = await getGeocode({address});
     const {lat, lng} = await getLatLng(results[0]);
@@ -49,15 +50,12 @@ const PlacesAutocomplete = ({apiKey,setRouteLoaded, setUserCoordinates, destinat
           <Combobox className='create-restaurant-address-dropdown' onSelect={handleSelect}>
             {/* <div className="create-restaurant-label-input-container address"> */}
               {/* <label htmlFor='create-restaurant-address-input'>Address</label> */}
-
               <ComboboxInput
-                // id="create-restaurant-address-input"
                 className='order-confirmation-address-input'
                 value={value}
                 onChange={(e)=> setValue(e.target.value)}
                 // ref={destinationRef}
                 type='text'
-                // name="restaurant-address"
                 placeholder='Address'
                 required
                 disabled = {!ready}

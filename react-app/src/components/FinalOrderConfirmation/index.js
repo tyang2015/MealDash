@@ -22,6 +22,7 @@ const FinalOrderConfirmation = () => {
   let cartItems= location?.state?.cartItems
   let duration= location?.state?.duration
   let order = location?.state?.createdOrder
+  let address = location?.state?.address
   // const [orderStarted, setOrderStarted] = useState(true)
   const [countdown, setCountdown] = useState(countdownFromStorage? countdownFromStorage: Number(parseInt(duration?.split(" ")[0])))
   // const [countdownInSec, setCountdownInSec] = useState(countdown? countdown* 60: null)
@@ -34,7 +35,7 @@ const FinalOrderConfirmation = () => {
   // let [storedRestaurant, setStoredRestaurant] = useState(restaurantFromStorage[restaurant?`${restaurant.id}`: restaurantId] )
   // let [storedOrders, setStoredOrders] = useState(ordersFromStorage)
   let [storedRestaurant, setStoredRestaurant] = useState(restaurantFromStorage)
-  let [storedOrder, setStoredOrder]= useState(ordersFromStorage[orderId])
+  let [storedOrder, setStoredOrder]= useState(JSON.parse(localStorage.getItem('orders'))[orderId])
   // console.log("stored restaurant in final order confirm page:", storedRestaurant)
   console.log('stored orders DIRECTLy from local storage:', ordersFromStorage)
   // console.log('stored ordersss:', storedOrders)
@@ -83,17 +84,7 @@ const FinalOrderConfirmation = () => {
 
   }
 
-  // useEffect(()=> {
-  //   if (restaurant && cartItems.length>0){
-  //     localStorage.setItem('restaurant', restaurant)
-  //     localStorage.setItem('cartItems', JSON.stringify(cartItems))
-  //   }
-  // }, [restaurant, cartItems.length])
-  // useEffect(()=>{
-  //   localStorage.setItem('restaurant', restaurant)
-  //   // localStorage.setItem('cartItems', JSON.stringify(cartItems) )
 
-  // }, [])
   useEffect(()=>{
     // TODO: make orderStarted a useState? no.. because everytime it enters the component (change the url back to this), it will reset to default value
     if (!orderStarted) return

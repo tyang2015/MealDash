@@ -7,7 +7,7 @@ import "./OrderConfirmationRightPane.css"
 // const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart' || "[]"))
 // const restaurantFromStorage = localStorage.getItem('restaurant')!= undefined? localStorage.getItem('restaurant'): "restaurant name"
 
-const OrderConfirmationRightPane = ({cartItems, orderSubtotal, deliveryMethod, deliveryOption, creditCard, distance, duration, restaurant, errors}) => {
+const OrderConfirmationRightPane = ({cartItems, address, orderSubtotal, deliveryMethod, deliveryOption, creditCard, distance, duration, restaurant, errors}) => {
   const sessionUser = useSelector(state=> state.session.user)
   const dispatch = useDispatch()
   const history = useHistory()
@@ -78,7 +78,10 @@ const OrderConfirmationRightPane = ({cartItems, orderSubtotal, deliveryMethod, d
       tip: Number(tip),
       delivery_method: deliveryMethod,
       delivery_option: deliveryOption,
-      food_items: cartItems
+      food_items: cartItems,
+      user_address: address,
+      subtotal: Number(orderSubtotal).toFixed(2),
+      fees: fees
     }
     console.log('order object:', order)
     let createdOrder = await dispatch(createNewOrder(order))
@@ -88,7 +91,7 @@ const OrderConfirmationRightPane = ({cartItems, orderSubtotal, deliveryMethod, d
     alert('We have confirmed your order!')
     setHasSubmitted(false)
     console.log("restaurant id after order submission:", restaurant.id)
-    history.push({pathname: `/restaurants/${restaurant.id}/orders/${createdOrder?.id}/new`, state: {duration, cartItems, restaurant, createdOrder}})
+    history.push({pathname: `/restaurants/${restaurant.id}/orders/${createdOrder?.id}/new`, state: {duration, cartItems, restaurant, createdOrder, address}})
     return
 
   }

@@ -43,6 +43,7 @@ const OrderConfirmationPage = () => {
   const [directionsResponse, setDirectionsResponse] = useState(null)
   const [distance, setDistance] = useState('')
   const [duration, setDuration] = useState('')
+  const [address, setAddress] = useState('')
   console.log('cart items in confirm page from local storage:', cartItems)
   console.log('restaurant id from use params in confirm page:', id)
   console.log('restaurant in order confirm page:', restaurant)
@@ -181,7 +182,7 @@ const OrderConfirmationPage = () => {
                       </>
                     )}
                   </div>
-                  <OrderPlacesAutocompleteContainer setUserCoordinates={setUserCoordinates} destinationRef={destinationRef} setDestinationRef={setDestinationRef} calculateRoute={calculateRoute}/>
+                  <OrderPlacesAutocompleteContainer setUserCoordinates={setUserCoordinates} setAddress={setAddress} destinationRef={destinationRef} setDestinationRef={setDestinationRef} calculateRoute={calculateRoute}/>
                   {deliveryMethod==="Delivery" && (
                   <div className='delivery-option-container'>
                     <label>
@@ -219,7 +220,7 @@ const OrderConfirmationPage = () => {
               </div>
               {paymentModal && (<PaymentModal setPaymentModal={setPaymentModal} creditCard={creditCard} setCreditCard={setCreditCard} />)}
         </div>
-        <OrderConfirmationRightPane cartItems={cartItems? cartItems: submittedCartItems} deliveryMethod={deliveryMethod} deliveryOption={deliveryOption} distance={distance} duration={duration} errors={errors}
+        <OrderConfirmationRightPane address={address} cartItems={cartItems? cartItems: submittedCartItems} deliveryMethod={deliveryMethod} deliveryOption={deliveryOption} distance={distance} duration={duration} errors={errors}
          restaurant={restaurant? restaurant: storedRestaurant} creditCard={creditCard} orderSubtotal={orderSubtotal}/>
       </div>
     </>

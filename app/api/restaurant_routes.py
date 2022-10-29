@@ -215,6 +215,9 @@ def create_restaurant_order(id):
       delivery_method = form.data['delivery_method'],
       delivery_option = form.data['delivery_option'],
       order_completed = False,
+      user_address = form.data['user_address'],
+      fees = form.data['fees'],
+      subtotal = form.data['subtotal'],
       user = current_user,
       restaurant = restaurant,
     )

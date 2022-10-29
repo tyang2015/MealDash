@@ -46,6 +46,9 @@ class OrderForm(FlaskForm):
   tip = DecimalField("Tip")
   delivery_method = StringField("delivery method")
   delivery_option = StringField("delivery option")
+  user_address = StringField('User Address')
+  subtotal = DecimalField("Subtotal")
+  fees = DecimalField("Fees")
 
 
   def __repr__(self):

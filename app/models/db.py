@@ -166,6 +166,9 @@ class Order(db.Model):
   delivery_method = db.Column(db.String)
   delivery_option = db.Column(db.String)
   order_completed = db.Column(db.Boolean, nullable=False)
+  user_address = db.Column(db.String)
+  subtotal = db.Column(db.Numeric(scale = 2), nullable=False)
+  fees = db.Column(db.Numeric(scale = 2), nullable=False)
 
   created_at = db.Column(db.DateTime, default=datetime.utcnow)
   updated_at = db.Column(db.DateTime, default=datetime.utcnow)
@@ -220,12 +223,14 @@ class Order(db.Model):
         "deliveryMethod": self.delivery_method,
         "deliveryOption": self.delivery_option,
         "orderCompleted": self.order_completed,
-        # "orderFoodItems": [foodItem.to_dict_for_order() for foodItem in self.order_food_items],
+        "userAddress": self.user_address,
+        "subtotal": str(self.subtotal),
+        "fees": str(self.fees),
         "user": self.convert_user_to_dict(),
         "restaurant": self.restaurant_to_dict(),
         "foodItems": [item.to_dict() for item in self.order_food_items],
         "createdAt": self.created_at,
-        "updatedAt": self.updated_at
+        "updatedAt": self.updated_at,
     }
 
   def convert_user_to_dict(self):
