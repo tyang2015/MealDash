@@ -6,21 +6,31 @@ import "./CartRightPane.css"
 
 // can we access the submitted Cart items from local instead??
 let cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]')
-let restaurantFromLocalStorage = JSON.parse(localStorage.getItem('restaurants') )
+// let restaurantFromLocalStorage = JSON.parse(localStorage.getItem('restaurants') || '{}')
+let restaurantFromLocalStorage = JSON.parse(localStorage.getItem('restaurant') || '{}')
 // we have cart items passed from PARENT and cart items from storage (this is not updating correctly...)
 const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems, setToggleCartPane, toggleCartPane}) => {
-  // console.log('cart in rightt pane passed down from parent', cartItems)
+
   console.log('restaurant from local storage:', restaurantFromLocalStorage)
   const location = useLocation();
   const [orderSubtotal, setOrderSubtotal] = useState(0)
   let [submittedCartItems, setSubmittedCartItems] = useState(cartFromLocalStorage || [])
-  let [restaurantId, setRestaurantId] = useState(cartItems?.length>0? cartItems[0].Restaurant.id: submittedCartItems?.length>0? submittedCartItems[0].Restaurant.id: "")
-  let [storedRestaurant, setStoredRestaurant] = useState(restaurantId? restaurantFromLocalStorage[`${restaurantId}`] : {})
+  // let [restaurantId, setRestaurantId] = useState(cartItems?.length>0? cartItems[0].Restaurant.id: submittedCartItems?.length>0?
+  //   submittedCartItems[0].Restaurant.id:restaurantFromLocalStorage? restaurantFromLocalStorage.id: "")
+  // let [storedRestaurant, setStoredRestaurant] = useState(restaurantId? restaurantFromLocalStorage[`${restaurantId}`] : {})
+  let [storedRestaurant, setStoredRestaurant] = useState(submittedCartItems?.length>0? submittedCartItems[0].Restaurant : restaurantFromLocalStorage!="{}"? restaurantFromLocalStorage: cartItems?.length> 0? cartItems[0].Restaurant: {})
   const [isOrderZero, setIsOrderZero] = useState(false)
-  console.log('restaurant id use state:', restaurantId)
-  // console.log('cart in rightt pane from local storage', submittedCartItems)
-  // console.log('cart in right pane passed down as propsss', cartItems)
+  // console.log('restaurant id use state:', restaurantId)
+  console.log('cart in rightt pane from local storage', submittedCartItems)
+  console.log('cart in right pane passed down as propsss', cartItems)
   console.log('stored restaurant value:', storedRestaurant)
+
+  useEffect(()=>{
+    if (submittedCartItems?.length>0){
+      setStoredRestaurant(submittedCartItems[0].Restaurant)
+    }
+  }, [submittedCartItems])
+
 
   useEffect(()=> {
     console.log('order subtotal use effect triggered')
@@ -137,7 +147,8 @@ const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems, s
         </div>
         <div className='checkout-button-container'>
           <div className='checkout-button'>
-            <NavLink className="navlink" style={{color: "white"}} to={{pathname: `/restaurants/${restaurant? restaurant.id: restaurantId}/checkout`, data: {orderSubtotal: orderSubtotal, restaurant: restaurant? restaurant: storedRestaurant, setCartItems: setSubmittedCartItems}, state: {prevPath: location.pathname}}}>
+            {/* <NavLink className="navlink" style={{color: "white"}} to={{pathname: `/restaurants/${restaurant? restaurant.id: restaurantId? restaurantId: storedRestaurant.id}/checkout`, data: {orderSubtotal: orderSubtotal, restaurant: restaurant? restaurant: storedRestaurant, setCartItems: setSubmittedCartItems}, state: {prevPath: location.pathname}}}> */}
+            <NavLink className="navlink" style={{color: "white"}} to={{pathname: `/restaurants/${restaurant? restaurant.id: storedRestaurant.id}/checkout`, data: {orderSubtotal: orderSubtotal, restaurant: restaurant? restaurant: storedRestaurant, submittedCartItems: cartItems? cartItems: submittedCartItems}, state: {prevPath: location.pathname}}}>
               <h3> Checkout </h3>
             </NavLink>
             <h3> {orderSubtotal.toFixed(2)} </h3>
@@ -237,7 +248,6 @@ const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems, s
             </>
           ))} */}
         </div>
-        {/* <h3>{submittedCartItems?.name}</h3> */}
 
       </div>
     </>

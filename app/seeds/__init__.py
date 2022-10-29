@@ -18,10 +18,10 @@ def seed():
     seed_users()
     seed_restaurants()
     seed_food_items()
+    seed_order_food_items()
     seed_orders()
     seed_food_item_reviews()
     seed_reviews()
-    seed_order_food_items()
     print('successfully seeded!')
     # Add other seed functions here
 
@@ -32,9 +32,9 @@ def undo():
     undo_users()
     undo_restaurants()
     undo_food_items()
+    undo_order_food_items()
     undo_orders()
     undo_food_item_reviews()
     undo_reviews()
-    undo_order_food_items()
 
     # Add other undo functions here

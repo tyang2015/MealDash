@@ -4,6 +4,7 @@ const GET_RESTAURANT_ORDERS = "orders/getRestaurantOrders"
 const GET_USER_ORDERS = 'orders/getUserOrders'
 
 const CREATE_ORDER = "orders/createOrder"
+const UPDATE_ORDER = 'orders/updateOrder'
 
 // dont use this one yet
 const loadRestaurantOrders = (payload) => {
@@ -27,6 +28,12 @@ const createOrder = (payload) => {
   }
 }
 
+const update = (payload) => {
+  return {
+    type: UPDATE_ORDER,
+    payload
+  }
+}
 // get user orders
 export const getOrders = (userId) => async dispatch => {
   const response = await fetch(`/api/restaurants/orders`)
@@ -55,6 +62,20 @@ export const createNewOrder = (payload) => async dispatch => {
   }
 }
 
+export const updateOrder = (payload) => async dispatch => {
+  console.log('order payload in thunk:', payload)
+  const response = await fetch(`/api/restaurants/${payload.restaurant_id}/orders/${payload.id}`, {
+    method: "PUT",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(payload)
+  })
+  if (response.ok){
+    let order = await response.json()
+    dispatch(update(order))
+    return order
+  }
+}
+
 
 const initialState = {}
 //  orders state=> { 1: {order attributes: ...,}}
@@ -68,7 +89,13 @@ const orderReducer = (state= initialState, action) => {
     case CREATE_ORDER: {
       let newState = {}
       newState[action.payload.id] = action.payload
-      console.log('new state in order reducer:', newState)
+      // console.log('new state in order reducer:', newState)
+      return newState
+    }
+    case UPDATE_ORDER: {
+      let newState = {}
+      newState[action.payload.id] = action.payload
+      // console.log('new state in order reducer:', newState)
       return newState
     }
     default:

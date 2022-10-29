@@ -220,11 +220,12 @@ class Order(db.Model):
         "deliveryMethod": self.delivery_method,
         "deliveryOption": self.delivery_option,
         "orderCompleted": self.order_completed,
-        # "totalPrice":  self.get_total_price(),
         # "orderFoodItems": [foodItem.to_dict_for_order() for foodItem in self.order_food_items],
         "user": self.convert_user_to_dict(),
         "restaurant": self.restaurant_to_dict(),
-        "foodItems": [item.to_dict() for item in self.order_food_items]
+        "foodItems": [item.to_dict() for item in self.order_food_items],
+        "createdAt": self.created_at,
+        "updatedAt": self.updated_at
     }
 
   def convert_user_to_dict(self):

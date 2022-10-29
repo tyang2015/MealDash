@@ -1,0 +1,101 @@
+.get-orders-main-container{
+  margin: auto;
+  width: 58em;
+  /* background-color: lightblue; */
+}
+
+.get-orders-in-progress-card{
+  /* width: 100%;
+  background-color: lightgoldenrodyellow; */
+  height: 8.8em;
+  border: 1px solid rgb(231, 231, 231);
+}
+
+
+.get-orders-completed-card{
+  height: 8.8em;
+  border: 1px solid rgb(231, 231, 231);
+
+}
+
+.get-orders-restaurant-name-title-container{
+  padding-left: 20px;
+  width: 100%;
+  background-color: #F7F7F7;
+  height: 30%;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.prepare-your-order-container{
+  padding-left: 20px;
+  background-color: lightpink;
+  height: 3em;
+}
+
+.get-orders-in-progress-text-content-main-container{
+  display: flex;
+  flex-direction: row;
+  height: 70%;
+}
+
+.get-orders-completed-text-content-main-container{
+  display: flex;
+  flex-direction: row;
+  height: 70%;
+}
+
+.get-orders-in-progress-text-content-left-container{
+  width: 70%;
+  display: flex;
+  align-items: flex-start;
+  /* justify-content: fle; */
+  flex-direction: column;
+}
+
+.get-orders-completed-text-content-left-container{
+  /* background-color: lightgreen; */
+  width: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.get-orders-estimated-delivery-container{
+
+}
+
+.get-orders-completed-text-content-top-row{
+  padding-left: 20px;
+}
+
+
+.get-orders-completed-text-content-right-container{
+  width: 30%;
+  /* background-color: lightgrey; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+
+}
+
+.view-receipt-button{
+  display: flex;
+  flex-direction: row;
+  /* width: 100%; */
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(231, 231, 231);
+  /* TRANSITION COLOR ON HOVER IS BELOW */
+  /* background-color:#D6D6D6; */
+  border-radius: 30px;
+  width: 11em;
+  height: 45px;
+
+}
+
+.receipt-logo{
+  background-color: lawngreen;
+}

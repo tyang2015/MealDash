@@ -3,7 +3,10 @@ from datetime import time
 # from .orders import orders_list
 import random
 
+order_food_items_list = []
+
 def seed_order_food_items():
+  global order_food_items_list
   order_food_items = [
     {
       "order_id": 1,
@@ -117,6 +120,7 @@ def seed_order_food_items():
       category = item['category']
     )
     db.session.add(ordered_food_item)
+    order_food_items_list.append(ordered_food_item)
   db.session.commit()
   print('order food items seeded!')
 

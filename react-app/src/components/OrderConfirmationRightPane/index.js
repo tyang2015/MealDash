@@ -4,14 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import { createNewOrder } from '../../store/order';
 import "./OrderConfirmationRightPane.css"
-const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart' || "[]"))
+// const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart' || "[]"))
 // const restaurantFromStorage = localStorage.getItem('restaurant')!= undefined? localStorage.getItem('restaurant'): "restaurant name"
 
-const OrderConfirmationRightPane = ({orderSubtotal, deliveryMethod, deliveryOption, creditCard, distance, duration, restaurant, errors}) => {
+const OrderConfirmationRightPane = ({cartItems, orderSubtotal, deliveryMethod, deliveryOption, creditCard, distance, duration, restaurant, errors}) => {
   const sessionUser = useSelector(state=> state.session.user)
   const dispatch = useDispatch()
   const history = useHistory()
-  const [cartItems, setCartItems] = useState(cartFromLocalStorage)
+  // const [cartItems, setCartItems] = useState(cartFromLocalStorage)
   // tip is delivery fee
   const [deliveryFee, setDeliveryFee] = useState(0)
   const [tip, setTip] = useState(Number(2).toFixed(2))
@@ -78,15 +78,17 @@ const OrderConfirmationRightPane = ({orderSubtotal, deliveryMethod, deliveryOpti
       tip: Number(tip),
       delivery_method: deliveryMethod,
       delivery_option: deliveryOption,
-      food_items: cartItems,
+      food_items: cartItems
     }
     console.log('order object:', order)
     let createdOrder = await dispatch(createNewOrder(order))
     console.log('created order:', createdOrder)
     localStorage.setItem("orders", JSON.stringify({...JSON.parse(localStorage.getItem('orders')), [createdOrder.id]: createdOrder}))
+    console.log('orders from local storage:', localStorage.getItem('orders'))
     alert('We have confirmed your order!')
     setHasSubmitted(false)
-    history.push({pathname: `restaurants/${restaurant.id}/orders/${createdOrder?.id}/new`, state: {duration, cartItems, restaurant, createdOrder}})
+    console.log("restaurant id after order submission:", restaurant.id)
+    history.push({pathname: `/restaurants/${restaurant.id}/orders/${createdOrder?.id}/new`, state: {duration, cartItems, restaurant, createdOrder}})
     return
 
   }

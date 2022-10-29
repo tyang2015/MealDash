@@ -246,3 +246,24 @@ def create_food_items(food_items, id, order_id):
   created_food_items = OrderFoodItem.query.filter(OrderFoodItem.order_id ==order_id)
   return {'orderFoodItems': [food_item.to_dict() for food_item in created_food_items]}, 201
   # return {"errors": validation_errors_to_error_messages(form.errors)}, 400
+
+@restaurant_routes.route("/<int:id>/orders/<int:orderId>", methods=['PUT'])
+@login_required
+def update_restaurant_order(id, orderId):
+  restaurant = Restaurant.query.get(id)
+  order = Order.query.get(orderId)
+  if restaurant == None:
+    return {"message": "Restaurant couldn't be found"}, 404
+  if order == None:
+    return {"message": "Order couldn't be found"}, 404
+  form = OrderForm()
+  form['csrf_token'].data = request.cookies['csrf_token']
+  if form.validate_on_submit():
+      order_data_bytes = request.data
+      new_order_data = json.loads(order_data_bytes.decode('utf-8'))
+      print('new order data after byte conversion:', new_order_data)
+      for k,v in list(new_order_data.items()):
+        setattr(order, k, v)
+      db.session.commit()
+      return order.to_dict(),200
+  return {"errors": validation_errors_to_error_messages(form.errors)}, 400

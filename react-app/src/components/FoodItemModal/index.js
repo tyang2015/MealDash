@@ -53,7 +53,9 @@ const FoodItemModal = ({setForceCartUpdate, forceCartUpdate,setSubmittedCartItem
     setSubmittedCartItems([...submittedCartItems, foodItem])
     localStorage.setItem('cart', JSON.stringify([...submittedCartItems, foodItem]))
     let restaurantKeyName = `${foodItem.Restaurant.id}`
-    localStorage.setItem(`restaurants`, JSON.stringify({...JSON.parse(localStorage.getItem('restaurant')|| '{}'),[restaurantKeyName]: foodItem.Restaurant}))
+    console.log('restaurant key name upon cart submission:', restaurantKeyName)
+    // localStorage.setItem(`restaurants`, JSON.stringify({...JSON.parse(localStorage.getItem('restaurants')|| '{}'),[restaurantKeyName]: foodItem.Restaurant}))
+    localStorage.setItem(`restaurant`, JSON.stringify(foodItem.Restaurant))
     setFoodItemModal(false)
     return
   }

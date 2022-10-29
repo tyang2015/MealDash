@@ -20,27 +20,31 @@ import {
 
 const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart' || "[]"))
 const subTotalFromLocalStorage = localStorage.getItem("orderSubtotal") ? JSON.parse(localStorage.getItem("orderSubtotal" )): 0
-let restaurantFromLocalStorage = JSON.parse(localStorage.getItem('restaurants'))
+// let restaurantFromLocalStorage = JSON.parse(localStorage.getItem('restaurants'))
+let restaurantFromLocalStorage = JSON.parse(localStorage.getItem('restaurant'))
 
 const OrderConfirmationPage = () => {
+
   const dispatch = useDispatch();
   const location = useLocation();
   const {id} = useParams();
   const key = useSelector(state=> state.session.user)
   const user = useSelector(state=> state.session.user)
-  // const [cartItems, setCartItems] = useState(cartFromLocalStorage)
+  const [cartItems, setCartItems] = useState(cartFromLocalStorage)
   const landingOrderSubtotal = location?.data?.orderSubtotal
   const restaurant= location?.data?.restaurant
-  const cartItems = cartFromLocalStorage
+  const submittedCartItems = location?.data?.submittedCartItems
   const [orderSubtotal, setOrderSubtotal] = useState(landingOrderSubtotal? landingOrderSubtotal: subTotalFromLocalStorage)
-  // const [storedRestaurant, setStoredRestaurant] = useState(restaurantFromLocalStorage)
+  const [storedRestaurant, setStoredRestaurant] = useState(restaurantFromLocalStorage)
   // let [restaurantId, setRestaurantId] = useState(cartItems?.length>0? cartItems[0].Restaurant.id: submittedCartItems?.length>0? submittedCartItems[0].Restaurant.id: "")
-  let [storedRestaurant, setStoredRestaurant] = useState(restaurantFromLocalStorage[restaurant?`${restaurant.id}`: `${id}`])
+  // let [storedRestaurant, setStoredRestaurant] = useState(restaurantFromLocalStorage[restaurant?`${restaurant.id}`: `${id}`])
   const [paymentModal, setPaymentModal] = useState(false)
   const [userCoordinates,setUserCoordinates] =useState({lat: Number(restaurant? restaurant.latitude: storedRestaurant.latitude), lng: Number(restaurant? restaurant.longitude: storedRestaurant.longitude)})
   const [directionsResponse, setDirectionsResponse] = useState(null)
   const [distance, setDistance] = useState('')
   const [duration, setDuration] = useState('')
+  console.log('cart items in confirm page from local storage:', cartItems)
+  console.log('restaurant id from use params in confirm page:', id)
   console.log('restaurant in order confirm page:', restaurant)
   console.log('restaurant from local storageeee', storedRestaurant)
 
@@ -71,11 +75,24 @@ const OrderConfirmationPage = () => {
 
 
 
+  // useEffect(()=>{
+  //   if (cartItems.length ===0) return
+  //   let itemAddress = cartItems[0].Restaurant.address
+  //   setOriginRef(itemAddress)
+  // }, [dispatch, cartItems[0]?.Restaurant.address])
+
   useEffect(()=>{
-    if (cartItems.length ===0) return
-    let itemAddress = cartItems[0].Restaurant.address
-    setOriginRef(itemAddress)
-  }, [dispatch, cartItems[0]?.Restaurant.address])
+    // if (cartItems.length ===0) return
+    if (cartItems?.length>0){
+      let itemAddress = cartItems[0].Restaurant.address
+      setOriginRef(itemAddress)
+      return
+    }
+    if (submittedCartItems?.length>0){
+      let itemAddress = submittedCartItems[0].Restaurant.address
+      setOriginRef(itemAddress)
+    }
+  }, [dispatch, cartItems, submittedCartItems])
 
   useEffect(()=>{
     calculateRoute()
@@ -202,7 +219,7 @@ const OrderConfirmationPage = () => {
               </div>
               {paymentModal && (<PaymentModal setPaymentModal={setPaymentModal} creditCard={creditCard} setCreditCard={setCreditCard} />)}
         </div>
-        <OrderConfirmationRightPane deliveryMethod={deliveryMethod} deliveryOption={deliveryOption} distance={distance} duration={duration} errors={errors}
+        <OrderConfirmationRightPane cartItems={cartItems? cartItems: submittedCartItems} deliveryMethod={deliveryMethod} deliveryOption={deliveryOption} distance={distance} duration={duration} errors={errors}
          restaurant={restaurant? restaurant: storedRestaurant} creditCard={creditCard} orderSubtotal={orderSubtotal}/>
       </div>
     </>
