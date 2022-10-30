@@ -1,8 +1,20 @@
+.get-order-receipt-page{
+  display: flex;
+  flex-direction: row;
+}
+
+
 .get-order-receipt-left-pane{
   /* background-color: lightblue; */
   width: 23em;
   height: 100vh;
   overflow-y: scroll;
+}
+
+.get-order-receipt-right-pane{
+  width: 80vw;
+  background-color: lightblue;
+
 }
 
 .get-order-receipt-top-container{

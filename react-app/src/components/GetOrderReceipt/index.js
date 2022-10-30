@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation , useParams} from 'react-router-dom';
 import FinalConfirmationNavBar from '../FinalConfirmationNavBar';
+import MapDistanceContainer from '../MapDistance';
 import "./GetOrderReceipt.css"
 
 const GetOrderReceipt = () => {
@@ -27,6 +28,7 @@ const GetOrderReceipt = () => {
   const getTotalPricePerItem = (foodItemObj) => {
     return (Number(foodItemObj.price) * foodItemObj.quantity).toFixed(2)
   }
+
 
   return (
     <>
@@ -96,7 +98,7 @@ const GetOrderReceipt = () => {
 
         </div>
         <div className='get-order-receipt-right-pane'>
-
+          <MapDistanceContainer restaurant={order.restaurant}/>
         </div>
 
       </div>

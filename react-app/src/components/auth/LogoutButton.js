@@ -10,6 +10,7 @@ const LogoutButton = () => {
     await dispatch(logout());
     // added here
     // history.push('/login')
+    localStorage.clear()
     history.push('/')
   };
 

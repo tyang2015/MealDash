@@ -6,7 +6,7 @@ import { getKey } from '../../store/maps';
 // import Maps from './Maps';
 import MapDistance from './MapDistance';
 
-const MapDistanceContainer = ({restaurant}) => {
+const MapDistanceContainer = ({directionsResponse, restaurant, userCoordinates}) => {
   // must access restaurant data from history object
   const key = useSelector((state) => state.maps.key);
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ const MapDistanceContainer = ({restaurant}) => {
 
   return (
     <>
-      <MapDistance apiKey={key} restaurant={restaurant}/>
+      <MapDistance directionsResponse={directionsResponse} userCoordinates={userCoordinates} apiKey={key} restaurant={restaurant}/>
     </>
   );
 };

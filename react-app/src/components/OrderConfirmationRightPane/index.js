@@ -7,7 +7,7 @@ import "./OrderConfirmationRightPane.css"
 // const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart' || "[]"))
 // const restaurantFromStorage = localStorage.getItem('restaurant')!= undefined? localStorage.getItem('restaurant'): "restaurant name"
 
-const OrderConfirmationRightPane = ({cartItems, address, orderSubtotal, deliveryMethod, deliveryOption, creditCard, distance, duration, restaurant, errors}) => {
+const OrderConfirmationRightPane = ({cartItems, directionsResponse, userCoordinates, address, orderSubtotal, deliveryMethod, deliveryOption, creditCard, distance, duration, restaurant, errors}) => {
   const sessionUser = useSelector(state=> state.session.user)
   const dispatch = useDispatch()
   const history = useHistory()
@@ -91,7 +91,7 @@ const OrderConfirmationRightPane = ({cartItems, address, orderSubtotal, delivery
     alert('We have confirmed your order!')
     setHasSubmitted(false)
     console.log("restaurant id after order submission:", restaurant.id)
-    history.push({pathname: `/restaurants/${restaurant.id}/orders/${createdOrder?.id}/new`, state: {duration, cartItems, restaurant, createdOrder, address}})
+    history.push({pathname: `/restaurants/${restaurant.id}/orders/${createdOrder?.id}/new`, state: {duration:duration.split(" ")[0], cartItems, restaurant, createdOrder, userCoordinates}})
     return
 
   }
@@ -99,7 +99,7 @@ const OrderConfirmationRightPane = ({cartItems, address, orderSubtotal, delivery
   return (
     <div className='order-confirmation-right-pane-main-container'>
       {errors.length>0 && hasSubmitted && (
-        <div className="validation-errors-container">
+        <div className="validation-errors-container order-confirmation-errors">
             <ul className='validation-errors'>
                 {errors.map((error, idx) => (
                 <li key={idx}>{error}</li>

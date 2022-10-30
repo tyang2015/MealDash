@@ -20,8 +20,7 @@ import {
 
 const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart' || "[]"))
 const subTotalFromLocalStorage = localStorage.getItem("orderSubtotal") ? JSON.parse(localStorage.getItem("orderSubtotal" )): 0
-// let restaurantFromLocalStorage = JSON.parse(localStorage.getItem('restaurants'))
-let restaurantFromLocalStorage = JSON.parse(localStorage.getItem('restaurant'))
+// let restaurantFromLocalStorage = JSON.parse(localStorage.getItem('restaurant'))
 
 const OrderConfirmationPage = () => {
 
@@ -35,7 +34,7 @@ const OrderConfirmationPage = () => {
   const restaurant= location?.data?.restaurant
   const submittedCartItems = location?.data?.submittedCartItems
   const [orderSubtotal, setOrderSubtotal] = useState(landingOrderSubtotal? landingOrderSubtotal: subTotalFromLocalStorage)
-  const [storedRestaurant, setStoredRestaurant] = useState(restaurantFromLocalStorage)
+  const [storedRestaurant, setStoredRestaurant] = useState(JSON.parse(localStorage.getItem('restaurant') || "{}"))
   // let [restaurantId, setRestaurantId] = useState(cartItems?.length>0? cartItems[0].Restaurant.id: submittedCartItems?.length>0? submittedCartItems[0].Restaurant.id: "")
   // let [storedRestaurant, setStoredRestaurant] = useState(restaurantFromLocalStorage[restaurant?`${restaurant.id}`: `${id}`])
   const [paymentModal, setPaymentModal] = useState(false)
@@ -47,7 +46,7 @@ const OrderConfirmationPage = () => {
   console.log('cart items in confirm page from local storage:', cartItems)
   console.log('restaurant id from use params in confirm page:', id)
   console.log('restaurant in order confirm page:', restaurant)
-  console.log('restaurant from local storageeee', storedRestaurant)
+  // console.log('restaurant from local storageeee', storedRestaurant)
 
   const [paymentDropdown, setPaymentDropdown] = useState(false)
   let [destinationRef, setDestinationRef] = useState('')
@@ -61,6 +60,13 @@ const OrderConfirmationPage = () => {
   const google = window.google
   // console.log('order subtotal on order confirmation page:', orderSubtotal)
   console.log("user coordinates:", userCoordinates)
+
+  useEffect(()=> {
+    if (localStorage.getItem('restaurant')!= undefined && restaurant){
+      localStorage.setItem('restaurant', JSON.stringify(restaurant))
+    }
+  }, [restaurant])
+
   useEffect(()=>{
     if(landingOrderSubtotal){
       localStorage.setItem("orderSubtotal", JSON.stringify(landingOrderSubtotal))
@@ -73,8 +79,6 @@ const OrderConfirmationPage = () => {
       dispatch(getKey());
     }
   }, [dispatch, key])
-
-
 
   // useEffect(()=>{
   //   if (cartItems.length ===0) return
@@ -105,6 +109,7 @@ const OrderConfirmationPage = () => {
     if (!creditCard) errs.push('Please enter credit card number')
     if (creditCard.length!=16) errs.push("Please enter valid credit card")
     if (!distance || !duration) errs.push("Please select an address in dropdown box")
+    if (duration.includes('hour')) errs.push("Delivery Time is too long. Please select a closer address")
     setErrors(errs)
   }, [creditCard, distance, duration])
 
@@ -115,7 +120,8 @@ const OrderConfirmationPage = () => {
   // your address input = destination
   async function calculateRoute() {
       if (originRef === "" || destinationRef === "") return
-
+      console.log('origin ref in calc route:', originRef)
+      console.log('destination ref in calc route:', destinationRef)
       const directionsService = new google.maps.DirectionsService()
       const results = await directionsService.route({
         origin: originRef,
@@ -220,7 +226,7 @@ const OrderConfirmationPage = () => {
               </div>
               {paymentModal && (<PaymentModal setPaymentModal={setPaymentModal} creditCard={creditCard} setCreditCard={setCreditCard} />)}
         </div>
-        <OrderConfirmationRightPane address={address} cartItems={cartItems? cartItems: submittedCartItems} deliveryMethod={deliveryMethod} deliveryOption={deliveryOption} distance={distance} duration={duration} errors={errors}
+        <OrderConfirmationRightPane directionsResponse={directionsResponse} address={address} userCoordinates={userCoordinates} cartItems={cartItems? cartItems: submittedCartItems} deliveryMethod={deliveryMethod} deliveryOption={deliveryOption} distance={distance} duration={duration} errors={errors}
          restaurant={restaurant? restaurant: storedRestaurant} creditCard={creditCard} orderSubtotal={orderSubtotal}/>
       </div>
     </>

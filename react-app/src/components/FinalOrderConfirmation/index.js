@@ -4,9 +4,9 @@ import { useHistory, useLocation , useParams} from 'react-router-dom';
 import "./FinalOrderConfirmation.css"
 import MapDistanceContainer from '../MapDistance';
 import FinalConfirmationNavBar from '../FinalConfirmationNavBar';
-import { updateOrder } from '../../store/order';
+import { updateOrder, getOrders } from '../../store/order';
 
-const countdownFromStorage = localStorage.getItem('countdown')? Number(localStorage.getItem('countdown')) : 0
+const countdownFromStorage = localStorage.getItem('countdown')
 // let restaurantsFromStorage = JSON.parse(localStorage.getItem(`restaurants`))
 let restaurantFromStorage = JSON.parse(localStorage.getItem(`restaurant`))
 let cartFromLocalStorage = JSON.parse(localStorage.getItem('cart' ||'[]'))
@@ -18,13 +18,17 @@ const FinalOrderConfirmation = () => {
   const dispatch = useDispatch();
   const {orderId, restaurantId} = useParams();
   const sessionUser = useSelector(state=> state.session.user)
-  let restaurant= location?.state?.restaurant
   let cartItems= location?.state?.cartItems
   let duration= location?.state?.duration
   let order = location?.state?.createdOrder
-  let address = location?.state?.address
+  let restaurant= location?.state?.restaurant
+  let userCoordinates = location?.state?.userCoordinates
+  // let directionsResponse = location?.state?.directionsResponse
+  console.log('user coordinatessss:', userCoordinates)
+  console.log('durationnnn:', duration)
   // const [orderStarted, setOrderStarted] = useState(true)
-  const [countdown, setCountdown] = useState(countdownFromStorage? countdownFromStorage: Number(parseInt(duration?.split(" ")[0])))
+  const [countdown, setCountdown] = useState(countdownFromStorage? countdownFromStorage: duration)
+  // const [countdown, setCountdown] = useState(localStorage.getItem('countdown')!=NaN? localStorage.getItem('countdown'): Number(parseInt(duration?.split(" ")[0])))
   // const [countdownInSec, setCountdownInSec] = useState(countdown? countdown* 60: null)
   console.log('order in final order confirm page:', order)
   const [finalCountDown, setFinalCountdown] = useState(0)
@@ -33,14 +37,9 @@ const FinalOrderConfirmation = () => {
   const [triggerCountdown, setTriggerCountdown] = useState(false)
   const [submittedCartItems, setSubmittedCartItems] = useState(cartFromLocalStorage)
   // let [storedRestaurant, setStoredRestaurant] = useState(restaurantFromStorage[restaurant?`${restaurant.id}`: restaurantId] )
-  // let [storedOrders, setStoredOrders] = useState(ordersFromStorage)
   let [storedRestaurant, setStoredRestaurant] = useState(restaurantFromStorage)
   let [storedOrder, setStoredOrder]= useState(JSON.parse(localStorage.getItem('orders'))[orderId])
-  // console.log("stored restaurant in final order confirm page:", storedRestaurant)
-  console.log('stored orders DIRECTLy from local storage:', ordersFromStorage)
-  // console.log('stored ordersss:', storedOrders)
-  // console.log('stored order', storedOrder)
-
+  console.log('restaurant in final order confirm page::', restaurant)
 
   const MinuteCountdown = async () => {
     let countdownInSec = countdown* 60
@@ -111,31 +110,35 @@ const FinalOrderConfirmation = () => {
       if (countdownInSec <= 0) {
         clearInterval(deliveryInterval);
         updateExistingOrderInStore(storedOrder)
+        localStorage.setItem('orders', JSON.stringify({...JSON.parse(localStorage.getItem('orders')), [orderId? orderId: order.id]: {...storedOrder, countdown: 0, orderCompleted: true} }))
         setStoredOrder({...storedOrder, countdown: 0, orderCompleted: true })
-        localStorage.setItem('orders', JSON.stringify({...JSON.parse(localStorage.getItem('orders')), [orderId? orderId: order.id]:storedOrder }))
         setTriggerCountdown(false)
         console.log("countdown completed")
         return
       }
       countdownInSec-=1
-      if (Math.ceil(countdownInSec/60) != countdown){
+      if (Math.ceil(countdownInSec/60) != localStorage.getItem('countdown')){
         setTriggerMinuteChange(!triggerMinuteChange)
       }
       // let concatCountdownInOrder = {...storedOrder, countdown: Math.ceil(countdownInSec/60) }
+      localStorage.setItem('orders', JSON.stringify({...JSON.parse(localStorage.getItem('orders')),[orderId? orderId: order.id]: {...storedOrder, countdown: Math.ceil(countdownInSec/60)}  }))
       localStorage.setItem('countdown', Math.ceil(countdownInSec/60) )
-      // localStorage.setItem('orders', JSON.stringify({...JSON.parse(localStorage.getItem('orders')), [orderId? orderId: order.id]:storedOrder }))
       setCountdown(Math.ceil(countdownInSec/60))
       setStoredOrder( {...storedOrder, countdown: Math.ceil(countdownInSec/60) })
     }, 1000)
 
   }, [triggerCountdown])
 
+  // im setting local storage for orders twice to same values (which is ok): from storedOrder trigger  FIRST and within the countdown useeffect above
   useEffect(()=>{
     console.log('STORED ORDER:', storedOrder)
+    setCountdown(storedOrder.countdown)
     localStorage.setItem('orders', JSON.stringify({...JSON.parse(localStorage.getItem('orders')), [orderId? orderId: order.id]:storedOrder }))
   }, [storedOrder])
 
-
+  // useEffect(()=>{
+  //   setCountdown(localStorage.getItem('countdown'))
+  // }, [triggerMinuteChange])
 
   return (
     <>
@@ -155,7 +158,7 @@ const FinalOrderConfirmation = () => {
                 <div className='final-order-order-item-card'> {item.quantity}x {item.name}</div>
               ))
               } */}
-              {cartItems?.length>0? cartItems.map(item=> (
+              {cartItems? cartItems.map(item=> (
                 <div className='final-order-order-item-card'> {item.quantity}x {item.name}</div>
 
               )) : submittedCartItems.map(item=>(
@@ -169,7 +172,7 @@ const FinalOrderConfirmation = () => {
           </div>
         </div>
         <div className='final-order-right-pane'>
-          <MapDistanceContainer restaurant={restaurant}/>
+          <MapDistanceContainer userCoordinates={userCoordinates} restaurant={restaurant}/>
         </div>
       </div>
     </>

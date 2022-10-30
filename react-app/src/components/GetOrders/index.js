@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory, NavLink } from 'react-router-dom';
+import { getGeocode, getLatLng } from 'use-places-autocomplete';
 import { getOrders } from '../../store/order';
 import "./GetOrders.css"
 
 const GetOrders = () => {
   const orders = useSelector(state=> Object.values(state.orders))
   const dispatch = useDispatch();
+  const [userCoordinates, setUserCoordinates] = useState({lat: 0, lng: 0})
   console.log('user orders:', orders)
   // const [inProgressOrders, setInProgressOrders] = useState(orders.filter(order=> order.orderCompleted === false))
   // const [completedOrders, setCompletedOrders] = useState(orders.filter(order => order.orderCompleted === true))
@@ -15,6 +17,13 @@ const GetOrders = () => {
     dispatch(getOrders())
     return
   }, [dispatch])
+
+  useEffect(()=>{
+    if (localStorage.getItem('countdown') && localStorage.getItem('countdown')=== 0) {
+      // order completed is true
+      dispatch(getOrders())
+    }
+  }, [localStorage.getItem('countdown')])
 
   const convertCreatedTimeForInProgress = (orderObj)=>{
     // return the order object with newly formatted order created TIME
@@ -39,6 +48,14 @@ const GetOrders = () => {
     return `${convertedTime}`
   }
 
+  // DOES NOT WORK UPON CLICKING NAVLINK
+  const geoCodeUserAddress = async (orderObj) => {
+    console.log('triggered geo code function! for user address')
+    const results = await getGeocode({address: orderObj.userAddress})
+    const {lat, lng} = await getLatLng(results[0]);
+    setUserCoordinates({lat, lng})
+  }
+
 
   // useEffect(()=>{
   //   let ordersCompleted = orders.filter(order => order.orderCompleted === true)
@@ -50,11 +67,8 @@ const GetOrders = () => {
   // }, [])
 
 
-
-
   const totalItemsPerOrder = (orderObj) => {
     return `${orderObj.foodItems.length} items`
-    console.log("order object:", orderObj)
     let foodItems = orderObj.foodItems
     let totalItems = foodItems.reduce( (accum, current) => accum + current.quantity, foodItems[0].quantity)
     return `${totalItems} items`
@@ -69,7 +83,7 @@ const GetOrders = () => {
         <h3> In Progress </h3>
         <div className='get-orders-in-progress-container'>
           {orders.length>0 && orders.filter(order=> order.orderCompleted === false).map( order => (
-            <div className='get-orders-in-progress-card'>
+            <div className='get-orders-in-progress-card' key={order.id}>
               <div className='get-orders-restaurant-name-title-container'>
                 <h3> {order.restaurant.name}</h3>
               </div>
@@ -83,9 +97,12 @@ const GetOrders = () => {
                   </div>
                 </div>
                 <div className='get-orders-in-progress-text-content-right-container'>
-                  <div className='view-order-button'>
-                    <h3>View Order</h3>
-                  </div>
+                  {/* TODO: fix user coordinates (instead of storing them as separate values, geocode in the finalorderconfirm component) */}
+                  <NavLink to={{pathname:`/restaurants/${order.restaurant.id}/orders/${order.id}/new`, state: {createdOrder: order, userCoordinates, restaurant: order.restaurant, duration: order.duration}}}>
+                    <div className='view-order-button'>
+                      <h3>View Order</h3>
+                    </div>
+                  </NavLink>
                 </div>
               </div>
             </div>
@@ -97,7 +114,7 @@ const GetOrders = () => {
         <h3>Completed</h3>
         <div className='get-orders-completed-container'>
           {orders.length>0 && orders.filter(order=> order.orderCompleted === true).map(order => (
-            <div className='get-orders-completed-card'>
+            <div className='get-orders-completed-card' key={order.id}>
               <div className='get-orders-restaurant-name-title-container'>
                 <h3> {order.restaurant.name}</h3>
               </div>
