@@ -27,7 +27,7 @@ const FinalOrderConfirmation = () => {
   console.log('user coordinatessss:', userCoordinates)
   console.log('durationnnn:', duration)
   // const [orderStarted, setOrderStarted] = useState(true)
-  const [countdown, setCountdown] = useState(countdownFromStorage? countdownFromStorage: duration)
+  const [countdown, setCountdown] = useState(localStorage.getItem('countdown')? localStorage.getItem('countdown'): duration)
   // const [countdown, setCountdown] = useState(localStorage.getItem('countdown')!=NaN? localStorage.getItem('countdown'): Number(parseInt(duration?.split(" ")[0])))
   // const [countdownInSec, setCountdownInSec] = useState(countdown? countdown* 60: null)
   console.log('order in final order confirm page:', order)
@@ -86,9 +86,10 @@ const FinalOrderConfirmation = () => {
 
   useEffect(()=>{
     // TODO: make orderStarted a useState? no.. because everytime it enters the component (change the url back to this), it will reset to default value
+    console.log("order started here...", orderStarted)
     if (!orderStarted) return
-    console.log('order started should be TRUE:', orderStarted)
     setTriggerCountdown(true)
+    console.log('order started should be TRUE:', orderStarted)
     orderStarted = false
     console.log('orderStarted should be FALSE (after countdown finishes)', orderStarted)
   }, [])
@@ -132,9 +133,11 @@ const FinalOrderConfirmation = () => {
   // im setting local storage for orders twice to same values (which is ok): from storedOrder trigger  FIRST and within the countdown useeffect above
   useEffect(()=>{
     console.log('STORED ORDER:', storedOrder)
-    setCountdown(storedOrder.countdown)
+    if(storedOrder?.countdown && storedOrder.countdown!=NaN){
+      setCountdown(storedOrder.countdown)
+    }
     localStorage.setItem('orders', JSON.stringify({...JSON.parse(localStorage.getItem('orders')), [orderId? orderId: order.id]:storedOrder }))
-  }, [storedOrder])
+  }, [storedOrder, localStorage.getItem('countdown')])
 
   // useEffect(()=>{
   //   setCountdown(localStorage.getItem('countdown'))
@@ -147,7 +150,7 @@ const FinalOrderConfirmation = () => {
         <div className='final-order-left-pane'>
           <div className='final-order-left-pane-top-container'>
               <h2>{countdown>0? "Preparing your order": "Order Completed"}</h2>
-              <p className='arrives-in-container'> Arrives in&nbsp;<div className='countdown-time-container'>{countdown} min</div></p>
+              <p className='arrives-in-container'> Arrives in&nbsp;<div className='countdown-time-container'>{storedOrder?.countdown? storedOrder.countdown: countdown} min</div></p>
               <div className='order-delivery-progress-bar'></div>
               <p className='order-confirmation-restaurant-container'> {countdown>0? `${restaurant? restaurant.name: storedRestaurant.name} is preparing your order`: "Your order is complete. Enjoy!"} </p>
           </div>
@@ -158,12 +161,12 @@ const FinalOrderConfirmation = () => {
                 <div className='final-order-order-item-card'> {item.quantity}x {item.name}</div>
               ))
               } */}
-              {cartItems? cartItems.map(item=> (
+              {submittedCartItems? submittedCartItems.map(item=>(
+                <div className='final-order-order-item-card'> {item.quantity}x {item.name}</div>
+              )) : cartItems.map(item=> (
                 <div className='final-order-order-item-card'> {item.quantity}x {item.name}</div>
 
-              )) : submittedCartItems.map(item=>(
-                <div className='final-order-order-item-card'> {item.quantity}x {item.name}</div>
-              ))}
+              )) }
             </div>
           </div>
           <div className='final-order-left-pane-bottom-container'>

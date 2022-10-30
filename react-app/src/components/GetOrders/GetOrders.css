@@ -18,6 +18,10 @@
 
 }
 
+.get-orders-completed-card:not(:first-child){
+  margin-top: 2em;
+}
+
 .get-orders-restaurant-name-title-container{
   padding-left: 20px;
   width: 100%;

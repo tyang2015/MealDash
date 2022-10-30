@@ -4,14 +4,22 @@ import { useParams, useHistory, NavLink } from 'react-router-dom';
 import { getGeocode, getLatLng } from 'use-places-autocomplete';
 import { getOrders } from '../../store/order';
 import "./GetOrders.css"
-
+// the highest # order is your most recent aka the IN PROGRESS ONE, if there is one
 const GetOrders = () => {
   const orders = useSelector(state=> Object.values(state.orders))
   const dispatch = useDispatch();
   const [userCoordinates, setUserCoordinates] = useState({lat: 0, lng: 0})
+  // const [sortedOrders, setSortedOrders]= useState()
+  const [mostRecentOrder, setMostRecentOrder] = useState(orders?.length>0? orders.sort( (a,b)=> b.id - a.id)[0]: {})
+  const [forceRender, setForceRender] = useState(false)
   console.log('user orders:', orders)
   // const [inProgressOrders, setInProgressOrders] = useState(orders.filter(order=> order.orderCompleted === false))
   // const [completedOrders, setCompletedOrders] = useState(orders.filter(order => order.orderCompleted === true))
+  // const findMostRecentOrderOrder = () => {
+  //   let sortedDesc = orders.sort( (a,b)=> b.id - a.id)
+  //   console.log('orders sorted in desc order:', sortedDesc)
+  //   setMostRecentOrder(sortedDesc[0])
+  // }
 
   useEffect(()=>{
     dispatch(getOrders())
@@ -19,11 +27,10 @@ const GetOrders = () => {
   }, [dispatch])
 
   useEffect(()=>{
-    if (localStorage.getItem('countdown') && localStorage.getItem('countdown')=== 0) {
-      // order completed is true
+    if (mostRecentOrder.orderCompleted === true) {
       dispatch(getOrders())
     }
-  }, [localStorage.getItem('countdown')])
+  }, [mostRecentOrder?.orderCompleted])
 
   const convertCreatedTimeForInProgress = (orderObj)=>{
     // return the order object with newly formatted order created TIME
@@ -98,7 +105,7 @@ const GetOrders = () => {
                 </div>
                 <div className='get-orders-in-progress-text-content-right-container'>
                   {/* TODO: fix user coordinates (instead of storing them as separate values, geocode in the finalorderconfirm component) */}
-                  <NavLink to={{pathname:`/restaurants/${order.restaurant.id}/orders/${order.id}/new`, state: {createdOrder: order, userCoordinates, restaurant: order.restaurant, duration: order.duration}}}>
+                  <NavLink to={{pathname:`/restaurants/${order.restaurant.id}/orders/${order.id}/new`, state: {createdOrder: order, cartItems: order.foodItems, userCoordinates, restaurant: order.restaurant, duration: order.duration}}}>
                     <div className='view-order-button'>
                       <h3>View Order</h3>
                     </div>
