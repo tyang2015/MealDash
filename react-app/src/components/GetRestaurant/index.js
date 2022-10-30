@@ -11,20 +11,20 @@ import FoodItemModal from "../FoodItemModal";
 import CartRightPane from "../CartRightPane";
 import RestaurantFooter from "../RestaurantFooter";
 import NavBar from "../Navigation/NavBar";
+import { useToggleCart } from '../../context/ToggleCartContext';
 
 let cartFromLocalStorage =  JSON.parse(localStorage.getItem('cart' || "[]"))
 
 const GetRestaurant = () => {
   let { id } = useParams();
+  const {toggleCartPane, setToggleCartPane} = useToggleCart();
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
   const sessionUser = useSelector(state=> state.session.user)
   const restaurant = useSelector(state=> state.restaurants[id])
   let foodItems = useSelector(state => Object.values(state.foodItems))
-  // const {submittedCartItems} = location?.state
-  // const setSubmittedCartItems = location?.state?.setSubmittedCartItems
-  // console.log('all food items:', foodItems)
+
   const [foodItemModal, setFoodItemModal] = useState(false)
   const [foodItem, setFoodItem] =useState(null)
   const [isOpen, setIsOpen] = useState(false)
@@ -37,7 +37,7 @@ const GetRestaurant = () => {
   const [all, setAll] = useState('')
   const [categoryChosen, setCategoryChosen] = useState('All')
   const [isFiltered, setIsFiltered] = useState(false)
-  const [toggleCartPane, setToggleCartPane] = useState(false)
+  // const [toggleCartPane, setToggleCartPane] = useState(false)
   let [filteredItems, setFilteredItems] = useState([])
 
   const [submittedCart, setSubmittedCart] =useState(false)
@@ -108,10 +108,8 @@ const GetRestaurant = () => {
       }
       if (todayInHours === actualCloseHours)console.log('hours match')
 
-      // console.log('restaraunt open minutes:,', openMinutes)
-      if (todayInHours === actualOpenHours && todayInMinutes > Number(openMinutes)) {
-        // console.log('should be open!')
-      } else console.log('close!!!')
+      // if (todayInHours === actualOpenHours && todayInMinutes > Number(openMinutes)) {
+      // } else console.log('close!!!')
       if ((todayInHours < actualCloseHours && todayInHours > actualOpenHours) || (todayInHours === actualCloseHours && todayInMinutes < Number(closeMinutes))
       || (todayInHours === actualOpenHours && todayInMinutes > Number(openMinutes))) {
         setIsOpen(true)
@@ -120,7 +118,7 @@ const GetRestaurant = () => {
       }
     }
   }, [restaurant?.openTime, restaurant?.closeTime])
-  // console.log("food items on get restaurant page: ", foodItems)
+
   console.log('submitted cart items on get restaurant page:', submittedCartItems)
 
 

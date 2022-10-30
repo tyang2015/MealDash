@@ -7,6 +7,7 @@ import "./FoodItemModal.css"
 import "../../context/Modal.css"
 
 const FoodItemModal = ({setForceCartUpdate, forceCartUpdate,setSubmittedCartItems, submittedCartItems,setSubmittedCart, setFoodItemModal, foodItem}) => {
+
   const {id} = useParams();
   const [totalPrice, setTotalPrice] = useState("")
   const [preferences, setPreferences] = useState("")
@@ -52,11 +53,12 @@ const FoodItemModal = ({setForceCartUpdate, forceCartUpdate,setSubmittedCartItem
     setForceCartUpdate(!forceCartUpdate)
     setSubmittedCartItems([...submittedCartItems, foodItem])
     localStorage.setItem('cart', JSON.stringify([...submittedCartItems, foodItem]))
-    let restaurantKeyName = `${foodItem.Restaurant.id}`
-    console.log('restaurant key name upon cart submission:', restaurantKeyName)
+    // let restaurantKeyName = `${foodItem.Restaurant.id}`
+    // console.log('restaurant key name upon cart submission:', restaurantKeyName)
     // localStorage.setItem(`restaurants`, JSON.stringify({...JSON.parse(localStorage.getItem('restaurants')|| '{}'),[restaurantKeyName]: foodItem.Restaurant}))
     localStorage.setItem(`restaurant`, JSON.stringify(foodItem.Restaurant))
     setFoodItemModal(false)
+    console.log('submitted cart items on food item modal after new item added:', submittedCartItems)
     return
   }
 

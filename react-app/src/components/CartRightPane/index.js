@@ -11,20 +11,18 @@ let restaurantFromLocalStorage = JSON.parse(localStorage.getItem('restaurant') |
 
 // const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems, setToggleCartPane, toggleCartPane}) => {
 const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems}) => {
+  console.log('cart items from right pane passed as props', cartItems)
   const {toggleCartPane, setToggleCartPane} = useToggleCart();
-  console.log('restaurant from local storage:', restaurantFromLocalStorage)
   const location = useLocation();
   const [orderSubtotal, setOrderSubtotal] = useState(0)
-  let [submittedCartItems, setSubmittedCartItems] = useState(cartFromLocalStorage || [])
+  let [submittedCartItems, setSubmittedCartItems] = useState(JSON.parse(localStorage.getItem('cart') || '[]'))
   // let [restaurantId, setRestaurantId] = useState(cartItems?.length>0? cartItems[0].Restaurant.id: submittedCartItems?.length>0?
   //   submittedCartItems[0].Restaurant.id:restaurantFromLocalStorage? restaurantFromLocalStorage.id: "")
   // let [storedRestaurant, setStoredRestaurant] = useState(restaurantId? restaurantFromLocalStorage[`${restaurantId}`] : {})
   let [storedRestaurant, setStoredRestaurant] = useState(submittedCartItems?.length>0? submittedCartItems[0].Restaurant : restaurantFromLocalStorage!="{}"? restaurantFromLocalStorage: cartItems?.length> 0? cartItems[0].Restaurant: {})
   const [isOrderZero, setIsOrderZero] = useState(false)
-  // console.log('restaurant id use state:', restaurantId)
   console.log('cart in rightt pane from local storage', submittedCartItems)
   console.log('cart in right pane passed down as propsss', cartItems)
-  console.log('stored restaurant value:', storedRestaurant)
 
   useEffect(()=>{
     if (submittedCartItems?.length>0){
