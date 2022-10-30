@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory, NavLink } from 'react-router-dom';
 import { getGeocode, getLatLng } from 'use-places-autocomplete';
 import { getOrders } from '../../store/order';
+import NavBar from '../Navigation/NavBar';
 import "./GetOrders.css"
 // the highest # order is your most recent aka the IN PROGRESS ONE, if there is one
 const GetOrders = () => {
@@ -20,6 +21,7 @@ const GetOrders = () => {
   //   console.log('orders sorted in desc order:', sortedDesc)
   //   setMostRecentOrder(sortedDesc[0])
   // }
+  console.log('most recent order:', mostRecentOrder)
 
   useEffect(()=>{
     dispatch(getOrders())
@@ -28,9 +30,21 @@ const GetOrders = () => {
 
   useEffect(()=>{
     if (mostRecentOrder.orderCompleted === true) {
+      console.log('use effect activated - most recent order::', mostRecentOrder)
       dispatch(getOrders())
     }
   }, [mostRecentOrder?.orderCompleted])
+
+  useEffect(()=>{
+    if (localStorage.getItem('countdown')===0){
+      setForceRender(!forceRender)
+      dispatch(getOrders())
+    }
+  }, [localStorage.getItem('countdown')])
+
+  useEffect(()=> {
+    dispatch(getOrders())
+  }, [forceRender])
 
   const convertCreatedTimeForInProgress = (orderObj)=>{
     // return the order object with newly formatted order created TIME
@@ -85,39 +99,40 @@ const GetOrders = () => {
 
   return (
     <>
+      <NavBar/>
       <div className='get-orders-main-container'>
-        <h2> Orders</h2>
-        <h3> In Progress </h3>
-        <div className='get-orders-in-progress-container'>
+          <h2> Orders</h2>
           {orders.length>0 && orders.filter(order=> order.orderCompleted === false).map( order => (
-            <div className='get-orders-in-progress-card' key={order.id}>
-              <div className='get-orders-restaurant-name-title-container'>
-                <h3> {order.restaurant.name}</h3>
-              </div>
-              <div className='get-orders-in-progress-text-content-main-container'>
-                <div className='get-orders-in-progress-text-content-left-container'>
-                  <div className='prepare-your-order-container'>
-                    <h3>Preparing your order</h3>
-                  </div>
-                  <div className="get-orders-estimated-delivery-container" style={{paddingLeft: '20px'}}>
-                    <div>Estimated Delivery: {convertCreatedTimeForInProgress(order)}</div>
-                  </div>
+            <div className='get-orders-in-progress-container'>
+              <h3> In Progress </h3>
+              <div className='get-orders-in-progress-card' key={order.id}>
+                <div className='get-orders-restaurant-name-title-container'>
+                  <h3> {order.restaurant.name}</h3>
                 </div>
-                <div className='get-orders-in-progress-text-content-right-container'>
-                  {/* TODO: fix user coordinates (instead of storing them as separate values, geocode in the finalorderconfirm component) */}
-                  <NavLink to={{pathname:`/restaurants/${order.restaurant.id}/orders/${order.id}/new`, state: {createdOrder: order, cartItems: order.foodItems, userCoordinates, restaurant: order.restaurant, duration: order.duration}}}>
-                    <div className='view-order-button'>
-                      <h3>View Order</h3>
+                <div className='get-orders-in-progress-text-content-main-container'>
+                  <div className='get-orders-in-progress-text-content-left-container'>
+                    <div className='prepare-your-order-container'>
+                      <h3>Preparing your order</h3>
                     </div>
-                  </NavLink>
+                    <div className="get-orders-estimated-delivery-container" style={{paddingLeft: '20px'}}>
+                      <div>Estimated Delivery: {convertCreatedTimeForInProgress(order)}</div>
+                    </div>
+                  </div>
+                  <div className='get-orders-in-progress-text-content-right-container'>
+                    {/* TODO: fix user coordinates (instead of storing them as separate values, geocode in the finalorderconfirm component) */}
+                    <NavLink to={{pathname:`/restaurants/${order.restaurant.id}/orders/${order.id}/new`, state: {createdOrder: order, cartItems: order.foodItems, userCoordinates, restaurant: order.restaurant, duration: order.duration}}}>
+                      <div className='view-order-button'>
+                        <h3>View Order</h3>
+                      </div>
+                    </NavLink>
+                  </div>
                 </div>
               </div>
             </div>
           ))}
-          {orders.filter(order=> order.orderCompleted === false).length === 0 && (
+          {/* {orders.filter(order=> order.orderCompleted === false).length === 0 && (
             <div> NO IN PROGRESS ORDERS </div>
-          )}
-        </div>
+          )} */}
         <h3>Completed</h3>
         <div className='get-orders-completed-container'>
           {orders.length>0 && orders.filter(order=> order.orderCompleted === true).map(order => (

@@ -15,16 +15,18 @@ import japaneseIcon from "./images/japanese-icon.png"
 import mexicanIcon from "./images/mexican-icon.png"
 import veganIcon from "./images/vegan-icon.png"
 import mediterraneanIcon from "./images/mediterranean-icon.png"
+import { useToggleCart } from '../../context/ToggleCartContext';
 
 const CATEGORY_CHOICES = ["All","Asian", "American","Breakfast", "Vegan", "Mexican", "Japanese", "Italian", "French", "FastFood", "Ethiopian", "Mediterranean"]
 const cartFromLocalStorage = localStorage.getItem('cart')!=undefined? JSON.parse(localStorage.getItem('cart' || "[]")): []
 
 const Restaurants = () => {
+    const {toggleCartPane, setToggleCartPane} = useToggleCart();
     const dispatch = useDispatch();
     const location = useLocation();
     const restaurantObj = useSelector(state => state.restaurants)
     let restaurants = Object.values(restaurantObj)
-    const [toggleCartPane, setToggleCartPane] = useState(false)
+    // const [toggleCartPane, setToggleCartPane] = useState(false)
     let [filteredItems, setFilteredItems] = useState([])
     const [submittedCartItems, setSubmittedCartItems] = useState(cartFromLocalStorage || [])
     const [isFiltered, setIsFiltered] = useState(false)

@@ -5,9 +5,11 @@ import { useSelector } from 'react-redux';
 import { useState } from 'react'
 import LogoutButton from '../auth/LogoutButton';
 import CartRightPane from '../CartRightPane';
+import { useToggleCart } from '../../context/ToggleCartContext';
 
-
-const NavBar = ({toggleCartPane, setToggleCartPane}) => {
+// const NavBar = ({toggleCartPane, setToggleCartPane}) => {
+const NavBar = () => {
+    const {toggleCartPane, setToggleCartPane} = useToggleCart();
     const sessionUser = useSelector((state) => state.session.user);
     const [open, setOpen] = useState(false)
     // const [toggleCartPane, setToggleCartPane] = useState(false)

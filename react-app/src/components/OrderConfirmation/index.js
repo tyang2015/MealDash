@@ -87,16 +87,17 @@ const OrderConfirmationPage = () => {
   // }, [dispatch, cartItems[0]?.Restaurant.address])
 
   useEffect(()=>{
+    setOriginRef(restaurant?restaurant.address: storedRestaurant.address)
     // if (cartItems.length ===0) return
-    if (cartItems?.length>0){
-      let itemAddress = cartItems[0].Restaurant.address
-      setOriginRef(itemAddress)
-      return
-    }
-    if (submittedCartItems?.length>0){
-      let itemAddress = submittedCartItems[0].Restaurant.address
-      setOriginRef(itemAddress)
-    }
+    // if (cartItems?.length>0){
+    //   let itemAddress = cartItems[0].Restaurant.address
+    //   setOriginRef(itemAddress)
+    //   return
+    // }
+    // if (submittedCartItems?.length>0){
+    //   let itemAddress = submittedCartItems[0].Restaurant.address
+    //   setOriginRef(itemAddress)
+    // }
   }, [dispatch, cartItems, submittedCartItems])
 
   useEffect(()=>{

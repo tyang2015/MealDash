@@ -24,13 +24,13 @@ const FinalOrderConfirmation = () => {
   let restaurant= location?.state?.restaurant
   let userCoordinates = location?.state?.userCoordinates
   // let directionsResponse = location?.state?.directionsResponse
-  console.log('user coordinatessss:', userCoordinates)
-  console.log('durationnnn:', duration)
+  // console.log('user coordinatessss:', userCoordinates)
+  // console.log('durationnnn:', duration)
   // const [orderStarted, setOrderStarted] = useState(true)
   const [countdown, setCountdown] = useState(localStorage.getItem('countdown')? localStorage.getItem('countdown'): duration)
   // const [countdown, setCountdown] = useState(localStorage.getItem('countdown')!=NaN? localStorage.getItem('countdown'): Number(parseInt(duration?.split(" ")[0])))
   // const [countdownInSec, setCountdownInSec] = useState(countdown? countdown* 60: null)
-  console.log('order in final order confirm page:', order)
+  // console.log('order in final order confirm page:', order)
   const [finalCountDown, setFinalCountdown] = useState(0)
   const [orderCompleted, setOrderCompleted] = useState(false)
   const [triggerMinuteChange, setTriggerMinuteChange] = useState(false)
@@ -39,7 +39,7 @@ const FinalOrderConfirmation = () => {
   // let [storedRestaurant, setStoredRestaurant] = useState(restaurantFromStorage[restaurant?`${restaurant.id}`: restaurantId] )
   let [storedRestaurant, setStoredRestaurant] = useState(restaurantFromStorage)
   let [storedOrder, setStoredOrder]= useState(JSON.parse(localStorage.getItem('orders'))[orderId])
-  console.log('restaurant in final order confirm page::', restaurant)
+  // console.log('restaurant in final order confirm page::', restaurant)
 
   const MinuteCountdown = async () => {
     let countdownInSec = countdown* 60
@@ -53,7 +53,7 @@ const FinalOrderConfirmation = () => {
         setTriggerMinuteChange(!triggerMinuteChange)
       }
       localStorage.setItem('countdown', Math.ceil(countdownInSec/60) )
-      console.log('local storage counter:', countdownFromStorage)
+      // console.log('local storage counter:', countdownFromStorage)
       // setCountdownInSec(prev=> prev - 1)
       setCountdown(Math.ceil(countdownInSec/60))
     }, 1000)
@@ -79,6 +79,7 @@ const FinalOrderConfirmation = () => {
       order_completed: true
     }
     dispatch(updateOrder(orderObj))
+    dispatch(getOrders())
     return
 
   }
@@ -86,12 +87,12 @@ const FinalOrderConfirmation = () => {
 
   useEffect(()=>{
     // TODO: make orderStarted a useState? no.. because everytime it enters the component (change the url back to this), it will reset to default value
-    console.log("order started here...", orderStarted)
+    // console.log("order started here...", orderStarted)
     if (!orderStarted) return
     setTriggerCountdown(true)
-    console.log('order started should be TRUE:', orderStarted)
+    // console.log('order started should be TRUE:', orderStarted)
     orderStarted = false
-    console.log('orderStarted should be FALSE (after countdown finishes)', orderStarted)
+    // console.log('orderStarted should be FALSE (after countdown finishes)', orderStarted)
   }, [])
 
 
@@ -104,7 +105,7 @@ const FinalOrderConfirmation = () => {
 
   useEffect(()=> {
     console.log('trigger countdown state in use effect:', triggerCountdown)
-    if (!triggerCountdown) return
+    // if (!triggerCountdown) return
     let countdownInSec = countdown* 60
     let deliveryInterval = setInterval(()=> {
       console.log('timer:', countdownInSec)
@@ -114,14 +115,14 @@ const FinalOrderConfirmation = () => {
         localStorage.setItem('orders', JSON.stringify({...JSON.parse(localStorage.getItem('orders')), [orderId? orderId: order.id]: {...storedOrder, countdown: 0, orderCompleted: true} }))
         setStoredOrder({...storedOrder, countdown: 0, orderCompleted: true })
         setTriggerCountdown(false)
+        orderStarted = true
         console.log("countdown completed")
         return
       }
       countdownInSec-=1
-      if (Math.ceil(countdownInSec/60) != localStorage.getItem('countdown')){
-        setTriggerMinuteChange(!triggerMinuteChange)
-      }
-      // let concatCountdownInOrder = {...storedOrder, countdown: Math.ceil(countdownInSec/60) }
+      // if (Math.ceil(countdownInSec/60) != localStorage.getItem('countdown')){
+      //   setTriggerMinuteChange(!triggerMinuteChange)
+      // }
       localStorage.setItem('orders', JSON.stringify({...JSON.parse(localStorage.getItem('orders')),[orderId? orderId: order.id]: {...storedOrder, countdown: Math.ceil(countdownInSec/60)}  }))
       localStorage.setItem('countdown', Math.ceil(countdownInSec/60) )
       setCountdown(Math.ceil(countdownInSec/60))
@@ -132,16 +133,12 @@ const FinalOrderConfirmation = () => {
 
   // im setting local storage for orders twice to same values (which is ok): from storedOrder trigger  FIRST and within the countdown useeffect above
   useEffect(()=>{
-    console.log('STORED ORDER:', storedOrder)
-    if(storedOrder?.countdown && storedOrder.countdown!=NaN){
-      setCountdown(storedOrder.countdown)
-    }
+    // if(storedOrder?.countdown && storedOrder.countdown!=NaN){
+    //   setCountdown(storedOrder.countdown)
+    // }
     localStorage.setItem('orders', JSON.stringify({...JSON.parse(localStorage.getItem('orders')), [orderId? orderId: order.id]:storedOrder }))
   }, [storedOrder, localStorage.getItem('countdown')])
 
-  // useEffect(()=>{
-  //   setCountdown(localStorage.getItem('countdown'))
-  // }, [triggerMinuteChange])
 
   return (
     <>

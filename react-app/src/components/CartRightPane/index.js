@@ -2,15 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useLocation } from 'react-router-dom';
 import FinalConfirmationNavBar from '../FinalConfirmationNavBar';
-import "./CartRightPane.css"
+import "./CartRightPane.css";
+import { useToggleCart } from '../../context/ToggleCartContext';
 
-// can we access the submitted Cart items from local instead??
 let cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]')
-// let restaurantFromLocalStorage = JSON.parse(localStorage.getItem('restaurants') || '{}')
 let restaurantFromLocalStorage = JSON.parse(localStorage.getItem('restaurant') || '{}')
 // we have cart items passed from PARENT and cart items from storage (this is not updating correctly...)
-const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems, setToggleCartPane, toggleCartPane}) => {
 
+// const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems, setToggleCartPane, toggleCartPane}) => {
+const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems}) => {
+  const {toggleCartPane, setToggleCartPane} = useToggleCart();
   console.log('restaurant from local storage:', restaurantFromLocalStorage)
   const location = useLocation();
   const [orderSubtotal, setOrderSubtotal] = useState(0)
