@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, session, request, redirect
 from flask_login import login_required, current_user
-from app.models import User, db, Restaurant, FoodItem, Order, OrderFoodItem
-from app.forms import LoginForm, SignUpForm, RestaurantForm, FoodItemForm, OrderForm, FoodForm
+from app.models import User, db, Restaurant, FoodItem, Order, OrderFoodItem, Review
+from app.forms import LoginForm, SignUpForm, RestaurantForm, FoodItemForm, OrderForm, FoodForm, ReviewForm
 from .auth_routes import validation_errors_to_error_messages
 import json
 
@@ -270,3 +270,79 @@ def update_restaurant_order(id, orderId):
       db.session.commit()
       return order.to_dict(),200
   return {"errors": validation_errors_to_error_messages(form.errors)}, 400
+
+@restaurant_routes.route("/<int:id>/orders/<int:orderId>", methods = ['DELETE'])
+@login_required
+def delete_restaurant_order(id, orderId):
+  restaurant = Restaurant.query.get(id)
+  order = Order.query.get(orderId)
+  if restaurant == None:
+    return {"message": "Restaurant couldn't be found"}, 404
+  if order == None:
+    return {"message": "Order couldn't be found"}, 404
+  db.session.delete(order)
+  db.session.commit()
+  return {"message": "Successfully deleted!"}
+
+# ------------------------------------------------
+
+# FEATURE 3: REVIEWS
+@restaurant_routes.route("/<int:id>/reviews", methods = ['GET'])
+@login_required
+def get_reviews(id):
+  restaurant = Restaurant.query.get(id)
+  if restaurant == None:
+    return {"message": "Restaurant couldn't be found"}, 404
+  reviews = Review.query.filter(Review.restaurant_id == id)
+  return {"reviews": [review.to_dict()for review in reviews]}
+
+
+@restaurant_routes.route("/<int:id>/reviews", methods = ['POST'])
+@login_required
+def create_review(id):
+  restaurant = Restaurant.query.get(id)
+  if restaurant == None:
+    return {"message": "Restaurant couldn't be found"}, 404
+  form = ReviewForm()
+  form['csrf_token'].data = request.cookies['csrf_token']
+  if form.validate_on_submit():
+    review = Review(
+      user_id= current_user.id,
+      restaurant_id= id,
+      review = form.data["review"],
+      stars = form.data["stars"],
+    )
+    db.session.add(review)
+    db.session.commit()
+    return review.to_dict(), 201
+  return {"errors": validation_errors_to_error_messages(form.errors)}, 400
+
+@restaurant_routes.route("/<int:id>/reviews/<int:review_id>", methods = ['PUT'])
+def update_review(id):
+  restaurant = Restaurant.query.get(id)
+  review = Review.query.get(review_id)
+  if restaurant == None:
+    return {"message": "Restaurant couldn't be found"}, 404
+  if review == None:
+    return {"message": "Review couldnt be found"}, 404
+  form = ReviewForm()
+  form['csrf_token'].data = request.cookies['csrf_token']
+  if form.validate_on_submit():
+    review_data = json.loads(request.data.decode('utf-8'))
+    for k,v in review_data.items():
+      setattr(review, k, v)
+    db.session.commit()
+    return review.to_dict
+  return {"errors": validation_errors_to_error_messages(form.errors)}, 400
+
+@restaurant_routes.route("/<int:id>/reviews/<int:review_id>", methods = ['DELETE'])
+def delete_review(id):
+  restaurant = Restaurant.query.get(id)
+  review = Review.query.get(review_id)
+  if restaurant == None:
+    return {"message": "Restaurant couldn't be found"}, 404
+  if review == None:
+    return {"message": "Review couldnt be found"}, 404
+  db.session.delete(review_id)
+  db.session.commit()
+  return {"message": "Successfully deleted!"}

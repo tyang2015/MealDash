@@ -4,6 +4,10 @@
   /* background-color: lightblue; */
 }
 
+.get-orders-completed-container{
+  background-color: lightblue;
+}
+
 .get-orders-in-progress-card{
   /* width: 100%;
   background-color: lightgoldenrodyellow; */
@@ -15,11 +19,15 @@
 .get-orders-completed-card{
   height: 8.8em;
   border: 1px solid rgb(231, 231, 231);
-
+  margin-bottom: 10px;
 }
 
-.get-orders-completed-card:not(:first-child){
+/* .get-orders-completed-card:not(:first-child){
   margin-top: 2em;
+} */
+
+div.get-orders-completed-card:last-child{
+  margin-bottom: 50px;
 }
 
 .get-orders-restaurant-name-title-container{

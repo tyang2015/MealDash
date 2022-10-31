@@ -11,6 +11,7 @@ import FoodItemModal from "../FoodItemModal";
 import CartRightPane from "../CartRightPane";
 import RestaurantFooter from "../RestaurantFooter";
 import NavBar from "../Navigation/NavBar";
+import RestaurantReviewsContainer from "../RestaurantReviewsContainer";
 import { useToggleCart } from '../../context/ToggleCartContext';
 
 let cartFromLocalStorage =  JSON.parse(localStorage.getItem('cart' || "[]"))
@@ -289,6 +290,7 @@ const GetRestaurant = () => {
                     )}
                   </div>
                 </div>
+                <RestaurantReviewsContainer sessionUser={sessionUser} restaurant={restaurant} finalAvgRating={finalAvgRating}/>
                 <div className="restaurant-page-middle-container">
                     <div style={{marginTop:"15px"}}><b>Full Menu</b></div>
                     <div style={{color: "#7A7876"}}> {openTime} - {closeTime}</div>

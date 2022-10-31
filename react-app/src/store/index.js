@@ -5,13 +5,15 @@ import restaurantReducer from './restaurant';
 import foodItemReducer from './foodItem';
 import mapsReducer from './maps';
 import orderReducer from './order';
+import reviewReducer from './review';
 
 const rootReducer = combineReducers({
   session,
   restaurants: restaurantReducer,
   foodItems: foodItemReducer,
   maps: mapsReducer,
-  orders: orderReducer
+  orders: orderReducer,
+  reviews: reviewReducer
 });
 
 

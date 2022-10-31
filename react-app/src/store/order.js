@@ -5,6 +5,7 @@ const GET_USER_ORDERS = 'orders/getUserOrders'
 
 const CREATE_ORDER = "orders/createOrder"
 const UPDATE_ORDER = 'orders/updateOrder'
+const DELETE_ORDER = 'orders/deleteOrder'
 
 // dont use this one yet
 const loadRestaurantOrders = (payload) => {
@@ -32,6 +33,13 @@ const update = (payload) => {
   return {
     type: UPDATE_ORDER,
     payload
+  }
+}
+
+const remove = (id) => {
+  return {
+    type: DELETE_ORDER,
+    id
   }
 }
 // get user orders
@@ -76,6 +84,17 @@ export const updateOrder = (payload) => async dispatch => {
   }
 }
 
+export const deleteOrder = (restaurantId, orderId) => async dispatch => {
+  const response = await fetch(`/api/restaurants/${restaurantId}/orders/${orderId}`, {
+    method: "DELETE",
+    headers: {"Content-Type": "application/json"},
+  })
+  if (response.ok){
+    dispatch(remove(orderId))
+  }
+
+}
+
 
 const initialState = {}
 //  orders state=> { 1: {order attributes: ...,}}
@@ -96,6 +115,11 @@ const orderReducer = (state= initialState, action) => {
       let newState = {}
       newState[action.payload.id] = action.payload
       // console.log('new state in order reducer:', newState)
+      return newState
+    }
+    case DELETE_ORDER: {
+      let newState = {...state}
+      delete newState[action.id]
       return newState
     }
     default:

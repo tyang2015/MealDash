@@ -23,6 +23,7 @@ import OrderConfirmationPage from './components/OrderConfirmation';
 import FinalOrderConfirmation from './components/FinalOrderConfirmation';
 import GetOrders from './components/GetOrders';
 import GetOrderReceipt from './components/GetOrderReceipt';
+import GetReviews from './components/GetReviews';
 
 
 function App() {
@@ -75,6 +76,9 @@ function App() {
           </ProtectedRoute>
           <ProtectedRoute path='/restaurants/:id' exact={true} >
             <GetRestaurant/>
+          </ProtectedRoute>
+          <ProtectedRoute path='/restaurants/:id/reviews' exact={true} >
+            <GetReviews/>
           </ProtectedRoute>
           <ProtectedRoute path='/restaurants/:id/new' exact={true} >
             <CreateFoodItem/>

@@ -328,12 +328,35 @@ class Review(db.Model):
     user = db.relationship("User", back_populates="reviews")
 
     def to_dict(self):
-        return {
-            "id": self.id,
-            "userId": self.user_id,
-            "restaurantId": self.restaurant_id,
-            "review": self.review,
-            "stars": self.stars,
-            "createdAt": self.created_at,
-            "updatedAt": self.updated_at
-        }
+      return {
+          "id": self.id,
+          # "userId": self.user_id,
+          # "restaurantId": self.restaurant_id,
+          "review": self.review,
+          "stars": self.stars,
+          "createdAt": self.created_at,
+          "updatedAt": self.updated_at,
+          "restaurant": self.restaurant_to_dict(),
+          "user": self.user_to_dict(),
+      }
+    def restaurant_to_dict(self):
+      return {
+        "id": self.restaurant.id,
+        "name": self.restaurant.name,
+        "email": self.restaurant.email,
+        "phoneNumber": self.restaurant.phone_number,
+        "address": self.restaurant.address,
+        "openTime": self.restaurant.open_time,
+        "closeTime": self.restaurant.close_time,
+        "category": self.restaurant.category,
+        "numReviews": len(self.restaurant.reviews),
+        "avgRating" : self.restaurant.get_avg_rating(),
+      }
+    def user_to_dict(self):
+      return {
+        'id': self.user.id,
+        'firstName': self.user.first_name,
+        'lastName': self.user.last_name,
+        'email': self.user.email,
+        'phoneNumber': self.user.phone_number
+      }
