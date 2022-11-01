@@ -318,7 +318,9 @@ def create_review(id):
   return {"errors": validation_errors_to_error_messages(form.errors)}, 400
 
 @restaurant_routes.route("/<int:id>/reviews/<int:review_id>", methods = ['PUT'])
-def update_review(id):
+@login_required
+def update_review(id, review_id):
+  print('hitting update review route!!\n\n')
   restaurant = Restaurant.query.get(id)
   review = Review.query.get(review_id)
   if restaurant == None:
@@ -329,20 +331,24 @@ def update_review(id):
   form['csrf_token'].data = request.cookies['csrf_token']
   if form.validate_on_submit():
     review_data = json.loads(request.data.decode('utf-8'))
+    print('review data in backend:', review_data)
     for k,v in review_data.items():
+      print('KEY IN REVIEWW', k)
       setattr(review, k, v)
+    print('review data fixed!', review)
     db.session.commit()
-    return review.to_dict
+    return review.to_dict(), 200
   return {"errors": validation_errors_to_error_messages(form.errors)}, 400
 
 @restaurant_routes.route("/<int:id>/reviews/<int:review_id>", methods = ['DELETE'])
-def delete_review(id):
+def delete_review(id, review_id):
+  print('review delete route hit')
   restaurant = Restaurant.query.get(id)
   review = Review.query.get(review_id)
   if restaurant == None:
     return {"message": "Restaurant couldn't be found"}, 404
   if review == None:
     return {"message": "Review couldnt be found"}, 404
-  db.session.delete(review_id)
+  db.session.delete(review)
   db.session.commit()
   return {"message": "Successfully deleted!"}

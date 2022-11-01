@@ -121,9 +121,8 @@
 }
 
 .restaurant-page-name{
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 700;
-
 }
 
 div.restaurant-page-update-delete-buttons-container{
@@ -265,6 +264,7 @@ div.restaurant-page-update-delete-buttons-container{
   height: 8%;
   display: flex;
   align-items: center;
+  font-size: 22px;
 }
 
 .delete-food-item-button{

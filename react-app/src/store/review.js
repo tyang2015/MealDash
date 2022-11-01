@@ -40,6 +40,43 @@ export const getReviews = (restaurantId) => async dispatch => {
   }
 }
 
+export const createReview = (restaurantId, payload) => async dispatch =>{
+  const response = await fetch(`/api/restaurants/${restaurantId}/reviews`, {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(payload)
+  })
+  if (response.ok){
+    let review = await response.json()
+    console.log('review from thunk:', review)
+    dispatch(create(review))
+    return review
+  }
+}
+
+export const updateReview = (restaurantId, payload)=> async dispatch =>{
+  const response = await fetch(`/api/restaurants/${restaurantId}/reviews/${payload.id}`, {
+    method: "PUT",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(payload)
+  })
+  if (response.ok){
+    let review = await response.json()
+    dispatch(update(review))
+
+  }
+}
+
+export const deleteReview = (restaurantId, id) => async dispatch =>{
+  const response = await fetch(`/api/restaurants/${restaurantId}/reviews/${id}`, {
+    method: "DELETE",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(id)
+  })
+  if (response.ok){
+    dispatch(remove(id))
+  }
+}
 
 
 const initialState={}

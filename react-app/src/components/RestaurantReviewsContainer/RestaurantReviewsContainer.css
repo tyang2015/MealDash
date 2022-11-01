@@ -1,0 +1,117 @@
+.restaurant-reviews-container{
+  display:flex;
+  flex-direction: column;
+  /* background-color: lightcyan; */
+  align-items: flex-start;
+  width: 100%;
+}
+
+.restaurant-reviews-container-top-row{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 1.2em;
+}
+
+.see-all-reviews-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: rgb(231, 231, 231);
+  border-radius: 30px;
+  width: 9em;
+  height: 32px;
+  font-weight: 550;
+}
+
+.restaurant-reviews-container-middle-row{
+  display: flex;
+  width:100%;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 1em;
+
+}
+
+div.middle-row-not-first{
+  margin-left: 10px
+}
+
+.restaurant-reviews-container-last-row{
+  display: flex;
+  width: 100%;
+  margin-top: 1em;
+
+}
+
+.restaurant-reviews-container-create-review-container{
+  height: 9.2em;
+  display: flex;
+  flex-direction: column;
+  /* background-color: lightblue; */
+  width: 17.9em;
+  align-items: flex-start;
+  justify-content: center;
+  background-color: #F7F7F7;
+  padding-top:-10px;
+
+}
+
+.restaurant-reviews-container-last-row{
+  display: flex;
+  justify-content: space-between;
+}
+
+.restaurant-reviews-container-last-row-card{
+  height: 9.2em;
+  flex-direction: column;
+  background-color: lightblue;
+  width: 19.5em;
+  align-items: flex-start;
+  justify-content: center;
+
+  display: flex;
+  flex-direction: column;
+  /* background-color: lightblue; */
+  background-color: white;
+  /* background-color: #F7F7F7; */
+  padding-top: -10px;
+  border: 1px solid rgb(231, 231, 231);
+  border-radius: 7px;
+}
+
+.restaurant-reviews-container-mini-stars-date-written-container{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  margin-left: 1em;
+}
+
+.restaurant-reviews-container-your-name-container{
+  height: 36px;
+  display: flex;
+  align-items: flex-start;
+  margin-top: -20px;
+  margin-left: 1em;
+}
+
+.restaurant-reviews-container-your-stars-container{
+  height: 30px;
+  margin-left: 1em;
+}
+
+.restaurant-reviews-container-reviewer{
+  height: fit-content;
+  display: flex;
+  align-items: flex-start;
+  margin-top: -46px;
+  margin-left: 1em;
+}
+
+.restaurant-reviews-container-review-content{
+  margin-left: 1em
+}

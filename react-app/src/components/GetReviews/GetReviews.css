@@ -1,0 +1,125 @@
+.get-reviews-page-main-container{
+  display: flex;
+  flex-direction: column;
+  width: 60em;
+  height:100vh;
+  /* background-color: lightblue; */
+  margin: auto
+}
+
+.get-reviews-page-back-to-restaurant-container{
+  width: 100%;
+  /* background-color: lightcoral; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 20px;
+
+}
+
+.get-reviews-back-to-restaurant-button{
+  display: flex;
+  align-items: center;
+
+}
+
+.get-reviews-page-bottom-container{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+
+}
+
+.get-reviews-page-bottom-left-pane{
+  width: 30%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  /* background-color: lightgoldenrodyellow; */
+}
+
+
+.get-reviews-page-bottom-right-pane{
+  width: 70%;
+  /* background-color: lightgreen; */
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  padding-top: 10px;
+}
+
+.get-reviews-review-card{
+  /* background-color: lightpink; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 12em;
+  border: 1px solid rgb(231, 231, 231);
+  border-radius: 7px;
+  text-overflow: ellipsis;
+}
+
+.get-reviews-review-card:not(:last-child){
+  margin-bottom: 1em;
+}
+
+.get-reviews-mini-stars-date-written-container{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-left: 1em;
+
+}
+
+.restaurant-reviews-content-container{
+  margin-left: 1em;
+}
+
+.get-reviews-page-avg-rating-container{
+  font-size: 32px;
+  font-weight: 700;
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+
+}
+
+.get-reviews-page-add-a-review-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: rgb(231, 231, 231);
+  border-radius: 30px;
+  width: 7em;
+  height: 32px;
+  font-weight: 550;
+  margin-top:10px;
+  letter-spacing: -0.02ch;
+}
+
+.get-reviews-page-number-ratings-container{
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  color: rgb(73, 73, 73);
+  font-weight: 500;
+  letter-spacing: -0.02ch;
+}
+
+.get-reviews-review-card-right-pane{
+  width: 5em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content:center;
+
+}
+
+/* i.get-review-edit-delete{
+  width: 20px;
+  height: 20px;
+  background-color: lightblue;
+} */

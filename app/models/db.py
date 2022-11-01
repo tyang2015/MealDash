@@ -76,6 +76,7 @@ class Restaurant(db.Model):
           "numReviews":  len(self.reviews),
           "avgRating" : self.get_avg_rating(),
           # "User": self.convert_user_to_dict()
+          "reviews": [review.to_dict() for review in self.reviews]
       }
 
     def convert_user_to_dict(self):
@@ -350,7 +351,7 @@ class Review(db.Model):
         "closeTime": self.restaurant.close_time,
         "category": self.restaurant.category,
         "numReviews": len(self.restaurant.reviews),
-        "avgRating" : self.restaurant.get_avg_rating(),
+        "avgRating" : str(self.restaurant.get_avg_rating()),
       }
     def user_to_dict(self):
       return {

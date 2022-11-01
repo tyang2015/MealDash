@@ -7,6 +7,8 @@ import NavBar from '../Navigation/NavBar';
 import { useTriggerCountdown } from '../../context/TriggerCountdown';
 import { useOrderStarted } from '../../context/OrderStartedContext';
 import "./GetOrders.css"
+import { DeleteOrderModal } from '../../context/DeleteOrderModal';
+import DeleteOrderModalComponent from '../DeleteOrderModal';
 // the highest # order is your most recent aka the IN PROGRESS ONE, if there is one
 let currentTime = new Date().toLocaleString('en-US', {
   month: "short",
@@ -23,6 +25,8 @@ const GetOrders = () => {
   const {orderStarted, setOrderStarted} = useOrderStarted();
   const dispatch = useDispatch();
   const [userCoordinates, setUserCoordinates] = useState({lat: 0, lng: 0})
+  const [orderDeleteModal, setOrderDeleteModal] = useState(false)
+  const [orderObj, setOrderObj] = useState(null)
   // const [sortedOrders, setSortedOrders]= useState()
   const [mostRecentOrder, setMostRecentOrder] = useState(orders?.length>0? orders.sort( (a,b)=> b.id - a.id)[0]: {})
   const [forceRender, setForceRender] = useState(false)
@@ -171,13 +175,17 @@ const GetOrders = () => {
                       <div className='view-order-button'>
                         <h3>View Order</h3>
                       </div>
-                      <div className="delete-order-button" onClick={()=>handleDelete(order)}>
-                        <h3>Delete Order</h3>
+                      <div className="get-orders-delete-order-button">
+                        <h3 onClick={()=> {
+                          setOrderDeleteModal(true)
+                          setOrderObj(order)
+                        }}>Delete Order</h3>
                       </div>
                     </NavLink>
                   </div>
                 </div>
               </div>
+              {orderDeleteModal && <DeleteOrderModalComponent restaurant={order.restaurant} order={orderObj} setOrderDeleteModal={setOrderDeleteModal}/>}
             </>
           ))}
           {/* {orders.filter(order=> order.orderCompleted === false).length === 0 && (

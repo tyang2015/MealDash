@@ -1,0 +1,92 @@
+.review-content{
+  width:100%;
+  height: 9.5em;
+  box-sizing: border-box;
+  /* margin: auto; */
+}
+
+.review-form-stars-container{
+  /* background-color: lightcyan; */
+  width: 100%;
+}
+
+.review-form-x-button{
+  width: 100%;
+  /* background-color: lightblue; */
+  border-radius: 20px;
+  padding-top: 18px;
+  padding-left: 15px;
+  box-sizing: border-box;
+}
+
+.review-form{
+  /* background-color: lightcoral; */
+  width:100%;
+  box-sizing: border-box;
+  height: 100%;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.review-form-stars-container{
+  height: 3.5em;
+  /* background-color: lightgoldenrodyellow; */
+  display: flex;
+  align-items: center;
+}
+
+.review-form-star-review-input-container{
+  background-color: #F7F7F7;
+  height: fit-content;
+  width:95%;
+  box-sizing: border-box;
+  border-radius: 5px;
+  margin-top: 15px;
+
+}
+
+textarea::placeholder{
+  color: rgb(118, 118, 118);
+  font-weight: 550;
+  font-size: 16px;
+  font-family: DD-TTNorms, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+}
+textarea{
+  background-color:#F7F7F7;
+  border: none;
+  border-radius: 5px;
+  padding-left: 15px;
+  padding-top: 15px;
+  font-size: 16px;
+  font-family: DD-TTNorms, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-weight: 550;
+}
+
+.review-form-submit-button-container{
+  width: 95%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  /* background-color: lightblue; */
+  box-sizing: border-box;
+  align-items: flex-end;
+  /* margin-top: 30px; */
+  padding-bottom: 15px;
+
+}
+
+.review-form-submit-button{
+  cursor: pointer;
+  background-color: lightcoral;
+  width: 6.5em;
+  border-radius: 1000px;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  justify-content: center;
+  color:white;
+  border: none
+}

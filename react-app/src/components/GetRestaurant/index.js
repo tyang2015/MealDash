@@ -7,6 +7,7 @@ import { deleteFoodItem } from "../../store/foodItem";
 import { getFoodItems } from "../../store/foodItem";
 import "./GetRestaurant.css"
 import { Modal } from "../../context/FoodItemOrder";
+// import { ReviewModal} from "../../context/Review";
 import FoodItemModal from "../FoodItemModal";
 import CartRightPane from "../CartRightPane";
 import RestaurantFooter from "../RestaurantFooter";
@@ -40,6 +41,7 @@ const GetRestaurant = () => {
   const [isFiltered, setIsFiltered] = useState(false)
   // const [toggleCartPane, setToggleCartPane] = useState(false)
   let [filteredItems, setFilteredItems] = useState([])
+  // const [reviewModal, setReviewModal] = useState(false)
 
   const [submittedCart, setSubmittedCart] =useState(false)
   const [submittedCartItems, setSubmittedCartItems] = useState(cartFromLocalStorage || [])

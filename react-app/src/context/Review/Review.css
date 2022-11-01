@@ -1,0 +1,9 @@
+#modal-content.review-form-modal-content{
+  height: 30.5em;
+  width: 32em;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+}
