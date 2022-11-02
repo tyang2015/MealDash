@@ -8,7 +8,7 @@ export default function OrderStartedProvider({children}){
   const [orderStarted, setOrderStarted] = useState(true)
 
   useEffect(()=>{
-    console.log('order started in provider:', orderStarted)
+    // console.log('order started in provider:', orderStarted)
   }, [orderStarted])
 
   return (

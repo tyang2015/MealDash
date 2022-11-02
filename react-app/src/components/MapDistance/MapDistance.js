@@ -16,7 +16,7 @@ const MapDistance = ({ apiKey, restaurant, userCoordinates, directionsResponse }
     googleMapsApiKey: apiKey,
     libraries: ['places']
   });
-  console.log('user coordinates in map component:', userCoordinates)
+  // console.log('user coordinates in map component:', userCoordinates)
   // const restaurantLoc = {
   //   lat:
   // }
@@ -24,7 +24,7 @@ const MapDistance = ({ apiKey, restaurant, userCoordinates, directionsResponse }
     lat: parseFloat(Number(restaurant?.latitude)),
     lng: parseFloat(Number(restaurant?.longitude))
   }
-  console.log('restaurant coordinates in map comp:', restaurantLoc)
+  // console.log('restaurant coordinates in map comp:', restaurantLoc)
 
   // const center = {
   //   lat: 34.05,

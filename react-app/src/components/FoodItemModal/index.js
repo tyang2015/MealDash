@@ -19,19 +19,19 @@ const FoodItemModal = ({setForceCartUpdate, forceCartUpdate,setSubmittedCartItem
     // if (!checkSameRestaurant(foodItem)){
     //   setSubmittedCartItems([])
     // }
-    // if (submittedCartItems.length>0){
-    //   let restaurantId = submittedCartItems[0].Restaurant.id
-    //   if (foodItem.Restaurant.id != restaurantId){
-    //     console.log('DIFFERENT RESTAURANT')
-    //     setSubmittedCartItems([])
-    //     localStorage.setItem('cart', JSON.stringify([]))
-    //   }
-    // }
-
+    if (submittedCartItems.length>0){
+      let restaurantId = submittedCartItems[0].Restaurant.id
+      if (foodItem.Restaurant.id != restaurantId){
+        alert('different restaurant, resetting cart...')
+        setSubmittedCartItems([])
+        localStorage.setItem('cart', JSON.stringify([]))
+        return
+      }
+    }
 
     // i also need to check the cartItems and see if the food name already exists
     // if it does I need to update THAT particular item in submittedCartItems
-    for (let i = 0; i< submittedCartItems.length; i++){
+    for (let i = 0; i< submittedCartItems?.length; i++){
       let item = submittedCartItems[i]
       if (item.id === foodItem.id){
         // do not add foodItem to submittedCartItems if already in cart, just increment quantity

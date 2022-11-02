@@ -9,6 +9,7 @@ import { useOrderStarted } from '../../context/OrderStartedContext';
 import "./GetOrders.css"
 import { DeleteOrderModal } from '../../context/DeleteOrderModal';
 import DeleteOrderModalComponent from '../DeleteOrderModal';
+import {useCancelTimer} from "../../context/CancelTimer"
 // the highest # order is your most recent aka the IN PROGRESS ONE, if there is one
 let currentTime = new Date().toLocaleString('en-US', {
   month: "short",
@@ -175,13 +176,13 @@ const GetOrders = () => {
                       <div className='view-order-button'>
                         <h3>View Order</h3>
                       </div>
-                      <div className="get-orders-delete-order-button">
-                        <h3 onClick={()=> {
-                          setOrderDeleteModal(true)
-                          setOrderObj(order)
-                        }}>Delete Order</h3>
-                      </div>
                     </NavLink>
+                    <div style={{backgroundColor: 'lightblue'}} className="get-orders-delete-order-button">
+                      <h3 onClick={()=> {
+                        setOrderDeleteModal(true)
+                        setOrderObj(order)
+                      }}>Delete Order</h3>
+                    </div>
                   </div>
                 </div>
               </div>

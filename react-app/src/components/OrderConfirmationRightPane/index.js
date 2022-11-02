@@ -18,8 +18,8 @@ const OrderConfirmationRightPane = ({cartItems, directionsResponse, userCoordina
   const [orderFinalTotal, setOrderFinalTotal] = useState(0)
   const [fees, setFees] = useState(0)
   const [hasSubmitted, setHasSubmitted] = useState(false)
-  console.log('cart items on order confirm right pane:', cartItems)
-  console.log('restaurant on right pane:', restaurant)
+  // console.log('cart items on order confirm right pane:', cartItems)
+  // console.log('restaurant on right pane:', restaurant)
 
   // calculate delivery fee (10% of subtotal)
   useEffect(()=> {
@@ -66,7 +66,7 @@ const OrderConfirmationRightPane = ({cartItems, directionsResponse, userCoordina
       alert('cannot submit order confirmation form')
       return
     }
-    console.log('cart items on order submission:', cartItems)
+    // console.log('cart items on order submission:', cartItems)
     let order = {
       customer_id: sessionUser.id,
       restaurant_id : restaurant?.id,
@@ -84,15 +84,17 @@ const OrderConfirmationRightPane = ({cartItems, directionsResponse, userCoordina
       subtotal: Number(orderSubtotal).toFixed(2),
       fees: fees
     }
-    // console.log('order object:', order)
+    let newDuration = parseInt(duration.split(" ")[0])
     let createdOrder = await dispatch(createNewOrder(order))
     console.log('created order:', createdOrder)
-    localStorage.setItem("orders", JSON.stringify({...JSON.parse(localStorage.getItem('orders')), [createdOrder.id]: createdOrder}))
+    await localStorage.setItem("orders", JSON.stringify({ [createdOrder.id]: {...createdOrder, countdown: newDuration}}))
+    await localStorage.setItem('countdown', newDuration)
+    await localStorage.setItem('orderStarted', 1)
     console.log('orders from local storage:', localStorage.getItem('orders'))
     alert('We have confirmed your order!')
     setHasSubmitted(false)
     // console.log("restaurant id after order submission:", restaurant.id)
-    history.push({pathname: `/restaurants/${restaurant.id}/orders/${createdOrder?.id}/new`, state: {duration:duration.split(" ")[0], cartItems, restaurant, createdOrder, userCoordinates}})
+    history.push({pathname: `/restaurants/${restaurant.id}/orders/${createdOrder?.id}/new`, state: {duration: newDuration, cartItems, restaurant, createdOrder, userCoordinates}})
     return
 
   }

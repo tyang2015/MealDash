@@ -43,11 +43,10 @@ const OrderConfirmationPage = () => {
   const [distance, setDistance] = useState('')
   const [duration, setDuration] = useState('')
   const [address, setAddress] = useState('')
-  console.log('cart items in confirm page from local storage:', cartItems)
-  console.log('cart items on confirm page from history state :', submittedCartItems)
-  console.log('restaurant id from use params in confirm page:', id)
-  console.log('restaurant in order confirm page:', restaurant)
-  // console.log('restaurant from local storageeee', storedRestaurant)
+  // console.log('cart items in confirm page from local storage:', cartItems)
+  // console.log('cart items on confirm page from history state :', submittedCartItems)
+  // console.log('restaurant id from use params in confirm page:', id)
+  // console.log('restaurant in order confirm page:', restaurant)
 
   const [paymentDropdown, setPaymentDropdown] = useState(false)
   let [destinationRef, setDestinationRef] = useState('')
@@ -81,24 +80,9 @@ const OrderConfirmationPage = () => {
     }
   }, [dispatch, key])
 
-  // useEffect(()=>{
-  //   if (cartItems.length ===0) return
-  //   let itemAddress = cartItems[0].Restaurant.address
-  //   setOriginRef(itemAddress)
-  // }, [dispatch, cartItems[0]?.Restaurant.address])
 
   useEffect(()=>{
     setOriginRef(restaurant?restaurant.address: storedRestaurant.address)
-    // if (cartItems.length ===0) return
-    // if (cartItems?.length>0){
-    //   let itemAddress = cartItems[0].Restaurant.address
-    //   setOriginRef(itemAddress)
-    //   return
-    // }
-    // if (submittedCartItems?.length>0){
-    //   let itemAddress = submittedCartItems[0].Restaurant.address
-    //   setOriginRef(itemAddress)
-    // }
   }, [dispatch, cartItems, submittedCartItems])
 
   useEffect(()=>{

@@ -3,15 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory, NavLink, useLocation } from 'react-router-dom';
 import { DeleteOrderModal } from '../../context/DeleteOrderModal';
 import { deleteOrder } from '../../store/order';
+import {useCancelTimer} from "../../context/CancelTimer"
 import "./DeleteOrderModal.css"
 
 const DeleteOrderModalComponent = ({restaurant, setOrderDeleteModal, order}) => {
   const dispatch = useDispatch()
   const history = useHistory()
+  const {cancelTimer, setCancelTimer} = useCancelTimer();
   console.log('inside delete order modal component')
 
   const handleDelete = () => {
     dispatch(deleteOrder(restaurant.id, order.id ))
+    setCancelTimer(true)
     setOrderDeleteModal(false)
     history.push({pathname: `/orders`})
   }
@@ -23,7 +26,6 @@ const DeleteOrderModalComponent = ({restaurant, setOrderDeleteModal, order}) => 
         <button className='delete-order-button' onClick={handleDelete}>Yes</button>
         <button className='delete-order-button' onClick={()=> setOrderDeleteModal(false)}>No</button>
       </div>
-
     </DeleteOrderModal>
   )
 }

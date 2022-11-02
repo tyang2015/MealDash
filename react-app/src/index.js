@@ -8,19 +8,22 @@ import ToggleCartProvider from './context/ToggleCartContext';
 import OrderStartedProvider from './context/OrderStartedContext';
 import TriggerCountdownProvider from './context/TriggerCountdown';
 import { ModalProvider } from './context/Modal';
+import CancelTimerProvider from './context/CancelTimer';
 const store = configureStore();
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ModalProvider>
-        <OrderStartedProvider>
-          <TriggerCountdownProvider>
-          <ToggleCartProvider>
-            <App />
-          </ToggleCartProvider>
-          </TriggerCountdownProvider>
-        </OrderStartedProvider>
+        <CancelTimerProvider>
+          <OrderStartedProvider>
+            <TriggerCountdownProvider>
+            <ToggleCartProvider>
+              <App />
+            </ToggleCartProvider>
+            </TriggerCountdownProvider>
+          </OrderStartedProvider>
+        </CancelTimerProvider>
       </ModalProvider>
     </Provider>
   </React.StrictMode>,

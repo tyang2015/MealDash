@@ -7,6 +7,8 @@ import { useToggleCart } from '../../context/ToggleCartContext';
 
 let cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]')
 let restaurantFromLocalStorage = JSON.parse(localStorage.getItem('restaurant') || '{}')
+let checkoutButton = document.querySelector("h3.checkout-text-container")
+
 // we have cart items passed from PARENT and cart items from storage (this is not updating correctly...)
 
 // const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems, setToggleCartPane, toggleCartPane}) => {
@@ -15,14 +17,12 @@ const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems}) 
   const {toggleCartPane, setToggleCartPane} = useToggleCart();
   const location = useLocation();
   const [orderSubtotal, setOrderSubtotal] = useState(0)
-  let [submittedCartItems, setSubmittedCartItems] = useState(JSON.parse(localStorage.getItem('cart') || '[]'))
+  let [submittedCartItems, setSubmittedCartItems] = useState(JSON.parse(localStorage.getItem('cart'))||[])
   // let [restaurantId, setRestaurantId] = useState(cartItems?.length>0? cartItems[0].Restaurant.id: submittedCartItems?.length>0?
   //   submittedCartItems[0].Restaurant.id:restaurantFromLocalStorage? restaurantFromLocalStorage.id: "")
   // let [storedRestaurant, setStoredRestaurant] = useState(restaurantId? restaurantFromLocalStorage[`${restaurantId}`] : {})
   let [storedRestaurant, setStoredRestaurant] = useState(submittedCartItems?.length>0? submittedCartItems[0].Restaurant : restaurantFromLocalStorage!="{}"? restaurantFromLocalStorage: cartItems?.length> 0? cartItems[0].Restaurant: {})
   const [isOrderZero, setIsOrderZero] = useState(false)
-  console.log('cart in rightt pane from local storage', submittedCartItems)
-  console.log('cart in right pane passed down as propsss', cartItems)
 
   useEffect(()=>{
     if (submittedCartItems?.length>0){
@@ -32,7 +32,7 @@ const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems}) 
 
 
   useEffect(()=> {
-    console.log('order subtotal use effect triggered')
+    // console.log('order subtotal use effect triggered')
     if (orderSubtotal == 0){
       setIsOrderZero(true)
     } else {
@@ -89,9 +89,21 @@ const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems}) 
   }, [forceCartUpdate, submittedCartItems, cartItems])
 
 
-  // if ((cartItems?.length<=0 && submittedCartItems?.length<=0) || (!submittedCartItems)) return (
-  //   <h3> Empty Cart </h3>
-  // )
+  const handleCheckout = () => {
+    console.log('checkout button clicked')
+    let orderStarted = localStorage.getItem("orderStarted")
+    console.log('order started:', orderStarted)
+    if (!orderStarted){
+      // currently pending an order
+      console.log('order started is 0')
+      checkoutButton.addEventListener('click', e=> {
+        alert("You can only have 1 progress in order at a time, please be patient until your order is completed")
+        e.stopPropagation();
+        return
+      })
+    } else return
+  }
+
 
   const handleDeleteItem = (itemToDelete) => {
     let i =0;
@@ -127,6 +139,7 @@ const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems}) 
       i=i+1
     }
   }
+  console.log('cart from LOCAL STORAGE in right pane:', cartFromLocalStorage)
   console.log('cart items at the end in right pane passed as props', cartItems)
   console.log('cart items from local storage at end in right pane', submittedCartItems )
 
@@ -148,7 +161,7 @@ const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems}) 
           <div className='checkout-button'>
             {/* <NavLink className="navlink" style={{color: "white"}} to={{pathname: `/restaurants/${restaurant? restaurant.id: restaurantId? restaurantId: storedRestaurant.id}/checkout`, data: {orderSubtotal: orderSubtotal, restaurant: restaurant? restaurant: storedRestaurant, setCartItems: setSubmittedCartItems}, state: {prevPath: location.pathname}}}> */}
             <NavLink className="navlink" style={{color: "white"}} to={{pathname: `/restaurants/${restaurant? restaurant.id: storedRestaurant.id}/checkout`, data: {orderSubtotal: orderSubtotal, restaurant: restaurant? restaurant: storedRestaurant, submittedCartItems: cartItems? cartItems: submittedCartItems}, state: {prevPath: location.pathname}}}>
-              <h3> Checkout </h3>
+              <h3 className='checkout-text-container' onClick={handleCheckout}> Checkout </h3>
             </NavLink>
             <h3> {orderSubtotal.toFixed(2)} </h3>
           </div>
@@ -176,11 +189,6 @@ const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems}) 
               </div>
             </>
           ))} */}
-          {/* {(submittedCartItems && submittedCartItems.length=== 0) && (cartItems && cartItems.length === 0) && (
-            <div className='cart-pane-food-item-card-container'>
-              EMPTY CART :(
-            </div>
-          )} */}
           {cartItems?.length>0? cartItems.map(item=> (
             <>
               <div key={item.id} className='cart-pane-food-item-card-container'>
@@ -224,30 +232,7 @@ const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems}) 
               </div>
             </>
           ))}
-          {/* {submittedCartItems?.length>0 && submittedCartItems.map(item=>(
-            <>
-              <div key={item.id} className='cart-pane-food-item-card-container'>
-                <div className='cart-pane-quantity-container'>
-                  <div className='cart-pane-quantity-circle'>
-                    {item.quantity} <p style={{fontSize:'10px'}}>x</p>
-                  </div>
-                </div>
-                <div className='cart-pane-food-item-name-price-container'>
-                  <div className='cart-pane-food-item-name-container'>
-                    <h4 className='cart-pane-food-item-name-text-box'> {item.name}</h4>
-                  </div>
-                  <div className="cart-pane-food-item-price-container">
-                    <h4> ${(item.price*item.quantity).toFixed(2)}</h4>
-                  </div>
-                </div>
-                <div className='cart-pane-food-item-delete-container'>
-                  <div onClick={()=> handleDeleteItem(item)}><i class="fa-solid fa-trash-can"></i></div>
-                </div>
-              </div>
-            </>
-          ))} */}
         </div>
-
       </div>
     </>
   )
