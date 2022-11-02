@@ -30,7 +30,10 @@ const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems}) 
 
   useEffect(()=> {
     const element = checkoutButtonRef.current
-    // checkoutButton = document.getElementById('checkout-text')
+    // let [checkoutButton] = ["checkout-text"].map(document.getElementById.bind(document))
+    // console.log('checkout button inside use effect', checkoutButton)
+    // document.getElementById('checkout-text').bind(document)
+
     // console.log('checkout button.....', checkoutButton)
     // const handleCheckout = (e) => {
     //   console.log('inside useffect function for handle checkout')
@@ -47,39 +50,47 @@ const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems}) 
     // }
     console.log('element hereeee:', element)
 
-    element.addEventListener('click',(e)=> {
-      e.stopPropagation()
-      console.log('CLICKED BUTTON INSIDE EVENT LISTENER')
-      let orderStarted = localStorage.getItem("orderStarted")
-      if (orderStarted == 0){
-        // currently pending an order
-        console.log('order started is 0')
-        alert('You have a pending order! Please be patient')
-      } else {
-        console.log("order is completed! you can proceed to checkout")
-        return
-      }
-    })
+    // if (checkoutButton){
+    //   checkoutButton.addEventListener('click', (e)=> {
+    //     e.stopPropagation();
+    //     console.log('CHECKOUT OUT BUTTON EVENT LISTENER TRIGGEREDDD')
+    //     let orderStarted = localStorage.getItem("orderStarted")
+    //     if (orderStarted == 0){
+    //       e.stopPropagation()
+    //       // currently pending an order
+    //       console.log('order started is 0')
+    //       alert('You have a pending order! Please be patient')
+    //     } else {
+    //       console.log("order is completed! you can proceed to checkout")
+    //       return
+    //     }
+
+    //   }, false)
+    // }
+
+    if (checkoutButtonRef && element){
+      console.log('inside condiitoinalll..')
+      element.addEventListener('click',(e)=> {
+        console.log('CLICKED BUTTON INSIDE EVENT LISTENER')
+        let orderStarted = localStorage.getItem("orderStarted")
+        if (orderStarted == 0){
+          e.stopPropagation()
+          // currently pending an order
+          console.log('order started is 0')
+          alert('You have a pending order! Please be patient')
+        } else {
+          console.log("order is completed! you can proceed to checkout")
+          return
+        }
+      })
+    }
+
 
     // return () => {
     //   element?.removeEventListener('click', handleCheckout)
     // }
 
   }, [])
-
-  // const handleCheckout = (e) => {
-  //   console.log('inside useffect function for handle checkout')
-  //   let orderStarted = localStorage.getItem("orderStarted")
-  //   if (orderStarted == 0){
-  //     // currently pending an order
-  //     console.log('order started is 0')
-  //     alert('You have a pending order! Please be patient')
-  //     e.stopPropagation()
-  //   } else {
-  //     console.log("order is completed! you can proceed to checkout")
-  //     return
-  //   }
-  // }
 
 
   useEffect(()=>{
@@ -207,9 +218,9 @@ const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems}) 
       i=i+1
     }
   }
-  console.log('cart from LOCAL STORAGE in right pane:', cartFromLocalStorage)
-  console.log('cart items at the end in right pane passed as props', cartItems)
-  console.log('cart items from local storage at end in right pane', submittedCartItems )
+  // console.log('cart from LOCAL STORAGE in right pane:', cartFromLocalStorage)
+  // console.log('cart items at the end in right pane passed as props', cartItems)
+  // console.log('cart items from local storage at end in right pane', submittedCartItems )
 
   if (isOrderZero) return (
     <div className="cart-pane-main-container"> EMPTY CART </div>
@@ -229,34 +240,12 @@ const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems}) 
           <div className='checkout-button'>
             {/* <NavLink className="navlink" style={{color: "white"}} to={{pathname: `/restaurants/${restaurant? restaurant.id: restaurantId? restaurantId: storedRestaurant.id}/checkout`, data: {orderSubtotal: orderSubtotal, restaurant: restaurant? restaurant: storedRestaurant, setCartItems: setSubmittedCartItems}, state: {prevPath: location.pathname}}}> */}
             <NavLink className="navlink" style={{color: "white"}} to={{pathname: `/restaurants/${restaurant? restaurant.id: storedRestaurant.id}/checkout`, data: {orderSubtotal: orderSubtotal, restaurant: restaurant? restaurant: storedRestaurant, submittedCartItems: cartItems? cartItems: submittedCartItems}, state: {prevPath: location.pathname}}}>
-              <h3 id="checkout-text" className='checkout-text-container' ref={checkoutButtonRef}> Checkout </h3>
+              <h3 id="checkout-text" className='checkout-text-container' ref={checkoutButtonRef} style={{backgroundColor: 'green'}}> Checkout </h3>
             </NavLink>
             <h3> {orderSubtotal.toFixed(2)} </h3>
           </div>
         </div>
         <div className='cart-pane-food-items-container'>
-          {/* {cartItems.length>0 && cartItems.map(item=> (
-            <>
-              <div key={item.id} className='cart-pane-food-item-card-container'>
-                <div className='cart-pane-quantity-container'>
-                  <div className='cart-pane-quantity-circle'>
-                    {item.quantity} <p style={{fontSize:'10px'}}>x</p>
-                  </div>
-                </div>
-                <div className='cart-pane-food-item-name-price-container'>
-                  <div className='cart-pane-food-item-name-container'>
-                    <h4 className='cart-pane-food-item-name-text-box'> {item.name}</h4>
-                  </div>
-                  <div className="cart-pane-food-item-price-container">
-                    <h4> ${(item.price*item.quantity).toFixed(2)}</h4>
-                  </div>
-                </div>
-                <div className='cart-pane-food-item-delete-container'>
-                  <div onClick={()=> handleDeleteItem(item)}><i class="fa-solid fa-trash-can"></i></div>
-                </div>
-              </div>
-            </>
-          ))} */}
           {cartItems?.length>0? cartItems.map(item=> (
             <>
               <div key={item.id} className='cart-pane-food-item-card-container'>
