@@ -10,9 +10,9 @@ import { useTriggerCountdown } from '../../context/TriggerCountdown';
 import {useCancelTimer} from "../../context/CancelTimer"
 // make order started into context?? so it can access that value from Get Orders page too and reset OrderStarted = true
 
-let countdownFromStorage = localStorage.getItem('countdown')|| 0
+let countdownFromStorage = localStorage.getItem('countdown')||0
 let cartFromLocalStorage = JSON.parse(localStorage.getItem('cart' )||'[]')
-let orderStartedFromLocalStorage = localStorage.getItem('orderStarted') || 1
+let orderStartedFromLocalStorage = localStorage.getItem('orderStarted') ||1
 
 // ISSUE: countdown times for all deliveries is correct BUT hard refresh will reset the times to original times
 const FinalOrderConfirmation = () => {
@@ -34,7 +34,7 @@ const FinalOrderConfirmation = () => {
   console.log('duration in order confirm:', duration)
   const [submittedCartItems, setSubmittedCartItems] = useState(cartFromLocalStorage)
   const [orderStarted, setOrderStarted] = useState(orderStartedFromLocalStorage)
-  const [countdown, setCountdown] = useState(countdownFromStorage === 0 || orderStarted? duration: countdownFromStorage)
+  const [countdown, setCountdown] = useState(!countdownFromStorage || countdownFromStorage === 0 || Number(orderStarted)===1? duration: countdownFromStorage)
   // const [countdown, setCountdown] = useState(orderStarted && countdownFromStorage != 0 ? duration: countdownFromStorage)
   // const [countdown, setCountdown] = useState(countdownFromStorage === 0 || orderStartedFromLocalStorage? duration: countdownFromStorage)
 
@@ -155,8 +155,8 @@ const FinalOrderConfirmation = () => {
       // }
       if (countdownInSec <= 0) {
         setCountdown(0)
-        localStorage.setItem('countdown', 0)
-        localStorage.setItem('orderStarted', 1)
+        localStorage.setItem('countdown',0)
+        localStorage.setItem('orderStarted',1)
         setOrderStarted(1)
         orderStartedFromLocalStorage = 1
         setTriggerCountdown(true)
@@ -169,10 +169,10 @@ const FinalOrderConfirmation = () => {
       }
       countdownInSec-=1
       // if (Math.ceil(countdownInSec/60) != countdown){
-        setCountdown(Math.ceil(countdownInSec/60))
-        order = {...order, countdown: Math.ceil(countdownInSec/60)}
-        localStorage.setItem("countdown", Math.ceil(countdownInSec/60))
-        localStorage.setItem("orders", JSON.stringify({...order}))
+      setCountdown(Math.ceil(countdownInSec/60))
+      order = {...order, countdown: Math.ceil(countdownInSec/60)}
+      localStorage.setItem("countdown", Math.ceil(countdownInSec/60))
+      localStorage.setItem("orders", JSON.stringify({...order}))
       // }
     }, 1000)
 
