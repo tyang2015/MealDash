@@ -55,6 +55,8 @@ const Restaurants = () => {
     const [lenFastFood, setLenFastFood] = useState(0)
     const [lenEthiopian, setLenEthiopian] = useState(0)
     const [lenMediterranean, setLenMediterranean] = useState(0)
+    const [starsFilter, setStarsFilter] = useState([3, 3.5, 4, 4.5, 5])
+    const [minStarsFilter, setMinStarsFilter] = useState(Math.min(...starsFilter))
     const [categoryNum, setCategoryNum] = useState({
       Asian: 0,
       American: 0,
@@ -411,28 +413,6 @@ const Restaurants = () => {
         }
     }
 
-    // const handleCategorySelection = async (chosenCategory) => {
-    //   console.log('category clicked:', chosenCategory)
-    //   await setCategories({
-    //     ALL:"",
-    //     Asian: "",
-    //     American: "",
-    //     Breakfast: "",
-    //     Vegan: "",
-    //     Mexican: "",
-    //     Japanese: "",
-    //     Italian: "",
-    //     French: "",
-    //     FastFood: "",
-    //     Ethiopian:"",
-    //     Mediterranean: ""
-    //   })
-    //   let allEmpty = Object.values(categories).every(cat=> cat === "" )
-    //   if (allEmpty){
-    //     setCategories({...categories, [chosenCategory] : chosenCategory})
-    //   }
-
-    // }
     return (
         <>
           <NavBar setToggleCartPane={setToggleCartPane} toggleCartPane={toggleCartPane}/>
@@ -457,6 +437,15 @@ const Restaurants = () => {
                   </small>
                 </div>
               ))}
+            </div>
+            <div className='get-restaurants-filter-price-stars-time-container'>
+              <div className='star-rating-filter-container'>
+                <div>
+                  <div> Over {minStarsFilter}</div>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" dimensionOverrides="[object Object]" class="styles__StyledInlineSvg-sc-12l8vvi-0 djCUZq sc-1290d041-0 jHoJgS"><path d="M8.91126 0.588193C8.74945 0.230121 8.39293 0 7.99999 0C7.60705 0 7.25054 0.230121 7.08872 0.588193L5.37316 4.38448L1.23254 4.84295C0.841992 4.8862 0.512964 5.15416 0.39154 5.52786C0.270115 5.90157 0.378802 6.31175 0.669346 6.5763L3.7497 9.381L2.90621 13.4606C2.82665 13.8454 2.97982 14.2412 3.29771 14.4721C3.6156 14.7031 4.0393 14.7265 4.38068 14.5319L7.99999 12.469L11.6193 14.5319C11.9607 14.7265 12.3844 14.7031 12.7023 14.4721C13.0202 14.2412 13.1733 13.8454 13.0938 13.4606L12.2503 9.381L15.3306 6.5763C15.6212 6.31175 15.7299 5.90157 15.6084 5.52786C15.487 5.15416 15.158 4.8862 14.7674 4.84295L10.6268 4.38448L8.91126 0.588193Z" fill="currentColor"></path></svg>
+                </div>
+
+              </div>
             </div>
             {!isFiltered && categoryNum.Asian>0 && (
               <>

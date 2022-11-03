@@ -1,0 +1,40 @@
+.rating-connector-line-container{
+  width: 20em;
+  height: 3px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #E7E7E7 ;
+  position: absolute;
+  z-index:-1
+}
+
+
+.rating-connector-line{
+  background-color: purple;
+  border: black solid .5px;
+  width: 20em;
+  height: 3px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  /* position within the gray line connector */
+  position:absolute;
+  right: 0px;
+  z-index:2;
+}
+
+.dot{
+  border-radius: 50%;
+  background-color: black;
+  width: 10px;
+  height: 10px;
+  position:absolute;
+
+}
+
+input[type="radio"].radio-star-rating{
+  display: none;
+  background-color: black;
+
+}

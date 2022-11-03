@@ -11,8 +11,10 @@
 .navbar-searchbar-outer-container-with-dropdown{
   height: fit-content;
   /* background-color: lightgoldenrodyellow; */
-  width: 26.7rem;
-  border: 1px solid #DDDDDD;
+  width: 28.7rem;
+  border-left: 1px solid #DDDDDD;
+  border-right: 1px solid #DDDDDD;
+  border-bottom: 1px solid #DDDDDD;
   border-radius: 10px;
   position: absolute;
   top: .008em;
@@ -72,7 +74,7 @@
   justify-content: center;
   position:relative;
   z-index: 100;
-  left: 5em;
+  left: 4em;
 }
 
 
@@ -90,11 +92,12 @@
   justify-content: flex-end;
   height: 40px;
   width: 26.7rem;
-  /* background-color: lightgoldenrodyellow; */
   border-radius: 500px;
   background-color: #F7F7F7;
   position:absolute;
-  top: 1.1em;
+  top: 1em;
+  right: 1.02em
+
 }
 
 .navbar-searchbox{

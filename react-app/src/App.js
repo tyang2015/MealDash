@@ -24,6 +24,7 @@ import FinalOrderConfirmation from './components/FinalOrderConfirmation';
 import GetOrders from './components/GetOrders';
 import GetOrderReceipt from './components/GetOrderReceipt';
 import GetReviews from './components/GetReviews';
+import RatingFilter from './components/RatingFilter';
 
 
 function App() {
@@ -62,6 +63,9 @@ function App() {
           <Route path='/login' exact={true}>
             <LoginForm />
           </Route>
+          <Route path='/practice' exact={true}>
+            <RatingFilter />
+          </Route>
           <ProtectedRoute path='/users/:userId' exact={true} >
             <User />
           </ProtectedRoute>
@@ -92,6 +96,7 @@ function App() {
           <ProtectedRoute path='/restaurants/:restaurantId/orders/:orderId/new' exact={true} >
             <FinalOrderConfirmation/>
           </ProtectedRoute>
+
 
         </div>
       </Switch>
