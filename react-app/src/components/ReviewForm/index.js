@@ -37,7 +37,6 @@ const ReviewForm = ({formType, restaurant, reviewData, setReviewModal, reviews})
       stars,
       review
     }
-    //       setFinalAvgRating(String(Number(restaurant.avgRating).toFixed(2)))
 
     console.log('review obj before submission:', reviewObj)
     if (formType === "Create Review"){

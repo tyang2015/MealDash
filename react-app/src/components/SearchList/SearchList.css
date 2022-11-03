@@ -1,0 +1,88 @@
+/* .search-dropdown{
+  border: 1px solid rgba(55, 43, 43, 0.3);
+  position: absolute;
+  top: 68px;
+  width: 26.7rem;
+  right: 25.7%;
+  z-index: 2;
+  background-color: white;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border-radius: 3px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
+
+} */
+
+.search-dropdown{
+  width: 100%;
+  /* width: 26.7rem; */
+  /* width: 31.5em; */
+  /* height: fit-content; */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border-radius: 3px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
+  top: 800px;
+  margin-top: 4rem;
+  /* display: static; */
+  z-index:2;
+  background-color: white;
+
+
+}
+
+.search-dropdown-card{
+  display: flex;
+  flex-direction: row;
+
+}
+
+.search-dropdown-logo-container{
+  height: 65px;
+  width: 65px;
+  background-color: lightblue;
+}
+
+.search-dropdown-logo{
+  height:100%;
+  width:100%;
+}
+
+.search-dropdown-logo-text-container{
+  /* background-color: lightgoldenrodyellow; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.search-dropdown-restaurant-name{
+  font-weight: 550;
+  letter-spacing: -0.02ch;
+
+}
+
+.search-dropdown-restaurant-category{
+  color: rgb(73, 73, 73);
+  font-weight: 550;
+  letter-spacing: -0.02ch;
+  font-size: 15px;
+
+}
+.search-dropdown-restaurant-time-info{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  height: 15px;
+  /* background-color: lightcoral; */
+  font-size: 15px;
+  font-weight: 550;
+  color: rgb(73, 73, 73);
+  letter-spacing: -0.02ch;
+
+
+}

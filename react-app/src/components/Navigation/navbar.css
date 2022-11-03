@@ -1,11 +1,35 @@
 .navbar{
     width: 100%;
-    height: 50px;
+    height: 60px;
     /* background-color: lightcoral; */
     display:flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
     border-bottom: #E7E7E7 1px solid;
+    /* padding-right: -100em; */
+    /* padding-left: -5em; */
+}
+
+.navbar-searchbar-outer-container-with-dropdown{
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* justify-content: flex-end; */
+  height: fit-content;
+  background-color: lightblue;
+  width: 26.7rem;
+
+  position: absolute;
+  top: .3em;
+}
+
+.navbar-searchbar-inner-container-with-dropdown{
+  display: flex;
+  height: 100%;
+  width: 100%;
+  background-color: lightgoldenrodyellow;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .nav-bar-profile-button{
@@ -64,4 +88,66 @@
   align-items: center;
   height: 27px;
   justify-content: center;
+}
+
+
+
+.searchbar-magnify-glass-container{
+  /* background-color: lightgreen; */
+  width: 10%;
+  display: flex;
+  align-items: center;
+  justify-content:center ;
+  border-radius: 500px;
+}
+
+.navbar-searchbar-container{
+  display: flex;
+  justify-content: flex-end;
+  height: 40px;
+  width: 26.7rem;
+  background-color: lightgoldenrodyellow;
+  border-radius: 500px;
+  background-color: #F7F7F7;
+  /* margin-bottom: 200px; */
+  position:absolute;
+  top: 1.1em;
+}
+
+.navbar-searchbox{
+  border: none;
+  background-color: #F7F7F7;
+  /* width: 30em; */
+  width: 90%;
+  height:100%;
+  box-sizing: border-box;
+  border-radius: 500px;
+
+}
+
+.navbar-menu-logo-container{
+  display: flex;
+  width: 10em;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-searchbar-carticon-container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 31.5em;
+  /* margin-left: 65rem; */
+}
+
+#navbar-searchfield::placeholder{
+  color: rgb(118, 118, 118);
+  font-weight: 550;
+  font-size: 16px;
+  font-family: DD-TTNorms, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  letter-spacing: -0.02ch;
+}
+
+#navbar-searchfield{
+  padding-left: 5px;
 }
