@@ -1,36 +1,25 @@
 .navbar{
     width: 100%;
     height: 60px;
-    /* background-color: lightcoral; */
     display:flex;
     justify-content: space-evenly;
     align-items: center;
     border-bottom: #E7E7E7 1px solid;
-    /* padding-right: -100em; */
-    /* padding-left: -5em; */
+
 }
 
 .navbar-searchbar-outer-container-with-dropdown{
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* justify-content: flex-end; */
   height: fit-content;
-  background-color: lightblue;
+  /* background-color: lightgoldenrodyellow; */
   width: 26.7rem;
-
+  border: 1px solid #DDDDDD;
+  border-radius: 10px;
   position: absolute;
-  top: .3em;
+  top: .008em;
+
 }
 
-.navbar-searchbar-inner-container-with-dropdown{
-  display: flex;
-  height: 100%;
-  width: 100%;
-  background-color: lightgoldenrodyellow;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
+
 
 .nav-bar-profile-button{
   cursor:pointer;
@@ -45,17 +34,10 @@
 }
 
 .dropdown-container{
-    /* background-color: lightcyan;
-    display: flex;
-    flex-direction: column;
-    width: 180px;
-     */
      border: 1px solid rgba(55, 43, 43, 0.3);
      position: absolute;
      left: 10%;
      top: 3em;
-     /* margin-top: 1.4em;
-     margin-left: 3000em; */
      width: 12em;
      right: 4em;
      z-index: 1;
@@ -88,12 +70,14 @@
   align-items: center;
   height: 27px;
   justify-content: center;
+  position:relative;
+  z-index: 100;
+  left: 5em;
 }
 
 
 
 .searchbar-magnify-glass-container{
-  /* background-color: lightgreen; */
   width: 10%;
   display: flex;
   align-items: center;
@@ -106,10 +90,9 @@
   justify-content: flex-end;
   height: 40px;
   width: 26.7rem;
-  background-color: lightgoldenrodyellow;
+  /* background-color: lightgoldenrodyellow; */
   border-radius: 500px;
   background-color: #F7F7F7;
-  /* margin-bottom: 200px; */
   position:absolute;
   top: 1.1em;
 }
@@ -135,9 +118,10 @@
 .navbar-searchbar-carticon-container{
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 31.5em;
-  /* margin-left: 65rem; */
+  justify-content: flex-end;
+  width: 32em;
+  margin-right: 0px;
+  height: 70px;
 }
 
 #navbar-searchfield::placeholder{
