@@ -93,7 +93,6 @@ const OrderConfirmationRightPane = ({cartItems, directionsResponse, userCoordina
     console.log('orders from local storage:', localStorage.getItem('orders'))
     alert('We have confirmed your order!')
     setHasSubmitted(false)
-    // console.log("restaurant id after order submission:", restaurant.id)
     history.push({pathname: `/restaurants/${restaurant.id}/orders/${createdOrder?.id}/new`, state: {duration: newDuration, cartItems, restaurant, createdOrder, userCoordinates}})
     return
 

@@ -17,9 +17,7 @@ let orderStartedFromLocalStorage = localStorage.getItem('orderStarted') ||1
 
 // ISSUE: countdown times for all deliveries is correct BUT hard refresh will reset the times to original times
 const FinalOrderConfirmation = () => {
-  // const {orderStarted, setOrderStarted} = useOrderStarted();
   const {triggerCountdown, setTriggerCountdown} = useTriggerCountdown();
-  // const { cancelTimer, setCancelTimer } = useCancelTimer();
   const {deliveryIntervalObj, setDeliveryIntervalObj} = useDeliveryInterval();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -35,30 +33,27 @@ const FinalOrderConfirmation = () => {
   let userCoordinates = location?.state?.userCoordinates
   console.log('duration in order confirm:', duration)
   const [submittedCartItems, setSubmittedCartItems] = useState(cartFromLocalStorage)
-  const [orderStarted, setOrderStarted] = useState(orderStartedFromLocalStorage)
-  const [countdown, setCountdown] = useState(!countdownFromStorage || countdownFromStorage === 0 || Number(orderStarted)===1? duration: countdownFromStorage)
-  // const [countdown, setCountdown] = useState(orderStarted && countdownFromStorage != 0 ? duration: countdownFromStorage)
-  // const [countdown, setCountdown] = useState(countdownFromStorage === 0 || orderStartedFromLocalStorage? duration: countdownFromStorage)
+  const [orderStarted, setOrderStarted] = useState(localStorage.getItem('orderStarted') || 1)
+  const [countdown, setCountdown] = useState(!localStorage.getItem('countdown')|| localStorage.getItem('countdown') === 0 || Number(orderStarted)===1? duration: countdownFromStorage)
 
   console.log("order started at top of final order confirm:", orderStarted)
   console.log("countDOWN", countdown)
 
-  useEffect(()=> {
-    if (orderStarted) {
-      // countdownFromStorage = duration
-      setCountdown(duration)
-      setOrderStarted(0)
-    }
-  }, [])
+  // useEffect(()=> {
+  //   if (orderStarted) {
+  //     setCountdown(duration)
+  //     setOrderStarted(0)
+  //   }
+  // }, [])
 
 
   useEffect(()=>{
     localStorage.setItem('orderStarted', orderStarted)
   }, [orderStarted])
 
-  useEffect(()=> {
-    localStorage.setItem("orderStarted", orderStarted)
-  }, [orderStarted])
+  // useEffect(()=> {
+  //   localStorage.setItem("orderStarted", orderStarted)
+  // }, [orderStarted])
 
 
   const updateExistingOrderInStore = async (order) => {
@@ -89,10 +84,10 @@ const FinalOrderConfirmation = () => {
   useEffect(()=> {
     if (!orderStarted) return
     console.log('entering countdown useeffect after orderStarted is TRUE')
-    orderStartedFromLocalStorage = 0
+    console.log('trigger countdown inside useeffect:', triggerCountdown)
+    // orderStartedFromLocalStorage = 0
     // setOrderStarted(0)
     localStorage.setItem('orderStarted', 0)
-    // let countdownInSec = countdown* 60
     countdownFunc(countdown*60)
 
   }, [])

@@ -23,31 +23,39 @@ const GetReviews = () => {
   const [createReviewModal, setCreateReviewModal] = useState(false)
   const [avgStarRating, setAvgStarRating] = useState(String(Number(restaurantObj?.avgRating).toFixed(2)) || null)
   const [numReviews, setNumReviews] = useState(restaurantObj?.numReviews)
+  const [triggerUpdate, setTriggerUpdate] = useState(false)
   let restaurant = location?.state?.restaurant
   let finalAvgRating = location?.state?.finalAvgRating
   const [reviewsLength, setReviewsLength] = useState(restaurant?.numReviews)
 
   useEffect(()=> {
     const getNewReviews = async ()=> {
+      // handle creating new review
+      let totalStars;
       let newReviews = await dispatch(getReviews(id)).then(data=>{
         return data.reviews
       })
-      console.log('NEW REVIEWS INSIDE FUNCTION:', newReviews)
-      let totalStars;
       let allRatings = newReviews.map(review => review.stars)
+      let userIds = newReviews.map(review=> review.user_id)
       if (allRatings && allRatings.length> 0){
         totalStars = allRatings.reduce( (accum, cur)=> accum + cur)
       } else {
         setAvgStarRating("No")
       }
-      console.log('total stars insideL', totalStars)
       let avgRating = (totalStars/(allRatings.length)).toFixed(2)
       setAvgStarRating(avgRating)
+
+      // handle after deleting review
+      // const userIds = reviews.map(review=> review.user_id)
+      if (userIds?.length>0 && userIds.includes(sessionUser.id)) {
+        alert("Looks like you have already submitted a review. Only new customers can submit a review.")
+        setCreateReviewModal(false)
+      }
 
     }
     getNewReviews()
     setNumReviews(reviews.length)
-    // return
+
   }, [dispatch, reviews.length])
 
 
@@ -55,6 +63,28 @@ const GetReviews = () => {
     dispatch(getAllRestaurants())
 
   }, [dispatch])
+
+  // for updating a review, only avgRating should change
+  useEffect(()=> {
+    const updateRating = async ()=> {
+      let newReviews = await dispatch(getReviews(id)).then(data=>{
+        return data.reviews
+      })
+      let totalStars;
+      let allRatings = newReviews.map(review => review.stars)
+      if (allRatings && allRatings.length> 0){
+        totalStars = allRatings.reduce( (accum, cur)=> accum + cur)
+      } else {
+        setAvgStarRating("No")
+      }
+      // console.log('total stars insideL', totalStars)
+      let avgRating = (totalStars/(allRatings.length)).toFixed(2)
+      setAvgStarRating(avgRating)
+
+    }
+    updateRating()
+
+  }, [triggerUpdate])
 
 
   // useEffect(()=>{
@@ -195,8 +225,8 @@ const GetReviews = () => {
                       }}>
                         <svg style={{width: "40px", height: "40px"}} xmlns="http://www.w3.org/2000/svg" fill="#000000" viewBox="0 0 64 64" width="50px" height="50px"><path d="M 28 9 C 26.895 9 26 9.895 26 11 L 26 12 L 14 12 C 12.896 12 12 12.896 12 14 C 12 15.104 12.896 16 14 16 L 50 16 C 51.104 16 52 15.104 52 14 C 52 12.896 51.104 12 50 12 L 38 12 L 38 11 C 38 9.895 37.105 9 36 9 L 28 9 z M 15 18 L 15 46 C 15 49.309 17.691 52 21 52 L 43 52 C 46.309 52 49 49.309 49 46 L 49 18 L 15 18 z M 22.5 22 C 23.328 22 24 22.671 24 23.5 L 24 44.5 C 24 45.329 23.328 46 22.5 46 C 21.672 46 21 45.329 21 44.5 L 21 23.5 C 21 22.671 21.672 22 22.5 22 z M 32 22 C 33.104 22 34 22.896 34 24 L 34 44 C 34 45.104 33.104 46 32 46 C 30.896 46 30 45.104 30 44 L 30 24 C 30 22.896 30.896 22 32 22 z M 41.5 22 C 42.328 22 43 22.671 43 23.5 L 43 44.5 C 43 45.329 42.328 46 41.5 46 C 40.672 46 40 45.329 40 44.5 L 40 23.5 C 40 22.671 40.672 22 41.5 22 z"/></svg>
                       </div>
-                      {reviewModal && <EditReviewModal restaurant={restaurant? restaurant: restaurantObj} review={review} setReviewModal={setReviewModal}/>}
-                      {deleteReviewModal && <DeleteReviewModalComponent restaurant={restaurant? restaurant: restaurantObj} review={review} setDeleteReviewModal={setDeleteReviewModal}/>}
+                      {reviewModal && <EditReviewModal triggerUpdate={triggerUpdate} setTriggerUpdate={setTriggerUpdate} restaurant={restaurant? restaurant: restaurantObj} review={review} setReviewModal={setReviewModal}/>}
+                      {deleteReviewModal && <DeleteReviewModalComponent reviews={reviews} restaurant={restaurant? restaurant: restaurantObj} review={review} setDeleteReviewModal={setDeleteReviewModal}/>}
 
                     </>
                   )}

@@ -6,7 +6,7 @@ import "./ReviewForm.css";
 import Star from '../Star';
 
 
-const ReviewForm = ({formType, restaurant, reviewData, setReviewModal, reviews}) => {
+const ReviewForm = ({formType, triggerUpdate, setTriggerUpdate, restaurant, reviewData, setReviewModal}) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const sessionUser = useSelector(state => state.session.user);
@@ -38,7 +38,7 @@ const ReviewForm = ({formType, restaurant, reviewData, setReviewModal, reviews})
       review
     }
 
-    console.log('review obj before submission:', reviewObj)
+    // console.log('review obj before submission:', reviewObj)
     if (formType === "Create Review"){
       dispatch(createReview(restaurant?.id, reviewObj))
       dispatch(getReviews(restaurant?.id))
@@ -49,6 +49,7 @@ const ReviewForm = ({formType, restaurant, reviewData, setReviewModal, reviews})
     } else {
       dispatch(updateReview(restaurant.id, reviewObj))
       dispatch(getReviews(restaurant?.id))
+      setTriggerUpdate(!triggerUpdate)
       alert("Successfully updated your review!")
       setReviewModal(false)
       history.push({pathname:`/restaurants/${restaurant?.id}/reviews`, state: {restaurant, finalAvgRating: String(Number(restaurant?.avgRating).toFixed(2))}})

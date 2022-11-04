@@ -116,32 +116,6 @@ const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems}) 
   }, [forceCartUpdate, submittedCartItems, cartItems])
 
 
-  // const handleCheckout = () => {
-  //   console.log('checkout button clicked')
-  //   let orderStarted = localStorage.getItem("orderStarted")
-  //   console.log('order started:', orderStarted.trim())
-  //   if (orderStarted == 0){
-  //     // currently pending an order
-  //     console.log('order started is 0')
-  //     checkoutButtonRef.addEventListener('click', e=> {
-  //       alert("You can only have 1 progress in order at a time, please be patient until your order is completed")
-  //       e.stopPropagation();
-  //       return
-  //     })
-  //   } else {
-  //     console.log("order is completed! you can proceed to checkout")
-  //     return
-  //   }
-  // }
-  // if ( localStorage.getItem("orderStarted") == 0){
-  //   checkoutButton?.addEventListener('click', e=> {
-  //     alert("You can only have 1 progress in order at a time, please be patient until your order is completed")
-  //     e.stopPropagation();
-  //     return
-  //   })
-  // }
-
-
   const handleDeleteItem = (itemToDelete) => {
     let i =0;
     // console.log('delete food item button clicked')

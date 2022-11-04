@@ -5,12 +5,11 @@ import { DeleteReviewModal } from '../../context/DeleteReviewModal';
 import { deleteReview, getReviews } from '../../store/review';
 import "./DeleteReviewModal.css"
 
-const DeleteReviewModalComponent = ({review, restaurant, setDeleteReviewModal}) => {
+const DeleteReviewModalComponent = ({review, reviews, restaurant, setDeleteReviewModal}) => {
   const dispatch = useDispatch()
+  const sessionUser = useSelector(state => state.session.user);
   const history = useHistory()
-  // useEffect(()=>{
-  //   dispatch(deleteReview())
-  // }, [dispatch])
+
 
   const handleDelete = () => {
     console.log('restauranttt in delete function:', restaurant)
@@ -18,6 +17,7 @@ const DeleteReviewModalComponent = ({review, restaurant, setDeleteReviewModal}) 
     dispatch(getReviews(restaurant?.id))
     setDeleteReviewModal(false)
     history.push({pathname: `/restaurants/${restaurant.id}/reviews`})
+    console.log('review length after deleting:', reviews.length)
   }
 
   return (

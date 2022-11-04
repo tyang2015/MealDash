@@ -5,7 +5,7 @@ import { ReviewModal } from '../../context/Review';
 import ReviewForm from '../ReviewForm';
 import { getReviews } from '../../store/review';
 
-const EditReviewModal = ({setReviewModal, review, restaurant}) => {
+const EditReviewModal = ({triggerUpdate,setTriggerUpdate, setReviewModal, review, restaurant}) => {
   const dispatch = useDispatch()
   const {id} = useParams()
   // const reviews = useSelector(state=> Object.values(state.reviews))
@@ -21,7 +21,7 @@ const EditReviewModal = ({setReviewModal, review, restaurant}) => {
 
   return (
     <ReviewModal onClose={()=> setReviewModal(false)}>
-      <ReviewForm formType="Edit Review" reviewData={oldReview} restaurant={restaurant} setReviewModal={setReviewModal}/>
+      <ReviewForm formType="Edit Review" triggerUpdate={triggerUpdate} setTriggerUpdate={setTriggerUpdate} reviewData={oldReview} restaurant={restaurant} setReviewModal={setReviewModal}/>
     </ReviewModal>
   )
 }

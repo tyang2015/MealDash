@@ -5,12 +5,14 @@ import { DeleteOrderModal } from '../../context/DeleteOrderModal';
 import { deleteOrder } from '../../store/order';
 import {useCancelTimer} from "../../context/CancelTimer"
 import { useDeliveryInterval } from '../../context/DeliveryInterval';
+import { useTriggerCountdown } from '../../context/TriggerCountdown';
 import "./DeleteOrderModal.css"
 
 const DeleteOrderModalComponent = ({restaurant, setOrderDeleteModal, order}) => {
   const dispatch = useDispatch()
   const history = useHistory()
   // const {cancelTimer, setCancelTimer} = useCancelTimer();
+  const {triggerCountdown, setTriggerCountdown} = useTriggerCountdown();
   const { deliveryIntervalObj, setDeliveryIntervalObj } = useDeliveryInterval();
   console.log('deliveryIntervalObj')
   console.log('inside delete order modal component')
@@ -18,6 +20,7 @@ const DeleteOrderModalComponent = ({restaurant, setOrderDeleteModal, order}) => 
   const handleDelete = () => {
     dispatch(deleteOrder(restaurant.id, order.id ))
     clearInterval(deliveryIntervalObj)
+    setTriggerCountdown(true)
     localStorage.setItem('countdown',0)
     localStorage.setItem('orderStarted',1)
     localStorage.setItem('cart', JSON.stringify([]))
