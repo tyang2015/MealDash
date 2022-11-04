@@ -110,9 +110,6 @@ const GetRestaurant = () => {
         setCloseTime(closeHours.concat(":").concat(closeMinutes).concat(closeExtension))
       }
       if (todayInHours === actualCloseHours)console.log('hours match')
-
-      // if (todayInHours === actualOpenHours && todayInMinutes > Number(openMinutes)) {
-      // } else console.log('close!!!')
       if ((todayInHours < actualCloseHours && todayInHours > actualOpenHours) || (todayInHours === actualCloseHours && todayInMinutes < Number(closeMinutes))
       || (todayInHours === actualOpenHours && todayInMinutes > Number(openMinutes))) {
         setIsOpen(true)
@@ -179,7 +176,7 @@ const GetRestaurant = () => {
 
   useEffect(()=> {
     dispatch(getFoodItems(id))
-  }, [dispatch])
+  }, [dispatch, id])
 
 
   const handleDelete = e => {

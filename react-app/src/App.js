@@ -63,9 +63,9 @@ function App() {
           <Route path='/login' exact={true}>
             <LoginForm />
           </Route>
-          <Route path='/practice' exact={true}>
+          {/* <Route path='/practice' exact={true}>
             <RatingFilter />
-          </Route>
+          </Route> */}
           <ProtectedRoute path='/users/:userId' exact={true} >
             <User />
           </ProtectedRoute>
@@ -96,8 +96,6 @@ function App() {
           <ProtectedRoute path='/restaurants/:restaurantId/orders/:orderId/new' exact={true} >
             <FinalOrderConfirmation/>
           </ProtectedRoute>
-
-
         </div>
       </Switch>
     </BrowserRouter>

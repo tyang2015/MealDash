@@ -1,7 +1,7 @@
 .restaurant-main-grid-container{
     margin-top: 50px;
     /* background-color: lightgreen; */
-    width:57em;
+    width:71.5em;
     height: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -14,7 +14,7 @@
 
 /* style={{width: "57rem", margin:"auto", backgroundColor: "lightblue"}} */
 .restaurant-filtered-main-grid-container{
-  width:57em;
+  width:71.5em;
   height: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -28,7 +28,7 @@
 }
 
 .restaurant-category-title{
-  width: 57rem;
+  width: 71.5rem;
   margin: auto;
   margin-top:1.1em;
   margin-bottom: 1em;
@@ -37,28 +37,26 @@
 
 
 .get-restaurants-pic-container{
-  height: 160px;
-  min-height:  160px;
-  max-height: 300px;
+  height: 180px;
+  min-height:  180px;
+  max-height: 180px;
+  border-radius: 5px;
 }
 
-/* adding...dsfsd */
-.restaurant-card-container{
-
-}
 
 .get-restaurants-pic{
   height: 100%;
   width: 100%;
   object-fit: cover;
+  border-radius: 5px;
+
 
 }
 
 .restaurants-categories-container{
   display: grid;
-  width: 57em;
+  width: 71.5em;
   margin: auto;
-  /* justify-content: space-evenly; */
   grid-template-columns: repeat(12, 1fr);
   /* margin-top: 1em; */
 
@@ -76,7 +74,7 @@
 }
 
 .restaurants-no-items-display{
-  width:57em;
+  width:71.5em;
   height: 30em;
   /* background-color: lightcyan; */
   display: flex;
@@ -85,4 +83,64 @@
   margin: auto;
 }
 
+.get-restaurants-filter-price-stars-time-container{
+  /* background-color: lightgoldenrodyellow; */
+  /* color:white; */
+  width: 71.5em;
+  margin: auto;
+  display: flex;
+  /* justify-content: ; */
 
+}
+
+.star-rating-filter-container{
+  background-color: black;
+  color: white;
+  width: 8.5em;
+  height: 40px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 550;
+}
+
+.price-filter-container{
+  background-color: black;
+  color: white;
+  width: 5.8em;
+  height: 40px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 550;
+
+}
+
+.get-restaurants-star-rating-filter-left-container{
+  /* background-color: lightblue; */
+  width: 80%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.get-restaurants-star-rating-filter-right-container{
+  display: flex;
+  height: 100%;
+  width: 20%;
+  align-items: center;
+
+}
+
+.get-restaurants-price-filter-right-container{
+  display: flex;
+  height: 100%;
+  width: 20%;
+  align-items: center;
+  justify-content: center;
+  /* background-color: lightcoral; */
+  margin-left: 10px;
+}
