@@ -27,17 +27,20 @@ const SearchList = ({value}) => {
     // can compare strings like "08:00:01" and "08:00:02"
     let openingTime = restaurantObj.openTime
     let closingTime = restaurantObj.closeTime
-    let currentTime = String(currentDate.getHours()) + ":" + String(currentDate.getMinutes()) + ":" + String(currentDate.getSeconds())
+    let currentTime;
+    if (currentDate.getHours()< 10){
+      currentTime = "0" + String(currentDate.getHours()) + ":" + String(currentDate.getMinutes()) + ":" + String(currentDate.getSeconds())
+    } else {
+      currentTime = String(currentDate.getHours()) + ":" + String(currentDate.getMinutes()) + ":" + String(currentDate.getSeconds())
+    }
     console.log('current time rn:', currentTime)
+    console.log(openingTime)
+    console.log(closingTime)
+    if (currentTime> openingTime) console.log('current time after open time!')
+    if (currentTime<closingTime) console.log('current time before close time!!')
     if (currentTime > openingTime && currentTime < closingTime) {
       return true
     } else return false
-    // let restaurantOpenHours = restaurantObj.openTime.split(":")[0]
-    // let restaurantOpenMin = restaurantObj.openTime.split(":")[1]
-    // let restaurantOpenSec = restaurantObj.openTime.split(":")[2]
-    // let restaurantCloseHours = restaurantObj.closeTime.split(":")[0]
-    // let restaurantCloseMin = restaurantObj.closeTime.split(":")[1]
-    // let restaurantCloseSec = restaurantObj.closeTime.split(":")[2]
 
   }
 

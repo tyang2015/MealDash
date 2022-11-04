@@ -22,7 +22,7 @@ const RestaurantReviewsContainer = ({restaurant, finalAvgRating, sessionUser}) =
   console.log('top reviews:', topReviews)
   useEffect(()=>{
     dispatch(getReviews(id))
-  }, [dispatch])
+  }, [dispatch, id])
 
   // useEffect(()=> {
   //   // if only 1 review

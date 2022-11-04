@@ -4,17 +4,24 @@ import { useParams, useHistory, NavLink, useLocation } from 'react-router-dom';
 import { DeleteOrderModal } from '../../context/DeleteOrderModal';
 import { deleteOrder } from '../../store/order';
 import {useCancelTimer} from "../../context/CancelTimer"
+import { useDeliveryInterval } from '../../context/DeliveryInterval';
 import "./DeleteOrderModal.css"
 
 const DeleteOrderModalComponent = ({restaurant, setOrderDeleteModal, order}) => {
   const dispatch = useDispatch()
   const history = useHistory()
-  const {cancelTimer, setCancelTimer} = useCancelTimer();
+  // const {cancelTimer, setCancelTimer} = useCancelTimer();
+  const { deliveryIntervalObj, setDeliveryIntervalObj } = useDeliveryInterval();
+  console.log('deliveryIntervalObj')
   console.log('inside delete order modal component')
 
   const handleDelete = () => {
     dispatch(deleteOrder(restaurant.id, order.id ))
-    setCancelTimer(true)
+    clearInterval(deliveryIntervalObj)
+    localStorage.setItem('countdown',0)
+    localStorage.setItem('orderStarted',1)
+    localStorage.setItem('cart', JSON.stringify([]))
+    localStorage.setItem('orders', JSON.stringify({...JSON.parse(localStorage.getItem('orders')), [order.id]: {...order, countdown: 0, orderCompleted: true} }))
     setOrderDeleteModal(false)
     history.push({pathname: `/orders`})
   }

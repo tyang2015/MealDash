@@ -8,6 +8,7 @@ import { getReviews } from '../../store/review';
 import "./GetReviews.css"
 import DeleteReviewModalComponent from '../DeleteReviewModal';
 import { getAllRestaurants } from '../../store/restaurant';
+import { useDeliveryInterval } from '../../context/DeliveryInterval';
 
 const GetReviews = () => {
   const dispatch = useDispatch()
@@ -26,55 +27,28 @@ const GetReviews = () => {
   let finalAvgRating = location?.state?.finalAvgRating
   const [reviewsLength, setReviewsLength] = useState(restaurant?.numReviews)
 
-  // console.log("reviews:", reviews)
-  // console.log('restaurnat?', restaurant)
-  // console.log('avg Star ratinggg:', avgStarRating)
-  // console.log('restaurnat obj?', restaurantObj)
-  // console.log('reviews length in get reviews:', reviewsLength)
   useEffect(()=> {
-    // dispatch(getReviews(id))
     const getNewReviews = async ()=> {
       let newReviews = await dispatch(getReviews(id)).then(data=>{
         return data.reviews
       })
       console.log('NEW REVIEWS INSIDE FUNCTION:', newReviews)
-      // return newReviews
+      let totalStars;
       let allRatings = newReviews.map(review => review.stars)
-      console.log("all ratingsssesf:", allRatings)
-      let totalStars = allRatings.reduce( (accum, cur)=> accum + cur)
+      if (allRatings && allRatings.length> 0){
+        totalStars = allRatings.reduce( (accum, cur)=> accum + cur)
+      } else {
+        setAvgStarRating("No")
+      }
       console.log('total stars insideL', totalStars)
       let avgRating = (totalStars/(allRatings.length)).toFixed(2)
       setAvgStarRating(avgRating)
 
     }
     getNewReviews()
-
-    // let reviewData =  dispatch(getReviews(id)).then((data)=>{
-    //   console.log('data:', data.reviews)
-    //   newReviews = data.reviews
-    //   return data.reviews
-    // }).catch( async (res)=> {
-    //   const data = await res.json();
-    //   console.log('data in catch block', data)
-    //   if (data) return data.reviews
-    // })
-
-    // console.log("NEW REVIEWSSS:", newReviews)
-    // console.log("review data:", reviewData)
-    // let allRatings = newReviews.map(review => review.stars)
-    // console.log('all ratings:', allRatings)
-    // let totalStars = allRatings.reduce( (accum, cur)=> accum + cur, allRatings[0])
-    // let avgRating = (totalStars/(allRatings.length)).toFixed(2)
-    // console.log('NEW AVG RATING:', avgRating)
-    // setAvgStarRating(avgRating)
-
-
-    // setAvgStarRating(String(Number(restaurantObj?.avgRating).toFixed(2)))
     setNumReviews(reviews.length)
     // return
   }, [dispatch, reviews.length])
-  // console.log('new rating:', avgStarRating)
-  // console.log('number reviews:', numReviews)
 
 
   useEffect(()=> {
@@ -123,14 +97,14 @@ const GetReviews = () => {
           <div className='get-reviews-page-bottom-left-pane'>
             <div className='get-reviews-page-avg-rating-container'>
               {/* {restaurantObj?.avgRating == "0"? "No": Number(restaurantObj?.avgRating).toFixed(2)} */}
-              {!avgStarRating? "No": avgStarRating}
+              {!avgStarRating || avgStarRating == NaN? "No": avgStarRating}
               <div style={{display: 'flex', alignItems: "center"}}>
                 <svg style={{marginLeft: '6px'}}width="28" height="28" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="styles__StyledInlineSvg-sc-12l8vvi-0 djCUZq"><path d="M8.91126 0.588193C8.74945 0.230121 8.39293 0 7.99999 0C7.60705 0 7.25054 0.230121 7.08872 0.588193L5.37316 4.38448L1.23254 4.84295C0.841992 4.8862 0.512964 5.15416 0.39154 5.52786C0.270115 5.90157 0.378802 6.31175 0.669346 6.5763L3.7497 9.381L2.90621 13.4606C2.82665 13.8454 2.97982 14.2412 3.29771 14.4721C3.6156 14.7031 4.0393 14.7265 4.38068 14.5319L7.99999 12.469L11.6193 14.5319C11.9607 14.7265 12.3844 14.7031 12.7023 14.4721C13.0202 14.2412 13.1733 13.8454 13.0938 13.4606L12.2503 9.381L15.3306 6.5763C15.6212 6.31175 15.7299 5.90157 15.6084 5.52786C15.487 5.15416 15.158 4.8862 14.7674 4.84295L10.6268 4.38448L8.91126 0.588193Z" fill="#E8C500"></path></svg>
               </div>
             </div>
             <div className='get-reviews-page-number-ratings-container'>
               {/* {restaurantObj?.numReviews == "0"? "No":  `${restaurantObj?.numReviews}+` } ratings */}
-              {restaurantObj?.numReviews == "0"? "No": `${numReviews}+ ratings` }
+              {restaurantObj?.numReviews == "0"? "No Ratings": `${numReviews}+ ratings` }
             </div>
             <div className='get-reviews-page-add-a-review-button' onClick={()=> setCreateReviewModal(true)}>
               <div>

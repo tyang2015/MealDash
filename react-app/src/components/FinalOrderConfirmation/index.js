@@ -8,6 +8,7 @@ import { updateOrder, getOrders } from '../../store/order';
 // import { useOrderStarted } from '../../context/OrderStartedContext';
 import { useTriggerCountdown } from '../../context/TriggerCountdown';
 import {useCancelTimer} from "../../context/CancelTimer"
+import {useDeliveryInterval} from "../../context/DeliveryInterval"
 // make order started into context?? so it can access that value from Get Orders page too and reset OrderStarted = true
 
 let countdownFromStorage = localStorage.getItem('countdown')||0
@@ -18,7 +19,8 @@ let orderStartedFromLocalStorage = localStorage.getItem('orderStarted') ||1
 const FinalOrderConfirmation = () => {
   // const {orderStarted, setOrderStarted} = useOrderStarted();
   const {triggerCountdown, setTriggerCountdown} = useTriggerCountdown();
-  const { cancelTimer, setCancelTimer } = useCancelTimer();
+  // const { cancelTimer, setCancelTimer } = useCancelTimer();
+  const {deliveryIntervalObj, setDeliveryIntervalObj} = useDeliveryInterval();
   const location = useLocation();
   const dispatch = useDispatch();
   const {orderId, restaurantId} = useParams();
@@ -54,32 +56,9 @@ const FinalOrderConfirmation = () => {
     localStorage.setItem('orderStarted', orderStarted)
   }, [orderStarted])
 
-  // useEffect(()=> {
-  //   if (!orderStarted) return
-  //   console.log("inside the initial use effect for setting countdown to duration")
-  //   // setCountdown(duration)
-  //   // if (orderStarted){
-  //   //   countdownFunc()
-  //   // }
-  // }, [])
-
-  // useEffect(()=> {
-  //   localStorage.setItem('countdown', countdown)
-  //   localStorage.setItem('orders',JSON.stringify({[orderId]: {...order, countdown: duration}}))
-  // }, [countdown])
-
-
   useEffect(()=> {
     localStorage.setItem("orderStarted", orderStarted)
   }, [orderStarted])
-
-  // useEffect(()=>{
-  //   localStorage.setItem("countdown", countdown)
-  // }, [countdown])
-
-  // useEffect(()=>{
-  //   localStorage.setItem("orders", JSON.stringify({...order}))
-  // }, [order])
 
 
   const updateExistingOrderInStore = async (order) => {
@@ -106,32 +85,6 @@ const FinalOrderConfirmation = () => {
 
   }
 
-  // const countdownFunc = async () => {
-  //   // if (!triggerCountdown) return
-  //   if (!orderStarted) return
-  //   setOrderStarted(0)
-  //   let countdownInSec = countdown* 60
-  //   let deliveryInterval = setInterval(()=> {
-  //     console.log('timer:', countdownInSec)
-  //     if (countdownInSec <= 0) {
-  //       setCountdown(0)
-  //       localStorage.setItem('countdown', 0)
-  //       setOrderStarted(1)
-  //       // setTriggerCountdown(true)
-  //       updateExistingOrderInStore(order)
-  //       localStorage.setItem('orders', JSON.stringify({...JSON.parse(localStorage.getItem('orders')), [orderId]: {...order, countdown: 0, orderCompleted: true} }))
-  //       console.log("countdown completed")
-  //       clearInterval(deliveryInterval);
-  //       return
-  //     }
-  //     countdownInSec-=1
-  //     if (Math.ceil(countdownInSec/60) != countdown){
-  //       localStorage.setItem('countdown', Math.ceil(countdownInSec/60) )
-  //       setCountdown(Math.ceil(countdownInSec/60))
-  //       localStorage.setItem('orders', JSON.stringify({...JSON.parse(localStorage.getItem('orders')),[orderId]: {...order, countdown: Math.ceil(countdownInSec/60)}  }))
-  //     }
-  //   }, 1000)
-  // }
 
   useEffect(()=> {
     if (!orderStarted) return
@@ -149,6 +102,7 @@ const FinalOrderConfirmation = () => {
     await setTriggerCountdown(false)
     let deliveryInterval = setInterval(()=> {
       console.log('timer:', countdownInSec)
+      setDeliveryIntervalObj(deliveryInterval)
       // if (cancelTimer){
       //   console.log('CANCEL TIMER ACTIVATED')
       //   clearInterval(deliveryInterval);

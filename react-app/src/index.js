@@ -11,23 +11,24 @@ import RatingDropdownProvider from './context/RatingDropdown';
 import PriceDropdownProvider from './context/PriceDropdown';
 import { ModalProvider } from './context/Modal';
 import CancelTimerProvider from './context/CancelTimer';
+import DeliveryIntervalProvider from './context/DeliveryInterval';
 const store = configureStore();
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ModalProvider>
-        <CancelTimerProvider>
-            <TriggerCountdownProvider>
-              <RatingDropdownProvider>
-                <PriceDropdownProvider>
-                  <ToggleCartProvider>
-                    <App />
-                  </ToggleCartProvider>
-                </PriceDropdownProvider>
-              </RatingDropdownProvider>
-            </TriggerCountdownProvider>
-        </CancelTimerProvider>
+        <DeliveryIntervalProvider>
+          <TriggerCountdownProvider>
+            <RatingDropdownProvider>
+              <PriceDropdownProvider>
+                <ToggleCartProvider>
+                  <App />
+                </ToggleCartProvider>
+              </PriceDropdownProvider>
+            </RatingDropdownProvider>
+          </TriggerCountdownProvider>
+        </DeliveryIntervalProvider>
       </ModalProvider>
     </Provider>
   </React.StrictMode>,

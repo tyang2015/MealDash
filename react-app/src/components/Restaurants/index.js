@@ -412,7 +412,7 @@ const Restaurants = () => {
                   {category === "FastFood" && <img style={{height:'3.8em', width: '3.8em'}} src={fastFoodIcon}/>}
                   {category === "Ethiopian" && <img style={{height:'3.8em', width: '3.8em'}} src={ethiopianIcon}/>}
                   {category === "Mediterranean" && <img style={{height:'3.8em', width: '3.8em'}} src={mediterraneanIcon}/>}
-                  <small style={{fontSize: "10px"}}>
+                  <small style={{fontSize: "10px", color: "red"}} >
                   {category}
                   </small>
                 </div>

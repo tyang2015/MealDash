@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useHistory } from 'react-router-dom';
 import FinalConfirmationNavBar from '../FinalConfirmationNavBar';
 import "./CartRightPane.css";
 import { useToggleCart } from '../../context/ToggleCartContext';
@@ -16,67 +16,27 @@ const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems}) 
   console.log('cart items from right pane passed as props', cartItems)
   const {toggleCartPane, setToggleCartPane} = useToggleCart();
   const location = useLocation();
+  const history = useHistory();
   const [orderSubtotal, setOrderSubtotal] = useState(0)
   const checkoutButtonRef = useRef(null)
   let [submittedCartItems, setSubmittedCartItems] = useState(JSON.parse(localStorage.getItem('cart'))||[])
-  // let [restaurantId, setRestaurantId] = useState(cartItems?.length>0? cartItems[0].Restaurant.id: submittedCartItems?.length>0?
-  //   submittedCartItems[0].Restaurant.id:restaurantFromLocalStorage? restaurantFromLocalStorage.id: "")
-  // let [storedRestaurant, setStoredRestaurant] = useState(restaurantId? restaurantFromLocalStorage[`${restaurantId}`] : {})
   let [storedRestaurant, setStoredRestaurant] = useState(submittedCartItems?.length>0? submittedCartItems[0].Restaurant : restaurantFromLocalStorage!="{}"? restaurantFromLocalStorage: cartItems?.length> 0? cartItems[0].Restaurant: {})
   const [isOrderZero, setIsOrderZero] = useState(false)
-  // let checkoutButton = document.querySelector("h3.checkout-text-container")
-  // let checkoutButton;
+
   console.log('checkout button', checkoutButtonRef.current)
 
   useEffect(()=> {
     const element = checkoutButtonRef.current
-    // let [checkoutButton] = ["checkout-text"].map(document.getElementById.bind(document))
-    // console.log('checkout button inside use effect', checkoutButton)
-    // document.getElementById('checkout-text').bind(document)
 
-    // console.log('checkout button.....', checkoutButton)
-    // const handleCheckout = (e) => {
-    //   console.log('inside useffect function for handle checkout')
-    //   let orderStarted = localStorage.getItem("orderStarted")
-    //   if (orderStarted == 0){
-    //     // currently pending an order
-    //     console.log('order started is 0')
-    //     alert('You have a pending order! Please be patient')
-    //     e.stopPropagation()
-    //   } else {
-    //     console.log("order is completed! you can proceed to checkout")
-    //     return
-    //   }
-    // }
-    console.log('element hereeee:', element)
-
-    // if (checkoutButton){
-    //   checkoutButton.addEventListener('click', (e)=> {
-    //     e.stopPropagation();
-    //     console.log('CHECKOUT OUT BUTTON EVENT LISTENER TRIGGEREDDD')
-    //     let orderStarted = localStorage.getItem("orderStarted")
-    //     if (orderStarted == 0){
-    //       e.stopPropagation()
-    //       // currently pending an order
-    //       console.log('order started is 0')
-    //       alert('You have a pending order! Please be patient')
-    //     } else {
-    //       console.log("order is completed! you can proceed to checkout")
-    //       return
-    //     }
-
-    //   }, false)
-    // }
 
     if (checkoutButtonRef && element){
-      console.log('inside condiitoinalll..')
       element.addEventListener('click',(e)=> {
-        console.log('CLICKED BUTTON INSIDE EVENT LISTENER')
         let orderStarted = localStorage.getItem("orderStarted")
         if (orderStarted == 0){
           e.stopPropagation()
+          e.preventDefault()
           // currently pending an order
-          console.log('order started is 0')
+          // console.log('order started is 0')
           alert('You have a pending order! Please be patient')
         } else {
           console.log("order is completed! you can proceed to checkout")
@@ -85,13 +45,11 @@ const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems}) 
       })
     }
 
-
     // return () => {
     //   element?.removeEventListener('click', handleCheckout)
     // }
 
   }, [])
-
 
   useEffect(()=>{
     if (submittedCartItems?.length>0){
@@ -220,11 +178,24 @@ const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems}) 
   }
   // console.log('cart from LOCAL STORAGE in right pane:', cartFromLocalStorage)
   // console.log('cart items at the end in right pane passed as props', cartItems)
-  // console.log('cart items from local storage at end in right pane', submittedCartItems )
+  // console.log('cart items from local storage at end in right pane', submittedCartItems)
 
   if (isOrderZero) return (
     <div className="cart-pane-main-container"> EMPTY CART </div>
   )
+
+  const handleCheckout = () => {
+    let orderStarted = localStorage.getItem("orderStarted")
+    console.log('order started from storagee:', orderStarted)
+    if (orderStarted == 0){
+      alert('You have a pending order! Please be patient')
+      return
+    } else {
+      history.push({pathname: `/restaurants/${restaurant? restaurant.id: storedRestaurant.id}/checkout`, data: {orderSubtotal: orderSubtotal, restaurant: restaurant? restaurant: storedRestaurant, submittedCartItems: cartItems? cartItems: submittedCartItems}, state: {prevPath: location.pathname}})
+    }
+
+  }
+
 
   return (
     <>
@@ -239,9 +210,10 @@ const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems}) 
         <div className='checkout-button-container'>
           <div className='checkout-button'>
             {/* <NavLink className="navlink" style={{color: "white"}} to={{pathname: `/restaurants/${restaurant? restaurant.id: restaurantId? restaurantId: storedRestaurant.id}/checkout`, data: {orderSubtotal: orderSubtotal, restaurant: restaurant? restaurant: storedRestaurant, setCartItems: setSubmittedCartItems}, state: {prevPath: location.pathname}}}> */}
-            <NavLink className="navlink" style={{color: "white"}} to={{pathname: `/restaurants/${restaurant? restaurant.id: storedRestaurant.id}/checkout`, data: {orderSubtotal: orderSubtotal, restaurant: restaurant? restaurant: storedRestaurant, submittedCartItems: cartItems? cartItems: submittedCartItems}, state: {prevPath: location.pathname}}}>
+            {/* <button className="navlink" style={{color: "white"}} to={{pathname: `/restaurants/${restaurant? restaurant.id: storedRestaurant.id}/checkout`, data: {orderSubtotal: orderSubtotal, restaurant: restaurant? restaurant: storedRestaurant, submittedCartItems: cartItems? cartItems: submittedCartItems}, state: {prevPath: location.pathname}}}> */}
+            <button onClick={handleCheckout} className="navlink" style={{color: "white"}} >
               <h3 id="checkout-text" className='checkout-text-container' ref={checkoutButtonRef} style={{backgroundColor: 'green'}}> Checkout </h3>
-            </NavLink>
+            </button>
             <h3> {orderSubtotal.toFixed(2)} </h3>
           </div>
         </div>
