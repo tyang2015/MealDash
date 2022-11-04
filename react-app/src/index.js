@@ -7,6 +7,8 @@ import configureStore from './store';
 import ToggleCartProvider from './context/ToggleCartContext';
 import OrderStartedProvider from './context/OrderStartedContext';
 import TriggerCountdownProvider from './context/TriggerCountdown';
+import RatingDropdownProvider from './context/RatingDropdown';
+import PriceDropdownProvider from './context/PriceDropdown';
 import { ModalProvider } from './context/Modal';
 import CancelTimerProvider from './context/CancelTimer';
 const store = configureStore();
@@ -16,13 +18,15 @@ ReactDOM.render(
     <Provider store={store}>
       <ModalProvider>
         <CancelTimerProvider>
-          <OrderStartedProvider>
             <TriggerCountdownProvider>
-            <ToggleCartProvider>
-              <App />
-            </ToggleCartProvider>
+              <RatingDropdownProvider>
+                <PriceDropdownProvider>
+                  <ToggleCartProvider>
+                    <App />
+                  </ToggleCartProvider>
+                </PriceDropdownProvider>
+              </RatingDropdownProvider>
             </TriggerCountdownProvider>
-          </OrderStartedProvider>
         </CancelTimerProvider>
       </ModalProvider>
     </Provider>

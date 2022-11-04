@@ -7,25 +7,97 @@ import CreateReviewFormModal from '../CreateReviewFormModal';
 import { getReviews } from '../../store/review';
 import "./GetReviews.css"
 import DeleteReviewModalComponent from '../DeleteReviewModal';
+import { getAllRestaurants } from '../../store/restaurant';
 
 const GetReviews = () => {
   const dispatch = useDispatch()
   const location = useLocation()
-  const {id} = useParams()
+  const {id} = useParams();
   const reviews = useSelector(state=> Object.values(state.reviews))
+  const restaurantObj = useSelector(state => state.restaurants[id])
   const sessionUser = useSelector(state=> state.session.user)
   const [reviewObj, setReviewObj] = useState(null)
   const [reviewModal, setReviewModal] = useState(false)
   const [deleteReviewModal, setDeleteReviewModal] = useState(false)
   const [createReviewModal, setCreateReviewModal] = useState(false)
+  const [avgStarRating, setAvgStarRating] = useState(String(Number(restaurantObj?.avgRating).toFixed(2)) || null)
+  const [numReviews, setNumReviews] = useState(restaurantObj?.numReviews)
   let restaurant = location?.state?.restaurant
   let finalAvgRating = location?.state?.finalAvgRating
-  // console.log(restaurant)
-  console.log("reviews:", reviews)
+  const [reviewsLength, setReviewsLength] = useState(restaurant?.numReviews)
+
+  // console.log("reviews:", reviews)
+  // console.log('restaurnat?', restaurant)
+  // console.log('avg Star ratinggg:', avgStarRating)
+  // console.log('restaurnat obj?', restaurantObj)
+  // console.log('reviews length in get reviews:', reviewsLength)
+  useEffect(()=> {
+    // dispatch(getReviews(id))
+    const getNewReviews = async ()=> {
+      let newReviews = await dispatch(getReviews(id)).then(data=>{
+        return data.reviews
+      })
+      console.log('NEW REVIEWS INSIDE FUNCTION:', newReviews)
+      // return newReviews
+      let allRatings = newReviews.map(review => review.stars)
+      console.log("all ratingsssesf:", allRatings)
+      let totalStars = allRatings.reduce( (accum, cur)=> accum + cur)
+      console.log('total stars insideL', totalStars)
+      let avgRating = (totalStars/(allRatings.length)).toFixed(2)
+      setAvgStarRating(avgRating)
+
+    }
+    getNewReviews()
+
+    // let reviewData =  dispatch(getReviews(id)).then((data)=>{
+    //   console.log('data:', data.reviews)
+    //   newReviews = data.reviews
+    //   return data.reviews
+    // }).catch( async (res)=> {
+    //   const data = await res.json();
+    //   console.log('data in catch block', data)
+    //   if (data) return data.reviews
+    // })
+
+    // console.log("NEW REVIEWSSS:", newReviews)
+    // console.log("review data:", reviewData)
+    // let allRatings = newReviews.map(review => review.stars)
+    // console.log('all ratings:', allRatings)
+    // let totalStars = allRatings.reduce( (accum, cur)=> accum + cur, allRatings[0])
+    // let avgRating = (totalStars/(allRatings.length)).toFixed(2)
+    // console.log('NEW AVG RATING:', avgRating)
+    // setAvgStarRating(avgRating)
+
+
+    // setAvgStarRating(String(Number(restaurantObj?.avgRating).toFixed(2)))
+    setNumReviews(reviews.length)
+    // return
+  }, [dispatch, reviews.length])
+  // console.log('new rating:', avgStarRating)
+  // console.log('number reviews:', numReviews)
+
 
   useEffect(()=> {
-    dispatch(getReviews(id))
+    dispatch(getAllRestaurants())
+
   }, [dispatch])
+
+
+  // useEffect(()=>{
+  //   // const calcRatingAndNumReviews = () => {
+  //   let newReviews = Object.values(dispatch(getAllRestaurants()))
+  //   console.log("NEW REVIEWSSS:", newReviews)
+  //   let allRatings = newReviews.map(review => review.stars)
+  //   console.log('all ratings:', allRatings)
+  //   let totalStars = allRatings.reduce( (accum, cur)=> accum + cur, allRatings[0])
+  //   let avgRating = (totalStars/(allRatings.length)).toFixed(2)
+  //   console.log('NEW AVG RATING:', avgRating)
+  //   setAvgStarRating(avgRating)
+  //   setNumReviews(newReviews.length)
+  //     // return avgRating
+  //   // }
+
+  // }, [reviews.length])
 
   const convertReviewDate = (review) => {
     let dateInp= new Date(review.createdAt)
@@ -43,27 +115,29 @@ const GetReviews = () => {
         <div className='get-reviews-page-back-to-restaurant-container'>
           <NavLink to={{pathname: `/restaurants/${id}`}} className="get-reviews-back-to-restaurant-button navlink">
             <svg width="12" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="styles__StyledInlineSvg-sc-12l8vvi-0 djCUZq"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.2071 3.29289C10.5976 3.68342 10.5976 4.31658 10.2071 4.70711L6.91421 8L10.2071 11.2929C10.5976 11.6834 10.5976 12.3166 10.2071 12.7071C9.81658 13.0976 9.18342 13.0976 8.79289 12.7071L4.79289 8.70711C4.60536 8.51957 4.5 8.26522 4.5 8C4.5 7.73478 4.60536 7.48043 4.79289 7.29289L8.79289 3.29289C9.18342 2.90237 9.81658 2.90237 10.2071 3.29289Z" fill="currentColor"></path></svg>
-            <div style={{textDecoration:"underline", marginLeft: '20px'}}> {restaurant?.name} </div>
+            <div style={{textDecoration:"underline", marginLeft: '20px'}}> {restaurant? restaurant.name: restaurantObj?.name} </div>
           </NavLink>
         </div>
         <div style={{fontSize:"40px", fontWeight: "700", letterSpacing: "-0.02ch"}}> Ratings & Reviews </div>
         <div className='get-reviews-page-bottom-container'>
           <div className='get-reviews-page-bottom-left-pane'>
             <div className='get-reviews-page-avg-rating-container'>
-              {restaurant?.avgRating == "0"? null: finalAvgRating}
+              {/* {restaurantObj?.avgRating == "0"? "No": Number(restaurantObj?.avgRating).toFixed(2)} */}
+              {!avgStarRating? "No": avgStarRating}
               <div style={{display: 'flex', alignItems: "center"}}>
                 <svg style={{marginLeft: '6px'}}width="28" height="28" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="styles__StyledInlineSvg-sc-12l8vvi-0 djCUZq"><path d="M8.91126 0.588193C8.74945 0.230121 8.39293 0 7.99999 0C7.60705 0 7.25054 0.230121 7.08872 0.588193L5.37316 4.38448L1.23254 4.84295C0.841992 4.8862 0.512964 5.15416 0.39154 5.52786C0.270115 5.90157 0.378802 6.31175 0.669346 6.5763L3.7497 9.381L2.90621 13.4606C2.82665 13.8454 2.97982 14.2412 3.29771 14.4721C3.6156 14.7031 4.0393 14.7265 4.38068 14.5319L7.99999 12.469L11.6193 14.5319C11.9607 14.7265 12.3844 14.7031 12.7023 14.4721C13.0202 14.2412 13.1733 13.8454 13.0938 13.4606L12.2503 9.381L15.3306 6.5763C15.6212 6.31175 15.7299 5.90157 15.6084 5.52786C15.487 5.15416 15.158 4.8862 14.7674 4.84295L10.6268 4.38448L8.91126 0.588193Z" fill="#E8C500"></path></svg>
               </div>
             </div>
             <div className='get-reviews-page-number-ratings-container'>
-              {restaurant?.numReviews == "0"? "No": `${restaurant?.numReviews}+`} ratings
+              {/* {restaurantObj?.numReviews == "0"? "No":  `${restaurantObj?.numReviews}+` } ratings */}
+              {restaurantObj?.numReviews == "0"? "No": `${numReviews}+ ratings` }
             </div>
             <div className='get-reviews-page-add-a-review-button' onClick={()=> setCreateReviewModal(true)}>
               <div>
                 Add a Review
               </div>
             </div>
-            {createReviewModal && <CreateReviewFormModal restaurant={restaurant} setReviewModal={setCreateReviewModal}/>}
+            {createReviewModal && <CreateReviewFormModal restaurant={restaurant? restaurant: restaurantObj} setReviewModal={setCreateReviewModal}/>}
           </div>
           <div className='get-reviews-page-bottom-right-pane'>
             {reviews?.length>0 && reviews.map(review=> (
@@ -147,8 +221,8 @@ const GetReviews = () => {
                       }}>
                         <svg style={{width: "40px", height: "40px"}} xmlns="http://www.w3.org/2000/svg" fill="#000000" viewBox="0 0 64 64" width="50px" height="50px"><path d="M 28 9 C 26.895 9 26 9.895 26 11 L 26 12 L 14 12 C 12.896 12 12 12.896 12 14 C 12 15.104 12.896 16 14 16 L 50 16 C 51.104 16 52 15.104 52 14 C 52 12.896 51.104 12 50 12 L 38 12 L 38 11 C 38 9.895 37.105 9 36 9 L 28 9 z M 15 18 L 15 46 C 15 49.309 17.691 52 21 52 L 43 52 C 46.309 52 49 49.309 49 46 L 49 18 L 15 18 z M 22.5 22 C 23.328 22 24 22.671 24 23.5 L 24 44.5 C 24 45.329 23.328 46 22.5 46 C 21.672 46 21 45.329 21 44.5 L 21 23.5 C 21 22.671 21.672 22 22.5 22 z M 32 22 C 33.104 22 34 22.896 34 24 L 34 44 C 34 45.104 33.104 46 32 46 C 30.896 46 30 45.104 30 44 L 30 24 C 30 22.896 30.896 22 32 22 z M 41.5 22 C 42.328 22 43 22.671 43 23.5 L 43 44.5 C 43 45.329 42.328 46 41.5 46 C 40.672 46 40 45.329 40 44.5 L 40 23.5 C 40 22.671 40.672 22 41.5 22 z"/></svg>
                       </div>
-                      {reviewModal && <EditReviewModal restaurant={restaurant} review={review} setReviewModal={setReviewModal}/>}
-                      {deleteReviewModal && <DeleteReviewModalComponent restaurant={restaurant} review={review} setDeleteReviewModal={setDeleteReviewModal}/>}
+                      {reviewModal && <EditReviewModal restaurant={restaurant? restaurant: restaurantObj} review={review} setReviewModal={setReviewModal}/>}
+                      {deleteReviewModal && <DeleteReviewModalComponent restaurant={restaurant? restaurant: restaurantObj} review={review} setDeleteReviewModal={setDeleteReviewModal}/>}
 
                     </>
                   )}

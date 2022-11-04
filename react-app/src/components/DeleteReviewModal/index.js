@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory, NavLink, useLocation } from 'react-router-dom';
 import { DeleteReviewModal } from '../../context/DeleteReviewModal';
-import { deleteReview } from '../../store/review';
+import { deleteReview, getReviews } from '../../store/review';
 import "./DeleteReviewModal.css"
 
 const DeleteReviewModalComponent = ({review, restaurant, setDeleteReviewModal}) => {
@@ -11,8 +11,11 @@ const DeleteReviewModalComponent = ({review, restaurant, setDeleteReviewModal}) 
   // useEffect(()=>{
   //   dispatch(deleteReview())
   // }, [dispatch])
+
   const handleDelete = () => {
+    console.log('restauranttt in delete function:', restaurant)
     dispatch(deleteReview(restaurant.id, review.id))
+    dispatch(getReviews(restaurant?.id))
     setDeleteReviewModal(false)
     history.push({pathname: `/restaurants/${restaurant.id}/reviews`})
   }

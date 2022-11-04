@@ -5,7 +5,7 @@ import "./FinalOrderConfirmation.css"
 import MapDistanceContainer from '../MapDistance';
 import FinalConfirmationNavBar from '../FinalConfirmationNavBar';
 import { updateOrder, getOrders } from '../../store/order';
-import { useOrderStarted } from '../../context/OrderStartedContext';
+// import { useOrderStarted } from '../../context/OrderStartedContext';
 import { useTriggerCountdown } from '../../context/TriggerCountdown';
 import {useCancelTimer} from "../../context/CancelTimer"
 // make order started into context?? so it can access that value from Get Orders page too and reset OrderStarted = true

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory, NavLink } from 'react-router-dom';
-import { createReview, updateReview } from '../../store/review';
+import { createReview, getReviews, updateReview } from '../../store/review';
 import "./ReviewForm.css";
 import Star from '../Star';
 
@@ -40,16 +40,18 @@ const ReviewForm = ({formType, restaurant, reviewData, setReviewModal, reviews})
 
     console.log('review obj before submission:', reviewObj)
     if (formType === "Create Review"){
-      dispatch(createReview(restaurant.id, reviewObj))
+      dispatch(createReview(restaurant?.id, reviewObj))
+      dispatch(getReviews(restaurant?.id))
       alert('Successfully submitted your review!')
       setReviewModal(false)
-      history.push({pathname:`/restaurants/${restaurant.id}/reviews`, state: {restaurant, finalAvgRating: String(Number(restaurant.avgRating).toFixed(2))}})
+      history.push({pathname:`/restaurants/${restaurant?.id}/reviews`, state: {restaurant, finalAvgRating: String(Number(restaurant?.avgRating).toFixed(2))}})
 
     } else {
       dispatch(updateReview(restaurant.id, reviewObj))
+      dispatch(getReviews(restaurant?.id))
       alert("Successfully updated your review!")
       setReviewModal(false)
-      history.push({pathname:`/restaurants/${restaurant.id}/reviews`, state: {restaurant, finalAvgRating: String(Number(restaurant.avgRating).toFixed(2))}})
+      history.push({pathname:`/restaurants/${restaurant?.id}/reviews`, state: {restaurant, finalAvgRating: String(Number(restaurant?.avgRating).toFixed(2))}})
     }
     setHasSubmitted(false)
     return
@@ -73,7 +75,7 @@ const ReviewForm = ({formType, restaurant, reviewData, setReviewModal, reviews})
       {/* <div className='review-form-container'> */}
         <form className='review-form' onSubmit={handleSubmit}>
           <div style={{textAlign:'left', width: "95%", fontSize:"32px", marginTop:"0px", fontWeight:"700", letterSpacing: "-0.02ch"}}>{formType==="Create Review"? "Add a Public Review": "Update Your Review"}</div>
-          <div style={{width: "95%", fontSize: '16px', color: "rgb(73, 73, 73)", fontWeight: "550" , marginTop:"15px"}}>{restaurant.name}</div>
+          <div style={{width: "95%", fontSize: '16px', color: "rgb(73, 73, 73)", fontWeight: "550" , marginTop:"15px"}}>{restaurant?.name}</div>
           <div className='review-form-star-review-input-container'>
             <div style={{marginTop:"30px", marginLeft: "15px", fontSize: '16px', fontWeight: "500"}}>{sessionUser.firstName} {sessionUser.lastName[0]}</div>
             <div className='review-form-stars-container'>

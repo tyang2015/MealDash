@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory, NavLink } from 'react-router-dom';
+import { UsePriceDropdown } from '../../context/PriceDropdown';
+import { UseRatingDropdown } from '../../context/RatingDropdown';
+
 import "./RatingFilter.css"
 
-const RatingFilter= ({setToggleRatingDropdown, restaurants, setFilteredItems, isFiltered, setIsFiltered}) => {
-  const sessionUser = useSelector(state=> state.session.user)
-  const [starsFilter, setStarsFilter] = useState([3, 3.5, 4, 4.5, 5])
-  const [selectedRatingMin, setSelectedRatingMin]= useState(3)
+const RatingFilter= ({ selectedRatingMin, setSelectedRatingMin ,restaurants, setFilteredItems, isFiltered, setIsFiltered}) => {
+  // const [selectedRatingMin, setSelectedRatingMin]= useState(3)
+  const {toggleRatingDropdown, setToggleRatingDropdown} = UseRatingDropdown();
+  const {togglePriceDropdown, setTogglePriceDropdown} = UsePriceDropdown();
 
   const handleClick = (e) => {
     console.log('clicked rating:', e.target.value)

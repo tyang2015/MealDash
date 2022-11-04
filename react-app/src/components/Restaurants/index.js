@@ -18,6 +18,8 @@ import mediterraneanIcon from "./images/mediterranean-icon.png"
 import { useToggleCart } from '../../context/ToggleCartContext';
 import RatingFilter from '../RatingFilter';
 import PriceFilter from '../PriceFilter';
+import { UsePriceDropdown } from '../../context/PriceDropdown';
+import { UseRatingDropdown } from '../../context/RatingDropdown';
 
 const CATEGORY_CHOICES = ["All","Asian", "American","Breakfast", "Vegan", "Mexican", "Japanese", "Italian", "French", "FastFood", "Ethiopian", "Mediterranean"]
 const cartFromLocalStorage = localStorage.getItem('cart')!=undefined? JSON.parse(localStorage.getItem('cart' || "[]")): []
@@ -25,13 +27,16 @@ const cartFromLocalStorage = localStorage.getItem('cart')!=undefined? JSON.parse
 // TODO: refactor so that you don't have filteredItems variable (just modify restaurants var)
 const Restaurants = () => {
     const {toggleCartPane, setToggleCartPane} = useToggleCart();
+    const {toggleRatingDropdown, setToggleRatingDropdown} = UseRatingDropdown();
+    const {togglePriceDropdown, setTogglePriceDropdown} = UsePriceDropdown();
     const dispatch = useDispatch();
     const location = useLocation();
     const restaurantObj = useSelector(state => state.restaurants)
     let restaurants = Object.values(restaurantObj)
     // const [toggleCartPane, setToggleCartPane] = useState(false)
-    const [toggleRatingDropdown, setToggleRatingDropdown] = useState(false)
-    const [togglePriceDropdown, setTogglePriceDropdown] = useState(false)
+    // const [toggleRatingDropdown, setToggleRatingDropdown] = useState(false)
+    // const [togglePriceDropdown, setTogglePriceDropdown] = useState(false)
+    const [selectedRatingMin, setSelectedRatingMin]= useState(3)
     let [filteredItems, setFilteredItems] = useState([])
     const [submittedCartItems, setSubmittedCartItems] = useState(cartFromLocalStorage || [])
     const [isFiltered, setIsFiltered] = useState(false)
@@ -60,8 +65,7 @@ const Restaurants = () => {
     const [lenFastFood, setLenFastFood] = useState(0)
     const [lenEthiopian, setLenEthiopian] = useState(0)
     const [lenMediterranean, setLenMediterranean] = useState(0)
-    const [starsFilter, setStarsFilter] = useState([3, 3.5, 4, 4.5, 5])
-    const [minStarsFilter, setMinStarsFilter] = useState(Math.min(...starsFilter))
+    // const [minStarsFilter, setMinStarsFilter] = useState(3)
     const [categoryNum, setCategoryNum] = useState({
       Asian: 0,
       American: 0,
@@ -216,35 +220,6 @@ const Restaurants = () => {
         return filteredItems
       }
     }, [mediterranean])
-
-
-
-
-    // useEffect(()=>{
-    //   if (restaurants.length>0){
-    //     for (let key in categories){
-    //       if (key === "") {
-    //         continue
-    //       }
-    //       else if (key === "ALL" && categories.ALL === "ALL") {
-    //         // no filter, just return original state
-    //         return restaurants
-    //       }
-    //       else {
-    //         let filteredItems = restaurants.filter(restaurant=> restaurant.category === key)
-    //         console.log(`filtered restaurants based on category ${key}: ${filteredItems}`)
-    //         setFilteredItems(filteredItems)
-    //         setIsFiltered(true)
-    //         return filteredItems
-    //       }
-    //     }
-    //   }
-    //   let filteredRestaurants = restaurants.filter(restaurant => restaurant.category === categories)
-    // }, [categories])
-    // [categories.ALL, categories.Asian, categories.American, categories.Breakfast, categories.Vegan,
-    //   categories.Mexican, categories.Japanese, categories.Italian, categories.French, categories.FastFood,
-    //   categories.Ethiopian, categories.Mediterranean
-    // ]
 
     const handleCategorySelection = (category) => {
         if(category === "All") {
@@ -449,7 +424,7 @@ const Restaurants = () => {
                 setTogglePriceDropdown(false)
                 }}>
                 <div className='get-restaurants-star-rating-filter-left-container'>
-                  <div style={{display: "flex", alignItems: "center", height: "100%"}}> Over {minStarsFilter}</div>
+                  <div style={{display: "flex", alignItems: "center", height: "100%"}}> Over {selectedRatingMin}</div>
                   <div style={{height: "100%", display:"flex", alignItems: "center", paddingTop: "2.5px", marginLeft: '7px'}}>
                     <svg width="12" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" dimensionOverrides="[object Object]" class="styles__StyledInlineSvg-sc-12l8vvi-0 djCUZq sc-1290d041-0 jHoJgS"><path d="M8.91126 0.588193C8.74945 0.230121 8.39293 0 7.99999 0C7.60705 0 7.25054 0.230121 7.08872 0.588193L5.37316 4.38448L1.23254 4.84295C0.841992 4.8862 0.512964 5.15416 0.39154 5.52786C0.270115 5.90157 0.378802 6.31175 0.669346 6.5763L3.7497 9.381L2.90621 13.4606C2.82665 13.8454 2.97982 14.2412 3.29771 14.4721C3.6156 14.7031 4.0393 14.7265 4.38068 14.5319L7.99999 12.469L11.6193 14.5319C11.9607 14.7265 12.3844 14.7031 12.7023 14.4721C13.0202 14.2412 13.1733 13.8454 13.0938 13.4606L12.2503 9.381L15.3306 6.5763C15.6212 6.31175 15.7299 5.90157 15.6084 5.52786C15.487 5.15416 15.158 4.8862 14.7674 4.84295L10.6268 4.38448L8.91126 0.588193Z" fill="currentColor"></path></svg>
                   </div>
@@ -458,7 +433,7 @@ const Restaurants = () => {
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="styles__StyledInlineSvg-sc-12l8vvi-0 jFpckg sc-84e263d1-5 bcmrDQ"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.29289 8.79289C5.68342 8.40237 6.31658 8.40237 6.70711 8.79289L12 14.0858L17.2929 8.79289C17.6834 8.40237 18.3166 8.40237 18.7071 8.79289C19.0976 9.18342 19.0976 9.81658 18.7071 10.2071L12.7071 16.2071C12.5196 16.3946 12.2652 16.5 12 16.5C11.7348 16.5 11.4804 16.3946 11.2929 16.2071L5.29289 10.2071C4.90237 9.81658 4.90237 9.18342 5.29289 8.79289Z" fill="currentColor"></path></svg>
                 </div>
               </div>
-              {toggleRatingDropdown && <RatingFilter restaurants={restaurants} setToggleRatingDropdown={setToggleRatingDropdown} setTogglePriceDropdown={setTogglePriceDropdown} setIsFiltered={setIsFiltered} isFiltered={isFiltered} setFilteredItems={setFilteredItems}/>}
+              {toggleRatingDropdown && <RatingFilter selectedRatingMin={selectedRatingMin} setSelectedRatingMin={setSelectedRatingMin} restaurants={restaurants} setIsFiltered={setIsFiltered} isFiltered={isFiltered} setFilteredItems={setFilteredItems}/>}
               <div className='price-filter-container' style={{marginLeft: '10px'}} onClick={()=> {
                 setTogglePriceDropdown(!togglePriceDropdown)
                 setToggleRatingDropdown(false)
@@ -470,7 +445,7 @@ const Restaurants = () => {
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="styles__StyledInlineSvg-sc-12l8vvi-0 jFpckg sc-84e263d1-5 bcmrDQ"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.29289 8.79289C5.68342 8.40237 6.31658 8.40237 6.70711 8.79289L12 14.0858L17.2929 8.79289C17.6834 8.40237 18.3166 8.40237 18.7071 8.79289C19.0976 9.18342 19.0976 9.81658 18.7071 10.2071L12.7071 16.2071C12.5196 16.3946 12.2652 16.5 12 16.5C11.7348 16.5 11.4804 16.3946 11.2929 16.2071L5.29289 10.2071C4.90237 9.81658 4.90237 9.18342 5.29289 8.79289Z" fill="currentColor"></path></svg>
                 </div>
               </div>
-              {togglePriceDropdown && <PriceFilter restaurants={restaurants} setTogglePriceDropdown={setTogglePriceDropdown} setToggleRatingDropdown={setToggleRatingDropdown} setIsFiltered={setIsFiltered} isFiltered={isFiltered} setFilteredItems={setFilteredItems}/>}
+              {togglePriceDropdown && <PriceFilter restaurants={restaurants} setIsFiltered={setIsFiltered} isFiltered={isFiltered} setFilteredItems={setFilteredItems}/>}
             </div>
             {!isFiltered && categoryNum.Asian>0 && (
               <>

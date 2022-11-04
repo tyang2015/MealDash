@@ -10,7 +10,7 @@
 
 .navbar-searchbar-outer-container-with-dropdown{
   height: fit-content;
-  /* background-color: lightgoldenrodyellow; */
+
   width: 28.7rem;
   border-left: 1px solid #DDDDDD;
   border-right: 1px solid #DDDDDD;
@@ -21,36 +21,43 @@
 
 }
 
+.nav-bar-profile-button-and-dropdown{
+  height: fit-content;
+  width: 12em;
+  position: absolute;
+  /* z-index:100 */
+
+}
+
 
 
 .nav-bar-profile-button{
   cursor:pointer;
+  /* background-color: lightcoral; */
+  width: fit-content
 }
 
 .fa-solid.fa-burger{
   width: fit-content;
   height: 20px;
   color: lightcoral;
-  /* font-weight: 800; */
-  /* background-color: lightpink; */
 }
 
 .dropdown-container{
      border: 1px solid rgba(55, 43, 43, 0.3);
      position: absolute;
      left: 10%;
-     top: 3em;
-     width: 12em;
-     right: 4em;
+     top: 2.7em;
+     width: 16em;
+     left: 0em;
      z-index: 1;
      background-color: white;
-     height: 8em;
+     height: 15em;
      display: flex;
      flex-direction: column;
-     justify-content: space-around;
+     justify-content: space-evenly;
      border-radius: 3px;
      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
-
 }
 
 .toggle-cart-panel{
@@ -113,9 +120,14 @@
 
 .navbar-menu-logo-container{
   display: flex;
-  width: 10em;
+  width: 11em;
   justify-content: space-between;
   align-items: center;
+  /* background-color: lightgoldenrodyellow; */
+  width: fit-content;
+  position:relative;
+  /* z-index: -100; */
+
 }
 
 .navbar-searchbar-carticon-container{
@@ -137,4 +149,13 @@
 
 #navbar-searchfield{
   padding-left: 5px;
+}
+
+.mealdash-logo-link{
+  /* display: relative;
+  z-index: 50; */
+  /* background-color: lightblue; */
+  /* width: 80%; */
+  width: 5em;
+  z-index: 50;
 }

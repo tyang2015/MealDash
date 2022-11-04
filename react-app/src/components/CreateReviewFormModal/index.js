@@ -12,18 +12,12 @@ const CreateReviewFormModal = ({setReviewModal, restaurant}) => {
   const sessionUser = useSelector(state => state.session.user);
   const {id} = useParams();
 
-  const userIds = restaurant.reviews.map(review=> review.user.id)
-  // if (userIds.includes(sessionUser.id)) {
-  //   alert("Looks like you have already submitted a review. Only new customers can submit a review.")
-  //   setReviewModal(false)
-  //   // return
-  // }
-  // console.log('user ids:', userIds)
+  const userIds = restaurant?.reviews.map(review=> review.user.id)
+
   useEffect(()=>{
-    if (userIds.includes(sessionUser.id)) {
+    if (userIds?.length>0 && userIds.includes(sessionUser.id)) {
       alert("Looks like you have already submitted a review. Only new customers can submit a review.")
       setReviewModal(false)
-      // return
     }
   }, [])
 

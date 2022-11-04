@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory, NavLink } from 'react-router-dom';
+import { UsePriceDropdown } from '../../context/PriceDropdown';
+import { UseRatingDropdown } from '../../context/RatingDropdown';
 import "./PriceFilter.css"
 
-const PriceFilter = ({setTogglePriceDropdown, restaurants, setFilteredItems, isFiltered, setIsFiltered}) => {
+const PriceFilter = ({ restaurants, setFilteredItems, isFiltered, setIsFiltered}) => {
   const sessionUser = useSelector(state=> state.session.user)
+  const {toggleRatingDropdown, setToggleRatingDropdown} = UseRatingDropdown();
+  const {togglePriceDropdown, setTogglePriceDropdown} = UsePriceDropdown();
+
   const [clickPrice1, setClickPrice1] = useState(false)
   const [clickPrice2, setClickPrice2] = useState(false)
   const [clickPrice3, setClickPrice3] = useState(false)

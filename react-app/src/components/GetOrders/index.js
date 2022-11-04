@@ -5,7 +5,7 @@ import { getGeocode, getLatLng } from 'use-places-autocomplete';
 import { getOrders, updateOrder, deleteOrder } from '../../store/order';
 import NavBar from '../Navigation/NavBar';
 import { useTriggerCountdown } from '../../context/TriggerCountdown';
-import { useOrderStarted } from '../../context/OrderStartedContext';
+// import { useOrderStarted } from '../../context/OrderStartedContext';
 import "./GetOrders.css"
 import { DeleteOrderModal } from '../../context/DeleteOrderModal';
 import DeleteOrderModalComponent from '../DeleteOrderModal';
@@ -23,7 +23,6 @@ const GetOrders = () => {
   const sessionUser = useSelector(state=> state.session.user)
   const orders = useSelector(state=> Object.values(state.orders))
   const {triggerCountdown, setTriggerCountdown} = useTriggerCountdown();
-  const {orderStarted, setOrderStarted} = useOrderStarted();
   const dispatch = useDispatch();
   const [userCoordinates, setUserCoordinates] = useState({lat: 0, lng: 0})
   const [orderDeleteModal, setOrderDeleteModal] = useState(false)
@@ -32,13 +31,6 @@ const GetOrders = () => {
   const [mostRecentOrder, setMostRecentOrder] = useState(orders?.length>0? orders.sort( (a,b)=> b.id - a.id)[0]: {})
   const [forceRender, setForceRender] = useState(false)
   console.log('user orders:', orders)
-  // const [inProgressOrders, setInProgressOrders] = useState(orders.filter(order=> order.orderCompleted === false))
-  // const [completedOrders, setCompletedOrders] = useState(orders.filter(order => order.orderCompleted === true))
-  // const findMostRecentOrderOrder = () => {
-  //   let sortedDesc = orders.sort( (a,b)=> b.id - a.id)
-  //   console.log('orders sorted in desc order:', sortedDesc)
-  //   setMostRecentOrder(sortedDesc[0])
-  // }
   console.log('most recent order:', mostRecentOrder)
 
   useEffect(()=>{
@@ -46,23 +38,6 @@ const GetOrders = () => {
     return
   }, [dispatch])
 
-  // useEffect(()=>{
-  //   if (mostRecentOrder.orderCompleted === true) {
-  //     console.log('use effect activated - most recent order::', mostRecentOrder)
-  //     dispatch(getOrders())
-  //   }
-  // }, [mostRecentOrder?.orderCompleted])
-
-  // useEffect(()=>{
-  //   if (localStorage.getItem('countdown')===0){
-  //     setForceRender(!forceRender)
-  //     dispatch(getOrders())
-  //   }
-  // }, [localStorage.getItem('countdown')])
-
-  // useEffect(()=> {
-  //   dispatch(getOrders())
-  // }, [forceRender])
 
   const convertCreatedTimeForInProgress = (orderObj)=>{
     // return the order object with newly formatted order created TIME
@@ -142,12 +117,11 @@ const GetOrders = () => {
     localStorage.setItem('countdown', 0)
     localStorage.setItem('orders', JSON.stringify({}))
     setTriggerCountdown(true)
-    setOrderStarted(true)
+    // setOrderStarted(true)
     alert('successfully deleted!')
     return
   }
 
-  // if (inProgressOrders?.length === 0 && completedOrders?.length === 0) return
 
   return (
     <>
