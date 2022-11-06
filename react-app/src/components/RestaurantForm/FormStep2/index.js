@@ -64,7 +64,7 @@ const FormStep2 = ({formData, setFormData}) => {
           <select
             id="restaurant-category"
             value={formData.category}
-            className="form-step-2-input restaurant-form-input-box restaurant-form-select"
+            className="form-step-2-input restaurant-form-input-box"
             onChange={e=> setFormData({...formData, category: e.target.value})}
             required
           >

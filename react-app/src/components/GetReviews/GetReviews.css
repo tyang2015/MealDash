@@ -73,8 +73,14 @@
 
 }
 
+.get-reviews-review-card-left-pane{
+  width: 100%;
+}
+
 .restaurant-reviews-content-container{
   margin-left: 1em;
+  width: 95%;
+  height: 70%;
 }
 
 .get-reviews-page-avg-rating-container{

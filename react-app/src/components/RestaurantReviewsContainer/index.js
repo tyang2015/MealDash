@@ -153,7 +153,7 @@ const RestaurantReviewsContainer = ({restaurant, finalAvgRating, sessionUser}) =
                 </>
               )}
               </div>
-              <div style={{marginLeft: '5px', color: 'rgb(118, 118, 118)'}}>
+              <div className="restaurant-reviews-container-date-text">
               • {convertReviewDate(review)}
               </div>
             </div>

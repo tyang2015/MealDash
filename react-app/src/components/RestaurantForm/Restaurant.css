@@ -171,10 +171,9 @@
   height: 2.4em;
 }
 
-.restaurant-form-input-box.restaurant-form-select{
+/* .restaurant-form-input-box.restaurant-form-select{
   color: rgb(118, 118, 118);
-  /* background-color: lightblue; */
-}
+} */
 
 .create-restaurant-button{
   border: none;

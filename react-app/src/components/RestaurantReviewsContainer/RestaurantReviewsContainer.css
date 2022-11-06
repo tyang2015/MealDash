@@ -108,10 +108,21 @@ div.middle-row-not-first{
   height: fit-content;
   display: flex;
   align-items: flex-start;
-  margin-top: -46px;
+  /* margin-top: -46px; */
   margin-left: 1em;
 }
 
 .restaurant-reviews-container-review-content{
-  margin-left: 1em
+  margin-left: 1em;
+  /* background-color: lightblue; */
+  height: 70%;
+  width: 90%;
+  text-overflow: ellipsis;
+}
+
+.restaurant-reviews-container-date-text{
+  margin-left: 5px;
+  color: rgb(118, 118, 118);
+  font-size: 14px;
+  font-weight: 500;
 }

@@ -88,7 +88,7 @@ const FoodItemForm = ({foodItem, formType}) => {
     <>
     <NavBar/>
       <form className='create-food-item-form-container'>
-        <h3> {formType==="Create Form"? "Create Menu Item": "Update Menu Item"} </h3>
+        <h3 style={{fontSize: "26px"}}> {formType==="Create Form"? "Create Menu Item": "Update Menu Item"} </h3>
         <div className="create-food-item-errors-container">
           {errors.length>0 && hasSubmitted && (
             <div className="validation-errors-container">
@@ -174,7 +174,7 @@ const FoodItemForm = ({foodItem, formType}) => {
               placeholder='food pic url'
               value={foodPicUrl}
               onChange={e=> setFoodPicUrl(e.target.value)}
-              className='food-item-food-pic-url-input'
+              className='food-item-food-pic-url-input food-item-input'
               style={{height: "5.8%"}}
               required
             />
