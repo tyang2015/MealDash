@@ -5,7 +5,7 @@ import { UsePriceDropdown } from '../../context/PriceDropdown';
 import { UseRatingDropdown } from '../../context/RatingDropdown';
 import "./PriceFilter.css"
 
-const PriceFilter = ({ restaurants, setFilteredItems, isFiltered, setIsFiltered}) => {
+const PriceFilter = ({ filteredItems , restaurants, setFilteredItems, isFiltered, setIsFiltered}) => {
   const sessionUser = useSelector(state=> state.session.user)
   const {toggleRatingDropdown, setToggleRatingDropdown} = UseRatingDropdown();
   const {togglePriceDropdown, setTogglePriceDropdown} = UsePriceDropdown();
@@ -49,7 +49,8 @@ const PriceFilter = ({ restaurants, setFilteredItems, isFiltered, setIsFiltered}
   const handlePriceFilter = () => {
     setIsFiltered(true)
     // let filteredItems
-    setFilteredItems(restaurants.filter(restaurant => selectedPriceRanges[restaurant.priceRange-1] === true))
+    let newFilteredItems = restaurants.filter(restaurant => selectedPriceRanges[restaurant.priceRange-1] === true)
+    setFilteredItems(newFilteredItems)
     // return filtered
     // console.log('clicked view results')
   }

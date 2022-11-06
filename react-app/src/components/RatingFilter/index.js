@@ -6,7 +6,7 @@ import { UseRatingDropdown } from '../../context/RatingDropdown';
 
 import "./RatingFilter.css"
 
-const RatingFilter= ({ selectedRatingMin, setSelectedRatingMin ,restaurants, setFilteredItems, isFiltered, setIsFiltered}) => {
+const RatingFilter= ({ filteredItems , selectedRatingMin, setSelectedRatingMin ,restaurants, setFilteredItems, isFiltered, setIsFiltered}) => {
   // const [selectedRatingMin, setSelectedRatingMin]= useState(3)
   const {toggleRatingDropdown, setToggleRatingDropdown} = UseRatingDropdown();
   const {togglePriceDropdown, setTogglePriceDropdown} = UsePriceDropdown();
@@ -17,8 +17,8 @@ const RatingFilter= ({ selectedRatingMin, setSelectedRatingMin ,restaurants, set
 
   const handleRatingFilter = (selectedRatingMin) =>{
     setIsFiltered(true)
-    let filteredItems = restaurants.filter(restaurant => Number(restaurant.avgRating) >= selectedRatingMin)
-    setFilteredItems(filteredItems)
+    let newFilteredItems = restaurants.filter(restaurant => Number(restaurant.avgRating) >= selectedRatingMin)
+    setFilteredItems(newFilteredItems)
     return filteredItems
   }
 

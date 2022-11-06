@@ -246,12 +246,9 @@ div.restaurant-page-update-delete-buttons-container{
 }
 
 
-.checkout-button-container{
-  width: 13em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+/* .checkout-button-container{
+
+} */
 
 .checkout-button{
   display: flex;

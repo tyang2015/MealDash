@@ -15,7 +15,8 @@ import NavBar from "../Navigation/NavBar";
 import RestaurantReviewsContainer from "../RestaurantReviewsContainer";
 import { useToggleCart } from '../../context/ToggleCartContext';
 
-let cartFromLocalStorage =  JSON.parse(localStorage.getItem('cart' || "[]"))
+// let cartFromLocalStorage =  JSON.parse(localStorage.getItem('cart' || "[]"))
+// let cartFromLocalStorage =  JSON.parse(localStorage.getItem('cart'))
 
 const GetRestaurant = () => {
   let { id } = useParams();
@@ -25,6 +26,10 @@ const GetRestaurant = () => {
   const location = useLocation();
   const sessionUser = useSelector(state=> state.session.user)
   const restaurant = useSelector(state=> state.restaurants[id])
+  const [quantityChange, setQuantityChange] = useState(false)
+  const [newQuantity, setNewQuantity] = useState(1)
+  const [oldFoodItem, setOldFoodItem] = useState(null)
+
   let foodItems = useSelector(state => Object.values(state.foodItems))
 
   const [foodItemModal, setFoodItemModal] = useState(false)
@@ -44,7 +49,7 @@ const GetRestaurant = () => {
   // const [reviewModal, setReviewModal] = useState(false)
 
   const [submittedCart, setSubmittedCart] =useState(false)
-  const [submittedCartItems, setSubmittedCartItems] = useState(cartFromLocalStorage || [])
+  const [submittedCartItems, setSubmittedCartItems] = useState(JSON.parse(localStorage.getItem('cart')) || [])
   const [forceCartUpdate, setForceCartUpdate] = useState(false)
 
   const [finalAvgRating, setFinalAvgRating] = useState(0)
@@ -54,12 +59,12 @@ const GetRestaurant = () => {
   let todayInHours = today.getHours()
   let todayInMinutes = today.getMinutes()
 
-  // console.log('cart from local storage:', cartFromLocalStorage)
-  useEffect(()=>{
-    let initialCartItems = localStorage.getItem('cart')? JSON.parse(localStorage.getItem('cart')): []
-    cartFromLocalStorage = initialCartItems
-    setSubmittedCartItems(initialCartItems)
-  }, [])
+  // // console.log('cart from local storage:', cartFromLocalStorage)
+  // useEffect(()=>{
+  //   let initialCartItems = localStorage.getItem('cart')? JSON.parse(localStorage.getItem('cart')): []
+  //   cartFromLocalStorage = initialCartItems
+  //   setSubmittedCartItems(initialCartItems)
+  // }, [])
 
   // // DONT SEND SUBMITTED CART ITEMS AS A PROP
   useEffect(()=> {
@@ -369,7 +374,7 @@ const GetRestaurant = () => {
                                   )}
                                 </div>
                               ))}
-                              {foodItemModal && <FoodItemModal forceCartUpdate={forceCartUpdate} setForceCartUpdate={setForceCartUpdate} submittedCartItems={submittedCartItems} setSubmittedCartItems={setSubmittedCartItems} setSubmittedCart={setSubmittedCart} foodItem={foodItem} setFoodItemModal={setFoodItemModal}/> }
+                              {foodItemModal && <FoodItemModal setFoodItemModal={setFoodItemModal} forceCartUpdate={forceCartUpdate} setForceCartUpdate={setForceCartUpdate} submittedCartItems={submittedCartItems} setSubmittedCartItems={setSubmittedCartItems} setSubmittedCart={setSubmittedCart} foodItem={foodItem} setFoodItemModal={setFoodItemModal}/> }
                           </div>
                         )}
                         {filteredItems.length>0 && isFiltered && (
@@ -414,7 +419,7 @@ const GetRestaurant = () => {
               </>
             )}
           </div>
-        {toggleCartPane && <CartRightPane setToggleCartPane={setToggleCartPane} toggleCartPane={toggleCartPane} cartItems={submittedCartItems} setCartItems={setSubmittedCartItems} forceCartUpdate={forceCartUpdate} restaurant={submittedCartItems?.length>0? submittedCartItems[0].Restaurant: null} />}
+        {toggleCartPane && <CartRightPane setNewQuantity={setNewQuantity} newQuantity={newQuantity} setOldFoodItem={setOldFoodItem} oldFoodItem={oldFoodItem} setQuantityChange={setQuantityChange} quantityChange={quantityChange} setToggleCartPane={setToggleCartPane} toggleCartPane={toggleCartPane} cartItems={submittedCartItems} setCartItems={setSubmittedCartItems} forceCartUpdate={forceCartUpdate} restaurant={submittedCartItems?.length>0? submittedCartItems[0].Restaurant: null} />}
         </div>
         <RestaurantFooter/>
 

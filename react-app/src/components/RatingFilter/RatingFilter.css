@@ -6,18 +6,13 @@
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
   height: 14em;
   width: 23.5em;
-  top: 239px;
-
+  top: 70px;
 }
 
 .ratings-container-dropdown-content-container{
   background-color: white;
   position: relative;
   z-index: 1;
-  /* border-radius: 3px; */
-  /* box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3); */
-  /* height: 14em;
-  width: 23.5em; */
   height:62%;
   padding-left: 20px;
   padding-top: 20px;

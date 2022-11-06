@@ -433,7 +433,7 @@ const Restaurants = () => {
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="styles__StyledInlineSvg-sc-12l8vvi-0 jFpckg sc-84e263d1-5 bcmrDQ"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.29289 8.79289C5.68342 8.40237 6.31658 8.40237 6.70711 8.79289L12 14.0858L17.2929 8.79289C17.6834 8.40237 18.3166 8.40237 18.7071 8.79289C19.0976 9.18342 19.0976 9.81658 18.7071 10.2071L12.7071 16.2071C12.5196 16.3946 12.2652 16.5 12 16.5C11.7348 16.5 11.4804 16.3946 11.2929 16.2071L5.29289 10.2071C4.90237 9.81658 4.90237 9.18342 5.29289 8.79289Z" fill="currentColor"></path></svg>
                 </div>
               </div>
-              {toggleRatingDropdown && <RatingFilter selectedRatingMin={selectedRatingMin} setSelectedRatingMin={setSelectedRatingMin} restaurants={restaurants} setIsFiltered={setIsFiltered} isFiltered={isFiltered} setFilteredItems={setFilteredItems}/>}
+              {toggleRatingDropdown && <RatingFilter filteredItems={filteredItems} selectedRatingMin={selectedRatingMin} setSelectedRatingMin={setSelectedRatingMin} restaurants={restaurants} setIsFiltered={setIsFiltered} isFiltered={isFiltered} setFilteredItems={setFilteredItems}/>}
               <div className='price-filter-container' style={{marginLeft: '10px'}} onClick={()=> {
                 setTogglePriceDropdown(!togglePriceDropdown)
                 setToggleRatingDropdown(false)
@@ -445,8 +445,9 @@ const Restaurants = () => {
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="styles__StyledInlineSvg-sc-12l8vvi-0 jFpckg sc-84e263d1-5 bcmrDQ"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.29289 8.79289C5.68342 8.40237 6.31658 8.40237 6.70711 8.79289L12 14.0858L17.2929 8.79289C17.6834 8.40237 18.3166 8.40237 18.7071 8.79289C19.0976 9.18342 19.0976 9.81658 18.7071 10.2071L12.7071 16.2071C12.5196 16.3946 12.2652 16.5 12 16.5C11.7348 16.5 11.4804 16.3946 11.2929 16.2071L5.29289 10.2071C4.90237 9.81658 4.90237 9.18342 5.29289 8.79289Z" fill="currentColor"></path></svg>
                 </div>
               </div>
-              {togglePriceDropdown && <PriceFilter restaurants={restaurants} setIsFiltered={setIsFiltered} isFiltered={isFiltered} setFilteredItems={setFilteredItems}/>}
+              {togglePriceDropdown && <PriceFilter filteredItems={filteredItems} restaurants={restaurants} setIsFiltered={setIsFiltered} isFiltered={isFiltered} setFilteredItems={setFilteredItems}/>}
             </div>
+
             {!isFiltered && categoryNum.Asian>0 && (
               <>
                 <h2 className='restaurant-category-title'>Asian</h2>
@@ -460,10 +461,17 @@ const Restaurants = () => {
                               <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}  onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
                             </div>
                             <div className="get-restaurants-bottom-text-container">
-                              <div className='get-restaurants-left-inner-text-container'>
-                                <h4>{restaurant.name}</h4>
-                                <p> {restaurant.avgRating} <i class="fa-solid fa-star" ></i> ratings</p>
+                              {/* <div className='get-restaurants-left-inner-text-container'> */}
+                              <div className='get-restaurants-bottom-text-row text-top-row'>
+                                {restaurant.name}
                               </div>
+                              <div className='get-restaurants-bottom-text-row not-top-row'>
+                                {restaurant.priceRange === 3? "$$$" : restaurant.priceRange===2? "$$": "$" } • {restaurant.category}
+                              </div>
+                              <div className='get-restaurants-bottom-text-row not-top-row'>
+                                {restaurant.avgRating == 0? "No" : Math.round(restaurant.avgRating * 10)/10} <i class="fa-solid fa-star" ></i> {restaurant.numReviews>0? `(${restaurant.numReviews}+)`: "0 ratings"}
+                              </div>
+                              {/* </div> */}
                             </div>
                           </div>
                         </NavLink>
@@ -486,10 +494,17 @@ const Restaurants = () => {
                               <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}  onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
                             </div>
                             <div className="get-restaurants-bottom-text-container">
-                              <div className='get-restaurants-left-inner-text-container'>
-                                <h4>{restaurant.name}</h4>
-                                <p> {restaurant.avgRating} <i class="fa-solid fa-star" ></i> ratings</p>
+                              {/* <div className='get-restaurants-left-inner-text-container'> */}
+                              <div className='get-restaurants-bottom-text-row text-top-row'>
+                                {restaurant.name}
                               </div>
+                              <div className='get-restaurants-bottom-text-row not-top-row'>
+                                {restaurant.priceRange === 3? "$$$" : restaurant.priceRange===2? "$$": "$" } • {restaurant.category}
+                              </div>
+                              <div className='get-restaurants-bottom-text-row not-top-row'>
+                                {restaurant.avgRating == 0? "No" : Math.round(restaurant.avgRating * 10)/10} <i class="fa-solid fa-star" ></i> {restaurant.numReviews>0? `(${restaurant.numReviews}+)`: "0 ratings"}
+                              </div>
+                              {/* </div> */}
                             </div>
                           </div>
                         </NavLink>
@@ -508,17 +523,24 @@ const Restaurants = () => {
                   {restaurant.category==="Breakfast" && (
                       <NavLink className='navlink' key={restaurant.id} to={{pathname:`restaurants/${restaurant.id}`}} >
                         <div key={restaurant.id} className="restaurant-card-container">
-                        <div className= 'get-restaurants-pic-container'>
-                          <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}  onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
-                        </div>
-                        <div className="get-restaurants-bottom-text-container">
-                          <div className='get-restaurants-left-inner-text-container'>
-                            <h4>{restaurant.name}</h4>
-                            <p> {restaurant.avgRating} <i class="fa-solid fa-star" ></i> ratings</p>
+                          <div className= 'get-restaurants-pic-container'>
+                            <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}  onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
+                          </div>
+                          <div className="get-restaurants-bottom-text-container">
+                            {/* <div className='get-restaurants-left-inner-text-container'> */}
+                            <div className='get-restaurants-bottom-text-row text-top-row'>
+                              {restaurant.name}
+                            </div>
+                            <div className='get-restaurants-bottom-text-row not-top-row'>
+                              {restaurant.priceRange === 3? "$$$" : restaurant.priceRange===2? "$$": "$" } • {restaurant.category}
+                            </div>
+                            <div className='get-restaurants-bottom-text-row not-top-row'>
+                              {restaurant.avgRating == 0? "No" : Math.round(restaurant.avgRating * 10)/10} <i class="fa-solid fa-star" ></i> {restaurant.numReviews>0? `(${restaurant.numReviews}+)`: "0 ratings"}
+                            </div>
+                            {/* </div> */}
                           </div>
                         </div>
-                      </div>
-                    </NavLink>
+                      </NavLink>
                     )}
                 </>
               ))}
@@ -534,16 +556,23 @@ const Restaurants = () => {
                   {restaurant.category==="Vegan" && (
                     <NavLink className='navlink' key={restaurant.id} to={{pathname:`restaurants/${restaurant.id}`}} >
                       <div key={restaurant.id} className="restaurant-card-container">
-                        <div className= 'get-restaurants-pic-container'>
-                          <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}  onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
-                        </div>
-                        <div className="get-restaurants-bottom-text-container">
-                          <div className='get-restaurants-left-inner-text-container'>
-                            <h4>{restaurant.name}</h4>
-                            <p> {restaurant.avgRating} <i class="fa-solid fa-star" ></i> ratings</p>
+                          <div className= 'get-restaurants-pic-container'>
+                            <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}  onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
+                          </div>
+                          <div className="get-restaurants-bottom-text-container">
+                            {/* <div className='get-restaurants-left-inner-text-container'> */}
+                            <div className='get-restaurants-bottom-text-row text-top-row'>
+                              {restaurant.name}
+                            </div>
+                            <div className='get-restaurants-bottom-text-row not-top-row'>
+                              {restaurant.priceRange === 3? "$$$" : restaurant.priceRange===2? "$$": "$" } • {restaurant.category}
+                            </div>
+                            <div className='get-restaurants-bottom-text-row not-top-row'>
+                              {restaurant.avgRating == 0? "No" : Math.round(restaurant.avgRating * 10)/10} <i class="fa-solid fa-star" ></i> {restaurant.numReviews>0? `(${restaurant.numReviews}+)`: "0 ratings"}
+                            </div>
+                            {/* </div> */}
                           </div>
                         </div>
-                      </div>
                     </NavLink>
                     )}
                 </>
@@ -560,16 +589,23 @@ const Restaurants = () => {
                   {restaurant.category==="Mexican" && (
                     <NavLink className='navlink' key={restaurant.id} to={{pathname:`restaurants/${restaurant.id}`}} >
                       <div key={restaurant.id} className="restaurant-card-container">
-                        <div className= 'get-restaurants-pic-container'>
-                          <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}  onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
-                        </div>
-                        <div className="get-restaurants-bottom-text-container">
-                          <div className='get-restaurants-left-inner-text-container'>
-                            <h4>{restaurant.name}</h4>
-                            <p> {restaurant.avgRating} <i class="fa-solid fa-star" ></i> ratings</p>
+                          <div className= 'get-restaurants-pic-container'>
+                            <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}  onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
+                          </div>
+                          <div className="get-restaurants-bottom-text-container">
+                            {/* <div className='get-restaurants-left-inner-text-container'> */}
+                            <div className='get-restaurants-bottom-text-row text-top-row'>
+                              {restaurant.name}
+                            </div>
+                            <div className='get-restaurants-bottom-text-row not-top-row'>
+                              {restaurant.priceRange === 3? "$$$" : restaurant.priceRange===2? "$$": "$" } • {restaurant.category}
+                            </div>
+                            <div className='get-restaurants-bottom-text-row not-top-row'>
+                              {restaurant.avgRating == 0? "No" : Math.round(restaurant.avgRating * 10)/10} <i class="fa-solid fa-star" ></i> {restaurant.numReviews>0? `(${restaurant.numReviews}+)`: "0 ratings"}
+                            </div>
+                            {/* </div> */}
                           </div>
                         </div>
-                      </div>
                     </NavLink>
                     )}
                 </>
@@ -587,16 +623,23 @@ const Restaurants = () => {
                   {restaurant.category==="Japanese" && (
                     <NavLink className='navlink' key={restaurant.id} to={{pathname:`restaurants/${restaurant.id}`}} >
                       <div key={restaurant.id} className="restaurant-card-container">
-                        <div className= 'get-restaurants-pic-container'>
-                          <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl} onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
-                        </div>
-                        <div className="get-restaurants-bottom-text-container">
-                          <div className='get-restaurants-left-inner-text-container'>
-                            <h4>{restaurant.name}</h4>
-                            <p> {restaurant.avgRating} <i class="fa-solid fa-star" ></i> ratings</p>
+                          <div className= 'get-restaurants-pic-container'>
+                            <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}  onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
+                          </div>
+                          <div className="get-restaurants-bottom-text-container">
+                            {/* <div className='get-restaurants-left-inner-text-container'> */}
+                            <div className='get-restaurants-bottom-text-row text-top-row'>
+                              {restaurant.name}
+                            </div>
+                            <div className='get-restaurants-bottom-text-row not-top-row'>
+                              {restaurant.priceRange === 3? "$$$" : restaurant.priceRange===2? "$$": "$" } • {restaurant.category}
+                            </div>
+                            <div className='get-restaurants-bottom-text-row not-top-row'>
+                              {restaurant.avgRating == 0? "No" : Math.round(restaurant.avgRating * 10)/10} <i class="fa-solid fa-star" ></i> {restaurant.numReviews>0? `(${restaurant.numReviews}+)`: "0 ratings"}
+                            </div>
+                            {/* </div> */}
                           </div>
                         </div>
-                      </div>
                     </NavLink>
                     )}
                 </>
@@ -614,16 +657,21 @@ const Restaurants = () => {
                   {restaurant.category==="Italian" && (
                     <NavLink className='navlink' key={restaurant.id} to={{pathname:`restaurants/${restaurant.id}`}} >
                       <div key={restaurant.id} className="restaurant-card-container">
-                        <div className= 'get-restaurants-pic-container'>
-                          <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl} onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
-                        </div>
-                        <div className="get-restaurants-bottom-text-container">
-                          <div className='get-restaurants-left-inner-text-container'>
-                            <h4>{restaurant.name}</h4>
-                            <p> {restaurant.avgRating} <i class="fa-solid fa-star" ></i> ratings</p>
+                          <div className= 'get-restaurants-pic-container'>
+                            <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}  onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
+                          </div>
+                          <div className="get-restaurants-bottom-text-container">
+                            <div className='get-restaurants-bottom-text-row text-top-row'>
+                              {restaurant.name}
+                            </div>
+                            <div className='get-restaurants-bottom-text-row not-top-row'>
+                              {restaurant.priceRange === 3? "$$$" : restaurant.priceRange===2? "$$": "$" } • {restaurant.category}
+                            </div>
+                            <div className='get-restaurants-bottom-text-row not-top-row'>
+                              {restaurant.avgRating == 0? "No" : Math.round(restaurant.avgRating * 10)/10} <i class="fa-solid fa-star" ></i> {restaurant.numReviews>0? `(${restaurant.numReviews}+)`: "0 ratings"}
+                            </div>
                           </div>
                         </div>
-                      </div>
                     </NavLink>
                     )}
                 </>
@@ -641,16 +689,21 @@ const Restaurants = () => {
                   {restaurant.category==="French" && (
                     <NavLink className='navlink' key={restaurant.id} to={{pathname:`restaurants/${restaurant.id}`}} >
                       <div key={restaurant.id} className="restaurant-card-container">
-                        <div className= 'get-restaurants-pic-container'>
-                          <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl} onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
-                        </div>
-                        <div className="get-restaurants-bottom-text-container">
-                          <div className='get-restaurants-left-inner-text-container'>
-                            <h4>{restaurant.name}</h4>
-                            <p> {restaurant.avgRating} <i class="fa-solid fa-star" ></i> ratings</p>
+                          <div className= 'get-restaurants-pic-container'>
+                            <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}  onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
+                          </div>
+                          <div className="get-restaurants-bottom-text-container">
+                            <div className='get-restaurants-bottom-text-row text-top-row'>
+                              {restaurant.name}
+                            </div>
+                            <div className='get-restaurants-bottom-text-row not-top-row'>
+                              {restaurant.priceRange === 3? "$$$" : restaurant.priceRange===2? "$$": "$" } • {restaurant.category}
+                            </div>
+                            <div className='get-restaurants-bottom-text-row not-top-row'>
+                              {restaurant.avgRating == 0? "No" : Math.round(restaurant.avgRating * 10)/10} <i class="fa-solid fa-star" ></i> {restaurant.numReviews>0? `(${restaurant.numReviews}+)`: "0 ratings"}
+                            </div>
                           </div>
                         </div>
-                      </div>
                     </NavLink>
                     )}
                 </>
@@ -668,16 +721,21 @@ const Restaurants = () => {
                   {restaurant.category==="FastFood" && (
                     <NavLink className='navlink' key={restaurant.id} to={{pathname:`restaurants/${restaurant.id}`}} >
                       <div key={restaurant.id} className="restaurant-card-container">
-                        <div className= 'get-restaurants-pic-container'>
-                          <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl} onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
-                        </div>
-                        <div className="get-restaurants-bottom-text-container">
-                          <div className='get-restaurants-left-inner-text-container'>
-                            <h4>{restaurant.name}</h4>
-                            <p> {restaurant.avgRating} <i class="fa-solid fa-star" ></i> ratings</p>
+                          <div className= 'get-restaurants-pic-container'>
+                            <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}  onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
+                          </div>
+                          <div className="get-restaurants-bottom-text-container">
+                            <div className='get-restaurants-bottom-text-row text-top-row'>
+                              {restaurant.name}
+                            </div>
+                            <div className='get-restaurants-bottom-text-row not-top-row'>
+                              {restaurant.priceRange === 3? "$$$" : restaurant.priceRange===2? "$$": "$" } • {restaurant.category}
+                            </div>
+                            <div className='get-restaurants-bottom-text-row not-top-row'>
+                              {restaurant.avgRating == 0? "No" : Math.round(restaurant.avgRating * 10)/10} <i class="fa-solid fa-star" ></i> {restaurant.numReviews>0? `(${restaurant.numReviews}+)`: "0 ratings"}
+                            </div>
                           </div>
                         </div>
-                      </div>
                     </NavLink>
                     )}
                 </>
@@ -720,16 +778,21 @@ const Restaurants = () => {
                   {restaurant.category==="Mediterranean" && (
                     <NavLink className='navlink' key={restaurant.id} to={{pathname:`restaurants/${restaurant.id}`}} >
                       <div key={restaurant.id} className="restaurant-card-container">
-                        <div className= 'get-restaurants-pic-container'>
-                          <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl} onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
-                        </div>
-                        <div className="get-restaurants-bottom-text-container">
-                          <div className='get-restaurants-left-inner-text-container'>
-                            <h4>{restaurant.name}</h4>
-                            <p> {restaurant.avgRating} <i class="fa-solid fa-star" ></i> ratings</p>
+                          <div className= 'get-restaurants-pic-container'>
+                            <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}  onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
+                          </div>
+                          <div className="get-restaurants-bottom-text-container">
+                            <div className='get-restaurants-bottom-text-row text-top-row'>
+                              {restaurant.name}
+                            </div>
+                            <div className='get-restaurants-bottom-text-row not-top-row'>
+                              {restaurant.priceRange === 3? "$$$" : restaurant.priceRange===2? "$$": "$" } • {restaurant.category}
+                            </div>
+                            <div className='get-restaurants-bottom-text-row not-top-row'>
+                              {restaurant.avgRating == 0? "No" : Math.round(restaurant.avgRating * 10)/10} <i class="fa-solid fa-star" ></i> {restaurant.numReviews>0? `(${restaurant.numReviews}+)`: "0 ratings"}
+                            </div>
                           </div>
                         </div>
-                      </div>
                     </NavLink>
                   )}
                 </>
@@ -737,22 +800,31 @@ const Restaurants = () => {
               </div>
             </>
             )}
+            {isFiltered && (
+            <div className='get-restaurants-filtered-results-number-container'>
+              {filteredItems.length} results
+            </div> )}
             {filteredItems.length>0 && isFiltered && (
             <div className='restaurant-filtered-main-grid-container'>
                {filteredItems.map(restaurant => (
                 <>
                     <NavLink className='navlink' key={restaurant.id} to={{pathname:`restaurants/${restaurant.id}`}} >
                     <div key={restaurant.id} className="restaurant-card-container">
-                      <div className= 'get-restaurants-pic-container'>
-                        <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl} onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
-                      </div>
-                      <div className="get-restaurants-bottom-text-container">
-                        <div className='get-restaurants-left-inner-text-container'>
-                          <h3>{restaurant.name}</h3>
-                          <p> {restaurant.avgRating} <i class="fa-solid fa-star" ></i> ratings</p>
+                          <div className= 'get-restaurants-pic-container'>
+                            <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}  onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
+                          </div>
+                          <div className="get-restaurants-bottom-text-container">
+                            <div className='get-restaurants-bottom-text-row text-top-row'>
+                              {restaurant.name}
+                            </div>
+                            <div className='get-restaurants-bottom-text-row not-top-row'>
+                              {restaurant.priceRange === 3? "$$$" : restaurant.priceRange===2? "$$": "$" } • {restaurant.category}
+                            </div>
+                            <div className='get-restaurants-bottom-text-row not-top-row'>
+                              {restaurant.avgRating == 0? "No" : Math.round(restaurant.avgRating * 10)/10} <i class="fa-solid fa-star" ></i> {restaurant.numReviews>0? `(${restaurant.numReviews}+)`: "0 ratings"}
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
                   </NavLink>
                 </>
               ))}
@@ -760,7 +832,7 @@ const Restaurants = () => {
             )}
             {filteredItems.length === 0 && isFiltered && (
               <div className='restaurants-no-items-display'>
-               <i class="fa-solid fa-utensils"> </i> &nbsp;&nbsp;No Restaurants in this Category
+               <i class="fa-solid fa-utensils"> </i> &nbsp;&nbsp; No Restaurants in this Category
               </div>
             )}
           </div>

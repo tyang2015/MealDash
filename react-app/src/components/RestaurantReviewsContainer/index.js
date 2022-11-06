@@ -20,8 +20,7 @@ const RestaurantReviewsContainer = ({restaurant, finalAvgRating, sessionUser}) =
     topReviews = reviews.slice(0,2)
   }
 
-  console.log('reviews for restaurant:', reviews)
-  console.log('top reviews:', topReviews)
+
   useEffect(()=>{
     dispatch(getReviews(id))
   }, [dispatch, id])
