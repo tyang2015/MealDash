@@ -254,7 +254,7 @@ const GetRestaurant = () => {
                 <div className="restaurant-page-pic-container">
                   <img className="restaurant-page-pic" src={restaurant.restaurantPicUrl} onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
                 </div>
-                <div className="restaurant-page-logo-pic-container" style={{marginTop: "27px"}}>
+                <div className="restaurant-page-logo-pic-container">
                   <img className="restaurant-page-logo-pic" src={restaurant.logo} onError={e => { e.currentTarget.src = "https://cdn5.vectorstock.com/i/1000x1000/65/29/vintage-badge-retro-blank-labels-logo-vector-23946529.jpg"; }} />
                 </div>
                 <div className="restaurant-page-name" style={{marginTop: "20px"}}>
@@ -262,7 +262,7 @@ const GetRestaurant = () => {
                 </div>
                 <div className="restaurant-page-description-container">
                   <div className="restaurant-page-left-description-text-box">
-                    <div> {restaurant.category} • {restaurant.avgRating == "0"? null: finalAvgRating}&nbsp;
+                    <div style={{width: '100%', display: 'flex'}}> {restaurant.category} • {restaurant.avgRating == "0"? null: finalAvgRating}&nbsp;
                     <i class="fa-solid fa-star" ></i> • {restaurant.numReviews == "0"? "No": restaurant.numReviews}&nbsp;{restaurant.numReviews=== 1? "rating": "ratings"} • {restaurant.priceRange == 1? "$": restaurant.priceRange == 2? "$$": "$$$"}
                     </div>
                     <div className="restaurant-page-hours-container">
@@ -419,7 +419,7 @@ const GetRestaurant = () => {
               </>
             )}
           </div>
-        {toggleCartPane && <CartRightPane setNewQuantity={setNewQuantity} newQuantity={newQuantity} setOldFoodItem={setOldFoodItem} oldFoodItem={oldFoodItem} setQuantityChange={setQuantityChange} quantityChange={quantityChange} setToggleCartPane={setToggleCartPane} toggleCartPane={toggleCartPane} cartItems={submittedCartItems} setCartItems={setSubmittedCartItems} forceCartUpdate={forceCartUpdate} restaurant={submittedCartItems?.length>0? submittedCartItems[0].Restaurant: null} />}
+        {toggleCartPane && <CartRightPane setToggleCartPane={setToggleCartPane} toggleCartPane={toggleCartPane} cartItems={submittedCartItems} setCartItems={setSubmittedCartItems} forceCartUpdate={forceCartUpdate} restaurant={submittedCartItems?.length>0? submittedCartItems[0].Restaurant: null} />}
         </div>
         <RestaurantFooter/>
 

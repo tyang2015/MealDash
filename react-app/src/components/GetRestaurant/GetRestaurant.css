@@ -6,6 +6,7 @@
   flex-direction: column;
   height: 100%;
   width: 100%;
+  margin-top: 5.5em;
 }
 
 .restaurant-page-main-content-and-footer-container{
@@ -40,21 +41,29 @@
 }
 
 .restaurant-page-logo-pic-container{
-  height: 8em;
-  width: 8em;
+  height: 4em;
+  /* width: 100%; */
 }
+
+.restaurant-page-left-description-text-box{
+  width: 28rem;
+}
+
 
 .restaurant-page-logo-pic{
   /* width: 190px;
   height: 190px;
   background-color: green; */
-  height: 100%;
-  width: 100%;
+  height: 8em;
+  width: 8em;
   object-fit: cover;
   border-radius: 50%;
   background-position: center;
   border: 1.5px solid #E7E7E7;
-
+  position: relative;
+  top: -68px;
+  z-index: 5;
+  left: 18px;
 }
 
 .restaurant-page-description-container{

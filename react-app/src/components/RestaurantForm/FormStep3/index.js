@@ -14,7 +14,9 @@ const FormStep3 = ({formData, setFormData}) => {
             type="number"
             value = {formData.bankAccount}
             onChange={e=> setFormData({...formData, bankAccount: e.target.value})}
+            placeholder="Must be 8-17 digits long"
             required
+            className='restaurant-form-input-box financial-input'
           />
         </div>
         <div className='form-step-3-label-input-container' >
@@ -22,7 +24,8 @@ const FormStep3 = ({formData, setFormData}) => {
           <input
             id="restaurant-routing-number"
             type="number"
-
+            className='restaurant-form-input-box financial-input'
+            placeholder="Must be 9 digits long"
             value = {formData.routingNumber}
             onChange={e=> setFormData({...formData, routingNumber: e.target.value})}
             required

@@ -11,7 +11,7 @@ export function Modal({ onClose, children }) {
   // console.log("inside order confirm")
 
   return ReactDOM.createPortal(
-    <div id="modal">
+    <div id="modal" style={{zIndex: 100}}>
       <div id="modal-background" className='order-confirm-payment-modal-background' onClick={onClose} />
       <div id="modal-content" className='order-confirm-payment-modal-content'>
         {children}

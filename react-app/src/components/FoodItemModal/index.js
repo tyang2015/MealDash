@@ -6,7 +6,7 @@ import CartRightPane from '../CartRightPane';
 import "./FoodItemModal.css"
 import "../../context/Modal.css"
 
-const FoodItemModal = ({setNewQuantity, setOldFoodItem, setQuantityChange , quantityChange , foodItemModal, setForceCartUpdate, forceCartUpdate,setSubmittedCartItems, submittedCartItems,setSubmittedCart, setFoodItemModal, foodItem}) => {
+const FoodItemModal = ({  setForceCartUpdate, forceCartUpdate,setSubmittedCartItems, submittedCartItems,setSubmittedCart, setFoodItemModal, foodItem}) => {
   const {id} = useParams();
   const [totalPrice, setTotalPrice] = useState("")
   const [preferences, setPreferences] = useState("")
@@ -35,20 +35,11 @@ const FoodItemModal = ({setNewQuantity, setOldFoodItem, setQuantityChange , quan
       if (item.id === foodItem.id){
         // remove it first before add the same one with new key values (quantity)
         copiedCartItems.splice(i,1)
-        // setQuantityChange(!quantityChange)
         item.quantity+=quantity
-        // update the quantity in the total price display
-        // setDisplayQuantity(item.quantity)
-        // add food preference to foodItem
         item.preferences = preferences
-        // add it back
         copiedCartItems = [...copiedCartItems, item]
-        console.log("copied cart items AFTER adding to same item:", copiedCartItems)
         localStorage.setItem('cart', JSON.stringify([...copiedCartItems]))
         setSubmittedCartItems([...copiedCartItems])
-        // setSubmittedCartItems([...JSON.parse(localStorage.getItem("cart") || '[]') ])
-        // setOldFoodItem(foodItem)
-        // setNewQuantity(quantity)
         setForceCartUpdate(!forceCartUpdate)
         // localStorage.setItem('cart', JSON.stringify([...submittedCartItems]))
         setFoodItemModal(false)
@@ -71,7 +62,7 @@ const FoodItemModal = ({setNewQuantity, setOldFoodItem, setQuantityChange , quan
   return (
     <Modal onClose={()=> setFoodItemModal(false)}>
       <div className='food-item-main-container'>
-        <div style={{height: '40px', borderRadius: "22px", boxSizing: 'border-box', display: 'flex', alignItems: "center", paddingLeft:"10px", paddingTop: "10px"}}>
+        <div onClick={()=> setFoodItemModal(false)} style={{height: '40px', borderRadius: "22px", boxSizing: 'border-box', display: 'flex', alignItems: "center", paddingLeft:"10px", paddingTop: "10px", cursor: "pointer", width: "fit-content"}}>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="styles__StyledInlineSvg-sc-12l8vvi-0 jFpckg"><path d="M17.2929 18.7071C17.6834 19.0976 18.3166 19.0976 18.7071 18.7071C19.0976 18.3166 19.0976 17.6834 18.7071 17.2929L13.4142 12L18.7071 6.70711C19.0976 6.31658 19.0976 5.68342 18.7071 5.29289C18.3166 4.90237 17.6834 4.90237 17.2929 5.29289L12 10.5858L6.70711 5.29289C6.31658 4.90237 5.68342 4.90237 5.29289 5.29289C4.90237 5.68342 4.90237 6.31658 5.29289 6.70711L10.5858 12L5.29289 17.2929C4.90237 17.6834 4.90237 18.3166 5.29289 18.7071C5.68342 19.0976 6.31658 19.0976 6.70711 18.7071L12 13.4142L17.2929 18.7071Z" fill="currentColor"></path></svg>
         </div>
         <div className='food-item-main-content-container'>

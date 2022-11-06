@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import "./FormStep2.css"
+import "../Restaurant.css"
 
 // 2nd step: openTime, closeTime, priceRange, category
 // time inputs, number, select
@@ -20,7 +21,7 @@ const FormStep2 = ({formData, setFormData}) => {
             min="00:01"
             max="23:99"
             value = {formData.openTime}
-            className="form-step-2-input"
+            className="form-step-2-input restaurant-form-input-box"
             onChange={(e)=> setFormData({...formData, openTime: e.target.value})}
             required
           />
@@ -34,7 +35,7 @@ const FormStep2 = ({formData, setFormData}) => {
             min="00:01"
             max="23:99"
             value = {formData.closeTime}
-            className="form-step-2-input"
+            className="form-step-2-input restaurant-form-input-box"
             onChange={(e)=> setFormData({...formData, closeTime: e.target.value})}
             required
           />
@@ -48,12 +49,13 @@ const FormStep2 = ({formData, setFormData}) => {
             type="number"
             // see if you can make the min = {formData.openTime + timeDelta(2)}
             min="1"
-            max="3"
+            max="4"
             step="1"
             // step="0.01"
             value = {formData.priceRange}
-            className="form-step-2-input"
+            className="form-step-2-input restaurant-form-input-box"
             onChange={(e)=> setFormData({...formData, priceRange: e.target.value})}
+            placeholder="Select 1 - 4"
             required
           />
         </div>
@@ -62,13 +64,14 @@ const FormStep2 = ({formData, setFormData}) => {
           <select
             id="restaurant-category"
             value={formData.category}
-            className="form-step-2-input"
+            className="form-step-2-input restaurant-form-input-box restaurant-form-select"
             onChange={e=> setFormData({...formData, category: e.target.value})}
             required
           >
             {CATEGORY_CHOICES.map(category=> (
               <option
                 key={category}
+                // style={{backgroundColor: "lightblue", height: "40rem"}}
               >
                 {category}
               </option>

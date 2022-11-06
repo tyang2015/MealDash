@@ -1,36 +1,45 @@
 .credit-card-modal-inner-container{
   display:flex;
   flex-direction:column;
-  background-color: lightgoldenrodyellow;
-  width: 30em;
+  width: 100%;
   height:100%;
   border-radius: 20px;
   align-items: center;
   justify-content: flex-start;
   /* padding-top: 10em; */
+  background-color: lightblue;
+
+
+}
+
+.credit-card-modal-x-button{
+  width: 100%;
+  display: flex;
+  /* background-color: lightcoral; */
+  height: 2.3em;
+  border-radius: 20px;
+  cursor:pointer
 }
 
 .add-new-card-title-container{
-  margin-top: 2em;
+  /* margin-top: 2em; */
   width: 100%;
   text-align: center;
 }
 
 .payment-button-container{
-  background-color: lightblue;
   width:100%;
   height:2em;
   display: flex;
   justify-content: center;
   position: absolute;
   bottom: 1.2em;
-  
+
 
 }
 
 .credit-card-input-label-container{
   width: 100%;
-  background-color:lightpink;
   display: flex;
   justify-content: center;
   height: fit-content;
@@ -39,6 +48,8 @@
 
 .credit-card-input{
   height: 30px;
+  border: 1px solid #e7e7e7;
+  border-radius: 3px;
 }
 
 .add-card-button{

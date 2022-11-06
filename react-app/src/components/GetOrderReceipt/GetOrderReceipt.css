@@ -70,6 +70,14 @@ div.get-order-receipt-food-item-card:not(:first-child){
   height: 30%;
 }
 
+.get-order-receipt-item-preference{
+  /* background-color: lightblue; */
+  display: flex;
+  flex-wrap: wrap;
+  /* height: ; */
+  /* min-height: 3em; */
+}
+
 .get-order-receipt-food-item-left-container-name-quantity{
   display:flex;
   justify-content: space-between;

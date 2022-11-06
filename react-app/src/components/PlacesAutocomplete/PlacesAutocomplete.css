@@ -1,0 +1,9 @@
+#create-restaurant-address-input.restaurant-form-input-box{
+  height: 2.2rem;
+  padding: 0 10px;
+}
+
+#create-restaurant-address-input.restaurant-form-input-box::placeholder{
+
+  /* font-weight: 550; */
+}

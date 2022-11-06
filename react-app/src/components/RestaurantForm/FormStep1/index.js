@@ -26,6 +26,7 @@ const FormStep1 = ({formData, setFormData}) => {
             value = {formData.name}
             onChange={e=> setFormData({...formData, name: e.target.value})}
             placeholder = "Restaurant name"
+            className='restaurant-form-input-box'
             required
           />
         </div>
@@ -37,6 +38,7 @@ const FormStep1 = ({formData, setFormData}) => {
             value = {formData.phoneNumber? maskPhoneNumber(formData.phoneNumber): null}
             onChange = {e=> setFormData({...formData, phoneNumber: e.target.value})}
             placeholder = "(123) 456-789"
+            className='restaurant-form-input-box'
             // pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
             required
           />
@@ -50,13 +52,13 @@ const FormStep1 = ({formData, setFormData}) => {
             type = 'text'
             value = {formData.email}
             onChange = {e=> setFormData({...formData, email: e.target.value})}
-            className = 'one-input-per-row'
-            placeholder = "Email"
+            className = 'one-input-per-row restaurant-form-input-box'
+            placeholder = "Email "
             required
           />
         </div>
       </div>
-      <div className='create-restaurant-form-step-1-third-row'>
+      {/* <div className='create-restaurant-form-step-1-third-row'>
         <div className='create-restaurant-form-step-1-left-container'>
           <div className='create-restaurant-label-input-container'>
             <label htmlFor='longitude'>Longitude *</label>
@@ -86,9 +88,8 @@ const FormStep1 = ({formData, setFormData}) => {
 
           </div>
         </div>
-
-      </div>
-      {/* <PlacesAutocompleteContainer setFormData={setFormData} formData={formData}/> */}
+      </div> */}
+      <PlacesAutocompleteContainer setFormData={setFormData} formData={formData}/>
       {/* <div>Converted to longitude and latitude: {formData.longitude} {formData.latitude} </div> */}
       <div className='create-restaurant-form-step-1-fourth-row'>
         <div className='create-restaurant-form-step-1-left-container'>
@@ -101,12 +102,14 @@ const FormStep1 = ({formData, setFormData}) => {
               onChange={e=> setFormData({...formData, restaurantPicUrl: e.target.value})}
               placeholder = "Restaurant Pic Url"
               required
+              className='restaurant-form-input-box'
+
             />
           </div>
           <img
             src={formData.restaurantPicUrl}
             alt="restaurant pic url"
-            className='create-restaurant-form-restaurant-pic'
+            className='create-restaurant-form-restaurant-pic form-step-1-pic'
             onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}
           />
         </div>
@@ -120,12 +123,13 @@ const FormStep1 = ({formData, setFormData}) => {
               onChange={e=> setFormData({...formData, logo: e.target.value})}
               placeholder = "Logo"
               required
+              className='restaurant-form-input-box'
             />
           </div>
           <img
             src={formData.logo}
             alt="logo url"
-            className='restaurant-form-restaurant-logo'
+            className='restaurant-form-restaurant-logo form-step-1-pic'
             onError={e => { e.currentTarget.src = "https://cdn5.vectorstock.com/i/1000x1000/65/29/vintage-badge-retro-blank-labels-logo-vector-23946529.jpg"; }}
           />
         </div>

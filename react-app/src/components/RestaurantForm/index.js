@@ -198,7 +198,7 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
               </div>
             )}
           </div>
-          <div className='create-restaurant-form-footer'>
+          <div className={`create-restaurant-form-footer`} >
             <button
               type="button"
               disabled={formStep == 0}

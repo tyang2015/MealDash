@@ -6,8 +6,7 @@
     align-items: center;
     border-bottom: #E7E7E7 1px solid;
     position: static;
-    z-index: 0;
-    /* position: fixed */
+    z-index: 10;
     position: fixed;
     top: 0;
     background-color: white;
@@ -83,11 +82,12 @@
   border-radius: 30px;
   display: flex;
   align-items: center;
-  height: 27px;
+  height: 32px;
   justify-content: center;
   position:relative;
   z-index: 5;
   left: 4em;
+  top: 0.4rem;
 }
 
 
@@ -174,8 +174,16 @@
   justify-content: flex-start;
   border-bottom:1.5px solid #E7E7E7 ;
   padding-left: 10px;
+}
+
+div.username-card{
+  font-weight: 550;
+}
+
+.dropdown-container-row:not(.username-card){
   cursor: pointer;
 }
-.dropdown-container-row:hover{
+
+.dropdown-container-row:not(.username-card):hover{
   background-color: #F7F7F7;
 }

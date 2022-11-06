@@ -13,6 +13,7 @@ import {
   ComboboxOptionText,
 } from "@reach/combobox";
 import "@reach/combobox/styles.css";
+import "./PlacesAutocomplete.css"
 
 // const google = window.google
 const PlacesAutocomplete = ({apiKey, setFormData, formData, destinationRef}) => {
@@ -56,7 +57,7 @@ const PlacesAutocomplete = ({apiKey, setFormData, formData, destinationRef}) => 
               <label htmlFor='create-restaurant-address-input'>Address</label>
               <ComboboxInput
                 id="create-restaurant-address-input"
-                className='one-input-per-row'
+                className='one-input-per-row restaurant-form-input-box'
                 value={value}
                 onChange={(e)=> setValue(e.target.value)}
                 ref={destinationRef}
