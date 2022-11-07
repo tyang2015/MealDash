@@ -14,6 +14,8 @@ import RestaurantFooter from "../RestaurantFooter";
 import NavBar from "../Navigation/NavBar";
 import RestaurantReviewsContainer from "../RestaurantReviewsContainer";
 import { useToggleCart } from '../../context/ToggleCartContext';
+import DeleteRestaurantModalComponent from "../DeleteRestaurantModal";
+import DeleteFoodItemModalComponent from "../DeleteFoodItemModal";
 
 // let cartFromLocalStorage =  JSON.parse(localStorage.getItem('cart' || "[]"))
 // let cartFromLocalStorage =  JSON.parse(localStorage.getItem('cart'))
@@ -33,6 +35,9 @@ const GetRestaurant = () => {
   let foodItems = useSelector(state => Object.values(state.foodItems))
 
   const [foodItemModal, setFoodItemModal] = useState(false)
+  const [restaurantDeleteModal, setRestaurantDeleteModal] = useState(false)
+  const [foodItemDeleteModal, setFoodItemDeleteModal] = useState(false)
+  // const [foodItem, setFoodItem]
   const [foodItem, setFoodItem] =useState(null)
   const [isOpen, setIsOpen] = useState(false)
   const [closeTime, setCloseTime] = useState('')
@@ -183,18 +188,18 @@ const GetRestaurant = () => {
     dispatch(getFoodItems(id))
   }, [dispatch, id])
 
+// REFACTORED INTO MODAL
+  // const handleDelete = e => {
+  //   dispatch(deleteRestaurant(id))
+  //   alert('successfully deleted!')
+  //   return history.push('/')
+  // }
 
-  const handleDelete = e => {
-    dispatch(deleteRestaurant(id))
-    alert('successfully deleted!')
-    return history.push('/')
-  }
-
-  const handleDeleteFoodItem = (foodItemId)=> {
-    dispatch(deleteFoodItem(id, foodItemId))
-    alert('food item deleted!')
-    return
-  }
+  // const handleDeleteFoodItem = (foodItemId)=> {
+  //   dispatch(deleteFoodItem(id, foodItemId))
+  //   alert('food item deleted!')
+  //   return
+  // }
 
   const handleFilter = categoryName => {
     if (categoryName === "All") {
@@ -282,7 +287,7 @@ const GetRestaurant = () => {
                             Update Restaurant
                           </div>
                         </NavLink>
-                        <button onClick={handleDelete} className="restaurant-page-delete-button button">
+                        <button onClick={()=> setRestaurantDeleteModal(true)} className="restaurant-page-delete-button button">
                           Delete Restaurant
                         </button>
                         <NavLink className='navlink' to={`/restaurants/${restaurant.id}/new`}>
@@ -292,6 +297,7 @@ const GetRestaurant = () => {
                         </NavLink>
                       </>
                     )}
+                    {restaurantDeleteModal && (<DeleteRestaurantModalComponent setRestaurantDeleteModal={setRestaurantDeleteModal} restaurant={restaurant}/>)}
                   </div>
                 </div>
                 <RestaurantReviewsContainer sessionUser={sessionUser} restaurant={restaurant} finalAvgRating={finalAvgRating}/>
@@ -346,60 +352,75 @@ const GetRestaurant = () => {
                         {foodItems.length>0 && !isFiltered && (
                           <div className="food-items-grid-container">
                               {foodItems.map(item=>(
-                                <div key={item.id} className="food-item-card-container" onClick={()=> {
-                                  setFoodItemModal(true)
-                                  setFoodItem(item)
-                                  }}>
-                                  <div className="food-item-left-container">
-                                    <div style={{fontWeight:"700"}}> {item.name.length>32? item.name.substring(0,33).concat("..."): item.name} </div>
-                                    <div> {item.description.length>87? item.description.substring(0,88).concat("..."): item.description} </div>
-                                    <div> ${item.price} </div>
-                                    {/* <div> {item.category}</div> */}
-                                  </div>
-                                  <div className="food-item-middle-container">
-                                    <img className="food-item-pic" src= {item.foodPicUrl} onError={e => { e.currentTarget.src =
-                                      "https://static.onecms.io/wp-content/uploads/sites/47/2020/08/06/cat-with-empty-bowl-1224404559-2000.jpg"; }}/>
+                                <div key={item.id} className="food-item-card-container">
+                                  <div className="food-item-left-middle-outer-container" onClick={()=> {
+                                    setFoodItemModal(true)
+                                    setFoodItem(item)
+                                    }}>
+                                    <div className="food-item-left-container">
+                                      <div style={{fontWeight:"700"}}> {item.name.length>32? item.name.substring(0,33).concat("..."): item.name} </div>
+                                      <div> {item.description.length>87? item.description.substring(0,88).concat("..."): item.description} </div>
+                                      <div> ${item.price} </div>
+                                    </div>
+                                    <div className="food-item-middle-container">
+                                      <img className="food-item-pic" src= {item.foodPicUrl} onError={e => { e.currentTarget.src =
+                                        "https://static.onecms.io/wp-content/uploads/sites/47/2020/08/06/cat-with-empty-bowl-1224404559-2000.jpg"; }}/>
+                                    </div>
                                   </div>
                                   {sessionUser.id == restaurant.ownerId && (
                                     <div className="food-item-right-container">
                                       {/* {sessionUser.id == restaurant.ownerId && ( */}
                                         <>
                                           <NavLink className="navlink edit-food-item-button" to={`/restaurants/${id}/fooditems/${item.id}`}>
-                                            <button style={{width:"100%"}}className="button"><i class="fa-solid fa-pen-to-square"></i></button>
+                                            <button style={{width:"100%"}}className="button edit-food-item-actual-button"><i class="fa-solid fa-pen-to-square"></i></button>
                                           </NavLink>
-                                          <button onClick={(e)=> handleDeleteFoodItem(item.id)} className="button delete-food-item-button"><i class="fa-solid fa-trash-can"></i></button>
+                                          <button onClick={()=> {
+                                            setFoodItemDeleteModal(true)
+                                            setFoodItem(item)
+                                            }} className="button delete-food-item-button"><i class="fa-solid fa-trash-can"></i></button>
                                         </>
                                       {/* )} */}
+                                      {foodItemDeleteModal && <DeleteFoodItemModalComponent foodItem={foodItem} restaurant={restaurant} setFoodItemDeleteModal={setFoodItemDeleteModal}/>}
                                     </div>
                                   )}
                                 </div>
                               ))}
-                              {foodItemModal && <FoodItemModal setFoodItemModal={setFoodItemModal} forceCartUpdate={forceCartUpdate} setForceCartUpdate={setForceCartUpdate} submittedCartItems={submittedCartItems} setSubmittedCartItems={setSubmittedCartItems} setSubmittedCart={setSubmittedCart} foodItem={foodItem} setFoodItemModal={setFoodItemModal}/> }
+                              {foodItemModal && <FoodItemModal restaurant={restaurant} setFoodItemModal={setFoodItemModal} forceCartUpdate={forceCartUpdate} setForceCartUpdate={setForceCartUpdate} submittedCartItems={submittedCartItems} setSubmittedCartItems={setSubmittedCartItems} setSubmittedCart={setSubmittedCart} foodItem={foodItem}/> }
                           </div>
                         )}
                         {filteredItems.length>0 && isFiltered && (
                           <div className="food-items-grid-container">
                             {filteredItems.map(item=>(
-                              <div key={item.id} className="food-item-card-container" onClick={()=> setFoodItemModal(true)}>
-                                <div className="food-item-left-container">
-                                  <div style={{fontWeight:"700"}}> {item.name} </div>
-                                  <div> {item.description.length>87? item.description.substring(0,88).concat("..."): item.description} </div>
-                                  <div> ${item.price} </div>
+                              <div key={item.id} className="food-item-card-container" >
+                                <div className="food-item-left-middle-outer-container" onClick={()=> {
+                                  setFoodItemModal(true)
+                                  setFoodItem(item)
+                                  }}>
+                                  <div className="food-item-left-container">
+                                    <div style={{fontWeight:"700"}}> {item.name} </div>
+                                    <div> {item.description.length>87? item.description.substring(0,88).concat("..."): item.description} </div>
+                                    <div> ${item.price} </div>
+                                  </div>
+                                  <div className="food-item-middle-container">
+                                    <img className="food-item-pic" src= {item.foodPicUrl} onError={e => { e.currentTarget.src =
+                                      "https://static.onecms.io/wp-content/uploads/sites/47/2020/08/06/cat-with-empty-bowl-1224404559-2000.jpg"; }}/>
+                                  </div>
                                 </div>
-                                <div className="food-item-middle-container">
-                                  <img className="food-item-pic" src= {item.foodPicUrl} onError={e => { e.currentTarget.src =
-                                    "https://static.onecms.io/wp-content/uploads/sites/47/2020/08/06/cat-with-empty-bowl-1224404559-2000.jpg"; }}/>
-                                </div>
-                                <div className="food-item-right-container">
-                                  {sessionUser.id == restaurant.ownerId && (
+                                {sessionUser.id == restaurant.ownerId && (
+                                  <div className="food-item-right-container">
                                     <>
                                       <NavLink className="navlink edit-food-item-button" to={`/restaurants/${id}/fooditems/${item.id}`}>
-                                        <button style={{width:"100%"}}className="button"><i class="fa-solid fa-pen-to-square"></i></button>
+                                        <button style={{width:"100%"}} className="button edit-food-item-actual-button"><i class="fa-solid fa-pen-to-square"></i></button>
                                       </NavLink>
-                                      <button onClick={(e)=> handleDeleteFoodItem(item.id)} className="button delete-food-item-button"><i class="fa-solid fa-trash-can"></i></button>
+                                      <button onClick={()=> {
+                                        setFoodItemDeleteModal(true)
+                                        setFoodItem(item)
+                                      }} className="button delete-food-item-button"><i class="fa-solid fa-trash-can"></i></button>
                                     </>
-                                  )}
-                                </div>
+                                    {foodItemDeleteModal && <DeleteFoodItemModalComponent setFilteredItems= {setFilteredItems} filteredItems={filteredItems} foodItem={foodItem} restaurant={restaurant} setFoodItemDeleteModal={setFoodItemDeleteModal}/>}
+                                  </div>
+                                )}
+                                {foodItemModal && <FoodItemModal restaurant={restaurant} setFoodItemModal={setFoodItemModal} forceCartUpdate={forceCartUpdate} setForceCartUpdate={setForceCartUpdate} submittedCartItems={submittedCartItems} setSubmittedCartItems={setSubmittedCartItems} setSubmittedCart={setSubmittedCart} foodItem={foodItem}/> }
                               </div>
                             ))}
                           </div>

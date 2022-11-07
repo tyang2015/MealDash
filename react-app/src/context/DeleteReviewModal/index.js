@@ -4,7 +4,7 @@ import '../Modal.css';
 import { ModalContext } from '../Modal';
 import "./DeleteReviewModal.css"
 
-export function DeleteReviewModal({ onClose, children }) {
+export function Modal({ onClose, children }) {
   const modalNode = useContext(ModalContext);
   if (!modalNode) return null;
 

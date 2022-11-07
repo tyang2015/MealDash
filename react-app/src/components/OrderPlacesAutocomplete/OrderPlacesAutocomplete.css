@@ -40,3 +40,13 @@
   padding-left: 8px;
   border-radius: 8px;
 }
+
+.order-confirmation-address-entire-dropdown{
+  position: relative;
+  z-index: 5;
+}
+
+/* .order-confirmation-address-dropdown{
+  position: relative;
+  z-index: 10;
+} */

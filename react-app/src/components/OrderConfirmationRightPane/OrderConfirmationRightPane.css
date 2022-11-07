@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   /* background-color: lightgoldenrodyellow; */
-  width: 30%;
+  width: 25rem;
   border-left: 1.5px solid #dbd8d8;
 }
 
@@ -13,6 +13,17 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+
+  height: 2.8em;
+  display: flex;
+}
+
+.order-summary-title-container{
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
 }
 
 .order-confirmation-restaurant-logo-pic{
@@ -155,6 +166,11 @@
 .dasher-tip-input{
   height: 25px;
   width: 100%;
+  border: none;
+  border-radius: 5px;
+  background-color: #F7F7F7 ;
+  height: 3em;
+  padding: 0 10px;
 }
 
 
@@ -162,4 +178,9 @@ div.order-confirmation-errors{
   display: flex;
   justify-content: flex-start;
   list-style-type: none;
+  margin: 0px;
+  width:100%;
+  align-items: flex-end;
+  /* background-color: lightcyan; */
+  padding-bottom: 0px;
 }

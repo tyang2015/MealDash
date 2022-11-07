@@ -59,8 +59,8 @@ const PlacesAutocomplete = ({apiKey,setRouteLoaded, setAddress, setUserCoordinat
                 required
                 disabled = {!ready}
               />
-            <ComboboxPopover>
-              <ComboboxList>
+            <ComboboxPopover className='order-confirmation-address-entire-dropdown'>
+              <ComboboxList className='order-confirmation-address-dropdown'>
                 {status === "OK" && data.map(({place_id, description}) =>(
                 <ComboboxOption key={place_id} value = {description}/>
                 ))}

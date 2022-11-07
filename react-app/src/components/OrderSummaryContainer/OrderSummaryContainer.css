@@ -1,0 +1,55 @@
+.order-summary-food-item-card{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  /* background-color: lightblue; */
+  margin-bottom: .8em;
+  border-bottom: 1px solid #e7e7e7;
+  height: 5em;
+}
+
+.food-item-last-card{
+  border:none
+}
+
+.order-summary-food-item-pic{
+  height: 50px;
+  width: 50px;
+  min-width: 50px;
+  object-fit: cover;
+}
+
+.order-summary-food-item-card-middle-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* background-color: lightcoral; */
+  width: 70%;
+  box-sizing: border-box;
+}
+
+.order-summary-food-item-quantity{
+  height: 100%;
+  /* background-color: lightcyan; */
+  width: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.order-summary-food-item-row{
+  margin-left: 15px;
+}
+
+div.food-item-name{
+  /* background-color: lightcoral; */
+  margin-bottom: 6px;
+  font-size: 16px;
+  font-weight: 550;
+}
+
+div.food-item-price{
+  font-size: 14px;
+  font-weight: 500;
+
+}

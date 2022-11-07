@@ -62,7 +62,7 @@
   border: 1.5px solid #E7E7E7;
   position: relative;
   top: -68px;
-  z-index: 5;
+  z-index: 0;
   left: 18px;
 }
 
@@ -110,6 +110,11 @@
   border-radius: 6px;
 
 }
+.food-item-left-middle-outer-container{
+  width: 100%;
+  display: flex;
+  cursor: pointer
+}
 
 .food-item-left-container{
   width: 100%;
@@ -127,6 +132,14 @@
   justify-content: space-evenly;
   align-items: center;
   width: 30%;
+}
+
+.edit-food-item-button{
+  cursor: pointer;
+}
+
+.delete-food-item-button{
+  cursor: pointer
 }
 
 .restaurant-page-name{
@@ -201,9 +214,17 @@ div.restaurant-page-update-delete-buttons-container{
 }
 
 .restaurant-page-hours-container{
-  width: 200px;
+  width: 18em;
   display:flex;
   justify-content: flex-start;
+}
+
+.restaurant-page-open-status{
+  width: fit-content;
+}
+
+.restaurant-page-close-information{
+  width: 65%;
 }
 
 .navlink{
@@ -284,6 +305,11 @@ div.restaurant-page-update-delete-buttons-container{
   justify-content: center;
   /* align-items: center; */
   height: 40px;
+  /* background-color: lightblue; */
+}
+
+.edit-food-item-actual-button{
+  cursor: pointer;
 }
 
 .fa-solid.fa-pen-to-square{

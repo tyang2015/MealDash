@@ -7,7 +7,6 @@
   align-items: center;
   justify-content: flex-start;
   /* padding-top: 10em; */
-  background-color: lightblue;
 
 
 }
@@ -65,4 +64,6 @@
   height: 100%;
   justify-content:space-around;
   align-items: center;
+  font-weight: 550;
+  font-size: 16px;
 }

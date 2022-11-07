@@ -148,12 +148,12 @@ const GetOrders = () => {
                   </div>
                   <div className='get-orders-in-progress-text-content-right-container'>
                     {/* TODO: fix user coordinates (instead of storing them as separate values, geocode in the finalorderconfirm component) */}
-                    <NavLink to={{pathname:`/restaurants/${order.restaurant.id}/orders/${order.id}/new`, state: {createdOrder: order, cartItems: order.foodItems, userCoordinates, restaurant: order.restaurant, duration: order.duration}}}>
+                    <NavLink className='navlink' to={{pathname:`/restaurants/${order.restaurant.id}/orders/${order.id}/new`, state: {createdOrder: order, cartItems: order.foodItems, userCoordinates, restaurant: order.restaurant, duration: order.duration}}}>
                       <div className='view-order-button'>
                         <h3>View Order</h3>
                       </div>
                     </NavLink>
-                    <div style={{backgroundColor: 'lightblue'}} className="get-orders-delete-order-button">
+                    <div className="get-orders-delete-order-button">
                       <h3 onClick={()=> {
                         setOrderDeleteModal(true)
                         setOrderObj(order)

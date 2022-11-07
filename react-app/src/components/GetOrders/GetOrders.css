@@ -83,11 +83,13 @@ div.get-orders-completed-card:last-child{
 }
 
 .get-orders-in-progress-text-content-right-container{
-  width: 30%;
+  /* width: 30%; */
   display: flex;
   align-items: center;
-  justify-content: flex-end;
   margin-right: 20px;
+
+  width: 28em;
+  justify-content: space-between;
 }
 
 
@@ -110,6 +112,18 @@ div.get-orders-completed-card:last-child{
   border-radius: 30px;
   width: 11em;
   height: 45px;
+}
+
+.get-orders-delete-order-button{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(231, 231, 231);
+  border-radius: 30px;
+  width: 11em;
+  height: 45px;
+  cursor:pointer;
 }
 
 .view-receipt-button{
