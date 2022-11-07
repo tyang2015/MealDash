@@ -102,6 +102,7 @@ div.middle-row-not-first{
 .restaurant-reviews-container-your-stars-container{
   height: 30px;
   margin-left: 1em;
+  cursor: pointer;
 }
 
 .restaurant-reviews-container-reviewer{

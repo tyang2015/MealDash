@@ -88,7 +88,7 @@ const SignUpForm = () => {
           ))}
         </div>
         <div className='signup-page-row-inputs top-row'>
-          <div className='first-row-firstname-box'>
+          <div className='first-row-firstname-box sign-up-label-input-container'>
             <label>First Name</label>
             <input
               type='text'
@@ -99,7 +99,7 @@ const SignUpForm = () => {
               required
             ></input>
           </div>
-          <div className='first-row-lastname-box'>
+          <div className='first-row-lastname-box sign-up-label-input-container'>
             <label style={{marginLeft: '5px'}}>Last Name</label>
             <input
               type='text'
@@ -112,7 +112,7 @@ const SignUpForm = () => {
             ></input>
           </div>
         </div>
-        <div className='signup-page-row-inputs single'>
+        <div className='signup-page-row-inputs single sign-up-label-input-container'>
           <label>Email</label>
           <input
             type='text'
@@ -123,7 +123,7 @@ const SignUpForm = () => {
             required
           ></input>
         </div>
-        <div className='signup-page-row-inputs single'>
+        <div className='signup-page-row-inputs single sign-up-label-input-container'>
           <label>PhoneNumber</label>
           <input
             type='text'
@@ -135,7 +135,7 @@ const SignUpForm = () => {
             required
           ></input>
         </div>
-        <div className='signup-page-row-inputs single'>
+        <div className='signup-page-row-inputs single sign-up-label-input-container'>
           <label>Password</label>
           <input
             type='password'
@@ -146,7 +146,7 @@ const SignUpForm = () => {
             required
           ></input>
         </div>
-        <div className='signup-page-row-inputs single'>
+        <div className='signup-page-row-inputs single sign-up-label-input-container'>
           <label>Repeat Password</label>
           <input
             type='password'
@@ -157,7 +157,7 @@ const SignUpForm = () => {
             required={true}
           ></input>
         </div>
-        <button className='signup-page-submit-button' style={{marginTop:"-30px"}} type='submit'>Sign Up</button>
+        <button className='signup-page-submit-button' type='submit'>Sign Up</button>
       </form>
     </>
   );

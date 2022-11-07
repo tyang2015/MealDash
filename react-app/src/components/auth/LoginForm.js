@@ -56,7 +56,7 @@ const LoginForm = () => {
             <div key={ind}>{error}</div>
           ))}
         </div>
-        <div className='login-page-email-row'>
+        <div className='login-page-email-row login-label-input-container'>
           <label htmlFor='email'>Email</label>
           <input
             name='email'
@@ -67,7 +67,7 @@ const LoginForm = () => {
             onChange={updateEmail}
           />
         </div>
-        <div className='login-page-password-row'>
+        <div className='login-page-password-row login-label-input-container'>
           <label htmlFor='password'>Password</label>
           <input
             name='password'

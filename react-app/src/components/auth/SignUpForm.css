@@ -9,9 +9,9 @@
 
 }
 
-.sign-up-logo{
-  /* width: 30em; */
 
+div.sign-up-label-input-container{
+  height: 3.7em;
 }
 
 .signup-inputs.first-name-input, .signup-inputs.last-name-input{
@@ -30,6 +30,7 @@
   border-radius: 7px;
   border: none;
   background-color: #F3F4F6 ;
+  padding: 0 10px;
 
 }
 
@@ -80,7 +81,7 @@
 .signup-form-container{
   /* background-color: lightgoldenrodyellow; */
   width: 25em;
-  height: 500px;
+  height: 520px;
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -114,6 +115,7 @@
   border-radius: 12em;
   color: white;
   font-weight: 700;
+  /* margin-top: -30px; */
 }
 
 label{
