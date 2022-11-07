@@ -18,7 +18,7 @@ import random
 def random_food_items():
   max_range = random.randint(1,5)
   all_food_items = []
-  # same food item can appear in multiple orders
+  # same food item can appear in multiple orders!
   for i in range(max_range):
     food_item = random.choice(food_items_list)
     all_food_items.append(food_item)
