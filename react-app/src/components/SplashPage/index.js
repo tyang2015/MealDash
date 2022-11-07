@@ -7,7 +7,7 @@ import SplashFooter from '../SplashFooter';
 import "./SplashPage.css"
 // import diningTablePhoto from "./images"
 
-// you should not be able to see the splash page when you're logged in => redirect to /restaurants
+// you should not be able to see the splash page when you're logged in => redirect to /restaurants d
 const SplashPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -37,15 +37,22 @@ const SplashPage = () => {
             <div className='splash-page-main-grid-container'>
               {topSixRestaurants.length>0 && topSixRestaurants.map(restaurant=>(
                 <NavLink className="navlink" to="/sign-up">
-                  <div key={restaurant.id} className='splash-page-restaurant-card-container'>
-                    <div className='splash-page-restaurant-pic-container'>
-                      <img className="splash-page-restaurant-pic" src={restaurant.restaurantPicUrl}/>
+                  <div key={restaurant.id} className="restaurant-card-container">
+                      <div className= 'get-restaurants-pic-container'>
+                        <img className= 'get-restaurants-pic'src={restaurant.restaurantPicUrl}  onError={e => { e.currentTarget.src = "https://i.pinimg.com/originals/90/85/b0/9085b0692d8ffe530e71a601ec887cf2.jpg"; }}/>
+                      </div>
+                      <div className="get-restaurants-bottom-text-container">
+                        <div className='get-restaurants-bottom-text-row text-top-row'>
+                          {restaurant.name}
+                        </div>
+                        <div className='get-restaurants-bottom-text-row not-top-row'>
+                          {restaurant.priceRange === 3? "$$$" : restaurant.priceRange===2? "$$": "$" } • {restaurant.category}
+                        </div>
+                        <div className='get-restaurants-bottom-text-row not-top-row'>
+                          {restaurant.avgRating == 0? "No" : Math.round(restaurant.avgRating * 10)/10} <i class="fa-solid fa-star" ></i> {restaurant.numReviews>0? `(${restaurant.numReviews}+)`: "0 ratings"}
+                        </div>
+                      </div>
                     </div>
-                    <div className='splash-page-restaurant-text-box'>
-                      <p>{restaurant.name}</p>
-                      <p>{restaurant.avgRating} <i class="fa-solid fa-star" ></i> rating</p>
-                    </div>
-                  </div>
                 </NavLink>
               ))}
             </div>
