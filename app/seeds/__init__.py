@@ -20,7 +20,7 @@ def seed():
     seed_food_items()
     # seed_orders()
     # seed_order_food_items()
-    seed_food_item_reviews()
+    # seed_food_item_reviews()
     seed_reviews()
     print('successfully seeded!')
 
@@ -33,6 +33,5 @@ def undo():
     undo_food_items()
     # undo_orders()
     # undo_order_food_items()
-    undo_food_item_reviews()
+    # undo_food_item_reviews()
     undo_reviews()
-
