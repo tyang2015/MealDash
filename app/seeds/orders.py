@@ -2,6 +2,7 @@ from app.models import db, Order
 from datetime import time
 from .food_items import food_items_list
 from .order_food_items import order_food_items_list
+from .food_items import food_items_list
 import random
 # orders_list = []
 
@@ -19,7 +20,7 @@ def random_food_items():
   all_food_items = []
   # same food item can appear in multiple orders
   for i in range(max_range):
-    food_item = random.choice(order_food_items_list)
+    food_item = random.choice(food_items_list)
     all_food_items.append(food_item)
   return all_food_items
 
