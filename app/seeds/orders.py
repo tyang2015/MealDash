@@ -218,8 +218,8 @@ def seed_orders():
             order_completed = order["order_completed"],
             user_address = order["user_address"],
             subtotal = order["subtotal"],
-            fees = order["fees"],
-            order_food_items = random_food_items()
+            fees = order["fees"]
+            # order_food_items = random_food_items()
         )
         # orders_list.append(newOrder)
         db.session.add(newOrder)
