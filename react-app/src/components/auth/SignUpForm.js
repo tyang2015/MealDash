@@ -9,7 +9,7 @@ import "./SignUpForm.css"
 const SignUpForm = () => {
   const history = useHistory();
   const [errors, setErrors] = useState([]);
-  // const [username, setUsername] = useState('');
+  // const [username, setUsername] = useState('');v
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
