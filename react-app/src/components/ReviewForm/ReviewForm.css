@@ -17,6 +17,7 @@
   padding-top: 18px;
   padding-left: 15px;
   box-sizing: border-box;
+  cursor:pointer;
 }
 
 .review-form{

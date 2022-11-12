@@ -13,7 +13,7 @@ const RestaurantReviewsContainer = ({restaurant, finalAvgRating, sessionUser}) =
   const [reviewModal, setReviewModal] = useState(false)
   const [forceRatingUpdate, setForceRatingUpdate] = useState(false)
   const [avgStarRating, setAvgStarRating] = useState(String(Number(restaurant?.avgRating).toFixed(2)) || null)
-
+  console.log("AVG star rating at top of reviews container:", avgStarRating)
   // const [topReviews, setTopReviews] = useState(reviews.sort((a,b) => Number(b.restaurant.avgRating) -  Number(a.restaurant.avgRating)))
   let topReviews = reviews.sort((a,b) => b.restaurant.avgRating -  a.restaurant.avgRating)
   if (topReviews.length>=2) {
@@ -27,29 +27,31 @@ const RestaurantReviewsContainer = ({restaurant, finalAvgRating, sessionUser}) =
 
   useEffect(()=> {
     const getNewReviews = async ()=> {
-      // handle creating new review
       let totalStars;
       let newReviews = await dispatch(getReviews(id)).then(data=>{
         return data.reviews
       })
+      if (!newReviews || newReviews.length == 0 ) {
+        setAvgStarRating("No")
+        return
+      }
       let allRatings = newReviews.map(review => review.stars)
       let userIds = newReviews.map(review=> review.user_id)
       if (allRatings && allRatings.length> 0){
         totalStars = allRatings.reduce( (accum, cur)=> accum + cur)
       } else {
         setAvgStarRating("No")
+        return
       }
       let avgRating = (totalStars/(allRatings.length)).toFixed(2)
+      console.log("avg rating in use effect:", avgRating)
       setAvgStarRating(avgRating)
 
-      // handle after deleting review
       if (userIds?.length>0 && userIds.includes(sessionUser.id)) {
         alert("Looks like you have already submitted a review. Only new customers can submit a review.")
-        // setCreateReviewModal(false)
       }
     }
     getNewReviews()
-    // setNumReviews(reviews.length)
   }, [reviews.length])
 
 
@@ -75,8 +77,7 @@ const RestaurantReviewsContainer = ({restaurant, finalAvgRating, sessionUser}) =
       </div>
       <div className="restaurant-reviews-container-middle-row">
         <div className='restaurant-reviews-container-avg-rating'>
-          {/* {restaurant.avgRating == "0"? null: finalAvgRating} */}
-          {!avgStarRating || avgStarRating == NaN? "No": avgStarRating}
+          {!avgStarRating || avgStarRating === NaN ? 0: avgStarRating}
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="styles__StyledInlineSvg-sc-12l8vvi-0 djCUZq"><path d="M8.91126 0.588193C8.74945 0.230121 8.39293 0 7.99999 0C7.60705 0 7.25054 0.230121 7.08872 0.588193L5.37316 4.38448L1.23254 4.84295C0.841992 4.8862 0.512964 5.15416 0.39154 5.52786C0.270115 5.90157 0.378802 6.31175 0.669346 6.5763L3.7497 9.381L2.90621 13.4606C2.82665 13.8454 2.97982 14.2412 3.29771 14.4721C3.6156 14.7031 4.0393 14.7265 4.38068 14.5319L7.99999 12.469L11.6193 14.5319C11.9607 14.7265 12.3844 14.7031 12.7023 14.4721C13.0202 14.2412 13.1733 13.8454 13.0938 13.4606L12.2503 9.381L15.3306 6.5763C15.6212 6.31175 15.7299 5.90157 15.6084 5.52786C15.487 5.15416 15.158 4.8862 14.7674 4.84295L10.6268 4.38448L8.91126 0.588193Z" fill="#E8C500"></path></svg>
         </div>
         <div className='restaurant-reviews-container-number-ratings middle-row-not-first'>
