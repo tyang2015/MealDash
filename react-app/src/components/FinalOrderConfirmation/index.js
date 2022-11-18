@@ -45,6 +45,11 @@ const FinalOrderConfirmation = () => {
   //     setOrderStarted(0)
   //   }
   // }, [])
+  useEffect(()=> {
+    if (orderStarted == 0 && localStorage.getItem('countdown')>0){
+      setCountdown(localStorage.getItem('countdown'))
+    }
+  }, [])
 
 
   useEffect(()=>{

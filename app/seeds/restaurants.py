@@ -91,14 +91,14 @@ def seed_restaurants():
             "address": "Blossom Soju & Beer, Fullerton Road, Rowland Heights, CA, USA"
         },
         {
-            "name": "Chen Dining",
-            "owner_id": 7,
+            "name": "Ashley's Mexican Fine Dining",
+            "owner_id": 8,
             "price_range": 3,
             "restaurant_pic_url": "https://cdn.vox-cdn.com/thumbor/NylXhUxHg2ZLh31jMbOi9hcMURI=/0x0:5760x3840/1200x900/filters:focal(2420x1460:3340x2380)/cdn.vox-cdn.com/uploads/chorus_image/image/66683596/Atlas_Kitchen_30.0.jpg",
             "logo": "https://restaurant.eatapp.co/hubfs/Modern-Restaurant-Logo.jpg",
             "longitude": -118.40,
             "latitude": 34.14,
-            "email": "chen@gmail.com",
+            "email": "ashley@gmail.com",
             "phone_number": "(625) 141-2222",
             "bank_account": "223456999",
             "routing_number": "123432189",
@@ -213,6 +213,40 @@ def seed_restaurants():
             "open_time": "08:00:00",
             "close_time": "17:00:00",
             "address": "Popeyes Louisiana Kitchen, Yorba Linda Boulevard, Fullerton, CA, USA"
+        },
+        {
+          "name": "Ananya's Matcha Garden",
+          "owner_id": 6,
+          "price_range": 3,
+          "restaurant_pic_url": "https://youpouch.com/wp-content/uploads/sites/4/2018/11/1542259775.jpg?w=640",
+          "logo": "https://t4.ftcdn.net/jpg/05/34/69/87/360_F_534698790_r2IKkgQTthvoESblhBYv4haTdqZlTx1d.jpg",
+          "longitude": 37.763348,
+          "latitude": -122.424896,
+          "email": "ananya@gmail.com",
+          "phone_number": "(909) 111-2222",
+          "bank_account": "976456789",
+          "routing_number": "911456789",
+          "category": "Japanese",
+          "open_time": "09:00:00",
+          "close_time": "18:00:00",
+          "address": "Mission Dolores, San Francisco, CA"
+        },
+        {
+          "name": "Emily's Indian Bistro",
+          "owner_id": 12,
+          "price_range": 4,
+          "restaurant_pic_url": "https://youpouch.com/wp-content/uploads/sites/4/2018/11/1542259775.jpg?w=640",
+          "logo": "https://t4.ftcdn.net/jpg/05/34/69/87/360_F_534698790_r2IKkgQTthvoESblhBYv4haTdqZlTx1d.jpg",
+          "longitude": 37.763348,
+          "latitude": -122.424896,
+          "email": "emily@gmail.com",
+          "phone_number": "(909) 111-2222",
+          "bank_account": "909456789",
+          "routing_number": "909456789",
+          "category": "Asian",
+          "open_time": "09:00:00",
+          "close_time": "18:00:00",
+          "address": "3049 20th St, San Francisco, CA 94110"
         },
     ]
 

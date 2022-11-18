@@ -81,7 +81,13 @@ def seed_users():
             "password": "password",
             "phone_number" : "(213) 889-3122"
         },
-
+        {
+            "first_name": "Emily",
+            "last_name": "Yang",
+            "email": "emily@gmail.com",
+            "password": "password",
+            "phone_number" : "(323) 889-4902"
+        }
     ]
 
     for user in users:
