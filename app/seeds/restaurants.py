@@ -102,7 +102,7 @@ def seed_restaurants():
             "phone_number": "(625) 141-2222",
             "bank_account": "223456999",
             "routing_number": "123432189",
-            "category": "Asian",
+            "category": "Mexican",
             "open_time": "08:00:00",
             "close_time": "17:00:00",
             "address": "GRANVILLE, Ventura Boulevard, Studio City, CA, USA"
@@ -209,7 +209,7 @@ def seed_restaurants():
             "phone_number": "(909) 111-2222",
             "bank_account": "909456789",
             "routing_number": "909456789",
-            "category": "Asian",
+            "category": "Italian",
             "open_time": "08:00:00",
             "close_time": "17:00:00",
             "address": "Popeyes Louisiana Kitchen, Yorba Linda Boulevard, Fullerton, CA, USA"
@@ -255,7 +255,7 @@ def seed_restaurants():
           "restaurant_pic_url": "https://www.maczfit.pl/blog/wp-content/uploads/2021/03/fast_food-960x639.jpeg",
           "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSF3DJHdVeFLiPOAbyHTrCPnQ2HNeCDus6qbCf9qZM7yg28V_Eo-qrvjC-QngCrMTigHE&usqp=CAU",
           "longitude": 37.7246477075467,
-          "latitude": -122.45889895874822
+          "latitude": -122.45889895874822,
           "email": "randy@gmail.com",
           "phone_number": "(919) 111-2222",
           "bank_account": "929456789",
@@ -282,6 +282,23 @@ def seed_restaurants():
           "close_time": "18:00:00",
           "address": "4476 Mission St #1950, San Francisco, CA 94112"
         },
+        {
+          "name": "Sabrina's Dim Sum",
+          "owner_id": 9,
+          "price_range": 3,
+          "restaurant_pic_url": "https://www.theglassmagazine.hk/wp-content/uploads/2020/01/dimsum.jpg",
+          "logo": "https://cdn5.vectorstock.com/i/thumb-large/18/49/b-letter-mark-fork-food-restaurant-logo-icon-vector-37541849.jpg",
+          "longitude": 37.72975206883965,
+          "latitude": -122.4048094822326,
+          "email": "sabrina@gmail.com",
+          "phone_number": "(908) 111-2222",
+          "bank_account": "949456789",
+          "routing_number": "911456789",
+          "category": "Asian",
+          "open_time": "09:00:00",
+          "close_time": "18:00:00",
+          "address": "2520 San Bruno Ave, San Francisco, CA 94134"
+        }
     ]
 
     for restaurant in restaurants:

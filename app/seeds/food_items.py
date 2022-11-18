@@ -153,7 +153,7 @@ def seed_food_items():
             "description": "delicious french pastry with filling",
             "price": 3.99,
             "restaurant_id": 5,
-            "category": "Dessert"
+            "category": "Desserts"
         },
         {
             "name": "Mille-feuille",
@@ -161,7 +161,7 @@ def seed_food_items():
             "description": "flaky dessert with roast strawberries and mascarpone",
             "price": 10.99,
             "restaurant_id": 5,
-            "category": "Dessert"
+            "category": "Desserts"
         },
         {
             "name": "Creme brulee",
@@ -169,7 +169,7 @@ def seed_food_items():
             "description": "delicious custard pudding with carmelized sugar layer on top",
             "price": 8.99,
             "restaurant_id": 5,
-            "category": "Main"
+            "category": "Desserts"
         },
         {
             "name": "Chocolate ganache",
@@ -177,7 +177,7 @@ def seed_food_items():
             "description": "chocolate pie with roasted strawberries",
             "price": 12.99,
             "restaurant_id": 5,
-            "category": "Dessert"
+            "category": "Desserts"
         },
         {
             "name": "Kirsch",
@@ -209,7 +209,7 @@ def seed_food_items():
             "description": "seafood with lime and fish stock",
             "price": 16.99,
             "restaurant_id": 6,
-            "category": "Side"
+            "category": "Sides"
         },
         {
             "name": "Empanada",
@@ -217,7 +217,7 @@ def seed_food_items():
             "description": "Roasted poblano pepper and cheese flour dumplings",
             "price": 12.99,
             "restaurant_id": 6,
-            "category": "Side"
+            "category": "Sides"
         },
         {
             "name": "Chupe de Camarones",
