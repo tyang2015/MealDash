@@ -189,7 +189,7 @@ def seed_reviews():
             "restaurant_id":  10,
             "review": "Very well cooked comfort food! Brisket perfectly moist and tender",
             "stars": 5,
-        }
+        },
         {
             "user_id": 6,
             "restaurant_id":  14,

@@ -468,22 +468,6 @@ def seed_food_items():
           "category": "Desserts"
         },
         {
-          "name": "Matcha crepe cake",
-          "food_pic_url": "https://live.staticflickr.com/65535/46738736845_518e86271b_b.jpg",
-          "description": "crepe cake with layers of matcha cream and matcha dust on top",
-          "price": 12.99,
-          "restaurant_id": 13,
-          "category": "Desserts"
-        },
-        {
-          "name": "Matcha crepe cake",
-          "food_pic_url": "https://live.staticflickr.com/65535/46738736845_518e86271b_b.jpg",
-          "description": "crepe cake with layers of matcha cream and matcha dust on top",
-          "price": 12.99,
-          "restaurant_id": 13,
-          "category": "Desserts"
-        },
-        {
           "name": "Chicken tikka masala",
           "food_pic_url": "https://gomyoffer.in/wp-content/uploads/2021/07/360_F_333040259_XAngCfVMVrmZbJXD3fqH4DVhMaTK7KbV.jpg",
           "description": "chicken cream curry with various spices",
