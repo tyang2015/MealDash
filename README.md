@@ -10,9 +10,6 @@ MealDash is built on a React frontend with a Python flask backend, using SQLITE 
 ## Frontend Overview
 MealDash is very front-end heavy with React that takes care of data filtering, display such as phone fields with various JS functions, and data manipulation from the backend to create new data structures, utilizing cookies and local storage, for best UI experience. 
 
-### Instructions on Navigating:
-
-
 ### Frontend Technologies Used
 #### React
 Includes API libraries such as reach/combobox, react-google-maps/api, use-places-autocomplete, geocoding, and directions (last 4 are self-contained libraries within Google API).
