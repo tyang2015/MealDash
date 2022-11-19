@@ -18,7 +18,7 @@ def valid_latitude(form, field):
     latitude = field.data
     if latitude < -90 or latitude > 90:
         raise ValidationError("Invalid latitude")
-# 1 to 3
+# 1 to 4
 def valid_price_range(form, field):
     price_range = field.data
     if price_range < 1 or price_range> 4:

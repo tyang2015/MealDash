@@ -1,10 +1,20 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { useState, useEffect } from 'react'
+import { NavLink, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { getAllRestaurants } from '../../store/restaurant';
 import "./RestaurantFooter.css"
 
 const RestaurantFooter = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const restaurants = useSelector(state=> Object.values(state.restaurants))
+
+  useEffect(()=> {
+    dispatch(getAllRestaurants())
+  }, [dispatch])
+
+  const topFive = restaurants.sort((a,b)=> b.avgRating - a.avgRating).splice(0,5)
   return (
     <div className='restaurant-footer-main-container'>
       <div className='restaurant-footer-content-container'>
@@ -13,11 +23,14 @@ const RestaurantFooter = () => {
             <div style={{fontSize:"17.5px", fontWeight: "700"}}>Trending Restaurants</div>
             <div className='restaurant-footer-trending-restaurants-container'>
               <div className='restaurant-footer-trending-restaurants-first-column'>
-                <p>Tiff's Taiwanese Breakfast</p>
+                {topFive.length>0 && topFive.map(restaurant => (
+                  <p> {restaurant.name} </p>
+                ))}
+                {/* <p>Tiff's Taiwanese Breakfast</p>
                 <p>2nd place</p>
                 <p>3rd place</p>
                 <p>4th place</p>
-                <p>5th place </p>
+                <p>5th place </p> */}
               </div>
             </div>
           </div>

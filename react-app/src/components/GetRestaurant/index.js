@@ -37,7 +37,6 @@ const GetRestaurant = () => {
   const [foodItemModal, setFoodItemModal] = useState(false)
   const [restaurantDeleteModal, setRestaurantDeleteModal] = useState(false)
   const [foodItemDeleteModal, setFoodItemDeleteModal] = useState(false)
-  // const [foodItem, setFoodItem]
   const [foodItem, setFoodItem] =useState(null)
   const [isOpen, setIsOpen] = useState(false)
   const [closeTime, setCloseTime] = useState('')
@@ -49,9 +48,7 @@ const GetRestaurant = () => {
   const [all, setAll] = useState('')
   const [categoryChosen, setCategoryChosen] = useState('All')
   const [isFiltered, setIsFiltered] = useState(false)
-  // const [toggleCartPane, setToggleCartPane] = useState(false)
   let [filteredItems, setFilteredItems] = useState([])
-  // const [reviewModal, setReviewModal] = useState(false)
 
   const [submittedCart, setSubmittedCart] =useState(false)
   const [submittedCartItems, setSubmittedCartItems] = useState(JSON.parse(localStorage.getItem('cart')) || [])
@@ -189,17 +186,6 @@ const GetRestaurant = () => {
   }, [dispatch, id])
 
 // REFACTORED INTO MODAL
-  // const handleDelete = e => {
-  //   dispatch(deleteRestaurant(id))
-  //   alert('successfully deleted!')
-  //   return history.push('/')
-  // }
-
-  // const handleDeleteFoodItem = (foodItemId)=> {
-  //   dispatch(deleteFoodItem(id, foodItemId))
-  //   alert('food item deleted!')
-  //   return
-  // }
 
   const handleFilter = categoryName => {
     if (categoryName === "All") {
@@ -268,7 +254,7 @@ const GetRestaurant = () => {
                 <div className="restaurant-page-description-container">
                   <div className="restaurant-page-left-description-text-box">
                     <div style={{width: '100%', display: 'flex'}}> {restaurant.category} • {restaurant.avgRating == "0"? null: finalAvgRating}&nbsp;
-                    <i class="fa-solid fa-star" ></i> • {restaurant.numReviews == "0"? "No": restaurant.numReviews}&nbsp;{restaurant.numReviews=== 1? "rating": "ratings"} • {restaurant.priceRange == 1? "$": restaurant.priceRange == 2? "$$": "$$$"}
+                    <i class="fa-solid fa-star" ></i> • {restaurant.numReviews == "0"? "No": restaurant.numReviews}&nbsp;{restaurant.numReviews=== 1? "rating": "ratings"} • {restaurant.priceRange == 1? "$": restaurant.priceRange == 2? "$$": restaurant.priceRange == 3? "$$$":"$$$$"}
                     </div>
                     <div className="restaurant-page-hours-container">
                       <div className="restaurant-page-open-status" style={{color: isOpen? "green": "red"}}>

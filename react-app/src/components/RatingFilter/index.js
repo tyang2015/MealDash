@@ -91,7 +91,7 @@ const RatingFilter= ({ filteredItems , selectedRatingMin, setSelectedRatingMin ,
 
       </div>
       <div className='ratings-container-dropdown-buttons-container'>
-          <div onClick={()=> setToggleRatingDropdown(false)} style={{fontWeight: '550', marginRight: "40px"}} className='ratings-container-cancel-button' >Cancel</div>
+          <div onClick={()=> setToggleRatingDropdown(false)} style={{fontWeight: '550', marginRight: "40px", cursor: "pointer"}} className='ratings-container-cancel-button'>Cancel</div>
           <div onClick={()=>handleRatingFilter(selectedRatingMin)} className='ratings-container-view-results-button'>
             <div>View Results</div>
           </div>

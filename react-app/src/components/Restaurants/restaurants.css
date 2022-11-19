@@ -113,6 +113,7 @@
   align-items: center;
   justify-content: center;
   font-weight: 550;
+  cursor: pointer;
 }
 
 .price-filter-container{
@@ -125,7 +126,7 @@
   align-items: center;
   justify-content: center;
   font-weight: 550;
-
+  cursor: pointer;
 }
 
 .get-restaurants-star-rating-filter-left-container{

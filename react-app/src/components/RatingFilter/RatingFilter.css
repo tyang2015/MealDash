@@ -52,7 +52,8 @@
   width: 8px;
   height: 8px;
   position:relative;
-  z-index: 1000
+  z-index: 1000;
+  cursor: pointer;
   /* position:absolute; */
 
 }
@@ -86,4 +87,10 @@ input[type="radio"].radio-star-rating{
   /* z-index: 100; */
   color:white;
   font-weight: 550;
+
+}
+
+.ratings-container-view-results-button:hover{
+  background-color:#d87373;
+  box-shadow: transparent 0px 0px 0px 1px inset;
 }

@@ -20,6 +20,7 @@ const FoodItemModal = ({ restaurant, setForceCartUpdate, forceCartUpdate,setSubm
   const handleCartSubmission = (foodItem, quantity, preferences) => {
     if (sessionUser.id == restaurant.ownerId) {
       alert("Wrong authorization - you can't order from a restaurant you own!")
+      return
     }
     setSubmittedCart(true)
 

@@ -96,7 +96,7 @@ const PriceFilter = ({ filteredItems , restaurants, setFilteredItems, isFiltered
         </div>
       </div>
       <div className='price-container-dropdown-buttons-container' style={{fontWeight: '550', marginRight: "40px"}} >
-        <div style={{fontWeight: '550', marginRight: "40px"}} onClick={()=> setTogglePriceDropdown(false)} className="price-container-cancel-button">
+        <div style={{fontWeight: '550', marginRight: "40px", cursor: "pointer"}} onClick={()=> setTogglePriceDropdown(false)} className="price-container-cancel-button">
           Cancel
         </div>
         <div onClick={handlePriceFilter}>

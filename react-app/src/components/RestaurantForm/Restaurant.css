@@ -26,6 +26,18 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  position: relative;
+}
+
+.back-to-restaurants-button{
+  position: absolute;
+  left: 0px;
+  /* background-color: lightblue; */
+  display: flex ;
+  align-items: center;
+  height: 100%;
+  color: lightcoral;
+  font-size: 16px;
 }
 
 .create-restaurant-progress-bar-container{

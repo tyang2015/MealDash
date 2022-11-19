@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory,useParams } from 'react-router-dom';
+import { NavLink, useHistory,useParams } from 'react-router-dom';
 import "./Restaurant.css"
 import { createRestaurant, updateRestaurant } from '../../store/restaurant';
 import FormStep1 from './FormStep1';
@@ -59,7 +59,7 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
       if (!formData.name) errors.push("Restaurant name is required")
       if (formData.name?.length>50) errors.push("Name must be less than 50 characters")
       if (formData.email?.length>30) errors.push("Email must be less than 50 characters")
-      if (formData.priceRange < 1 || formData.priceRange >3) errors.push("Price range is invalid")
+      if (formData.priceRange < 1 || formData.priceRange >4) errors.push("Price range is invalid")
       if (logoExists(formData.logo)) errors.push("Logo must be unique and not be used by another owner")
       if (!isImage(formData.logo)) errors.push("Logo url is invalid")
       if (!isImage(formData.restaurantPicUrl)) errors.push("Restaurant pic url is invalid")
@@ -176,6 +176,12 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
     return (
 			<>
         <div className='create-restaurant-title-container'>
+          <NavLink to="/restaurants">
+            <div className='back-to-restaurants-button'>
+              <svg style={{color: "lightcoral", marginRight: "5px"}}  width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="styles__StyledInlineSvg-sc-12l8vvi-0 jFpckg"><path d="M11.7071 6.70711C12.0976 6.31658 12.0976 5.68342 11.7071 5.29289C11.3166 4.90237 10.6834 4.90237 10.2929 5.29289L4.84222 10.7436C4.75796 10.8278 4.65733 10.9283 4.57595 11.0242C4.48166 11.1352 4.35611 11.3038 4.28052 11.5365C4.18264 11.8377 4.18264 12.1623 4.28052 12.4635C4.35611 12.6962 4.48166 12.8648 4.57595 12.9758C4.65733 13.0717 4.75796 13.1722 4.84222 13.2564L10.2929 18.7071C10.6834 19.0976 11.3166 19.0976 11.7071 18.7071C12.0976 18.3166 12.0976 17.6834 11.7071 17.2929L7.41421 13L19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11L7.41421 11L11.7071 6.70711Z" fill="currentColor"></path></svg>
+              Back to Restaurants Page
+            </div>
+          </NavLink>
           <i className="fa-solid fa-burger sign-up-logo"style={{color:"lightcoral"}}> </i>
           <div className='create-restaurant-form-title'>
             Step {formStep + 1} of 3

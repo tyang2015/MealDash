@@ -252,22 +252,6 @@ def seed_food_items():
           "category": "Main"
         },
         {
-          "name": "Assorted sushi 1",
-          "food_pic_url": "https://dorothy-lane-market.s3.us-east-2.amazonaws.com/general/assorted-sushi-plate-2-of-10_2880x1920.JPEG",
-          "description": "sushi and salmon nigiri combination",
-          "price": 16.99,
-          "restaurant_id": 7,
-          "category": "Main"
-        },
-        {
-          "name": "Assorted sushi 1",
-          "food_pic_url": "https://dorothy-lane-market.s3.us-east-2.amazonaws.com/general/assorted-sushi-plate-2-of-10_2880x1920.JPEG",
-          "description": "sushi and salmon nigiri combination",
-          "price": 16.99,
-          "restaurant_id": 7,
-          "category": "Main"
-        },
-        {
           "name": "sashimi platter 1",
           "food_pic_url": "https://images.getbento.com/accounts/25fd617895d952103480e78213c748cf/media/images/47981img-23.jpg?w=1200&fit=max&auto=compress,format",
           "description": "tuna, yellowtail, albacore, salmon, sweet shrimp, and inari",
@@ -352,14 +336,6 @@ def seed_food_items():
           "food_pic_url": "https://www.theslowroasteditalian.com/wp-content/uploads/2022/05/perfect-smoked-brisket-square-2795374-500x375.jpg",
           "description": "slow cooked beef brisket with bbq sauce",
           "price": 16.99,
-          "restaurant_id": 10,
-          "category": "Main"
-        },
-        {
-          "name": "Beef ribs",
-          "food_pic_url": "https://betterbegrilled.com/wp-content/uploads/2019/06/20190611_194946.jpg",
-          "description": "oven cooked beef ribs with bbq sauce",
-          "price": 18.99,
           "restaurant_id": 10,
           "category": "Main"
         },
@@ -491,8 +467,78 @@ def seed_food_items():
           "restaurant_id": 14,
           "category": "Desserts"
         },
-
-
+        {
+          "name": "Swedish meatballs",
+          "food_pic_url": "https://insanelygoodrecipes.com/wp-content/uploads/2021/02/Swedish-Meatballs-with-Pomegranate-and-Cream-Sauce-800x530.png",
+          "description": "delicious ground beef meatballs with ligonberry",
+          "price": 16.99,
+          "restaurant_id": 18,
+          "category": "Main"
+        },
+        {
+          "name": "Pickled Herrings",
+          "food_pic_url": "https://images.ctfassets.net/3s5io6mnxfqz/2i5kobOllwisekVz0qezWh/eff4150308056ab3f116ee6ca820be0c/AdobeStock_284125251.jpeg",
+          "description": "pickled fish with onions and herbs",
+          "price": 12.99,
+          "restaurant_id": 18,
+          "category": "Sides"
+        },
+        {
+          "name": "Sour Herring on Toast",
+          "food_pic_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbno7p0ckWpyueKw9j21csGpMOzEP660HhpZtCgiuReb8t9opGKbu5Tjr7Nw0gDf5cKzs&usqp=CAU",
+          "description": "pickled fish seasoned and served with various garnishes on toast",
+          "price": 12.99,
+          "restaurant_id": 18,
+          "category": "Main"
+        },
+        {
+          "name": "Swedish Salmon Soup",
+          "food_pic_url": "https://images.themodernproper.com/billowy-turkey/production/posts/2019/salmon-chowder-14.jpg?w=960&h=960&q=82&fm=jpg&fit=crop&dm=1599769412&s=727b6fb215e9ea9c8241bbc4417514f6",
+          "description": "salmon cream soup",
+          "price": 14.99,
+          "restaurant_id": 18,
+          "category": "Sides"
+        },
+        {
+          "name": "Hot Dog 1",
+          "food_pic_url": "https://img.taste.com.au/yRysA0eA/w1200-h630-cfill/taste/2016/11/mexican-hot-dogs-103726-1.jpeg",
+          "description": "hot dog with avocado",
+          "price": 11.99,
+          "restaurant_id": 19,
+          "category": "Main"
+        },
+        {
+          "name": "Hot Dog 2",
+          "food_pic_url": "https://img.taste.com.au/QY9SjlKM/taste/2020/06/july20_mexican-style-hotdogs-162774-1.jpg",
+          "description": "hot dog with cheese and chili sauce",
+          "price": 11.99,
+          "restaurant_id": 19,
+          "category": "Main"
+        },
+        {
+          "name": "Steak with Garlic Butter",
+          "food_pic_url": "https://img.taste.com.au/QY9SjlKM/taste/2020/06/july20_mexican-style-hotdogs-162774-1.jpg",
+          "description": "pan seared steak",
+          "price": 28.99,
+          "restaurant_id": 15,
+          "category": "Main"
+        },
+        {
+          "name": "Baked Salmon with Dill Sauce",
+          "food_pic_url": "https://www.lecremedelacrumb.com/wp-content/uploads/2017/07/lemon-dill-salmon-101.jpg",
+          "description": "salmon with dill sauce",
+          "price": 26.99,
+          "restaurant_id": 15,
+          "category": "Main"
+        },
+        {
+          "name": "Prime Rib",
+          "food_pic_url": "https://www.rouses.com/wp-content/uploads/2017/11/Prime-Rib.jpg",
+          "description": "prime rib",
+          "price": 30.99,
+          "restaurant_id": 15,
+          "category": "Main"
+        },
     ]
 
     for item in food_items:
