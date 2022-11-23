@@ -19,7 +19,7 @@ const ReviewForm = ({formType, triggerUpdate, setTriggerUpdate, restaurant, revi
   useEffect(()=>{
     let errors = []
     if (!stars) errors.push("Please input a valid rating by clicking on the corresponding star")
-    if (review.length>500) errors.push("Review must be less than 500 characters")
+    if (review.length>350) errors.push("Review must be less than 350 characters")
     setErrors(errors)
 
   }, [review, stars])

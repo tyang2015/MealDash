@@ -90,6 +90,10 @@
   /* top: 0.4rem; */
 }
 
+.cart-button-container:hover{
+  background-color:#d87373;
+  box-shadow: transparent 0px 0px 0px 1px inset;
+}
 
 
 .searchbar-magnify-glass-container{

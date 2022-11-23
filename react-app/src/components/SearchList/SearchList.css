@@ -44,12 +44,13 @@
 .search-dropdown-logo-container{
   height: 65px;
   width: 65px;
-  background-color: lightblue;
+  /* background-color: lightblue; */
 }
 
 .search-dropdown-logo{
   height:100%;
   width:100%;
+  object-fit: cover;
 }
 
 .search-dropdown-logo-text-container{

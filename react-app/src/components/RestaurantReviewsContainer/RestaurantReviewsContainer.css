@@ -116,9 +116,22 @@ div.middle-row-not-first{
 .restaurant-reviews-container-review-content{
   margin-left: 1em;
   /* background-color: lightblue; */
-  height: 70%;
+  height: 60%;
   width: 90%;
+  /* text-overflow: ellipsis;
+
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  flex-wrap: wrap; */
+
+  display: inline-block;
+  overflow: hidden;
   text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
 }
 
 .restaurant-reviews-container-date-text{

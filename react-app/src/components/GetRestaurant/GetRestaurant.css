@@ -113,7 +113,8 @@
 .food-item-left-middle-outer-container{
   width: 100%;
   display: flex;
-  cursor: pointer
+  cursor: pointer;
+  text-overflow: ellipsis;
 }
 
 .food-item-left-container{
@@ -145,6 +146,7 @@
 .restaurant-page-name{
   font-size: 22px;
   font-weight: 700;
+  text-overflow: ellipsis;
 }
 
 div.restaurant-page-update-delete-buttons-container{

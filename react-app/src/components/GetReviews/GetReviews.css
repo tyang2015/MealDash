@@ -81,6 +81,9 @@
   margin-left: 1em;
   width: 95%;
   height: 70%;
+  /* text-overflow: hidden;
+  display: inline grid;
+  white-space: nowrap; */
 }
 
 .get-reviews-page-avg-rating-container{

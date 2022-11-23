@@ -118,6 +118,12 @@ div.sign-up-label-input-container{
   /* margin-top: -30px; */
 }
 
+.signup-page-submit-button:hover{
+  background-color:#d87373;
+  box-shadow: transparent 0px 0px 0px 1px inset;
+  cursor: pointer;
+}
+
 label{
   font-weight: 700;
 }

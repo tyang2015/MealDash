@@ -46,6 +46,12 @@ div.food-item-name{
   margin-bottom: 6px;
   font-size: 16px;
   font-weight: 550;
+
+  width: 95%;
+  display: inline-grid;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 div.food-item-price{

@@ -1,11 +1,21 @@
 .get-orders-main-container{
   margin: auto;
   width: 58em;
-  /* background-color: lightblue; */
+  height: 100vh;
+  top: 60px;
+  position: relative;
 }
 
 .get-orders-completed-container{
-  background-color: lightblue;
+  /* background-color: lightblue; */
+}
+
+.no-orders-box{
+  /* background-color: lightgoldenrodyellow ; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20em
 }
 
 .get-orders-in-progress-card{

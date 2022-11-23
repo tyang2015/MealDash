@@ -5,6 +5,7 @@
   /* background-color: lightgoldenrodyellow; */
   width: 25rem;
   border-left: 1.5px solid #dbd8d8;
+  overflow: auto;
 }
 
 .order-summary-container{
@@ -79,6 +80,12 @@
   height: 100%;
   justify-content:space-around;
   align-items: center;
+}
+
+.right-pane-place-order-button:hover{
+  background-color:#d87373;
+  box-shadow: transparent 0px 0px 0px 1px inset;
+  cursor: pointer;
 }
 
 .right-pane-top-one-fifth-container{

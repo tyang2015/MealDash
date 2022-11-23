@@ -86,7 +86,7 @@ input[type='radio'].delivery-option{
   align-items: center;
   justify-content: center;
   border-radius: 30px;
-
+  cursor: pointer;
 }
 
 .delivery-option-label{

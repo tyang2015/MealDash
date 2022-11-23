@@ -46,7 +46,7 @@ const SplashPage = () => {
                           {restaurant.name}
                         </div>
                         <div className='get-restaurants-bottom-text-row not-top-row'>
-                          {restaurant.priceRange === 3? "$$$" : restaurant.priceRange===2? "$$": "$" } • {restaurant.category}
+                        {restaurant.priceRange === 3? "$$$" : restaurant.priceRange===2? "$$": restaurant.priceRange===1? "$": "$$$$" } • {restaurant.category}
                         </div>
                         <div className='get-restaurants-bottom-text-row not-top-row'>
                           {restaurant.avgRating == 0? "No" : Math.round(restaurant.avgRating * 10)/10} <i class="fa-solid fa-star" ></i> {restaurant.numReviews>0? `(${restaurant.numReviews}+)`: "0 ratings"}

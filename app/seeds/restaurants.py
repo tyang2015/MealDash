@@ -190,7 +190,7 @@ def seed_restaurants():
             "phone_number": "(909) 111-2222",
             "bank_account": "909456789",
             "routing_number": "909456789",
-            "category": "Asian",
+            "category": "Japanese",
             "open_time": "08:00:00",
             "close_time": "17:00:00",
             "address": "Lady M Cake Boutique - Irvine, Michelson Drive b, Irvine, CA"
@@ -349,6 +349,23 @@ def seed_restaurants():
           "close_time": "18:00:00",
           "address": "179 E Houston St, New York, NY 10002"
         },
+        {
+          "name": "Tiff's Inspiration from Gamla Stan",
+          "owner_id": 4,
+          "price_range": 3,
+          "restaurant_pic_url": "https://ubiquinol.org/sites/default/files/swedish-food-2.jpg",
+          "logo": "https://cms-assets.tutsplus.com/cdn-cgi/image/width=850/uploads/users/2660/posts/32688/image-upload/restaurant_logo_templates_9NMUUK.jpeg",
+          "longitude": -120.14028974222194,
+          "latitude": 34.595098799788275,
+          "email": "tiffany@gmail.com",
+          "phone_number": "(908) 111-2222",
+          "bank_account": "949456789",
+          "routing_number": "911456789",
+          "category": "Asian",
+          "open_time": "09:00:00",
+          "close_time": "18:00:00",
+          "address": "1660 Copenhagen Dr, Solvang, CA 93463"
+        }
     ]
 
     for restaurant in restaurants:

@@ -50,6 +50,12 @@ div.login-label-input-container{
   font-weight: 700;
 }
 
+.login-page-submit-button:hover{
+  background-color:#d87373;
+  box-shadow: transparent 0px 0px 0px 1px inset;
+  cursor: pointer;
+}
+
 .login-form-validation-errors{
   color: red;
   /* background-color: lightblue; */

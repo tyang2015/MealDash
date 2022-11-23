@@ -61,7 +61,21 @@ textarea.food-item-preference-input::placeholder{
 
 .food-item-name-text{
   padding: 0 25px;
+  /* background-color: lightgoldenrodyellow; */
+  width: 30.7rem;
+  /* overflow-x: scroll; */
+  /* white-space: nowrap; */
+  /* height: 3em; */
+  /* white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden; */
+  /* display: -webkit-box;
+  -webkit-scrollbar: 10px */
 }
+
+/* ::-webkit-scrollbar {
+  width: 10px;
+} */
 
 .food-item-description-text{
   font-size: 14px;
@@ -69,8 +83,13 @@ textarea.food-item-preference-input::placeholder{
   color: rgb(73, 73, 73);
   padding: 0px 25px;
   height: fit-content;
-  max-height: 5em;
-  text-overflow: ellipsis;
+  max-height: 7em;
+  /* text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 35.2em; */
+  /* background-color: lightblue; */
+
 }
 
 .food-item-footer{

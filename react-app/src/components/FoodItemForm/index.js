@@ -43,7 +43,7 @@ const FoodItemForm = ({foodItem, formType}) => {
     let errors =[]
     if (!name) errors.push('Name is required')
     if (name.length> 50) errors.push("Name must be less than 50 characters")
-    if (description.length>500) errors.push("Description must be less than 500 chars")
+    if (description.length>350) errors.push("Description must be less than 350 chars")
     if (price>25000) errors.push("Price must be below 25000")
     if (price<=0) errors.push("Price must be greater than 0")
     if (!isImage(foodPicUrl)) errors.push("Food pic url is invalid")

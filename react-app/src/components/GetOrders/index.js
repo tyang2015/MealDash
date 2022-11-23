@@ -129,7 +129,7 @@ const GetOrders = () => {
     <>
       <NavBar/>
       <div className='get-orders-main-container'>
-          <h2> Orders</h2>
+          <h2 style={{height: '50px', fontSize: "28px", display: "flex", alignItems: "center"}}> Orders</h2>
           {orders?.filter(order=> order.orderCompleted === false).length != 0 && (<h3> In Progress </h3>)}
           {orders?.length>0 && orders.filter(order=> order.orderCompleted === false).map( order => (
             <>
@@ -169,7 +169,8 @@ const GetOrders = () => {
           {/* {orders.filter(order=> order.orderCompleted === false).length === 0 && (
             <div> NO IN PROGRESS ORDERS </div>
           )} */}
-          <h3>Completed</h3>
+          {orders?.length>0 && orders.filter(order=> order.orderCompleted === true) && (<h3>Completed</h3>)}
+          {orders.length === 0 && (<div className='no-orders-box'>No order history. <i class="fa-solid fa-plate-wheat"></i></div>)}
           {orders?.length>0 && orders.filter(order=> order.orderCompleted === true).map(order => (
             <>
               {/* <div className='get-orders-completed-container'> */}

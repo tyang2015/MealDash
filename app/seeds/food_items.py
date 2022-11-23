@@ -517,7 +517,7 @@ def seed_food_items():
         },
         {
           "name": "Steak with Garlic Butter",
-          "food_pic_url": "https://img.taste.com.au/QY9SjlKM/taste/2020/06/july20_mexican-style-hotdogs-162774-1.jpg",
+          "food_pic_url": "https://www.certifiedirishangus.ie/wp-content/uploads/2020/01/GarlicButter.jpg",
           "description": "pan seared steak",
           "price": 28.99,
           "restaurant_id": 15,
@@ -537,6 +537,38 @@ def seed_food_items():
           "description": "prime rib",
           "price": 30.99,
           "restaurant_id": 15,
+          "category": "Main"
+        },
+        {
+          "name": "Chicken feet",
+          "food_pic_url": "https://i.pinimg.com/originals/52/f2/28/52f2281875f799a98b98721061ef35c0.jpg",
+          "description": "chicken feet simmered in chile soy sauce",
+          "price": 4.99,
+          "restaurant_id": 17,
+          "category": "Side"
+        },
+        {
+          "name": "Siu mai",
+          "food_pic_url": "https://i.ytimg.com/vi/pXA2H6l-wiA/maxresdefault.jpg",
+          "description": "pork and shrimp dumpling, wrapped in an egg noodle-like wrapper",
+          "price": 5.99,
+          "restaurant_id": 17,
+          "category": "Side"
+        },
+        {
+          "name": "Egg tart",
+          "food_pic_url": "https://assets.bonappetit.com/photos/59b807037f7c9a1ef926e5f6/5:7/w_2380,h_3332,c_limit/portuguese-egg-custard-tarts.jpg",
+          "description": "egg tart",
+          "price": 4.99,
+          "restaurant_id": 17,
+          "category": "Desserts"
+        },
+        {
+          "name": "Truffle Pasta",
+          "food_pic_url": "https://img.delicious.com.au/NkqVZEnH/del/2021/06/three-williams-153685-2.jpg",
+          "description": "world's best pasta made with the most expensive ingredient in the world",
+          "price": 40.99,
+          "restaurant_id": 16,
           "category": "Main"
         },
     ]

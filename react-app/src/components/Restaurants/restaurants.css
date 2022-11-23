@@ -176,6 +176,7 @@
   /* background-color: lightgoldenrodyellow; */
   display: flex;
   justify-content: flex-start;
+  text-overflow: ellipsis;
 }
 
 .fa-solid.fa-star{

@@ -57,4 +57,10 @@
   flex-wrap: wrap;
   font-size: 14px;
   text-align: center;
+  cursor: pointer;
 }
+
+/* .demo-login-button:hover{
+  background-color:lightcoral;
+  box-shadow: transparent 0px 0px 0px 1px inset;
+} */
