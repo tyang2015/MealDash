@@ -28,10 +28,10 @@ const FinalOrderConfirmation = () => {
   let duration= location?.state?.duration
 
 
-  console.log('countdown from storage:', countdownFromStorage)
+  // console.log('countdown from storage:', countdownFromStorage)
   let restaurant= location?.state?.restaurant
   let userCoordinates = location?.state?.userCoordinates
-  console.log('duration in order confirm:', duration)
+  // console.log('duration in order confirm:', duration)
   const [submittedCartItems, setSubmittedCartItems] = useState(cartFromLocalStorage)
   const [orderStarted, setOrderStarted] = useState(localStorage.getItem('orderStarted') || 1)
   const [countdown, setCountdown] = useState(!localStorage.getItem('countdown')|| localStorage.getItem('countdown') === 0 || Number(orderStarted)===1? duration: countdownFromStorage)
