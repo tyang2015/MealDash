@@ -334,7 +334,7 @@ def seed_restaurants():
         },
         {
           "name": "Madame B's Sanctuary",
-          "owner_id": 1
+          "owner_id": 1,
           "price_range": 3,
           "restaurant_pic_url": "https://media-cdn.tripadvisor.com/media/photo-s/15/11/fe/1c/sushi-boats-order-your.jpg",
           "logo": "https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/attachment_51207186-e1571403645427.png?auto=format&q=60&fit=max&w=930",
