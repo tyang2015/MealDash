@@ -9,7 +9,7 @@ from .order_food_items import seed_order_food_items, undo_order_food_items
 
 
 # Creates a seed group to hold our commands
-# So we can type `flask seed --help`
+# Soo we can type `flask seed --help`
 seed_commands = AppGroup('seed')
 
 # Creates the `flask seed all` command
