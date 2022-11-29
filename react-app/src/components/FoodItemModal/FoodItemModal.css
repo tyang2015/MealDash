@@ -142,3 +142,9 @@ textarea.food-item-preference-input::placeholder{
   background-color:#d87373;
   box-shadow: transparent 0px 0px 0px 1px inset;
 }
+
+div.order-confirmation-errors.food-item-modal{
+  width: 90%;
+  height: 35px;
+  margin: auto;
+}

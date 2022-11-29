@@ -32,7 +32,7 @@ const FinalOrderConfirmation = () => {
   let restaurant= location?.state?.restaurant
   let userCoordinates = location?.state?.userCoordinates
   // console.log('duration in order confirm:', duration)
-  const [submittedCartItems, setSubmittedCartItems] = useState(cartFromLocalStorage)
+  const [submittedCartItems, setSubmittedCartItems] = useState(JSON.parse(localStorage.getItem('cart' )||'[]'))
   const [orderStarted, setOrderStarted] = useState(localStorage.getItem('orderStarted') || 1)
   const [countdown, setCountdown] = useState(!localStorage.getItem('countdown')|| localStorage.getItem('countdown') === 0 || Number(orderStarted)===1? duration: countdownFromStorage)
 

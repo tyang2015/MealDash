@@ -52,8 +52,10 @@ const OrderConfirmationPage = () => {
   let [errors, setErrors] = useState([])
 
   const google = window.google
-  console.log("user coordinates:", userCoordinates)
+  // console.log("user coordinates:", userCoordinates)
 
+  console.log('restaurant:', restaurant)
+  console.log('stored restaurant:', storedRestaurant)
   useEffect(()=> {
     if (localStorage.getItem('restaurant')!= undefined && restaurant){
       localStorage.setItem('restaurant', JSON.stringify(restaurant))

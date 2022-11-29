@@ -65,7 +65,7 @@ const GetOrderReceipt = () => {
                       </div>
                     </div>
                     <div className = 'get-order-receipt-food-item-left-container-preference'>
-                      <div className='get-order-receipt-item-preference'>{item.preference} preference here</div>
+                      <div className='get-order-receipt-item-preference'>{item.preferences}</div>
                     </div>
                   {/* </div> */}
                 </div>
