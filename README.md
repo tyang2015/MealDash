@@ -21,7 +21,7 @@ Used with wtforms validations and Flask-SQLAlchemy to validate forms and analyze
 
 ### Instructions on Navigating the Page
 On the splash page, you can view a quick glance of the top 6 restaurants. You can login by clicking Demo User on the top right.
-
+![splashpage](./images/splash-page-pic.png)
 
 
 ## Concluding Remarks
