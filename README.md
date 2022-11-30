@@ -49,7 +49,7 @@ With _proper authorization_ (eg. you must be the owner of the restaurant to make
 ## Create a Menu Item / Update Menu Item / Delete Menu Item
 Click "Add to Menu" to take you to the create food item page, where you list the details of a food item for your menu.
 
-![create-food-item](./images/update-menu-item.png)
+![create-food-item](./images/update-food-item.png)
 
 With _proper authorization_ (eg. you must be the owner of the restaurant to make changes to the restaurant itself), you can update and delete the food item for the restaurant you own, by clicking the pencil and trashcan icons respectively.
 
