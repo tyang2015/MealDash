@@ -25,7 +25,7 @@ Used with wtforms validations and Flask-SQLAlchemy to validate forms and analyze
 On the splash page, you can view a quick glance of the top 6 restaurants. You can login by clicking "Demo Login" on the top right.
 ![splashpage](./images/splash-page-pic.png)
 
-## Get Restaurants
+## View Restaurants
 Once logged in, you will view the restaurants homepage, listed by the category of cuisine. Each restaurant will be a brief description right below each thumbnail. You can also select the price, avg star rating filters, as well as the cuisine icons to filter restaurants by these categories. 
 
 ![get-restaurants](./images/get-restaurants.png)
