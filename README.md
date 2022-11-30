@@ -30,9 +30,9 @@ Once logged in, you will view the restaurants homepage, listed by the category o
 
 ![get-restaurants](./images/get-restaurants.png)
 
-You can also use the search box to find specific restaurants by either restaurant name or category.
+You can also use the search bar to find specific restaurants by either restaurant name or category.
 
-INSERT PICTURE HERE****
+![searchbar](./images/searchbar.png)
 
 ## Create a Restaurant
 Click the top left icon with 3 horizontal dashes, and click "Register Restaurant" to create a restaurant. This will take you to the first page of a 3 step form. You will fill out all the necessary info to properly register your restaurant for other users to order from.
