@@ -305,7 +305,7 @@ def seed_food_items():
           "description": "assorted sushi with eel, salmon, tuna and shrimp",
           "price": 9.99,
           "restaurant_id": 8,
-          "category": "Side"
+          "category": "Sides"
         },
         {
           "name": "Yellowtail sashimi",
@@ -545,7 +545,7 @@ def seed_food_items():
           "description": "chicken feet simmered in chile soy sauce",
           "price": 4.99,
           "restaurant_id": 17,
-          "category": "Side"
+          "category": "Sides"
         },
         {
           "name": "Siu mai",
@@ -553,7 +553,7 @@ def seed_food_items():
           "description": "pork and shrimp dumpling, wrapped in an egg noodle-like wrapper",
           "price": 5.99,
           "restaurant_id": 17,
-          "category": "Side"
+          "category": "Sides"
         },
         {
           "name": "Egg tart",
