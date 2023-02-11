@@ -74,11 +74,11 @@ const GetOrderReceipt = () => {
             <div className='get-order-receipt-price-breakdown-container'>
               <div className='get-order-subtotal-container get-order-price-line'>
                 <div>Subtotal</div>
-                <div> ${order.subtotal}</div>
+                <div> ${(Number(order.subtotal)).toFixed(2)}</div>
               </div>
               <div className='get-order-delivery-fee-container get-order-price-line middle'>
                 <div> Delivery Fee</div>
-                <div> ${order.deliveryFee}</div>
+                <div> ${ (Number(order.deliveryFee)).toFixed(2)}</div>
               </div>
               <div className='get-order-fees-container get-order-price-line middle'>
                 <div>Service and Tax Fees </div>
@@ -86,11 +86,11 @@ const GetOrderReceipt = () => {
               </div>
               <div className='get-order-tip-container get-order-price-line middle'>
                 <div>Dasher Tip</div>
-                <div> ${order.tip}</div>
+                <div> ${(Number(order.tip)).toFixed(2)}</div>
               </div>
               <div className='get-order-total-container get-order-price-line'>
                 <div>Total</div>
-                <div> ${order.totalPrice}</div>
+                <div> ${(Number(order.totalPrice)).toFixed(2)}</div>
               </div>
             </div>
 

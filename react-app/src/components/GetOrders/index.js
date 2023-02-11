@@ -181,7 +181,7 @@ const GetOrders = () => {
                   <div className='get-orders-completed-text-content-main-container'>
                     <div className='get-orders-completed-text-content-left-container'>
                       <div className='get-orders-completed-text-content-top-row'>
-                        <div> {convertCreatedTimeForCompleted(order)} • {order.totalPrice} • {totalItemsPerOrder(order)}</div>
+                        <div> {convertCreatedTimeForCompleted(order)} • {(Number(order.totalPrice)).toFixed(2)} • {totalItemsPerOrder(order)}</div>
                         <div> {order.foodItems.map( (item, i)=> (
                             <>
                               {i=== 0? ``: ` `} {item.name} {item.quantity>=2?`(${item.quantity})`: ""} {i!=order.foodItems.length - 1? "•": ""}

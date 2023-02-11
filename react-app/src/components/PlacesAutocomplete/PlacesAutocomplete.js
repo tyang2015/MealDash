@@ -54,7 +54,7 @@ const PlacesAutocomplete = ({apiKey, setFormData, formData, destinationRef}) => 
         {/* <Autocomplete> */}
           <Combobox className='create-restaurant-address-dropdown' onSelect={handleSelect}>
             {/* <div className="create-restaurant-label-input-container address"> */}
-              <label htmlFor='create-restaurant-address-input'>Address</label>
+              <label htmlFor='create-restaurant-address-input'>Address *</label>
               <ComboboxInput
                 id="create-restaurant-address-input"
                 className='one-input-per-row restaurant-form-input-box'

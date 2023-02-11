@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom';
 import "./OrderSummaryContainer.css"
 
 const OrderSummaryContainer = ({cartItems}) => {
-  console.log('cart items in containerrr:', cartItems)
  return (
   <div className='order-confirmation-order-summary-main-container'>
     <div style={{fontSize: "24px",fontWeight: "700", letterSpacing: "-0.01ch"}}>Items</div>

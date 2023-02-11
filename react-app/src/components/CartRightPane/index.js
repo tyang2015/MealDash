@@ -9,7 +9,6 @@ import { useToggleCart } from '../../context/ToggleCartContext';
 let cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]')
 let restaurantFromLocalStorage = JSON.parse(localStorage.getItem('restaurant') || '{}')
 // let checkoutButton = document.querySelector("h3.checkout-text-container")
-// let checkoutButton;
 // we have cart items passed from PARENT and cart items from storage (this is not updating correctly...)
 
 // const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems, setToggleCartPane, toggleCartPane}) => {
@@ -26,6 +25,7 @@ const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems}) 
   let [storedRestaurant, setStoredRestaurant] = useState(submittedCartItems?.length>0? submittedCartItems[0].Restaurant : restaurantFromLocalStorage!="{}"? restaurantFromLocalStorage: cartItems?.length> 0? cartItems[0].Restaurant: {})
   const [isOrderZero, setIsOrderZero] = useState(false)
   // console.log('SUBMITTED CART ITEMS AT BEGINNING OF CART RIGHT PANE:', submittedCartItems)
+  console.log('STORED RESTUARANT:', storedRestaurant)
 
   // useEffect(()=> {
   //   setSubmittedCartItems([...submittedCartItems])
@@ -109,7 +109,6 @@ const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems}) 
 
 
   useEffect(()=> {
-    // console.log('order subtotal use effect triggered')
     if (orderSubtotal == 0){
       setIsOrderZero(true)
     } else {
@@ -223,7 +222,21 @@ const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems}) 
       alert('You have a pending order! Please be patient')
       return
     } else {
-      history.push({pathname: `/restaurants/${restaurant? restaurant.id: storedRestaurant.id}/checkout`, data: {orderSubtotal: orderSubtotal, restaurant: restaurant? restaurant: storedRestaurant, submittedCartItems: cartItems? cartItems: submittedCartItems}, state: {prevPath: location.pathname}})
+      // if closed:
+      let date = new Date()
+      let hrs = String(date.getHours()).length ===1? "0" + date.getHours(): "" + date.getHours()
+      let mins = String(date.getMinutes()).length ===1? "0" + date.getMinutes(): "" + date.getMinutes()
+      let secs = String(date.getSeconds()).length ===1? "0" + date.getSeconds(): "" + date.getSeconds()
+      let dateStr = hrs + ":" + mins + ":" + secs
+      // console.log('DATE STRING:', dateStr)
+      // console.log('CLOSE TIME:', storedRestaurant.closeTime)
+      if (!(dateStr> storedRestaurant.openTime && dateStr < storedRestaurant.closeTime)) {
+        alert("Restaurant is closed. Sorry for the inconvenience!")
+      }
+
+      else {
+        history.push({pathname: `/restaurants/${restaurant? restaurant.id: storedRestaurant.id}/checkout`, data: {orderSubtotal: orderSubtotal, restaurant: restaurant? restaurant: storedRestaurant, submittedCartItems: cartItems? cartItems: submittedCartItems}, state: {prevPath: location.pathname}})
+      }
     }
 
   }
