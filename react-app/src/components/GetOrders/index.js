@@ -11,6 +11,7 @@ import { DeleteOrderModal } from '../../context/DeleteOrderModal';
 import DeleteOrderModalComponent from '../DeleteOrderModal';
 import {useCancelTimer} from "../../context/CancelTimer"
 import {useDeliveryInterval} from "../../context/DeliveryInterval"
+import { create } from '@mui/material/styles/createTransitions';
 // the highest # order is your most recent aka the IN PROGRESS ONE, if there is one
 let currentTime = new Date().toLocaleString('en-US', {
   month: "short",
@@ -44,6 +45,8 @@ const GetOrders = () => {
   const convertCreatedTimeForInProgress = (orderObj)=>{
     // return the order object with newly formatted order created TIME
     let createdTimeObj = new Date (orderObj.createdAt)
+    console.log("CREATED TIME OBJ:", createdTimeObj)
+    console.log("local time convert:", createdTimeObj.toString() )
     createdTimeObj.setMinutes(createdTimeObj.getMinutes()+ orderObj.duration)
     let convertedLocalTime = createdTimeObj.toLocaleString('en-US', {
       month: "short",

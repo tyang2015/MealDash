@@ -61,8 +61,8 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
       if (formData.email?.length>30) errors.push("Email must be less than 50 characters")
       if (formData.priceRange < 1 || formData.priceRange >4) errors.push("Price range is invalid")
       if (logoExists(formData.logo)) errors.push("Logo must be unique and not be used by another owner")
-      if (!isImage(formData.logo)) errors.push("Logo url is invalid")
-      if (!isImage(formData.restaurantPicUrl)) errors.push("Restaurant pic url is invalid")
+      // if (!isImage(formData.logo)) errors.push("Logo url is invalid")
+      // if (!isImage(formData.restaurantPicUrl)) errors.push("Restaurant pic url is invalid")
       if (formData.closeTime <= formData.openTime) errors.push("Closing Time must be after Opening Time")
       if (formData.longitude < -180 || formData.longitude > 180) errors.push("Longitude is invalid")
       if (formData.latitude < -90 || formData.latitude> 90) errors.push("Latitude is invalid")
@@ -103,18 +103,18 @@ const RestaurantForm = ({restaurant, formType, restaurants}) => {
       return re.test(email);
     }
 
-    function isImage(url) {
-      let imageExtensions= ['jpg', 'jpeg', 'png', 'svg', 'gif', 'webp']
-      if (url){
-        for (let i = 0; i< imageExtensions.length; i++){
-          let ext = imageExtensions[i]
-          if (url.toLowerCase().includes(ext)){
-            return true
-          }
-        }
-        return false
-      }
-    }
+    // function isImage(url) {
+    //   let imageExtensions= ['jpg', 'jpeg', 'png', 'svg', 'gif', 'webp']
+    //   if (url){
+    //     for (let i = 0; i< imageExtensions.length; i++){
+    //       let ext = imageExtensions[i]
+    //       if (url.toLowerCase().includes(ext)){
+    //         return true
+    //       }
+    //     }
+    //     return false
+    //   }
+    // }
 
     const FormDisplay = () => {
         if (formStep === 0 ) {

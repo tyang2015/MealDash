@@ -5,6 +5,7 @@ import FinalConfirmationNavBar from '../FinalConfirmationNavBar';
 import "./CartRightPane.css";
 import emptyCart from "./images/empty-cart.png";
 import { useToggleCart } from '../../context/ToggleCartContext';
+import { getAllRestaurants } from '../../store/restaurant';
 
 let cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]')
 let restaurantFromLocalStorage = JSON.parse(localStorage.getItem('restaurant') || '{}')
@@ -13,19 +14,27 @@ let restaurantFromLocalStorage = JSON.parse(localStorage.getItem('restaurant') |
 
 // const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems, setToggleCartPane, toggleCartPane}) => {
 const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems}) => {
-  console.log('cart items from right pane passed as props', cartItems)
+  // console.log('cart items from right pane passed as props', cartItems)
   const {toggleCartPane, setToggleCartPane} = useToggleCart();
+  const dispatch = useDispatch();
   const location = useLocation();
   const history = useHistory();
   const [orderSubtotal, setOrderSubtotal] = useState(0)
-  // const [quantityChange, setQuantityChange] = useState(false)
   // const checkoutButtonRef = useRef(null)
   const [quantity, setQuantity] = useState(1)
   let [submittedCartItems, setSubmittedCartItems] = useState(JSON.parse(localStorage.getItem('cart'))||[])
   let [storedRestaurant, setStoredRestaurant] = useState(submittedCartItems?.length>0? submittedCartItems[0].Restaurant : restaurantFromLocalStorage!="{}"? restaurantFromLocalStorage: cartItems?.length> 0? cartItems[0].Restaurant: {})
+  const newRestaurant = useSelector(state=> state.restaurants[restaurant? restaurant.id: storedRestaurant.id])
   const [isOrderZero, setIsOrderZero] = useState(false)
   // console.log('SUBMITTED CART ITEMS AT BEGINNING OF CART RIGHT PANE:', submittedCartItems)
-  console.log('STORED RESTUARANT:', storedRestaurant)
+  // console.log('STORED RESTUARANT:', storedRestaurant)
+  // console.log('restaurant passed as prop:', restaurant)
+  console.log("new restaurant::", newRestaurant)
+
+  // added: to get the restaurant close and open times correctly registered with cart pane to prevent ordering
+  useEffect(()=> {
+    dispatch(getAllRestaurants())
+  }, [dispatch])
 
   // useEffect(()=> {
   //   setSubmittedCartItems([...submittedCartItems])
@@ -228,9 +237,9 @@ const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems}) 
       let mins = String(date.getMinutes()).length ===1? "0" + date.getMinutes(): "" + date.getMinutes()
       let secs = String(date.getSeconds()).length ===1? "0" + date.getSeconds(): "" + date.getSeconds()
       let dateStr = hrs + ":" + mins + ":" + secs
-      // console.log('DATE STRING:', dateStr)
-      // console.log('CLOSE TIME:', storedRestaurant.closeTime)
-      if (!(dateStr> storedRestaurant.openTime && dateStr < storedRestaurant.closeTime)) {
+      if (!(dateStr> newRestaurant.openTime && dateStr < newRestaurant.closeTime)) {
+        // console.log("close time::", newRestaurant.closeTime)
+        // console.log("current time:", dateStr)
         alert("Restaurant is closed. Sorry for the inconvenience!")
       }
 
