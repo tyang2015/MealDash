@@ -293,7 +293,7 @@ def seed_food_items():
         },
         {
           "name": "Salmon sashimi",
-          "food_pic_url": "https://drhealthbenefits.com/wp-content/uploads/2017/05/health-benefits-of-sashimi.jpg",
+          "food_pic_url": "https://rbsushi.com/wp-content/uploads/2020/01/Untitled-design-60.png",
           "description": "raw salmon with ginger and wasabi",
           "price": 15.99,
           "restaurant_id": 8,
@@ -357,7 +357,7 @@ def seed_food_items():
         },
         {
           "name": "Omurice with curry",
-          "food_pic_url": "https://bestfoodfeed.s3.amazonaws.com/media/5178413/conversions/129278998_381807263029630_388065392854815906_n-highResolution.jpg",
+          "food_pic_url": "https://cdn.vox-cdn.com/thumbor/xZ2WKl3hcAjY3I5zEuyCDVgqiIE=/1400x1050/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/9858195/o.jpg",
           "description": "curry rice with omelette and pork tonkatsu",
           "price": 15.99,
           "restaurant_id": 11,
@@ -396,7 +396,7 @@ def seed_food_items():
           "category": "Main"
         },
         {
-          "name": "Extra Fancy Pizza",
+          "name": "Fancy Pizza",
           "food_pic_url": "https://d332juqdd9b8hn.cloudfront.net/wp-content/uploads/2019/04/2top.jpg",
           "description": "Pizza with all kinds of purple and yellow flowers and decadent cheese",
           "price": 40.99,
@@ -417,7 +417,7 @@ def seed_food_items():
           "description": "Expresso infused cake with layers of light cream and chocolate shreds on top",
           "price": 12.99,
           "restaurant_id": 12,
-          "category": "Main"
+          "category": "Desserts"
         },
         {
           "name": "Matcha latte",
@@ -571,6 +571,30 @@ def seed_food_items():
           "restaurant_id": 16,
           "category": "Main"
         },
+        {
+          "name": "Venison",
+          "food_pic_url": "https://ameessavorydish.com/wp-content/uploads/2011/02/Venison-tenderloin-13-e1573841973578.jpg",
+          "description": "deer meat with raspberry sauce",
+          "price": 20.99,
+          "restaurant_id": 21,
+          "category": "Main"
+        },
+        {
+          "name": "Kardamom Bun",
+          "food_pic_url": "https://thisweekfordinner.com/wp-content/uploads/2018/12/kardemummabullar-recipe-and-step-by-step-final-horiz-this-week-for-dinner-web.jpg",
+          "description": "cinammon flavored bun",
+          "price": 3.99,
+          "restaurant_id": 21,
+          "category": "Desserts"
+        },
+        {
+          "name": "Herring on Toast",
+          "food_pic_url": "https://girlheartfood.com/wp-content/uploads/2020/08/Smoked-Herring-on-Toast-4-500x500.jpg",
+          "description": "herring on toast",
+          "price": 8.99,
+          "restaurant_id": 21,
+          "category": "Sides"
+        }
     ]
 
     for item in food_items:
