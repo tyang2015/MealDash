@@ -6,7 +6,7 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  height: 250px;
+  height: 290px;
 }
 
 div.login-label-input-container{
@@ -14,12 +14,14 @@ div.login-label-input-container{
 
 }
 
+
 .login-page-email-row{
   width: 100%;
   height: 50px;
   display:flex;
   flex-direction: column;
   margin-top: -50px;
+  /* background-color: lightblue; */
 }
 
 .login-page-password-row{
@@ -58,7 +60,5 @@ div.login-label-input-container{
 
 .login-form-validation-errors{
   color: red;
-  /* background-color: lightblue; */
-
-  /* margin-bottom: 20px; */
+  margin-bottom: 20px;
 }

@@ -70,7 +70,9 @@ const SignUpForm = () => {
   return (
     <>
       <div className='signup-top-bar'>
-        <i className="fa-solid fa-burger sign-up-logo"style={{color:"lightcoral"}}> MealDash </i>
+        <NavLink to="/">
+          <i className="fa-solid fa-burger sign-up-logo"style={{color:"lightcoral"}}> MealDash </i>
+        </NavLink>
       </div>
       <div className='signup-title-container'>
         <h1>Sign Up</h1>

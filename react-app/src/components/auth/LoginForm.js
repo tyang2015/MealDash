@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { Redirect } from 'react-router-dom';
+import { Redirect, NavLink, useHistory} from 'react-router-dom';
 import { login } from '../../store/session';
-import { NavLink } from 'react-router-dom';
 import "./LoginForm.css"
 
 const LoginForm = () => {
@@ -39,7 +37,9 @@ const LoginForm = () => {
   return (
     <>
       <div className='signup-top-bar'>
-        <i className="fa-solid fa-burger sign-up-logo"style={{color:"lightcoral"}}> MealDash </i>
+        <NavLink to="/">
+          <i className="fa-solid fa-burger sign-up-logo"style={{color:"lightcoral"}}> MealDash </i>
+        </NavLink>
       </div>
       <div className='signup-title-container'>
         <h1>Sign In</h1>
