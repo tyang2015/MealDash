@@ -230,7 +230,7 @@ def seed_food_items():
         {
             "name": "Chicken Enchilada",
             "food_pic_url": "https://www.recipetineats.com/wp-content/uploads/2020/03/Chicken-Enchiladas_4.jpg?resize=650,910",
-            "description": "spicy Peruvian chupe made with crayfish, rocoto pepper, potatoes, vegetables, milk, and a poached egg",
+            "description": "enchilada with chicken and cheese",
             "price": 12.99,
             "restaurant_id": 6,
             "category": "Main"

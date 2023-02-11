@@ -39,7 +39,7 @@ def seed_restaurants():
             "address": "Ginger's Divine Ice Creams, West Washington Boulevard, Los Angeles, CA, USA"
         },
         {
-            "name": "tiff's vegan delight",
+            "name": "Tiff's vegan delight",
             "owner_id": 4,
             "price_range": 2,
             "restaurant_pic_url": "https://static.thehoneycombers.com/wp-content/uploads/sites/4/2018/07/The-Shady-Shack-vegetarian-vegan-restaurant-in-Bali.jpg",
@@ -249,7 +249,7 @@ def seed_restaurants():
         },
         {
           "name": "Randy's American Dream",
-          "owner_id": 4,
+          "owner_id": 5,
           "price_range": 3,
           "restaurant_pic_url": "https://www.maczfit.pl/blog/wp-content/uploads/2021/03/fast_food-960x639.jpeg",
           "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSF3DJHdVeFLiPOAbyHTrCPnQ2HNeCDus6qbCf9qZM7yg28V_Eo-qrvjC-QngCrMTigHE&usqp=CAU",
@@ -299,15 +299,15 @@ def seed_restaurants():
           "address": "2520 San Bruno Ave, San Francisco, CA 94134"
         },
         {
-          "name": "Tiff's Swedish/Asian Fusion",
-          "owner_id": 4,
+          "name": "Ivorine's Swedish/Asian Fusion",
+          "owner_id": 13,
           "price_range": 3,
           "restaurant_pic_url": "https://foodandnutrition.org/wp-content/uploads/MGTSweden-780x520.jpg",
           "logo": "https://img.myloview.com/posters/vintage-restaurant-logo-design-inspiration-vector-illustration-700-148963696.jpg",
           "longitude": -90.06,
           "latitude": 29.95,
-          "email": "tiffany@gmail.com",
-          "phone_number": "(908) 111-2222",
+          "email": "ivorine@gmail.com",
+          "phone_number": "(908) 909-2222",
           "bank_account": "949456789",
           "routing_number": "911456789",
           "category": "Asian",

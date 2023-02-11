@@ -87,6 +87,13 @@ def seed_users():
             "email": "emily@gmail.com",
             "password": "password",
             "phone_number" : "(323) 889-4902"
+        },
+        {
+            "first_name": "Ivorine",
+            "last_name": "Do",
+            "email": "ivorine@gmail.com",
+            "password": "password",
+            "phone_number" : "(323) 909-4902"
         }
     ]
 
