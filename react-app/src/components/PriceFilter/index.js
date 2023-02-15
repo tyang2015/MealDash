@@ -5,17 +5,31 @@ import { UsePriceDropdown } from '../../context/PriceDropdown';
 import { UseRatingDropdown } from '../../context/RatingDropdown';
 import "./PriceFilter.css"
 
-const PriceFilter = ({ filteredItems , restaurants, setFilteredItems, isFiltered, setIsFiltered}) => {
+const PriceFilter = ({ clickPrice1, setClickPrice1, clickPrice2, setClickPrice2, clickPrice3, setClickPrice3, clickPrice4, setClickPrice4, filteredItems , restaurants, setFilteredItems, isFiltered, setIsFiltered}) => {
   const sessionUser = useSelector(state=> state.session.user)
   const {toggleRatingDropdown, setToggleRatingDropdown} = UseRatingDropdown();
   const {togglePriceDropdown, setTogglePriceDropdown} = UsePriceDropdown();
 
-  const [clickPrice1, setClickPrice1] = useState(false)
-  const [clickPrice2, setClickPrice2] = useState(false)
-  const [clickPrice3, setClickPrice3] = useState(false)
-  const [clickPrice4, setClickPrice4] = useState(false)
+  // const [clickPrice1, setClickPrice1] = useState(false)
+  // const [clickPrice2, setClickPrice2] = useState(false)
+  // const [clickPrice3, setClickPrice3] = useState(false)
+  // const [clickPrice4, setClickPrice4] = useState(false)
 
   const selectedPriceRanges = [clickPrice1, clickPrice2, clickPrice3, clickPrice4]
+
+  const mergeRestaurants = (arr) => {
+    let set = new Set()
+    let i = 0;
+    while (i< arr.length) {
+      if ( set.has(arr[i].id) ) {
+        arr.splice(i, 1)
+      } else {
+        set.add(arr[i].id)
+        i++
+      }
+    }
+    return arr
+  }
 
   const oneSelected = () => {
     return selectedPriceRanges.filter(item => item === true).length === 1
@@ -48,12 +62,24 @@ const PriceFilter = ({ filteredItems , restaurants, setFilteredItems, isFiltered
 
   const handlePriceFilter = () => {
     setIsFiltered(true)
-    // let filteredItems
-    let newFilteredItems = restaurants.filter(restaurant => selectedPriceRanges[restaurant.priceRange-1] === true)
+    let newFilteredItems;
+    if (isFiltered) {
+      newFilteredItems = filteredItems.filter(restaurant => selectedPriceRanges[restaurant.priceRange-1] === true)
+    } else {
+      newFilteredItems = restaurants.filter(restaurant => selectedPriceRanges[restaurant.priceRange-1] === true)
+    }
+    // let newFilteredItems = restaurants.filter(restaurant => selectedPriceRanges[restaurant.priceRange-1] === true)
     setFilteredItems(newFilteredItems)
+
+    // setFilteredItems( mergeRestaurants([...filteredItems, ...newFilteredItems]))
+    // console.log("MERGED:", mergeRestaurants([...filteredItems, ...newFilteredItems]))
+    // setFilteredItems(mergeRestaurants([...filteredItems, newFilteredItems]))
     // return filtered
     // console.log('clicked view results')
   }
+
+
+
   return (
     <div className='price-container-dropdown'>
       <div className='price-container-dropdown-content-container'>

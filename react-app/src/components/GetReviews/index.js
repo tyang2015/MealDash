@@ -147,7 +147,7 @@ const GetReviews = () => {
             {reviews?.length>0 && reviews.map(review=> (
               <div className='get-reviews-review-card'>
                 <div className="get-reviews-review-card-left-pane">
-                  <div style={{marginTop: "1em",marginLeft: "1em", fontWeight: "700", fontSize:"16px"}}>{sessionUser.firstName} {sessionUser.lastName[0]}</div>
+                  <div style={{marginTop: "1em",marginLeft: "1em", fontWeight: "700", fontSize:"16px"}}>{review.user.firstName} {review.user.lastName[0]}</div>
                   <div className='get-reviews-mini-stars-date-written-container'>
                     <div className='restaurant-reviews-container-mini-stars-container'>
                       {review.stars === 1 && (

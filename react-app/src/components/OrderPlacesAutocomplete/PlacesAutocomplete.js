@@ -34,8 +34,8 @@ const PlacesAutocomplete = ({apiKey,setRouteLoaded, setAddress, setUserCoordinat
 
     const results = await getGeocode({address});
     const {lat, lng} = await getLatLng(results[0]);
-    console.log('lat:', lat)
-    console.log('lng:' , lng)
+    // console.log('lat:', lat)
+    // console.log('lng:' , lng)
     setUserCoordinates({"lat": lat, "lng": lng})
   }
 

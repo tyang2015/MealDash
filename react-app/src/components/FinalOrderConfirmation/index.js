@@ -39,12 +39,7 @@ const FinalOrderConfirmation = () => {
   console.log("order started at top of final order confirm:", orderStarted)
   console.log("countDOWN", countdown)
 
-  // useEffect(()=> {
-  //   if (orderStarted) {
-  //     setCountdown(duration)
-  //     setOrderStarted(0)
-  //   }
-  // }, [])
+
   useEffect(()=> {
     if (orderStarted == 0 && localStorage.getItem('countdown')>0){
       setCountdown(localStorage.getItem('countdown'))
@@ -55,10 +50,6 @@ const FinalOrderConfirmation = () => {
   useEffect(()=>{
     localStorage.setItem('orderStarted', orderStarted)
   }, [orderStarted])
-
-  // useEffect(()=> {
-  //   localStorage.setItem("orderStarted", orderStarted)
-  // }, [orderStarted])
 
 
   const updateExistingOrderInStore = async (order) => {

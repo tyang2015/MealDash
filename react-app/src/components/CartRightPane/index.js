@@ -209,9 +209,7 @@ const CartRightPane = ({ forceCartUpdate, restaurant, cartItems, setCartItems}) 
       i=i+1
     }
   }
-  // console.log('cart from LOCAL STORAGE in right pane:', cartFromLocalStorage)
-  // console.log('cart items at the end in right pane passed as props', cartItems)
-  // console.log('cart items from local storage at end in right pane', submittedCartItems)
+
 
   if (isOrderZero) return (
     <div className="cart-pane-main-container">

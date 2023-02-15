@@ -37,6 +37,10 @@ const Restaurants = () => {
     // const [toggleRatingDropdown, setToggleRatingDropdown] = useState(false)
     // const [togglePriceDropdown, setTogglePriceDropdown] = useState(false)
     const [selectedRatingMin, setSelectedRatingMin]= useState(3)
+    const [clickPrice1, setClickPrice1] = useState(false)
+    const [clickPrice2, setClickPrice2] = useState(false)
+    const [clickPrice3, setClickPrice3] = useState(false)
+    const [clickPrice4, setClickPrice4] = useState(false)
     let [filteredItems, setFilteredItems] = useState([])
     const [submittedCartItems, setSubmittedCartItems] = useState(cartFromLocalStorage || [])
     const [isFiltered, setIsFiltered] = useState(false)
@@ -445,7 +449,8 @@ const Restaurants = () => {
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="styles__StyledInlineSvg-sc-12l8vvi-0 jFpckg sc-84e263d1-5 bcmrDQ"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.29289 8.79289C5.68342 8.40237 6.31658 8.40237 6.70711 8.79289L12 14.0858L17.2929 8.79289C17.6834 8.40237 18.3166 8.40237 18.7071 8.79289C19.0976 9.18342 19.0976 9.81658 18.7071 10.2071L12.7071 16.2071C12.5196 16.3946 12.2652 16.5 12 16.5C11.7348 16.5 11.4804 16.3946 11.2929 16.2071L5.29289 10.2071C4.90237 9.81658 4.90237 9.18342 5.29289 8.79289Z" fill="currentColor"></path></svg>
                 </div>
               </div>
-              {togglePriceDropdown && <PriceFilter filteredItems={filteredItems} restaurants={restaurants} setIsFiltered={setIsFiltered} isFiltered={isFiltered} setFilteredItems={setFilteredItems}/>}
+              {togglePriceDropdown && <PriceFilter clickPrice1={clickPrice1} clickPrice2={clickPrice2} clickPrice3={clickPrice3}
+              clickPrice4={clickPrice4} setClickPrice1 ={setClickPrice1} setClickPrice2 ={setClickPrice2} setClickPrice3={setClickPrice3} setClickPrice4 ={setClickPrice4} filteredItems={filteredItems} restaurants={restaurants} setIsFiltered={setIsFiltered} isFiltered={isFiltered} setFilteredItems={setFilteredItems}/>}
             </div>
 
             {!isFiltered && categoryNum.Asian>0 && (
