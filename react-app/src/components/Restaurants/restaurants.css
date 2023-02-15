@@ -78,6 +78,7 @@
   width: 5em;;
   /* background-color: lightcyan; */
   height: 5em;
+  cursor: pointer;
 }
 
 .restaurants-no-items-display{
