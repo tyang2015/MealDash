@@ -16,10 +16,22 @@ const RatingFilter= ({ filteredItems , selectedRatingMin, setSelectedRatingMin ,
   }
 
   const handleRatingFilter = (selectedRatingMin) =>{
+    console.log('selected rating:', selectedRatingMin)
     setIsFiltered(true)
-    let newFilteredItems = restaurants.filter(restaurant => Number(restaurant.avgRating) >= selectedRatingMin)
+    let newFilteredItems;
+    console.log('is filtered....:', isFiltered)
+    if (isFiltered) {
+      newFilteredItems = filteredItems.filter(restaurant => Number(restaurant.avgRating) >= selectedRatingMin)
+    } else {
+      newFilteredItems = restaurants.filter(restaurant => Number(restaurant.avgRating) >= selectedRatingMin)
+    }
     setFilteredItems(newFilteredItems)
-    return filteredItems
+
+
+    // setIsFiltered(true)
+    // let newFilteredItems = restaurants.filter(restaurant => Number(restaurant.avgRating) >= selectedRatingMin)
+    // setFilteredItems(newFilteredItems)
+    // return filteredItems
   }
 
   return (
