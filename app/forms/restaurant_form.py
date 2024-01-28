@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField, IntegerField, DecimalField, DateTimeField
-from wtforms.fields.html5 import TimeField
+# from wtforms.fields.html5 import TimeField
 from wtforms.validators import DataRequired, ValidationError
 from app.models import Restaurant
 

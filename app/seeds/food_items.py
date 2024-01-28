@@ -445,7 +445,7 @@ def seed_food_items():
         },
         {
           "name": "Chicken tikka masala",
-          "food_pic_url": "https://gomyoffer.in/wp-content/uploads/2021/07/360_F_333040259_XAngCfVMVrmZbJXD3fqH4DVhMaTK7KbV.jpg",
+          "food_pic_url": "https://bellyfull.net/wp-content/uploads/2021/05/Chicken-Tikka-Masala-blog.jpg",
           "description": "chicken cream curry with various spices",
           "price": 16.99,
           "restaurant_id": 14,
