@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.css": "/static/css/main.cc492632.chunk.css",
+    "main.js": "/static/js/main.912d3665.chunk.js",
+    "main.js.map": "/static/js/main.912d3665.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.84ec8e64.js",
+    "runtime-main.js.map": "/static/js/runtime-main.84ec8e64.js.map",
+    "static/css/2.142bee5e.chunk.css": "/static/css/2.142bee5e.chunk.css",
+    "static/js/2.ae275cee.chunk.js": "/static/js/2.ae275cee.chunk.js",
+    "static/js/2.ae275cee.chunk.js.map": "/static/js/2.ae275cee.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.142bee5e.chunk.css.map": "/static/css/2.142bee5e.chunk.css.map",
+    "static/css/main.cc492632.chunk.css.map": "/static/css/main.cc492632.chunk.css.map",
+    "static/js/2.ae275cee.chunk.js.LICENSE.txt": "/static/js/2.ae275cee.chunk.js.LICENSE.txt",
+    "static/media/asian-icon.2eb568d6.png": "/static/media/asian-icon.2eb568d6.png",
+    "static/media/breakfast-icon.eb721dc9.png": "/static/media/breakfast-icon.eb721dc9.png",
+    "static/media/ethiopian-icon.87776cd3.png": "/static/media/ethiopian-icon.87776cd3.png",
+    "static/media/fastfood-icon.2a84ba1e.png": "/static/media/fastfood-icon.2a84ba1e.png",
+    "static/media/french-icon.ea62a79f.png": "/static/media/french-icon.ea62a79f.png",
+    "static/media/italian-icon.cf0fc285.png": "/static/media/italian-icon.cf0fc285.png",
+    "static/media/japanese-icon.8ef722a2.png": "/static/media/japanese-icon.8ef722a2.png",
+    "static/media/mediterranean-icon.844c6367.png": "/static/media/mediterranean-icon.844c6367.png",
+    "static/media/vegan-icon.de0cbac2.png": "/static/media/vegan-icon.de0cbac2.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.84ec8e64.js",
+    "static/css/2.142bee5e.chunk.css",
+    "static/js/2.ae275cee.chunk.js",
+    "static/css/main.cc492632.chunk.css",
+    "static/js/main.912d3665.chunk.js"
+  ]
+}
