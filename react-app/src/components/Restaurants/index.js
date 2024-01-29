@@ -30,46 +30,23 @@ const Restaurants = () => {
     const {toggleRatingDropdown, setToggleRatingDropdown} = UseRatingDropdown();
     const {togglePriceDropdown, setTogglePriceDropdown} = UsePriceDropdown();
     const dispatch = useDispatch();
-    const location = useLocation();
     const restaurantObj = useSelector(state => state.restaurants)
     let restaurants = Object.values(restaurantObj)
     // const [toggleCartPane, setToggleCartPane] = useState(false)
     // const [toggleRatingDropdown, setToggleRatingDropdown] = useState(false)
     // const [togglePriceDropdown, setTogglePriceDropdown] = useState(false)
     const [selectedRatingMin, setSelectedRatingMin]= useState(3)
-    const [clickPrice1, setClickPrice1] = useState(false)
-    const [clickPrice2, setClickPrice2] = useState(false)
-    const [clickPrice3, setClickPrice3] = useState(false)
-    const [clickPrice4, setClickPrice4] = useState(false)
+    const [selectedPrices, setSelectedPrices] = useState({
+      price1: false,
+      price2: false,
+      price3: false,
+      price4: false
+    })
+
     let [filteredItems, setFilteredItems] = useState([])
     const [submittedCartItems, setSubmittedCartItems] = useState(cartFromLocalStorage || [])
     const [isFiltered, setIsFiltered] = useState(false)
     const [categoryChosen, setCategoryChosen] = useState('')
-    const [all, setAll] = useState('')
-    const [asian, setAsian] = useState('')
-    const [american, setAmerican] = useState('')
-    const [breakfast, setBreakfast] = useState('')
-    const [vegan, setVegan] = useState('')
-    const [mexican, setMexican] = useState('')
-    const [japanese, setJapanese] = useState('')
-    const [italian, setItalian] = useState('')
-    const [french, setFrench] = useState('')
-    const [fastFood, setFastFood] = useState('')
-    const [ethiopian, setEthiopian ] = useState('')
-    const [mediterranean, setMediterranean] = useState('')
-
-    const [lenAsian, setLenAsian] = useState(0)
-    const [lenAmerican, setLenAmerican] = useState(0)
-    const [lenBreakfast, setLenBreakfast] = useState(0)
-    const [lenVegan, setLenVegan] = useState(0)
-    const [lenMexican, setLenMexican] = useState(0)
-    const [lenJapanese, setLenJapanese] = useState(0)
-    const [lenItalian, setLenItalian] = useState(0)
-    const [lenFrench, setLenFrench] = useState(0)
-    const [lenFastFood, setLenFastFood] = useState(0)
-    const [lenEthiopian, setLenEthiopian] = useState(0)
-    const [lenMediterranean, setLenMediterranean] = useState(0)
-    // const [minStarsFilter, setMinStarsFilter] = useState(3)
     const [categoryNum, setCategoryNum] = useState({
       Asian: 0,
       American: 0,
@@ -84,22 +61,22 @@ const Restaurants = () => {
       Mediterranean: 0
 
     })
-    console.log('location on main page:', location.pathname)
 
-    // const [categories, setCategories] = useState({
-    //   ALL:"",
-    //   Asian: "",
-    //   American: "",
-    //   Breakfast: "",
-    //   Vegan: "",
-    //   Mexican: "",
-    //   Japanese: "",
-    //   Italian: "",
-    //   French: "",
-    //   FastFood: "",
-    //   Ethiopian:"",
-    //   Mediterranean: ""
-    // })
+// use this as values for the icons
+    const [categories, setCategories] = useState({
+      ALL:true,
+      Asian: false,
+      American: false,
+      Breakfast: false,
+      Vegan: false,
+      Mexican: false,
+      Japanese: false,
+      Italian: false,
+      French: false,
+      FastFood: false,
+      Ethiopian:false,
+      Mediterranean: false
+    })
 
     useEffect(()=>{
         dispatch(getAllRestaurants())
@@ -119,283 +96,91 @@ const Restaurants = () => {
       }
     }, [restaurantObj])
 
-    useEffect(()=>{
-      if (restaurants.length>0 && all === "All"){
-        setIsFiltered(false)
-        return restaurants
-      }
-    }, [all])
 
-    useEffect(()=>{
-      if (restaurants.length>0 && asian === 'Asian'){
-        filteredItems = restaurants.filter(restaurant=> restaurant.category === asian)
-        setFilteredItems(filteredItems)
-        setIsFiltered(true)
-        return filteredItems
-      }
-    }, [asian])
+    useEffect(()=> {
 
-    useEffect(()=>{
-      if (restaurants.length>0 && american === "American"){
-        filteredItems = restaurants.filter(restaurant=> restaurant.category === american)
-        setFilteredItems(filteredItems)
-        setIsFiltered(true)
-        return filteredItems
-      }
-    }, [american])
-
-    useEffect(()=>{
-      if (restaurants.length>0 && breakfast === "Breakfast"){
-        filteredItems = restaurants.filter(restaurant=> restaurant.category === breakfast)
-        setFilteredItems(filteredItems)
-        setIsFiltered(true)
-        return filteredItems
-      }
-    }, [breakfast])
-
-    useEffect(()=>{
-      if (restaurants.length>0 && vegan === "Vegan"){
-        filteredItems = restaurants.filter(restaurant=> restaurant.category === vegan)
-        setFilteredItems(filteredItems)
-        setIsFiltered(true)
-        return filteredItems
-      }
-    }, [vegan])
-
-    useEffect(()=>{
-      if (restaurants.length>0 && mexican === "Mexican"){
-        filteredItems = restaurants.filter(restaurant=> restaurant.category === mexican)
-        setFilteredItems(filteredItems)
-        setIsFiltered(true)
-        return filteredItems
-      }
-    }, [mexican])
-
-    useEffect(()=>{
-      if (restaurants.length>0 && japanese === "Japanese"){
-        filteredItems = restaurants.filter(restaurant=> restaurant.category === japanese)
-        setFilteredItems(filteredItems)
-        setIsFiltered(true)
-        return filteredItems
-      }
-    }, [japanese])
-
-    useEffect(()=>{
-      if (restaurants.length>0 && italian === "Italian"){
-        filteredItems = restaurants.filter(restaurant=> restaurant.category === italian)
-        setFilteredItems(filteredItems)
-        setIsFiltered(true)
-        return filteredItems
-      }
-    }, [italian])
-
-    useEffect(()=>{
-      if (restaurants.length>0 && french === "French"){
-        filteredItems = restaurants.filter(restaurant=> restaurant.category === french)
-        setFilteredItems(filteredItems)
-        setIsFiltered(true)
-        return filteredItems
-      }
-    }, [french])
-
-    useEffect(()=>{
-      if (restaurants.length>0 && fastFood === "FastFood"){
-        filteredItems = restaurants.filter(restaurant=> restaurant.category === fastFood)
-        setFilteredItems(filteredItems)
-        setIsFiltered(true)
-        return filteredItems
-      }
-    }, [fastFood])
-
-    useEffect(()=>{
-      if (restaurants.length>0 && ethiopian === "Ethiopian"){
-        filteredItems = restaurants.filter(restaurant=> restaurant.category === ethiopian)
-        setFilteredItems(filteredItems)
-        setIsFiltered(true)
-        return filteredItems
-      }
-    }, [ethiopian])
-
-    useEffect(()=>{
-      if (restaurants.length>0 && mediterranean === "Mediterranean"){
-        filteredItems = restaurants.filter(restaurant=> restaurant.category === mediterranean)
-        setFilteredItems(filteredItems)
-        setIsFiltered(true)
-        return filteredItems
-      }
-    }, [mediterranean])
+    }, [])
 
     const handleCategorySelection = (category) => {
-        if(category === "All") {
-          setCategoryChosen(category)
-          setAll(category)
-          setAsian("")
-          setAmerican("")
-          setBreakfast("")
-          setVegan("")
-          setMexican("")
-          setJapanese('')
-          setItalian('')
-          setFrench("")
-          setFastFood("")
-          setEthiopian("")
-          setMediterranean("")
-        } else if (category === 'Asian') {
-          setAsian(category)
-          setCategoryChosen(category)
-          setAll('')
-          setAmerican("")
-          setBreakfast("")
-          setVegan("")
-          setMexican("")
-          setJapanese('')
-          setItalian('')
-          setFrench("")
-          setFastFood("")
-          setEthiopian("")
-          setMediterranean("")
-        } else if (category === 'American'){
-          setAmerican(category)
-          setCategoryChosen(category)
-          setAsian("")
-          setAll('')
-          setBreakfast("")
-          setVegan("")
-          setMexican("")
-          setJapanese('')
-          setItalian('')
-          setFrench("")
-          setFastFood("")
-          setEthiopian("")
-          setMediterranean("")
-        } else if (category === "Breakfast") {
-          setBreakfast(category)
-          setCategoryChosen(category)
-          setAsian("")
-          setAmerican("")
-          setAll('')
-          setVegan("")
-          setMexican("")
-          setJapanese('')
-          setItalian('')
-          setFrench("")
-          setFastFood("")
-          setEthiopian("")
-          setMediterranean("")
-        } else if (category === "Vegan"){
-          setVegan(category)
-          setCategoryChosen(category)
-          setBreakfast("")
-          setAmerican("")
-          setAsian("")
-          setAll('')
-          setMexican("")
-          setJapanese('')
-          setItalian('')
-          setFrench("")
-          setFastFood("")
-          setEthiopian("")
-          setMediterranean("")
-        } else if (category === "Mexican"){
-          setMexican(category)
-          setCategoryChosen(category)
-          setVegan("")
-          setBreakfast("")
-          setAmerican("")
-          setAsian("")
-          setAll('')
-          setJapanese('')
-          setItalian('')
-          setFrench("")
-          setFastFood("")
-          setEthiopian("")
-          setMediterranean("")
-        } else if (category=== "Japanese"){
-          setJapanese(category)
-          setCategoryChosen(category)
-          setAsian("")
-          setAmerican("")
-          setBreakfast("")
-          setVegan("")
-          setMexican("")
-          setAll('')
-          setItalian('')
-          setFrench("")
-          setFastFood("")
-          setEthiopian("")
-          setMediterranean("")
-        } else if (category=== "Italian"){
-          setItalian(category)
-          setCategoryChosen(category)
-          setJapanese("")
-          setAsian("")
-          setAmerican("")
-          setBreakfast("")
-          setVegan("")
-          setMexican("")
-          setAll('')
-          setFrench("")
-          setFastFood("")
-          setEthiopian("")
-          setMediterranean("")
-        } else if (category === "French"){
-          setFrench(category)
-          setCategoryChosen(category)
-          setJapanese("")
-          setAsian("")
-          setAmerican("")
-          setBreakfast("")
-          setVegan("")
-          setMexican("")
-          setAll('')
-          setFastFood("")
-          setEthiopian("")
-          setMediterranean("")
-          setItalian("")
-        } else if (category === "FastFood"){
-          setFastFood(category)
-          setCategoryChosen(category)
-          setFrench("")
-          setJapanese("")
-          setAsian("")
-          setAmerican("")
-          setBreakfast("")
-          setVegan("")
-          setMexican("")
-          setAll('')
-          setEthiopian("")
-          setMediterranean("")
-          setItalian("")
-        } else if (category === "Ethiopian"){
-          setEthiopian(category)
-          setCategoryChosen(category)
-          setFastFood("")
-          setFrench("")
-          setJapanese("")
-          setAsian("")
-          setAmerican("")
-          setBreakfast("")
-          setVegan("")
-          setMexican("")
-          setAll('')
-          setMediterranean("")
-          setItalian("")
-        } else if (category === "Mediterranean"){
-          setMediterranean(category)
-          setCategoryChosen(category)
-          setEthiopian("")
-          setFastFood("")
-          setFrench("")
-          setJapanese("")
-          setAsian("")
-          setAmerican("")
-          setBreakfast("")
-          setVegan("")
-          setMexican("")
-          setAll('')
-          setItalian("")
+
+      if (categoryChosen === category && category.toLowerCase()!= "all") {
+
+        return
+      }
+      else if (category.toLowerCase() === "all" ) {
+        // clear all filters
+        setCategories({
+          ALL:true,
+          Asian: false,
+          American: false,
+          Breakfast: false,
+          Vegan: false,
+          Mexican: false,
+          Japanese: false,
+          Italian: false,
+          French: false,
+          FastFood: false,
+          Ethiopian:false,
+          Mediterranean: false
+        })
+        setCategoryChosen(category)
+        setSelectedRatingMin(3)
+        setSelectedPrices({
+          price1: false,
+          price2: false,
+          price3: false,
+          price4: false
+        })
+        setIsFiltered(false)
+        return
+      } else {
+        
+        setIsFiltered(true)
+        let defaultCats = {
+          ALL:false,
+          Asian: false,
+          American: false,
+          Breakfast: false,
+          Vegan: false,
+          Mexican: false,
+          Japanese: false,
+          Italian: false,
+          French: false,
+          FastFood: false,
+          Ethiopian:false,
+          Mediterranean: false
         }
+        setCategories({...defaultCats, [category]: true })
+        setCategoryChosen(category)
+        let newFilteredItems;
+        // look at ratings
+        newFilteredItems = restaurants.filter(rest => Number(rest.avgRating) >= selectedRatingMin)
+
+        // look at prices
+        let priceFilters = Object.entries(selectedPrices).filter(arr => arr[1] === true)
+        if (priceFilters.length) {
+          let filtersAfterPriceAndRatings = newFilteredItems.filter(rest => {
+            // only true values, filterName = price1, price2
+            for (let [filterName, bool] of priceFilters) {
+              if (rest.priceRange === parseInt(filterName[filterName.length - 1])){
+                return true
+              }
+            }
+            return false
+          })
+          // filter for category here
+          let finalFilters = filtersAfterPriceAndRatings.filter(rest => rest.category === category)
+          setFilteredItems(finalFilters)
+          return
+        } else {
+          // no price filters
+          let finalFilters = newFilteredItems.filter(rest => rest.category === category)
+          setFilteredItems(finalFilters)
+          return
+        }
+      }
     }
+
 
     return (
         <>
@@ -416,6 +201,9 @@ const Restaurants = () => {
                   {category === "FastFood" && <img style={{height:'3.8em', width: '3.8em'}} src={fastFoodIcon}/>}
                   {category === "Ethiopian" && <img style={{height:'3.8em', width: '3.8em'}} src={ethiopianIcon}/>}
                   {category === "Mediterranean" && <img style={{height:'3.8em', width: '3.8em'}} src={mediterraneanIcon}/>}
+                  {/* <small style={{fontSize: "12px", color: category=== categoryChosen? "red": "black" }} >
+                  {category}
+                  </small> */}
                   <small style={{fontSize: "12px", color: category=== categoryChosen? "red": "black" }} >
                   {category}
                   </small>
@@ -437,7 +225,17 @@ const Restaurants = () => {
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="styles__StyledInlineSvg-sc-12l8vvi-0 jFpckg sc-84e263d1-5 bcmrDQ"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.29289 8.79289C5.68342 8.40237 6.31658 8.40237 6.70711 8.79289L12 14.0858L17.2929 8.79289C17.6834 8.40237 18.3166 8.40237 18.7071 8.79289C19.0976 9.18342 19.0976 9.81658 18.7071 10.2071L12.7071 16.2071C12.5196 16.3946 12.2652 16.5 12 16.5C11.7348 16.5 11.4804 16.3946 11.2929 16.2071L5.29289 10.2071C4.90237 9.81658 4.90237 9.18342 5.29289 8.79289Z" fill="currentColor"></path></svg>
                 </div>
               </div>
-              {toggleRatingDropdown && <RatingFilter filteredItems={filteredItems} selectedRatingMin={selectedRatingMin} setSelectedRatingMin={setSelectedRatingMin} restaurants={restaurants} setIsFiltered={setIsFiltered} isFiltered={isFiltered} setFilteredItems={setFilteredItems}/>}
+              {toggleRatingDropdown && <RatingFilter
+                filteredItems={filteredItems}
+                selectedRatingMin={selectedRatingMin}
+                setSelectedRatingMin={setSelectedRatingMin}
+                selectedPrices={selectedPrices}
+                restaurants={restaurants}
+                setIsFiltered={setIsFiltered}
+                isFiltered={isFiltered}
+                setFilteredItems={setFilteredItems}
+                categories={categories}
+              />}
               <div className='price-filter-container' style={{marginLeft: '10px'}} onClick={()=> {
                 setTogglePriceDropdown(!togglePriceDropdown)
                 setToggleRatingDropdown(false)
@@ -449,8 +247,18 @@ const Restaurants = () => {
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="styles__StyledInlineSvg-sc-12l8vvi-0 jFpckg sc-84e263d1-5 bcmrDQ"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.29289 8.79289C5.68342 8.40237 6.31658 8.40237 6.70711 8.79289L12 14.0858L17.2929 8.79289C17.6834 8.40237 18.3166 8.40237 18.7071 8.79289C19.0976 9.18342 19.0976 9.81658 18.7071 10.2071L12.7071 16.2071C12.5196 16.3946 12.2652 16.5 12 16.5C11.7348 16.5 11.4804 16.3946 11.2929 16.2071L5.29289 10.2071C4.90237 9.81658 4.90237 9.18342 5.29289 8.79289Z" fill="currentColor"></path></svg>
                 </div>
               </div>
-              {togglePriceDropdown && <PriceFilter clickPrice1={clickPrice1} clickPrice2={clickPrice2} clickPrice3={clickPrice3}
-              clickPrice4={clickPrice4} setClickPrice1 ={setClickPrice1} setClickPrice2 ={setClickPrice2} setClickPrice3={setClickPrice3} setClickPrice4 ={setClickPrice4} filteredItems={filteredItems} restaurants={restaurants} setIsFiltered={setIsFiltered} isFiltered={isFiltered} setFilteredItems={setFilteredItems}/>}
+              {togglePriceDropdown &&
+                <PriceFilter
+                  selectedPrices={selectedPrices}
+                  setSelectedPrices={setSelectedPrices}
+                  selectedRatingMin={selectedRatingMin}
+                  filteredItems={filteredItems}
+                  restaurants={restaurants}
+                  setIsFiltered={setIsFiltered}
+                  isFiltered={isFiltered}
+                  setFilteredItems={setFilteredItems}
+                  categories={categories}
+                  />}
             </div>
 
             {!isFiltered && categoryNum.Asian>0 && (
@@ -748,7 +556,7 @@ const Restaurants = () => {
               </div>
             </>
             )}
-            {!isFiltered && categoryNum.Ethiopian >0 && (
+            {!isFiltered && categoryNum.Ethiopian>0 && (
             <>
               <h2 className='restaurant-category-title'>Ethiopian</h2>
               <div className="restaurant-main-grid-container" >

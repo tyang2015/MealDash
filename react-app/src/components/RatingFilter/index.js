@@ -6,32 +6,77 @@ import { UseRatingDropdown } from '../../context/RatingDropdown';
 
 import "./RatingFilter.css"
 
-const RatingFilter= ({ filteredItems , selectedRatingMin, setSelectedRatingMin ,restaurants, setFilteredItems, isFiltered, setIsFiltered}) => {
+const RatingFilter= ({ filteredItems, categories, selectedPrices, selectedRatingMin, setSelectedRatingMin ,restaurants, setFilteredItems, isFiltered, setIsFiltered}) => {
   // const [selectedRatingMin, setSelectedRatingMin]= useState(3)
   const {toggleRatingDropdown, setToggleRatingDropdown} = UseRatingDropdown();
   const {togglePriceDropdown, setTogglePriceDropdown} = UsePriceDropdown();
 
   const handleClick = (e) => {
-    console.log('clicked rating:', e.target.value)
+    return
+  }
+
+  const filterPrice = (filteredItems, priceFilters) => {
+    let finalItems = filteredItems.filter(rest => {
+      // only true values, filterName = price1, price2
+      for (let [filterName, bool] of priceFilters) {
+        if (rest.priceRange === parseInt(filterName[filterName.length - 1])){
+          return true
+        }
+      }
+      return false
+    })
+    return finalItems
+  }
+
+  const filterCats = (filteredItems, catFilters) => {
+    let finalItems = filteredItems.filter(rest => {
+      for (let [filterName, bool] of catFilters) {
+        // console.log('filter name for cat')
+        if (filterName.toLowerCase() === "all") return true
+        if (rest.category === filterName) return true
+      }
+      return false
+    })
+    return finalItems
   }
 
   const handleRatingFilter = (selectedRatingMin) =>{
-    console.log('selected rating:', selectedRatingMin)
     setIsFiltered(true)
     let newFilteredItems;
-    console.log('is filtered....:', isFiltered)
-    if (isFiltered) {
-      newFilteredItems = filteredItems.filter(restaurant => Number(restaurant.avgRating) >= selectedRatingMin)
-    } else {
-      newFilteredItems = restaurants.filter(restaurant => Number(restaurant.avgRating) >= selectedRatingMin)
+
+    // look at ratings
+    newFilteredItems = restaurants.filter(rest => Number(rest.avgRating) >= selectedRatingMin)
+
+    // look at prices
+    let priceFilters = Object.entries(selectedPrices).filter(arr => arr[1] === true)
+    // look at category filter
+    let catFilters = Object.entries(categories).filter(arr=> arr[1] === true)
+
+    if (!priceFilters.length && !catFilters.length) {
+      setFilteredItems(newFilteredItems)
+      return
     }
+
+    // if both
+    else if (priceFilters.length && catFilters.length) {
+      let filter1 = filterPrice(newFilteredItems, priceFilters)
+      let filter2 = filterCats(filter1, catFilters)
+      newFilteredItems = filter2
+    }
+
+// IF PRICE FILTERS ONLY
+    else if (priceFilters.length && !catFilters.length) {
+      const filteredItems = filterPrice(newFilteredItems, priceFilters)
+      newFilteredItems = filteredItems
+    }
+
+// IF CAT FILTERS ONLY
+    else if (catFilters.length && !priceFilters.length) {
+      const filteredItems = filterCats(newFilteredItems, catFilters)
+      newFilteredItems = filteredItems
+    }
+
     setFilteredItems(newFilteredItems)
-
-
-    // setIsFiltered(true)
-    // let newFilteredItems = restaurants.filter(restaurant => Number(restaurant.avgRating) >= selectedRatingMin)
-    // setFilteredItems(newFilteredItems)
-    // return filteredItems
   }
 
   return (
