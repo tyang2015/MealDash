@@ -102,9 +102,8 @@ const Restaurants = () => {
     }, [])
 
     const handleCategorySelection = (category) => {
-
+      console.log('click cat')
       if (categoryChosen === category && category.toLowerCase()!= "all") {
-
         return
       }
       else if (category.toLowerCase() === "all" ) {
@@ -134,7 +133,6 @@ const Restaurants = () => {
         setIsFiltered(false)
         return
       } else {
-        
         setIsFiltered(true)
         let defaultCats = {
           ALL:false,
